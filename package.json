@@ -1,0 +1,16 @@
+{
+  "name": "first",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "micro": "latest"
+  }
+}
