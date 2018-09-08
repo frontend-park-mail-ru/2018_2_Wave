@@ -6,6 +6,8 @@ const gameRulesBlock = document.querySelector('.gamerules');
 const settingsBlock = document.querySelector('.settings');
 const profileBlock = document.querySelector('.profile');
 
+const backButton = document.querySelector('.back');
+
 
 show(loginBlock);
 hide(createBlock);
@@ -13,6 +15,7 @@ hide(leaderBoard);
 hide(gameRulesBlock);
 hide(profileBlock);
 hide(settingsBlock);
+hide(backButton);
 
 
 const loginLink  = loginBlock.querySelector('.message a');
@@ -37,34 +40,37 @@ createButton.addEventListener('click', goToMenu);
 function goToMenu() {
 	hide(document.querySelector('.register-form'));
     show(menu);
-}
+};
 
+
+// menu buttons
 
 const leaderBoardButton = menu.querySelector('.leaderboard_button');
 const profileButton = menu.querySelector('.profile_button');
+const settingsButton = menu.querySelector('.settings_button');
 
 
-leaderBoardButton.addEventListener('click', () => {
-	hide(menu);
-	show(leaderBoard);
-});
+function showMeAndHideMenu(element) {
+	return function () {
+		hide(menu);
+		show(element);
+		show(backButton);
+		backButton.addEventListener('click', hideMeAndShowMenu(element));
+	}
+};
 
-profileButton.addEventListener('click', () => {
-	hide(menu);
-	show(profileBlock);
-});
-
-
-
-
-
-
-
-
-
+function hideMeAndShowMenu(element) {
+	return function(){
+		hide(element);
+		hide(backButton);
+		show(menu);
+	}
+}
 
 
-
+leaderBoardButton.addEventListener('click', showMeAndHideMenu(leaderBoard));
+profileButton.addEventListener('click', showMeAndHideMenu(profileBlock));
+settingsButton.addEventListener('click', showMeAndHideMenu(settingsBlock));
 
 
 

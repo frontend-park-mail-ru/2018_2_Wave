@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
-  background: #76b852;
+  background: #7cdcc8;
   font-family: "Roboto", sans-serif;     
 }
 
@@ -33,7 +33,7 @@ body {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #345C54;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -42,7 +42,7 @@ body {
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #2f8271;
 }
 .form .message {
   margin: 15px 0 0;
@@ -51,7 +51,7 @@ body {
   cursor: pointer;
 }
 .form .message a {
-  color: #4CAF50;
+  color: #549587;
   text-decoration: none;
 }
 
@@ -68,14 +68,14 @@ body {
 /* leaderboard */
 
 .leaderboard {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .leaderboard td, .leaderboard th {
-    border: 1px solid #ddd;
-    padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
 .leaderboard tr:nth-child(even){background-color: #f2f2f2;}
@@ -83,10 +83,10 @@ body {
 .leaderboard tr:hover {background-color: #ddd;}
 
 .leaderboard th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    background-color: #4CAF50;
-    color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #549587;
+  color: white;
 }
 
 
@@ -94,6 +94,8 @@ body {
 
 img {
   border-radius: 50%;
+  width: 270px;
+  height: 270px;
 }
 
 .avatar {
@@ -101,6 +103,12 @@ img {
 }
 
 .information {
-  float:left
+
 }
 
+
+/* back button*/
+
+.back {
+  margin-top: 20px;
+}
