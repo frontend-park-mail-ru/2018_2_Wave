@@ -16,7 +16,7 @@ const server = http.createServer((request, response) => {
     }
 
     if (filePath == './favicon.ico') {
-    	filePath = './public/favicon.png';
+    	filePath = './public/img/favicon.png';
     }
 
 	var extname = String(path.extname(filePath)).toLowerCase();
