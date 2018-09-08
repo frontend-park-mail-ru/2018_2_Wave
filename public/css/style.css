@@ -94,12 +94,12 @@ body {
 
 img {
   border-radius: 50%;
-  width: 270px;
-  height: 270px;
+  width: 200px;
+  height: 200px;
 }
 
 .avatar {
-  float:left;
+  width: 100%;
 }
 
 .information {
