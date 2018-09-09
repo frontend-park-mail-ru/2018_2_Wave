@@ -1,15 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+
 body {
-  background: #7cdcc8;
-  font-family: "Roboto", sans-serif;     
+  background: #aeeeed;
+  font-family: "Roboto", sans-serif;
 }
+
 
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
+
 .form {
   background: #FFFFFF;
   max-width: 360px;
@@ -18,6 +21,7 @@ body {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -29,6 +33,7 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -41,15 +46,18 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
 .form button:hover,.form button:active,.form button:focus {
   background: #2f8271;
 }
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
   cursor: pointer;
 }
+
 .form .message a {
   color: #549587;
   text-decoration: none;
@@ -62,7 +70,6 @@ body {
 .menu button {
  margin: 0 0 15px;
 }
-
 
 
 /* leaderboard */

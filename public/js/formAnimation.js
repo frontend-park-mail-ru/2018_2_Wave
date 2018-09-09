@@ -22,9 +22,9 @@ const loginLink  = loginBlock.querySelector('.message a');
 const createLink = createBlock.querySelector('.message a');
 
 function changeBlocks() {
-	isHide(loginBlock) ? show(loginBlock) : hide(loginBlock);
-	isHide(createBlock) ? show(createBlock) : hide(createBlock);
-};
+    isHide(loginBlock) ? show(loginBlock) : hide(loginBlock);
+    isHide(createBlock) ? show(createBlock) : hide(createBlock);
+}
 
 loginLink.addEventListener('click', changeBlocks);
 createLink.addEventListener('click', changeBlocks);
@@ -38,9 +38,9 @@ loginButton.addEventListener('click', goToMenu);
 createButton.addEventListener('click', goToMenu);
 
 function goToMenu() {
-	hide(document.querySelector('.register-form'));
+    hide(document.querySelector('.register-form'));
     show(menu);
-};
+}
 
 
 // menu buttons
@@ -51,20 +51,20 @@ const settingsButton = menu.querySelector('.settings_button');
 
 
 function showMeAndHideMenu(element) {
-	return function () {
-		hide(menu);
-		show(element);
-		show(backButton);
-		backButton.addEventListener('click', hideMeAndShowMenu(element));
-	}
-};
+    return function () {
+        hide(menu);
+        show(element);
+        show(backButton);
+        backButton.addEventListener('click', hideMeAndShowMenu(element));
+    }
+}
 
 function hideMeAndShowMenu(element) {
-	return function(){
-		hide(element);
-		hide(backButton);
-		show(menu);
-	}
+    return function(){
+        hide(element);
+        hide(backButton);
+        show(menu);
+    }
 }
 
 
@@ -73,17 +73,14 @@ profileButton.addEventListener('click', showMeAndHideMenu(profileBlock));
 settingsButton.addEventListener('click', showMeAndHideMenu(settingsBlock));
 
 
-
 function isHide(element) {
-	return element.style.display  == 'none';
+    return element.style.display  == 'none';
 }
 
 function hide(element) {
-	element.style.display  = 'none';
+    element.style.display  = 'none';
 }
 
 function show(element) {
-	element.style.display  = 'block';
+    element.style.display  = 'block';
 }
-
-
