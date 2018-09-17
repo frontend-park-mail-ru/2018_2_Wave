@@ -1,0 +1,94 @@
+<!-- html-код блоков для шаблонизатора -->
+<!-- пригодится -->
+
+<!-- пихать в root -->
+
+<div class='block' id='menu'>
+    <a class='button'>Играть</a>
+    <a class='button'>Профиль</a>
+    <a class='button'>Таблица лидеров</a>
+    <a class='button'>Правила игры</a>
+    <a class='button'>Настройки</a>
+    </div>
+
+    <div class='block' id='register'>
+    <div class='form'>
+        <input type='text' placeholder='username'/>
+        <input type='password' placeholder='password'/>
+        <input type='email'  placeholder='email'/>
+        <a class='button'>create</a>
+        <p class='message'>
+        Already registered?
+        <a>Sign In</a>
+        </p>
+    </div>
+    </div>
+
+    <div class='block' id='login'>
+    <div class='form'>
+        <input type='text' placeholder='username'/>
+        <input type='password' placeholder='password'/>
+        <a class='button'>login</a>
+        <p class='message'>
+        Not registered?
+        <a>Create an account</a>
+        </p>
+    </div>
+    </div>
+
+    <div class='block' id='profile'>
+    <img src='/img/dieter_rams.jpg'>
+    <h3>Dieter Rams</h3>
+    <p>слегка сжатый по бокам</p><br>
+    <p>потом пофиксим</p>
+    <a class='button back'>Назад</a>
+    </div>
+
+    <!-- <div class='gamerules'>
+    </div> -->
+
+    <div class='block' id='settings'>
+    <input
+    id="vol-control"
+    type="range"
+    min="0" max="100"
+    step="1" oninput=""
+    ></input>
+    <div>
+        <input type="checkbox" id="scales" name="feature" value="scales" checked></input>
+        <label for="scales">Scales</label>
+    </div>
+    <a class='button back'>Назад</a>
+    </div>
+
+    <div class='block' id='leaderboard'>
+    <table class='leadertable'>
+        <tr>
+        <th>Player</th>
+        <th>Lvl</th>
+        <th>Score</th>
+        </tr>
+        <tr>
+        <td>Alfreds Futterkiste</td>
+        <td>10</td>
+        <td>3505</td>
+        </tr>
+        <tr>
+        <td>Berglunds snabbköp</td>
+        <td>10</td>
+        <td>3412</td>
+        </tr>
+        <tr>
+        <td>Centro comercial Moctezuma</td>
+        <td>8</td>
+        <td>2058</td>
+        </tr>
+        <tr>
+        <td>Ernst Handel</td>
+        <td>4</td>
+        <td>1002</td>
+        </tr>
+    </table>
+    <a class='button back'>Назад</a>
+    </div>
+</div>
