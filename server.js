@@ -1,11 +1,13 @@
 const http = require('http');
 const fs = require('fs');
+const mime = require('mime-types');
+const path = require('path');
 
 const port = 3000;
 const paths = {
-  index: './index.html',
-  favicon: './img/favicon.png',
-  notFound: './404.html'
+  index: './public/index.html',
+  favicon: './public/img/favicon.png',
+  notFound: './public/404.html'
 };
 
 const server = http.createServer((request, response) => {
@@ -20,7 +22,7 @@ const server = http.createServer((request, response) => {
       filePath = paths.favicon;
       break;
     default:
-      filePath = '.' + request.url;
+      filePath = './public' + request.url;
       if (!fs.existsSync(filePath)) {
         code = 404;
         filePath = paths.notFound;
@@ -28,12 +30,15 @@ const server = http.createServer((request, response) => {
   }
 
   fs.readFile(filePath, function(error, content) {
+    let contentType = mime.contentType(path.extname(filePath));
     if (error) {
       code = 500;
       content = 'Sorry, check with the site admin for error: ' + error.code + ' ..\n';
+      contentType = 'text/plain';
     }
-    response.writeHead(code);
-    response.end(content, 'utf-8');
+
+    response.writeHead(code, contentType);
+    response.end(content);
   });
 
   console.log(code, request.url);
