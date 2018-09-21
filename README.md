@@ -1,11 +1,14 @@
 # Команда Wave
 
 ## Репозитории
-
 * [Клиент](https://github.com/frontend-park-mail-ru/2018_2_Wave)
 
-## Деплой
+## Запуск
+npm install
+npm run start
 
+## Деплой
+без деплоя
 [wave.now.sh](https://wave.now.sh)
 
 ## Участники
