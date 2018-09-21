@@ -4,7 +4,7 @@
 * [Клиент](https://github.com/frontend-park-mail-ru/2018_2_Wave)
 
 ## Запуск
-npm install
+npm install  
 npm run start
 
 ## Деплой
