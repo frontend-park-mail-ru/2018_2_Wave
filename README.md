@@ -1,34 +1,16 @@
-# frontend_game
+# Команда Wave
 
-Для запуска на ноде:  
-создайте в главной деректории файл package.json  
-пример файла:
-```
-{
-  "name": "first",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+## Репозитории
 
-  "scripts": {
-    "start": "node ."
-  },
-  "dependencies": {
-    "micro": "latest"
-  }
-}
-```
+* [Клиент](https://github.com/frontend-park-mail-ru/2018_2_Wave)
 
-Запустите команду
+## Деплой
 
-```
-node .
-```
+[wave.now.sh](https://wave.now.sh)
 
-Для запуска на now.sh
-```
-now
-```
+## Участники
+
+* Дмитрий Палий &mdash; [stanford](https://github.com/stanf0rd)
+* Илья Лебедев &mdash; [bomkvilt](https://github.com/bomkvilt)
+* Ксения Глазачёва &mdash; [ksgl](https://github.com/ksgl)
+* Дмитрий Липко &mdash; [dlipko](https://github.com/dlipko)
