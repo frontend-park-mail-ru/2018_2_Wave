@@ -1,27 +1,27 @@
 ## from front to back
 
+# signup
 {
-    "action" : "register",
     "name" : "",
     "email" : "",
     "password" : ""
 }
 
+# login
 {
-    "action" : "login",
     "email" : "",
     "password" : ""
 }
 
 ## from back to front
 
+# signup
 {
-    "action" : "register",
     "answer" : "ok"/"fail"
 }
 
+# login
 {
-    "action" : "register",
     "answer" : "ok"/"fail",
     "name" : ""/"<empty>"
 }
