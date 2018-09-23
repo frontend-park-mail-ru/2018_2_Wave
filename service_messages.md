@@ -1,13 +1,13 @@
 ## from front to back
 
-# signup
+### signup
 {
     "name" : "",
     "email" : "",
     "password" : "",
 }
 
-# login
+### login
 {
     "email" : "",
     "password" : "",
@@ -15,13 +15,13 @@
 
 ## from back to front
 
-# signup
+### signup
 {
     "answer" : "ok"/"fail",
     "error" : "", (in case of "fail")
 }
 
-# login
+### login
 {
     "answer" : "ok"/"fail",
     "error" : "", (in case of "fail")
