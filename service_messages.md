@@ -4,24 +4,26 @@
 {
     "name" : "",
     "email" : "",
-    "password" : ""
+    "password" : "",
 }
 
 # login
 {
     "email" : "",
-    "password" : ""
+    "password" : "",
 }
 
 ## from back to front
 
 # signup
 {
-    "answer" : "ok"/"fail"
+    "answer" : "ok"/"fail",
+    "error" : "", (in case of "fail")
 }
 
 # login
 {
     "answer" : "ok"/"fail",
-    "name" : ""/"<empty>"
+    "error" : "", (in case of "fail")
+    "name" : ""/"<empty>",
 }
