@@ -5,6 +5,7 @@ import validate from "../validation/validation";
 
 import registerTemplate from "./register.pug";
 
+
 export default function createRegister() {
   root.innerHTML = registerTemplate();
 

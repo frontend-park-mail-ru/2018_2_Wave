@@ -3,11 +3,11 @@ import createProfile from "../profile/profile";
 import createLeaderboard from "../leaderboard/leaderboard";
 import createSettings from "../settings/settings";
 
-import menuTemplate from "./menu.pug";
+// import menuTemplate from "./menu.pug";
 
 
 // оставил без использования шаблона,
-// возможно стоит переделать
+// возможно, стоит переделать
 export default function createMenu() {
   const menuButtons = new Map()
   .set('Войти', createLogin)
@@ -37,7 +37,7 @@ export default function createMenu() {
 
 function createBlock(id) {
   const block = document.createElement('div');
-  block.id = id
+  block.id = id;
   block.classList.add('block');
   return block;
 }
@@ -46,5 +46,5 @@ function createButton(label) {
   const button = document.createElement('a');
   button.classList.add('button');
   button.innerHTML = label;
-  return button
+  return button;
 }
