@@ -36,7 +36,7 @@ const users = {
 const ids = {};
 
 app.post('/signup', function (req, res) {
-  const email = req.body.name;
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -54,8 +54,8 @@ app.post('/signup', function (req, res) {
 });
 
 app.post('/login', function (req, res) {
-  const password = req.body.email;
-  const email = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
   if (!users[email] || users[email].password !== password) {
     return res.status(400).json({answer : "fail"}); // wrong email or/and password
