@@ -5,8 +5,8 @@ import leaderBoardTemplate from "./leaderboard.pug";
 
 export default function leaderboard() {
 
-	root.innerHTML = leaderBoardTemplate();
-	addButtonListener("menuButton", createMenu);
+  root.innerHTML = leaderBoardTemplate();
+  addButtonListener("menuButton", createMenu);
 
-	console.log("leaderboard block created");
+  console.log("leaderboard block created");
 }

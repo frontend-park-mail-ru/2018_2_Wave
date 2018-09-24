@@ -1,9 +1,11 @@
 export default function addButtonListener (id, func) {
-	// проверочку бы
-	const menuButton = document.getElementById(id);
+  const menuButton = document.getElementById(id);
+  if (menuButton == null) {
+    return;
+  }
 
-	menuButton.addEventListener('click', function (event) {
-		event.preventDefault();
-		func();
-	});
+  menuButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    func();
+  });
 }
