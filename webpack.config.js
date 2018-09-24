@@ -4,36 +4,35 @@ const path = require('path');
 
 module.exports = {
   entry: {
-  	app: './public/js/app.js'
+    app: './public/js/app.js'
   },
-   
+
   output: {
-  	filename: 'app.bundle.js',
-  	path: path.resolve(__dirname, 'dist')
+    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
 
   module: {
 
-  	rules: [
-  	{
-  		test: /\.css$/, 
-  		use: ['style-loader', 'css-loader']
-  	},
+    rules: [
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    },
 
-  	{
-  		test: /\.pug$/,
-  		use: 'pug-loader'
-  	}
+    {
+      test: /\.pug$/,
+      use: 'pug-loader'
+    }
 
-  	]
+    ]
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-    	title: 'Demo',
-    	template: './public/index.pug',
+      title: 'Demo',
+      template: './public/index.pug',
     })
   ]
-
 
 };
