@@ -1,12 +1,12 @@
-import createMenu from "../menu/menu";
-import addButtonListener from "../addbuttonlistener";
+import createMenu from '../menu/menu';
+import addButtonListener from '../addbuttonlistener';
 
-import settingsTemplate from "./settings.pug";
+import settingsTemplate from './settings.pug';
 
 
 export default function createSettings() {
   root.innerHTML = settingsTemplate();
-  addButtonListener("menuButton", createMenu);
+  addButtonListener('menuButton', createMenu);
 
-  console.log("settings block created");
+  console.log('settings block created');
 }

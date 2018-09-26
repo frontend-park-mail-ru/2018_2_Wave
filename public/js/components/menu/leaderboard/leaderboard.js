@@ -1,12 +1,11 @@
-import createMenu from "../menu/menu";
-import addButtonListener from "../addbuttonlistener";
+import createMenu from '../menu/menu';
+import addButtonListener from '../addbuttonlistener';
 
-import leaderBoardTemplate from "./leaderboard.pug";
+import leaderBoardTemplate from './leaderboard.pug';
 
 export default function leaderboard() {
-
   root.innerHTML = leaderBoardTemplate();
-  addButtonListener("menuButton", createMenu);
+  addButtonListener('menuButton', createMenu);
 
-  console.log("leaderboard block created");
+  console.log('leaderboard block created');
 }

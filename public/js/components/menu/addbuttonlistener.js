@@ -1,10 +1,10 @@
-export default function addButtonListener (id, func) {
+export default function addButtonListener(id, func) {
   const menuButton = document.getElementById(id);
   if (menuButton == null) {
     return;
   }
 
-  menuButton.addEventListener('click', function (event) {
+  menuButton.addEventListener('click', (event) => {
     event.preventDefault();
     func();
   });

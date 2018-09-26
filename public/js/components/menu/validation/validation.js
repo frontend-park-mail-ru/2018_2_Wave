@@ -2,10 +2,9 @@ import css from './validation.css';
 
 
 export default function validate() {
-
-  var usernameInput = document.getElementById('username');
-  var passwordInput = document.getElementById('password');
-  var passwordRepeatInput = document.getElementById('repeatPassword');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const passwordRepeatInput = document.getElementById('repeatPassword');
 
   usernameInput.CustomValidation = new CustomValidation(usernameInput);
   usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
@@ -17,9 +16,9 @@ export default function validate() {
   passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
 
 
-  var inputs = document.querySelectorAll('input:not([type="submit"])');
+  const inputs = document.querySelectorAll('input:not([type="submit"])');
 
-  for (var i = 0; i < inputs.length; i++) {
+  for (let i = 0; i < inputs.length; i++) {
     inputs[i].CustomValidation.checkInput();
   }
 }
@@ -28,40 +27,38 @@ function CustomValidation(input) {
   this.invalidities = [];
   this.validityChecks = [];
 
-  //add reference to the input node
+  // add reference to the input node
   this.inputNode = input;
 
-  //trigger method to attach the listener
+  // trigger method to attach the listener
   this.registerListener();
 }
 
 CustomValidation.prototype = {
 
-  registerListener: function() {
-
-    var CustomValidation = this;
-    this.inputNode.addEventListener('keyup', function() {
+  registerListener() {
+    const CustomValidation = this;
+    this.inputNode.addEventListener('keyup', () => {
       CustomValidation.checkInput();
     });
   },
 
-  addInvalidity: function(message) {
+  addInvalidity(message) {
     this.invalidities.push(message);
   },
 
-  getInvalidities: function() {
+  getInvalidities() {
     return this.invalidities.join('. \n');
   },
 
-  checkValidity: function(input) {
-    for ( var i = 0; i < this.validityChecks.length; i++ ) {
-
-      var isInvalid = this.validityChecks[i].isInvalid(input);
+  checkValidity(input) {
+    for (let i = 0; i < this.validityChecks.length; i++) {
+      const isInvalid = this.validityChecks[i].isInvalid(input);
       if (isInvalid) {
         this.addInvalidity(this.validityChecks[i].invalidityMessage);
       }
 
-      var requirementElement = document.getElementById(this.validityChecks[i].id);
+      const requirementElement = document.getElementById(this.validityChecks[i].id);
 
       if (requirementElement) {
         if (isInvalid) {
@@ -71,54 +68,52 @@ CustomValidation.prototype = {
           requirementElement.classList.remove('invalid');
           requirementElement.classList.add('valid');
         }
-
       }
     }
   },
 
-  checkInput: function() {
+  checkInput() {
     this.inputNode.CustomValidation.invalidities = [];
     this.checkValidity(this.inputNode);
 
-    if ( this.inputNode.CustomValidation.invalidities.length === 0 && this.inputNode.value !== '' ) {
+    if (this.inputNode.CustomValidation.invalidities.length === 0 && this.inputNode.value !== '') {
       this.inputNode.setCustomValidity('');
     } else {
-      var message = this.inputNode.CustomValidation.getInvalidities();
+      const message = this.inputNode.CustomValidation.getInvalidities();
       this.inputNode.setCustomValidity(message);
     }
-  }
+  },
 };
-
 
 
 var usernameValidityChecks = [
   {
-    isInvalid: function(input) {
+    isInvalid(input) {
       return input.value.length < 3;
     },
     invalidityMessage: 'This input needs to be at least 3 characters',
-    id: 'usernameMessage'
-  }
+    id: 'usernameMessage',
+  },
 ];
 
 var passwordValidityChecks = [
   {
-    isInvalid: function(input) {
+    isInvalid(input) {
       return input.value.length < 8 | input.value.length > 100;
     },
     invalidityMessage: 'This input needs to be between 8 and 100 characters',
-    id: 'passwordMessage'
-  }
+    id: 'passwordMessage',
+  },
 ];
 
 var passwordRepeatValidityChecks = [
   {
-    isInvalid: function() {
-      var passwordInput = document.getElementById('password');
-      var passwordRepeatInput = document.getElementById('repeatPassword');
+    isInvalid() {
+      const passwordInput = document.getElementById('password');
+      const passwordRepeatInput = document.getElementById('repeatPassword');
       return (passwordRepeatInput.value != passwordInput.value) | !passwordRepeatInput.value;
     },
     invalidityMessage: 'This password needs to match the first one',
-    id: 'repeatPasswordMessage'
-  }
+    id: 'repeatPasswordMessage',
+  },
 ];
