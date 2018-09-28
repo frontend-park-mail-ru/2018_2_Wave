@@ -1,36 +1,36 @@
-// const cookie = require('cookie-parser');
 
 const morgan = require('morgan');
 const express = require('express');
 const favicon = require('serve-favicon');
 const uuid = require('uuid/v4');
 const path = require('path');
+const bodyParser = require('body-parser');
+const cookie = require('cookie-parser');
 
 const app = express();
 app.use(morgan('dev'));  // logging
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/dist')));
 app.use(favicon(path.join(__dirname, '/public/img/favicon.png')));
-
-
-// app.use(body.json());
-// app.use(cookie());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookie());
 
 
 const ids = {};
 
 const users = {
-  1: {
+  '1@mail.ru': {
     name: '1',
     email: '1@mail.ru',
     password: '111111',
   },
-  2: {
+  '2@mail.ru': {
     name: '2',
     email: '2@mail.ru',
     password: '222222',
   },
-  3: {
+  '3@mail.ru': {
     name: '3',
     email: '3@mail.ru',
     password: '333333',
@@ -39,9 +39,9 @@ const users = {
 
 
 app.post('/signup', (req, res) => {
-  const { name } = req.body.name;
-  const { email } = req.body.email;
-  const { password } = req.body.password;
+  const { name } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
 
   if (users[email]) {
     // user already exists
@@ -59,8 +59,11 @@ app.post('/signup', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  const { email } = req.body.email;
-  const { password } = req.body.password;
+  console.log(req.body);  // Why is this shit empty???
+  // W H Y ?
+
+  const { email } = req.body;
+  const { password } = req.body;
 
   if (!users[email] || users[email].password !== password) {
     // wrong email or/and password
