@@ -1,17 +1,22 @@
-#login.block.form
+#login.block
   div
-    input(
-      name='login'
-      type='text'
-      placeholder='username'
-      minlength="3"
-      required
-    )
-    input(
-      name='password'
-      type='password'
-      placeholder='password'
-    )
-    a.button(datahref='menu') login
-    p.message Not registered?
-      a(datahref='register') Create an account
+    form#loginForm
+      input(
+        name='email'
+        type='text'
+        placeholder='email'
+        minlength='3'
+        required
+      )
+      input(
+        name='password'
+        type='password'
+        placeholder='password'
+      )
+      input.button(
+        name='submit'
+        type='submit'
+        value='login'
+      )
+      p.message Not registered?
+        a(datahref='register')  Create an account
