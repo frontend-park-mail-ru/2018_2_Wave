@@ -23,15 +23,13 @@ const pages = {
 
 
 root.addEventListener('click', (event) => {
-  if (!(event.target instanceof HTMLAnchorElement)) {
+  if (!(event.target instanceof HTMLAnchorElement)
+  || (event.target.getAttribute('type') === 'submit')) {
     return;
   }
 
   event.preventDefault();
   const link = event.target;
-
-  console.log(link);
-  console.log(link.datahref);
 
   root.innerHTML = '';
   pages[link.getAttribute('datahref')]();
