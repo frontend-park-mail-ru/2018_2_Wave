@@ -1,8 +1,8 @@
-require('../../modules/ajax');
 const loginTemplate = require('./login.pug');
 
 const root = document.getElementById('root');
 
+import AjaxModule from '../../modules/ajax';
 
 export default function createLogin() {
   root.innerHTML = loginTemplate();
@@ -11,19 +11,29 @@ export default function createLogin() {
   loginForm.addEventListener('submit', (event) => {
     console.log('submit');
     event.preventDefault();
-    const formData = new FormData(loginForm);
-    window.AjaxModule.doPost({
-      callback() {
-        // ESLint want to kill me for these lines
-        // They print FormData body
-        // I'll remove them soon
-        for (let [key, value] of formData.entries()) {
-          console.log(key, value);
-        }
+
+    // похоже, что formdata пока не особо работает
+    // пока выпилию её, так как без поняти, что это 
+    //const formData = new FormData(loginForm);
+    //console.log(formData);
+
+  const email = document.getElementById('usernameInput').value;
+  const password = document.getElementById('passwordInput').value;
+  console.log(email, password, "doAjax");
+
+    AjaxModule.doPost({
+      callback (xhr) {
+        alert("you are login");
+        console.log(xhr);
       },
-      body: formData,
       path: '/login',
+      body: {
+        email,
+        password,
+      },
     });
+
+
   });
 
   // пока повесил переход в меню
