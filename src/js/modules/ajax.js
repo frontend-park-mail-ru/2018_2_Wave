@@ -20,7 +20,7 @@ function ajax({
   if (body instanceof FormData) {
     // FormData sets RequestHeader automatically!
     xhr.send(body);
-  } else if (body) {
+  } else {
     xhr.setRequestHeader(
       'Content-Type', 'application/json; charset=utf-8',
     );
