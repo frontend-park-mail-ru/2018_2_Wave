@@ -1,7 +1,7 @@
 {
   "name": "sample",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "public/js/app.js",
   "scripts": {
     "prestart": "webpack -d",
     "start": "node server",

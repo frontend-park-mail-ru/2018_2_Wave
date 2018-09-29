@@ -11,7 +11,7 @@ const favicon = require('serve-favicon');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '/dist')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(favicon(path.join(__dirname, '/public/img/favicon.png')));
 
 app.use(body.json());
