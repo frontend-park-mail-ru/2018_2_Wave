@@ -61,7 +61,7 @@ app.post('/login', upload.none(), (req, res) => {
 
   if (!users[username]
   || users[username].password !== password) {
-    // wrong email or/and password
+    // wrong username or/and password
     return res.status(400).json({ answer: 'fail' });
   }
 
@@ -72,8 +72,6 @@ app.post('/login', upload.none(), (req, res) => {
     'sessionid', id,
     { expires: new Date(Date.now() + 1000 * 60 * 10) },
   );
-
-  console.log(`${username} logged in`);
   return res.status(200).json({ id });
 });
 
@@ -113,14 +111,14 @@ app.post('/register', upload.none(), (req, res) => {
 
 app.get('/me', (req, res) => {
   const id = req.cookies.sessionid;
-  const email = ids[id];
-  if (!email || !users[email]) {
+  const username = ids[id];
+  if (!username || !users[username]) {
     return res.status(401).end();
   }
 
-  users[email].score += 1;
+  users[username].score += 1;
 
-  return res.json(users[email]);
+  return res.json(users[username]);
 });
 
 
@@ -128,8 +126,7 @@ app.get('/users', (req, res) => {
   const scorelist = Object.values(users)
     .sort((l, r) => r.score - l.score)
     .map(user => ({
-      email: user.email,
-      age: user.age,
+      username: user.username,
       score: user.score,
     }));
 
