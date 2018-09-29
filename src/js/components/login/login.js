@@ -1,41 +1,26 @@
+import AjaxModule from '../../modules/ajax';
+
 const loginTemplate = require('./login.pug');
 
 const root = document.getElementById('root');
 
-import AjaxModule from '../../modules/ajax';
 
 export default function createLogin() {
   root.innerHTML = loginTemplate();
   const loginForm = document.getElementById('loginForm');
 
   loginForm.addEventListener('submit', (event) => {
-    console.log('submit');
+    console.log('submit catched');
     event.preventDefault();
 
-    // похоже, что formdata пока не особо работает
-    // пока выпилию её, так как без поняти, что это 
-    //const formData = new FormData(loginForm);
-    //console.log(formData);
-
-  const email = document.getElementById('usernameInput').value;
-  const password = document.getElementById('passwordInput').value;
-  console.log(email, password, "doAjax");
+    const formData = new FormData(loginForm);
 
     AjaxModule.doPost({
-      callback (xhr) {
-        alert("you are login");
+      callback(xhr) {
         console.log(xhr);
       },
       path: '/login',
-      body: {
-        email,
-        password,
-      },
+      body: formData,
     });
-
-
   });
-
-  // пока повесил переход в меню
-  // потом на проверку пользовательских данных
 }
