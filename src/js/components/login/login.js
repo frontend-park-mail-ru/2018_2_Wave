@@ -16,9 +16,6 @@ export default function createLogin() {
     const formData = new FormData(loginForm);
 
     AjaxModule.doPost({
-      callback(xhr) {
-        console.log(xhr);
-      },
       path: '/login',
       body: formData,
     });

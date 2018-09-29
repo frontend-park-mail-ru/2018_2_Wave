@@ -72,6 +72,8 @@ app.post('/login', upload.none(), (req, res) => {
     'sessionid', id,
     { expires: new Date(Date.now() + 1000 * 60 * 10) },
   );
+
+  console.log(`${username} logged in`);
   return res.status(200).json({ id });
 });
 
