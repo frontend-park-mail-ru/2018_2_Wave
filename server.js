@@ -1,54 +1,144 @@
-'use strict';
-
-const http = require('http');
-const fs = require('fs');
-const mime = require('mime-types');
+const express = require('express');
+const favicon = require('serve-favicon');
+const cookie = require('cookie-parser');
+const morgan = require('morgan');
+const uuid = require('uuid/v4');
 const path = require('path');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 
-const port = 3000;
-const paths = {
-  index: './dist/index.html',
-  'app.bundle.js': './dist/app.bundle.js',
-  favicon: './public/img/favicon.png',
-  notFound: './public/404.html'
+const upload = multer();  // for parsing multipart/form-data
+const app = express();
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(favicon(path.join(__dirname, '/public/img/favicon.png')));
+app.use(cookie());
+
+
+const users = {
+  ostapenko: {
+    username: 'ostapenko',
+    password: '1234',
+    score: 72,
+  },
+  dorofeev: {
+    username: 'dorofeev',
+    password: '1234',
+    score: 100500,
+  },
+  volodin: {
+    username: 'volodin',
+    password: '1234',
+    score: 72,
+  },
+  tyuldyukov: {
+    username: 'tyuldyukov',
+    password: '1234',
+    score: 72,
+  },
+  dlipko: {
+    username: 'dlipko',
+    password: '1234',
+    score: 72,
+  },
+  stanford: {
+    username: 'stanford',
+    password: '1234',
+    score: 72,
+  },
 };
 
-const server = http.createServer((request, response) => {
+const ids = {};
 
-  let filePath;
-  let code = 200;
-  switch(request.url) {
-    case '/':
-      filePath = paths.index;
-      break;
-    case '/favicon.ico':
-      filePath = paths.favicon;
-      break;
-    case '/app.bundle.js':
-      filePath = paths['app.bundle.js'];
-      break;
-    default:
-      filePath = './public' + request.url;
-      if (!fs.existsSync(filePath)) {
-        code = 404;
-        filePath = paths.notFound;
-      }
+// upload.none() allowes to parse FormData
+app.post('/login', upload.none(), (req, res) => {
+  const { username } = req.body;
+  const { password } = req.body;
+
+  if (!users[username]
+  || users[username].password !== password) {
+    // wrong email or/and password
+    return res.status(400).json({ answer: 'fail' });
   }
 
-  fs.readFile(filePath, function(error, content) {
-    let contentType = mime.contentType(path.extname(filePath));
-    if (error) {
-      code = 500;
-      content = 'Sorry, check with the site admin for error: ' + error.code + ' ..\n';
-      contentType = 'text/plain';
-    }
+  const id = uuid();
+  ids[id] = username;
 
-    response.writeHead(code, contentType);
-    response.end(content);
-  });
+  res.cookie(
+    'sessionid', id,
+    { expires: new Date(Date.now() + 1000 * 60 * 10) },
+  );
 
-  console.log(code, request.url);
-
+  console.log(`${username} logged in`);
+  return res.status(200).json({ id });
 });
 
-server.listen(port);
+
+app.post('/register', upload.none(), (req, res) => {
+  const { password } = req.body;
+  const { username } = req.body;
+  const { age } = req.body;
+  if (!password
+  || !username
+  || !password.match(/^\S{4,}$/)
+  || !(typeof age === 'number' && age > 10 && age < 100)
+  ) {
+    return res.status(400).json({ error: 'Неверные данные' });
+  }
+  if (users[username]) {
+    return res.status(400).json({ error: 'Пользователь уже существует' });
+  }
+
+  const id = uuid();
+  const user = {
+    password,
+    username,
+    age,
+    score: 0,
+  };
+  ids[id] = username;
+  users[username] = user;
+
+  res.cookie(
+    'sessionid', id,
+    { expires: new Date(Date.now() + 1000 * 60 * 10) },
+  );
+  return res.status(201).json({ id });
+});
+
+
+app.get('/me', (req, res) => {
+  const id = req.cookies.sessionid;
+  const email = ids[id];
+  if (!email || !users[email]) {
+    return res.status(401).end();
+  }
+
+  users[email].score += 1;
+
+  return res.json(users[email]);
+});
+
+
+app.get('/users', (req, res) => {
+  const scorelist = Object.values(users)
+    .sort((l, r) => r.score - l.score)
+    .map(user => ({
+      email: user.email,
+      age: user.age,
+      score: user.score,
+    }));
+
+  return res.json(scorelist);
+});
+
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server listening port ${port}`);
+});
