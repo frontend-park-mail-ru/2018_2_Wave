@@ -1,0 +1,37 @@
+#register.block
+  div
+    form(
+      name='register-form'
+      enctype='multipart/form-data'
+    )
+      input#username(
+        name='username'
+        type='text'
+        placeholder='Username'
+      )
+      .input-requirements
+        p#usernameMessage At least 3 characters long
+
+      input#password(
+        name='password'
+        type='password'
+        placeholder='Password'
+        maxlength='100'
+        minlength='8'
+        required
+      )
+      .input-requirements
+        p#passwordMessage At least 8 characters long (and less than 100 characters)
+
+      input#repeatPassword(
+        type='password'
+        placeholder='Repeat Password'
+      )
+      .input-requirements
+        p#repeatPasswordMessage This password needs to match the first one
+
+      a.button(datahref='menu') create
+      p.message Already registered?
+        a(
+          datahref='login'
+        )  Sign In
