@@ -1,0 +1,14 @@
+.block#leaderboard
+  table.leadertable
+    tr
+      th Username
+      th Score
+
+    each user in users
+      tr
+        td=user.username
+        td=user.score
+
+  a.button(
+    datahref='menu'
+  ) Назад

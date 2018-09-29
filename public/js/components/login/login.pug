@@ -1,0 +1,23 @@
+#login.block
+  div
+    form#loginForm
+      input#usernameInput(
+        name='username'
+        type='text'
+        placeholder='Username'
+        minlength='3'
+        required
+      )
+      input#passwordInput(
+        name='password'
+        type='password'
+        placeholder='Password'
+      )
+      input.button(
+        name='submit'
+        type='submit'
+        value='login'
+      )
+      p.message Not registered?
+        a(datahref='register')  Create an account
+        
