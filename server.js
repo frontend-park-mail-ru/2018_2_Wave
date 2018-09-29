@@ -1,104 +1,116 @@
-'use strict';
-
 const express = require('express');
-const body = require('body-parser');
+const favicon = require('serve-favicon');
 const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const uuid = require('uuid/v4');
 const path = require('path');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+
+const upload = multer();  // for parsing multipart/form-data
 const app = express();
-const favicon = require('serve-favicon');
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(favicon(path.join(__dirname, '/public/img/favicon.png')));
-
-app.use(body.json());
 app.use(cookie());
 
 
 const users = {
-  'a.ostapenko@corp.mail.ru': {
-    username: "ostapenko",
-    email: 'a.ostapenko@corp.mail.ru',
-    password: 'password',
+  ostapenko: {
+    username: 'ostapenko',
+    password: '1234',
     score: 72,
   },
-  'd.dorofeev@corp.mail.ru': {
-    username: "dorofeev",
-    email: 'd.dorofeev@corp.mail.ru',
-    password: 'password',
+  dorofeev: {
+    username: 'dorofeev',
+    password: '1234',
     score: 100500,
   },
-  's.volodin@corp.mail.ru': {
-    username: "volodin",
-    email: 's.volodin@corp.mail.ru',
+  volodin: {
+    username: 'volodin',
     password: '1234',
     score: 72,
   },
-  'a.tyuldyukov@corp.mail.ru': {
+  tyuldyukov: {
     username: 'tyuldyukov',
-    email: 'a.tyuldyukov@corp.mail.ru',
     password: '1234',
     score: 72,
   },
-  'dlipko@mail.ru': {
+  dlipko: {
     username: 'dlipko',
-    email: 'dlipko@mail.ru',
+    password: '1234',
+    score: 72,
+  },
+  stanford: {
+    username: 'stanford',
     password: '1234',
     score: 72,
   },
 };
+
 const ids = {};
 
-app.post('/signup', function (req, res) {
-  const password = req.body.password;
-  const email = req.body.email;
-  const age = req.body.age;
-  if (
-    !password || !email || !age ||
-    !password.match(/^\S{4,}$/) ||
-    !email.match(/@/) ||
-    !(typeof age === 'number' && age > 10 && age < 100)
-    ) {
-    return res.status(400).json({error: 'Не валидные данные пользователя'});
-}
-if (users[email]) {
-  return res.status(400).json({error: 'Пользователь уже существует'});
-}
+// upload.none() allowes to parse FormData
+app.post('/login', upload.none(), (req, res) => {
+  const { username } = req.body;
+  const { password } = req.body;
 
-const id = uuid();
-const user = {password, email, age, score: 0};
-ids[id] = email;
-users[email] = user;
-
-res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
-res.status(201).json({id});
-});
-
-app.post('/login', function (req, res) {
-  const password = req.body.password;
-  const email = req.body.email;
-
-  console.log(password, email);
-
-  if (!password || !email) {
-    return res.status(400).json({error: 'Не указан E-Mail или пароль'});
-  }
-  if (!users[email] || users[email].password !== password) {
-    return res.status(400).json({error: 'Не верный E-Mail и/или пароль'});
+  if (!users[username]
+  || users[username].password !== password) {
+    // wrong email or/and password
+    return res.status(400).json({ answer: 'fail' });
   }
 
   const id = uuid();
-  ids[id] = email;
+  ids[id] = username;
 
-  res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
-  res.status(201).json({id});
+  res.cookie(
+    'sessionid', id,
+    { expires: new Date(Date.now() + 1000 * 60 * 10) },
+  );
+  return res.status(200).json({ id });
 });
 
-app.get('/me', function (req, res) {
-  const id = req.cookies['sessionid'];
+
+app.post('/register', upload.none(), (req, res) => {
+  const { password } = req.body;
+  const { username } = req.body;
+  const { age } = req.body;
+  if (!password
+  || !username
+  || !password.match(/^\S{4,}$/)
+  || !(typeof age === 'number' && age > 10 && age < 100)
+  ) {
+    return res.status(400).json({ error: 'Неверные данные' });
+  }
+  if (users[username]) {
+    return res.status(400).json({ error: 'Пользователь уже существует' });
+  }
+
+  const id = uuid();
+  const user = {
+    password,
+    username,
+    age,
+    score: 0,
+  };
+  ids[id] = username;
+  users[username] = user;
+
+  res.cookie(
+    'sessionid', id,
+    { expires: new Date(Date.now() + 1000 * 60 * 10) },
+  );
+  return res.status(201).json({ id });
+});
+
+
+app.get('/me', (req, res) => {
+  const id = req.cookies.sessionid;
   const email = ids[id];
   if (!email || !users[email]) {
     return res.status(401).end();
@@ -106,25 +118,25 @@ app.get('/me', function (req, res) {
 
   users[email].score += 1;
 
-  res.json(users[email]);
+  return res.json(users[email]);
 });
 
-app.get('/users', function (req, res) {
+
+app.get('/users', (req, res) => {
   const scorelist = Object.values(users)
-  .sort((l, r) => r.score - l.score)
-  .map(user => {
-    return {
+    .sort((l, r) => r.score - l.score)
+    .map(user => ({
       email: user.email,
       age: user.age,
       score: user.score,
-    }
-  });
+    }));
 
-  res.json(scorelist);
+  return res.json(scorelist);
 });
+
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log(`Server listening port ${port}`);
 });
