@@ -36,6 +36,4 @@ export default function createMenu() {
   });
 
   root.appendChild(menu);
-
-  console.log('menu block created');
 }
