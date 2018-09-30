@@ -1,8 +1,23 @@
+import AjaxModule from '../../modules/ajax';
+
 const profileTemplate = require('./profile.pug');
 
 const root = document.getElementById('root');
 
 
+const createProfileCallback = (xhr) => {
+  console.log(xhr);
+  const user = JSON.parse(xhr.responseText);
+  console.log(user);
+  root.innerHTML = profileTemplate({
+    user,
+  });
+};
+
+
 export default function createProfile() {
-  root.innerHTML = profileTemplate();
+  AjaxModule.doGet({
+    callback: createProfileCallback,
+    path: '/me',
+  });
 }

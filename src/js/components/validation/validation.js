@@ -1,26 +1,15 @@
-import css from './validation.css';
+import './validation.css';
 
 
-export default function validate() {
-  const usernameInput = document.getElementById('username');
-  const passwordInput = document.getElementById('password');
-  const passwordRepeatInput = document.getElementById('repeatPassword');
-
-  usernameInput.CustomValidation = new CustomValidation(usernameInput);
-  usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
-
-  passwordInput.CustomValidation = new CustomValidation(passwordInput);
-  passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
-
-  passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
-  passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
-
-
+function isValid() {
   const inputs = document.querySelectorAll('input:not([type="submit"])');
-
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].CustomValidation.checkInput();
+  let flag = true;
+  for (let i = 0; i < inputs.length; i += 1) {
+    if (inputs[i].CustomValidation.invalidities.length > 0) {
+      flag = false;
+    }
   }
+  return flag;
 }
 
 function CustomValidation(input) {
@@ -32,6 +21,103 @@ function CustomValidation(input) {
 
   // trigger method to attach the listener
   this.registerListener();
+}
+
+const usernameValidityChecks = [
+  {
+    isInvalid(input) {
+      return !input.value.match(/^\S{4,}$/);
+    },
+    invalidityMessage: 'This input needs to be at least 3 characters',
+    id: 'usernameMessage',
+  },
+];
+
+const passwordValidityChecks = [
+  {
+    isInvalid(input) {
+      return !input.value.match(/^\S{4,}$/);
+    },
+    invalidityMessage: 'This input needs to be at least 3 characters',
+    id: 'passwordMessage',
+  },
+];
+
+const passwordRepeatValidityChecks = [
+  {
+    isInvalid() {
+      const passwordInput = document.getElementById('passwordInput');
+      const passwordRepeatInput = document.getElementById('repeatPasswordInput');
+      return (passwordRepeatInput.value !== passwordInput.value) || !passwordRepeatInput.value;
+    },
+    invalidityMessage: 'Более 3 символов',
+    id: 'repeatPasswordMessage',
+  },
+];
+
+
+const passwordEditValidityChecks = [
+  {
+    isInvalid(input) {
+      return !input.value.match(/^$|^\S{4,}$/);
+    },
+    invalidityMessage: 'Более 3 символов или пусто',
+    id: 'passwordMessage',
+  },
+];
+
+const passwordRepeatEditValidityChecks = [
+  {
+    isInvalid() {
+      const passwordInput = document.getElementById('passwordInput');
+      const passwordRepeatInput = document.getElementById('repeatPasswordInput');
+      return (passwordRepeatInput.value !== passwordInput.value);
+    },
+    invalidityMessage: 'Пароли должны совпадать',
+    id: 'repeatPasswordMessage',
+  },
+];
+
+function validate() {
+  const usernameInput = document.getElementById('usernameInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const passwordRepeatInput = document.getElementById('repeatPasswordInput');
+
+  usernameInput.CustomValidation = new CustomValidation(usernameInput);
+  usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
+
+  passwordInput.CustomValidation = new CustomValidation(passwordInput);
+  passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
+
+  passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
+  passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
+
+  const inputs = document.querySelectorAll('input:not([type="submit"])');
+
+  for (let i = 0; i < inputs.length; i += 1) {
+    inputs[i].CustomValidation.checkInput();
+  }
+}
+
+function validateEdit() {
+  const usernameInput = document.getElementById('usernameInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const passwordRepeatInput = document.getElementById('repeatPasswordInput');
+
+  usernameInput.CustomValidation = new CustomValidation(usernameInput);
+  usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
+
+  passwordInput.CustomValidation = new CustomValidation(passwordInput);
+  passwordInput.CustomValidation.validityChecks = passwordEditValidityChecks;
+
+  passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
+  passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatEditValidityChecks;
+
+  const inputs = document.querySelectorAll('input:not([type="submit"])');
+
+  for (let i = 0; i < inputs.length; i += 1) {
+    inputs[i].CustomValidation.checkInput();
+  }
 }
 
 CustomValidation.prototype = {
@@ -52,7 +138,7 @@ CustomValidation.prototype = {
   },
 
   checkValidity(input) {
-    for (let i = 0; i < this.validityChecks.length; i++) {
+    for (let i = 0; i < this.validityChecks.length; i += 1) {
       const isInvalid = this.validityChecks[i].isInvalid(input);
       if (isInvalid) {
         this.addInvalidity(this.validityChecks[i].invalidityMessage);
@@ -85,35 +171,8 @@ CustomValidation.prototype = {
   },
 };
 
-
-var usernameValidityChecks = [
-  {
-    isInvalid(input) {
-      return input.value.length < 3;
-    },
-    invalidityMessage: 'This input needs to be at least 3 characters',
-    id: 'usernameMessage',
-  },
-];
-
-var passwordValidityChecks = [
-  {
-    isInvalid(input) {
-      return input.value.length < 8 | input.value.length > 100;
-    },
-    invalidityMessage: 'This input needs to be between 8 and 100 characters',
-    id: 'passwordMessage',
-  },
-];
-
-var passwordRepeatValidityChecks = [
-  {
-    isInvalid() {
-      const passwordInput = document.getElementById('password');
-      const passwordRepeatInput = document.getElementById('repeatPassword');
-      return (passwordRepeatInput.value != passwordInput.value) | !passwordRepeatInput.value;
-    },
-    invalidityMessage: 'This password needs to match the first one',
-    id: 'repeatPasswordMessage',
-  },
-];
+export {
+  validate,
+  isValid,
+  validateEdit,
+};

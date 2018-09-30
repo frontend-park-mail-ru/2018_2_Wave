@@ -19,9 +19,9 @@ const menuButtons = {
   settings: 'Настройки',
 };
 
-// оставил без использования шаблона,
-// возможно, стоит переделать
+
 export default function createMenu() {
+  root.innerHTML = '';
   const menu = createBlock('menu');
   Object.entries(menuButtons).forEach((entry) => {
     const href = entry[0];

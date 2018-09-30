@@ -1,7 +1,11 @@
 - const userName = 'Dieter Rams'
 .block#profile
   img(src = 'img/dieter_rams.jpg')
-  h3= userName
+  h3= user.username
+  h3= user.score
+  a.button(
+    datahref='editprofile'
+  ) Редактировать
   a.button(
     datahref='menu'
   ) Назад

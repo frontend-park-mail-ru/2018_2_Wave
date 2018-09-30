@@ -57,8 +57,10 @@ const ids = {};
 
 // upload.none() allowes to parse FormData
 app.post('/login', upload.none(), (req, res) => {
-  const { username } = req.body;
-  const { password } = req.body;
+  const {
+    username,
+    password,
+  } = req.body;
 
   if (!users[username]
   || users[username].password !== password) {
@@ -78,9 +80,11 @@ app.post('/login', upload.none(), (req, res) => {
 
 
 app.post('/register', upload.single('avatar'), (req, res) => {
-  const { password } = req.body;
-  const { username } = req.body;
-  const { filename } = req.file;
+  const {
+    password,
+    username,
+    filename,
+  } = req.body;
 
   if (!password
   || !username
@@ -133,6 +137,26 @@ app.get('/users', (req, res) => {
     }));
 
   return res.json(scorelist);
+});
+
+
+app.put('/user', (req, res) => {
+  const id = req.cookies.sessionid;
+  const oldusername = ids[id];
+  const {
+    username,
+    password,
+  } = req.body;
+
+  console.log('old', oldusername);
+  console.log('new', username, password);
+
+  users[oldusername].username = username;
+  if (password && !password.match(/^\S{4,}$/)) {
+    users[oldusername] = password;
+  }
+
+  return res.status(200).json(users[oldusername]);
 });
 
 

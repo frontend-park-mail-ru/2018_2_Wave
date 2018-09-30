@@ -30,6 +30,7 @@ function ajax({
   }
 }
 
+
 function doGet(params = {}) {
   ajax({ ...params, method: 'GET' });
 }
@@ -38,10 +39,15 @@ function doPost(params = {}) {
   ajax({ ...params, method: 'POST' });
 }
 
+function doPut(params = {}) {
+  ajax({ ...params, method: 'PUT' });
+}
+
 
 const AjaxModule = {
   doGet,
   doPost,
+  doPut,
 };
 
 export default AjaxModule;

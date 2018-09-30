@@ -4,7 +4,7 @@ import createRegister from './components/register/register';
 import createLeaderboard from './components/leaderboard/leaderboard';
 import createProfile from './components/profile/profile';
 import createSettings from './components/settings/settings';
-
+import createEditProfile from './components/editprofile/editprofile';
 
 import '../css/style.css';
 
@@ -19,6 +19,7 @@ const pages = {
   leaderboard: createLeaderboard,
   profile: createProfile,
   settings: createSettings,
+  editprofile: createEditProfile,
 };
 
 

@@ -1,5 +1,8 @@
 import AjaxModule from '../../modules/ajax';
 import './registration.css';
+import { validate /* , isValid */} from '../validation/validation';
+// Дима Л.: рабочая функция isValid
+// Дима П.: она клёвая, но не используется, ESLint матерится :(
 
 const registerTemplate = require('./register.pug');
 
@@ -12,7 +15,6 @@ export default function createRegister() {
 
   registerForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
     const formData = new FormData(registerForm);
 
     AjaxModule.doPost({
@@ -28,4 +30,7 @@ export default function createRegister() {
       body: formData,
     });
   });
+
+  // запускать в конце, после неё код не выполняется
+  validate();
 }
