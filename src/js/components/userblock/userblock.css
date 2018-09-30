@@ -7,6 +7,8 @@
   overflow: hidden;
   border: 2px solid #393941;
   margin: 10px;
+
+  cursor: pointer;
 }
 
 #userblock img {

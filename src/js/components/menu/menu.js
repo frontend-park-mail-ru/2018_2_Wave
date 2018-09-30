@@ -14,8 +14,6 @@ function createBlock(id) {
 const menuButtons = {
   play: 'Play',
   leaderboard: 'Leaderboard',
-  profile: 'Profile',
-  editProfile: 'Edit profile',
   settings: 'Settings',
 };
 

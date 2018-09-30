@@ -19,7 +19,7 @@ const pages = {
   leaderboard: createLeaderboard,
   profile: createProfile,
   settings: createSettings,
-  editprofile: createEditProfile,
+  editProfile: createEditProfile,
 };
 
 
