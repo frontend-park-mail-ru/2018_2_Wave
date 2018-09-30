@@ -1,10 +1,19 @@
+import AjaxModule from '../../modules/ajax';
+import './leaderboard.css';
+
 const leaderBoardTemplate = require('./leaderboard.pug');
 
 const root = document.getElementById('root');
 
 
-export default function createLeaderboard() {
-  root.innerHTML = leaderBoardTemplate();
+const leaderboardCallback = (xhr) => {
+  const users = JSON.parse(xhr.responseText);
+  root.innerHTML = leaderBoardTemplate({ users });
+};
 
-  console.log('leaderboard block created');
+export default function createLeaderboard() {
+  AjaxModule.doGet({
+    callback: leaderboardCallback,
+    path: '/users',
+  });
 }

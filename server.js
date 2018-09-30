@@ -7,7 +7,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 
-const upload = multer();  // for parsing multipart/form-data
+// for parsing multipart/form-data
+const upload = multer({ dest: 'uploads/' });
 const app = express();
 
 
@@ -56,8 +57,10 @@ const ids = {};
 
 // upload.none() allowes to parse FormData
 app.post('/login', upload.none(), (req, res) => {
-  const { username } = req.body;
-  const { password } = req.body;
+  const {
+    username,
+    password,
+  } = req.body;
 
   if (!users[username]
   || users[username].password !== password) {
@@ -72,18 +75,20 @@ app.post('/login', upload.none(), (req, res) => {
     'sessionid', id,
     { expires: new Date(Date.now() + 1000 * 60 * 10) },
   );
-  return res.status(200).json({ id });
+  return res.status(202).json({ id });
 });
 
 
-app.post('/register', upload.none(), (req, res) => {
-  const { password } = req.body;
-  const { username } = req.body;
-  const { age } = req.body;
+app.post('/register', upload.single('avatar'), (req, res) => {
+  const {
+    password,
+    username,
+    filename,
+  } = req.body;
+
   if (!password
   || !username
   || !password.match(/^\S{4,}$/)
-  || !(typeof age === 'number' && age > 10 && age < 100)
   ) {
     return res.status(400).json({ error: 'Неверные данные' });
   }
@@ -95,9 +100,10 @@ app.post('/register', upload.none(), (req, res) => {
   const user = {
     password,
     username,
-    age,
     score: 0,
+    avatarSource: `uploads/'${filename}`,
   };
+
   ids[id] = username;
   users[username] = user;
 
@@ -131,6 +137,26 @@ app.get('/users', (req, res) => {
     }));
 
   return res.json(scorelist);
+});
+
+
+app.put('/user', (req, res) => {
+  const id = req.cookies.sessionid;
+  const oldusername = ids[id];
+  const {
+    username,
+    password,
+  } = req.body;
+
+  console.log('old', oldusername);
+  console.log('new', username, password);
+
+  users[oldusername].username = username;
+  if (password && !password.match(/^\S{4,}$/)) {
+    users[oldusername] = password;
+  }
+
+  return res.status(200).json(users[oldusername]);
 });
 
 

@@ -1,18 +1,13 @@
-//- костыль на время 
-- const players = [{  name: 'Alfreds Futterkiste', lvl: 10, score: 3505}, {  name: 'Berglunds snabbköp', lvl: 10, score: 3412}, {  name: 'Centro comercial Moctezuma', lvl: 8, score: 2058},  {  name: 'Ernst Handel', lvl: 4, score: 1002}]
-
 .block#leaderboard
   table.leadertable
     tr
-      th Player
-      th Lvl
+      th Username
       th Score
 
-    each player in players
+    each user in users
       tr
-        td=player.name
-        td=player.lvl
-        td=player.score
+        td=user.username
+        td=user.score
 
   a.button(
     datahref='menu'

@@ -25,8 +25,11 @@ function ajax({
       'Content-Type', 'application/json; charset=utf-8',
     );
     xhr.send(JSON.stringify(body));
+  } else {
+    xhr.send();
   }
 }
+
 
 function doGet(params = {}) {
   ajax({ ...params, method: 'GET' });
@@ -36,10 +39,15 @@ function doPost(params = {}) {
   ajax({ ...params, method: 'POST' });
 }
 
+function doPut(params = {}) {
+  ajax({ ...params, method: 'PUT' });
+}
+
 
 const AjaxModule = {
   doGet,
   doPost,
+  doPut,
 };
 
 export default AjaxModule;
