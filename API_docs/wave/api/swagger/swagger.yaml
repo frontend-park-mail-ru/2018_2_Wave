@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Wave Application
+host: localhost:10010
+basePath: /
+tags:
+- name: "user"
+
+schemes:
+  - http
+  #- https
+
+consumes:
+  - application/json
+
+produces:
+  - application/json
+  
+paths:
+  /signup:
+    get:
+      tags:
+      - user
+      summary: "Creating an account."
+      description: ""
+      operationId: signupUser
+      consumes: 
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "Key user information."
+          required: true
+          schema:
+            $ref: "#/definitions/UserCredentials"
+      responses:
+        201:
+          description: "Created"
+        403:
+          description: "Forbidden"
+  
+  /login:
+    get:
+      tags:
+      - user
+      summary: "Logging in an existing account."
+      description: ""
+      operationId: loginUser
+      consumes: 
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "Key user information."
+          required: true
+          schema:
+            $ref: "#/definitions/UserCredentials"
+      responses:
+        202:
+          description: "Accepted"
+        403:
+          description: "Forbidden"
+
+definitions:
+  UserCredentials:
+    type: object 
+    required:
+      - "username"
+      - "password"
+    properties:
+      username:
+        type: string
+      password:
+        type: string

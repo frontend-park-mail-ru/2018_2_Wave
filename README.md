@@ -17,3 +17,7 @@ old: [wave.now.sh](https://wave.now.sh)
 * Илья Лебедев &mdash; [bomkvilt](https://github.com/bomkvilt)
 * Ксения Глазачёва &mdash; [ksgl](https://github.com/ksgl)
 * Дмитрий Липко &mdash; [dlipko](https://github.com/dlipko)
+
+## Ментор
+
+* Игорь Дружинин &mdash; [Drujininii](https://github.com/Drujininii)
