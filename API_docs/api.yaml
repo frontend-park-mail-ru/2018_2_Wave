@@ -5,7 +5,7 @@ info:
 host: localhost:10010
 basePath: /
 tags:
-- name: "user"
+  - name: "user"
 
 schemes:
   - http
@@ -61,6 +61,52 @@ paths:
           description: "Accepted"
         403:
           description: "Forbidden"
+  
+  /me:
+    get:
+      tags:
+      - user
+      summary: "Viewing current user's profile page."
+      description: ""
+      operationId: meShowUser
+      consumes: 
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "More detailed user information."
+          required: true
+          schema:
+            $ref: "#/definitions/UserExtended"
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Internal Server Error"
+
+  /me:
+    put:
+      tags:
+      - user
+      summary: "Edititng current user's profile information."
+      description: ""
+      operationId: meEditUser
+      consumes: 
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          description: "More detailed user information."
+          required: true
+          schema:
+            $ref: "#/definitions/UserExtended"
+      responses:
+        202:
+          description: "Accepted"
+        413:
+          description: "Payload Too Large"
+        500:
+          description: "Internal Server Error"
 
 definitions:
   UserCredentials:
@@ -71,5 +117,28 @@ definitions:
     properties:
       username:
         type: string
+        example: florence
       password:
         type: string
+        example: pass123
+
+  UserExtended:
+    type: object 
+    required:
+      - "username"
+      - "password"
+      - "score"
+      - "avatarSource"
+    properties:
+      username:
+        type: string
+        example: florence
+      password:
+        type: string
+        example: pass123
+      score:
+        type: int
+        example: 21
+      avatarSource:
+        type: string
+        example: <avatarSource>
