@@ -1,2 +1,5 @@
 node_modules
-package.json
+public/app.bundle.js
+public/index.html
+dist
+uploads
