@@ -1,0 +1,47 @@
+#register.block
+  div
+    form#registerForm(
+      name='register-form'
+      enctype='multipart/form-data'
+    )
+      input#usernameInput(
+        name='username'
+        type='text'
+        placeholder='Username'
+      )
+      .input-requirements
+        p#usernameMessage Более 3 символов
+
+      input#passwordInput(
+        name='password'
+        type='password'
+        placeholder='Password'
+        maxlength='100'
+        minlength='8'
+        required
+      )
+      .input-requirements
+        p#passwordMessage Более 3 символов
+
+      input#repeatPasswordInput(
+        type='password'
+        placeholder='Repeat Password'
+      )
+      .input-requirements
+        p#repeatPasswordMessage Пароли должны совпадать
+
+      label.button Choose avatar
+        input#fileInput(
+          name="avatar"
+          type="file"
+        )
+
+      input.button(
+        name='submit'
+        type='submit'
+        value='register'
+      )
+      p.message Already registered?
+        a(
+          datahref='login'
+        )  Sign In

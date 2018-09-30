@@ -1,0 +1,4 @@
+if !user.authorized
+  a#userblockbutton(datahref='login') login
+else
+  img#userblockAvatar(src=user.avatarSource)
