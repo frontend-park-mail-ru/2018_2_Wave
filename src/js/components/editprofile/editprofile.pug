@@ -1,0 +1,36 @@
+#register.block
+  div
+    form#editProfileForm
+      input#usernameInput(
+        name= 'username'
+        type= 'text'
+        placeholder= 'Username'
+        minlength='4'
+        value= user.username
+        required
+      )
+      .input-requirements
+        p#usernameMessage Более 3 символов
+
+      input#passwordInput(
+        name='password'
+        type='password'
+        placeholder='Password'
+      )
+      .input-requirements
+        p#passwordMessage Более 3 символов или пусто
+
+      input#repeatPasswordInput(
+        name='repeatpassword'
+        type='password'
+        placeholder='Repeat Password'
+      )
+      .input-requirements
+        p#repeatPasswordMessage Пароли должны совпадать
+
+      input.button(
+        name='submit'
+        type='submit'
+        value='Сохранить'
+        datahref='profile'
+        )
