@@ -1,10 +1,3 @@
-const AjaxModule = {
-  doGet,
-  doPost,
-};
-
-export default AjaxModule;
-
 const noop = () => null;
 
 function ajax({
@@ -17,12 +10,6 @@ function ajax({
   xhr.open(method, path, true);
   xhr.withCredentials = true;
 
-  if (body) {
-    xhr.setRequestHeader(
-      'Content-Type', 'application/json; charset=utf-8',
-    );
-  }
-
   xhr.onreadystatechange = () => {
     if (xhr.readyState !== 4) {
       return;
@@ -30,10 +17,14 @@ function ajax({
     callback(xhr);
   };
 
-  if (body) {
-    xhr.send(JSON.stringify(body));
+  if (body instanceof FormData) {
+    // FormData sets RequestHeader automatically!
+    xhr.send(body);
   } else {
-    xhr.send();
+    xhr.setRequestHeader(
+      'Content-Type', 'application/json; charset=utf-8',
+    );
+    xhr.send(JSON.stringify(body));
   }
 }
 
@@ -44,3 +35,16 @@ function doGet(params = {}) {
 function doPost(params = {}) {
   ajax({ ...params, method: 'POST' });
 }
+
+function doPut(params = {}) {
+  ajax({ ...params, method: 'PUT' });
+}
+
+
+const AjaxModule = {
+  doGet,
+  doPost,
+  doPut,
+};
+
+export default AjaxModule;

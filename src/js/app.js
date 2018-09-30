@@ -4,7 +4,7 @@ import createRegister from './components/register/register';
 import createLeaderboard from './components/leaderboard/leaderboard';
 import createProfile from './components/profile/profile';
 import createSettings from './components/settings/settings';
-
+import createEditProfile from './components/editprofile/editprofile';
 
 import css from '../css/style.css';
 
@@ -19,20 +19,20 @@ const pages = {
   leaderboard: createLeaderboard,
   profile: createProfile,
   settings: createSettings,
+  editprofile: createEditProfile,
 };
 
 
 root.addEventListener('click', (event) => {
-  if (!(event.target instanceof HTMLAnchorElement)
+  console.log('event');
+  if ((!event.target.getAttribute('datahref'))
   || (event.target.getAttribute('type') === 'submit')) {
     return;
   }
 
   event.preventDefault();
-  const link = event.target;
 
-  root.innerHTML = '';
-  pages[link.getAttribute('datahref')]();
+  pages[event.target.getAttribute('datahref')]();
 });
 
 createMenu();
