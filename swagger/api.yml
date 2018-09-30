@@ -1,4 +1,5 @@
-swagger: "2.0"
+openapi: "3.0.1"
+
 info:
   version: "0.0.1"
   title: Wave Application
@@ -84,7 +85,7 @@ paths:
         500:
           description: "Internal Server Error"
 
-  /me:
+  /user:
     put:
       tags:
       - user
