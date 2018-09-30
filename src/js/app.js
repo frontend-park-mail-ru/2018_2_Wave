@@ -5,11 +5,11 @@ import createLeaderboard from './components/leaderboard/leaderboard';
 import createProfile from './components/profile/profile';
 import createSettings from './components/settings/settings';
 import createEditProfile from './components/editprofile/editprofile';
+import createUserblock from './components/userblock/userblock';
 
 import '../css/style.css';
 
 const root = document.getElementById('root');
-
 
 const pages = {
   play: createMenu,
@@ -23,7 +23,7 @@ const pages = {
 };
 
 
-root.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   if (!(event.target instanceof HTMLAnchorElement)
   || (event.target.getAttribute('type') === 'submit')) {
     return;
@@ -38,8 +38,14 @@ root.addEventListener('click', (event) => {
 
 
 root.addEventListener('link', (event) => {
+  /* this event dispatches after
+   * logging in, registering and
+   * profile update */
+  createUserblock();
+
   root.innerHTML = '';
   pages[event.detail]();
 });
 
+createUserblock();
 createMenu();

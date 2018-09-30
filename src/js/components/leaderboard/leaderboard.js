@@ -12,7 +12,7 @@ const leaderboardCallback = (xhr) => {
 };
 
 export default function createLeaderboard() {
-  AjaxModule.doGet({
+  AjaxModule.Get({
     callback: leaderboardCallback,
     path: '/users',
   });

@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 
 // for parsing multipart/form-data
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'public/uploads/' });
 const app = express();
 
 
@@ -25,31 +25,19 @@ const users = {
     username: 'ostapenko',
     password: '1234',
     score: 72,
-  },
-  dorofeev: {
-    username: 'dorofeev',
-    password: '1234',
-    score: 100500,
-  },
-  volodin: {
-    username: 'volodin',
-    password: '1234',
-    score: 72,
-  },
-  tyuldyukov: {
-    username: 'tyuldyukov',
-    password: '1234',
-    score: 72,
+    avatarSource: 'https://avatars3.githubusercontent.com/u/6782017?s=460&v=4',
   },
   dlipko: {
     username: 'dlipko',
     password: '1234',
     score: 72,
+    avatarSource: 'https://avatars2.githubusercontent.com/u/22277868?s=460&v=4',
   },
   stanford: {
     username: 'stanford',
     password: '1234',
     score: 72,
+    avatarSource: 'https://avatars1.githubusercontent.com/u/28190898?s=460&v=4',
   },
 };
 
@@ -124,7 +112,7 @@ app.get('/me', (req, res) => {
 
   users[username].score += 1;
 
-  return res.json(users[username]);
+  return res.status(200).json(users[username]);
 });
 
 
