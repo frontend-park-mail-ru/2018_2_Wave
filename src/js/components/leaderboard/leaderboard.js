@@ -1,4 +1,5 @@
 import AjaxModule from '../../modules/ajax';
+import './leaderboard.css';
 
 const leaderBoardTemplate = require('./leaderboard.pug');
 

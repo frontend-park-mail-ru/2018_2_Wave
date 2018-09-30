@@ -1,4 +1,5 @@
 import AjaxModule from '../../modules/ajax';
+import './profile.css';
 
 const profileTemplate = require('./profile.pug');
 
