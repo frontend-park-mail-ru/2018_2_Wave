@@ -20,7 +20,7 @@ function ajax({
   if (body instanceof FormData) {
     // FormData sets RequestHeader automatically!
     xhr.send(body);
-  } else {
+  } else if (body) {
     xhr.setRequestHeader(
       'Content-Type', 'application/json; charset=utf-8',
     );
@@ -31,23 +31,23 @@ function ajax({
 }
 
 
-function doGet(params = {}) {
+function Get(params = {}) {
   ajax({ ...params, method: 'GET' });
 }
 
-function doPost(params = {}) {
+function Post(params = {}) {
   ajax({ ...params, method: 'POST' });
 }
 
-function doPut(params = {}) {
+function Put(params = {}) {
   ajax({ ...params, method: 'PUT' });
 }
 
 
 const AjaxModule = {
-  doGet,
-  doPost,
-  doPut,
+  Get,
+  Post,
+  Put,
 };
 
 export default AjaxModule;

@@ -17,7 +17,7 @@ export default function createRegister() {
     event.preventDefault();
     const formData = new FormData(registerForm);
 
-    AjaxModule.doPost({
+    AjaxModule.Post({
       callback(xhr) {
         if (xhr.status === 201) {
           const ev = new CustomEvent('link', { detail: 'menu' });

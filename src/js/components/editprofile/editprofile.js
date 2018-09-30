@@ -11,43 +11,28 @@ const callbackEditProgile = (xhr) => {
     user,
   });
   validateEdit();
-  // const editProfileForm = root.getElementById('editProfileForm');
-  const editProfileForm = root.querySelector('#editProfileForm');
 
+  const editProfileForm = root.getElementById('#editProfileForm');
   editProfileForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     if (isValid()) {
-      // const formData = new FormData(editProfileForm);
-      const username = root.querySelector('#usernameInput').value;
-      const password = root.querySelector('#passwordInput').value;
-      console.log(username, password);
+      const formData = new FormData(editProfileForm);
 
-      AjaxModule.doPut({
-        callback(xhr2) {
-          console.log(xhr2);
-          const button = root.querySelector('input.button');
-          button.type = 'button';
-          const eventProfile = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-          });
-          button.dispatchEvent(eventProfile);
-          console.log('create event');
+      AjaxModule.Put({
+        callback() {
+          const ev = new CustomEvent('link', { detail: 'profile' });
+          root.dispatchEvent(ev);
         },
         path: '/user',
-        body: {
-          username,
-          password,
-        },
+        body: formData,
       });
     }
   });
 };
 
 export default function createEditProfile() {
-  AjaxModule.doGet({
+  AjaxModule.Get({
     callback: callbackEditProgile,
     path: '/me',
   });

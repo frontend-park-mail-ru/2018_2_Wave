@@ -12,11 +12,12 @@ function createBlock(id) {
 
 
 const menuButtons = {
-  play: 'Играть оффлайн',
-  login: 'Войти',
-  leaderboard: 'Таблица лидеров',
-  profile: 'Профиль',
-  settings: 'Настройки',
+  play: 'Play',
+  login: 'Login',
+  leaderboard: 'Leaderboard',
+  profile: 'Profile',
+  editProfile: 'Edit profile',
+  settings: 'Settings',
 };
 
 

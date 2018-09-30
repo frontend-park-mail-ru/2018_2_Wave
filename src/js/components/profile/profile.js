@@ -17,7 +17,7 @@ const createProfileCallback = (xhr) => {
 
 
 export default function createProfile() {
-  AjaxModule.doGet({
+  AjaxModule.Get({
     callback: createProfileCallback,
     path: '/me',
   });
