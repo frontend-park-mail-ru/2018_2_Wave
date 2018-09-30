@@ -10,12 +10,19 @@ export default function createLogin() {
   const loginForm = document.getElementById('loginForm');
 
   loginForm.addEventListener('submit', (event) => {
-    console.log('submit catched');
     event.preventDefault();
 
     const formData = new FormData(loginForm);
 
     AjaxModule.doPost({
+      callback(xhr) {
+        if (xhr.status === 202) {
+          const ev = new CustomEvent('link', { detail: 'menu' });
+          root.dispatchEvent(ev);
+        } else {
+          // TODO: show error
+        }
+      },
       path: '/login',
       body: formData,
     });

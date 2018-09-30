@@ -7,7 +7,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 
-const upload = multer();  // for parsing multipart/form-data
+// for parsing multipart/form-data
+const upload = multer({ dest: 'uploads/' });
 const app = express();
 
 
@@ -72,18 +73,18 @@ app.post('/login', upload.none(), (req, res) => {
     'sessionid', id,
     { expires: new Date(Date.now() + 1000 * 60 * 10) },
   );
-  return res.status(200).json({ id });
+  return res.status(202).json({ id });
 });
 
 
-app.post('/register', upload.none(), (req, res) => {
+app.post('/register', upload.single('avatar'), (req, res) => {
   const { password } = req.body;
   const { username } = req.body;
-  const { age } = req.body;
+  const { filename } = req.file;
+
   if (!password
   || !username
   || !password.match(/^\S{4,}$/)
-  || !(typeof age === 'number' && age > 10 && age < 100)
   ) {
     return res.status(400).json({ error: 'Неверные данные' });
   }
@@ -95,9 +96,10 @@ app.post('/register', upload.none(), (req, res) => {
   const user = {
     password,
     username,
-    age,
     score: 0,
+    avatarSource: `uploads/'${filename}`,
   };
+
   ids[id] = username;
   users[username] = user;
 

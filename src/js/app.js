@@ -6,7 +6,7 @@ import createProfile from './components/profile/profile';
 import createSettings from './components/settings/settings';
 
 
-import css from '../css/style.css';
+import '../css/style.css';
 
 const root = document.getElementById('root');
 
@@ -33,6 +33,12 @@ root.addEventListener('click', (event) => {
 
   root.innerHTML = '';
   pages[link.getAttribute('datahref')]();
+});
+
+
+root.addEventListener('link', (event) => {
+  root.innerHTML = '';
+  pages[event.detail]();
 });
 
 createMenu();

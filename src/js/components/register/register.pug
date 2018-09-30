@@ -1,6 +1,6 @@
 #register.block
   div
-    form(
+    form#registerForm(
       name='register-form'
       enctype='multipart/form-data'
     )
@@ -30,7 +30,17 @@
       .input-requirements
         p#repeatPasswordMessage This password needs to match the first one
 
-      a.button(datahref='menu') create
+      label.button Choose avatar
+        input#fileInput(
+          name="avatar"
+          type="file"
+        )
+
+      input.button(
+        name='submit'
+        type='submit'
+        value='register'
+      )
       p.message Already registered?
         a(
           datahref='login'
