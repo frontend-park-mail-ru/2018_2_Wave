@@ -1,29 +1,22 @@
 import AjaxModule from '../../modules/ajax';
 import './userblock.css';
 
-
-// const userblockTemplate = require('./userblock.pug');
+const userblockTemplate = require('./userblock.pug');
 
 const userblock = document.getElementById('userblock');
 
 
 export default function createUserblock() {
-  userblock.innerHTML = '';
+  const user = {};
   AjaxModule.Get({
     callback(xhr) {
       if (xhr.status === 401) {
-        const a = document.createElement('a');
-        a.id = 'loginbutton';
-        a.setAttribute('datahref', 'login');
-        a.innerHTML = 'login';
-        userblock.appendChild(a);
+        user.authorized = false;
       } else if (xhr.status === 200) {
-        // show avatar
-        const avatar = document.createElement('img');
-        const { avatarSource } = JSON.parse(xhr.responseText);
-        avatar.setAttribute('src', avatarSource);
-        userblock.appendChild(avatar);
+        user.authorized = true;
+        user.avatarSource = JSON.parse(xhr.responseText).avatarSource;
       }
+      userblock.innerHTML = userblockTemplate({ user });
     },
     path: '/me',
   });
