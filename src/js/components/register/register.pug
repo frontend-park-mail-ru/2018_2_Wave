@@ -8,27 +8,30 @@
         name='username'
         type='text'
         placeholder='Username'
+        minlength='4'
+        required
       )
       .input-requirements
-        p#usernameMessage Более 3 символов
+        p#usernameMessage At least 4 characters long
 
       input#passwordInput(
         name='password'
         type='password'
         placeholder='Password'
-        maxlength='100'
-        minlength='8'
+        minlength='6'
         required
       )
       .input-requirements
-        p#passwordMessage Более 3 символов
+        p#passwordMessage  At least 6 characters long
 
       input#repeatPasswordInput(
         type='password'
         placeholder='Repeat Password'
+        minlength='6'
+        required
       )
       .input-requirements
-        p#repeatPasswordMessage Пароли должны совпадать
+        p#repeatPasswordMessage Passwords must match
 
       label.button Choose avatar
         input#fileInput(

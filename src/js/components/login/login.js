@@ -15,8 +15,8 @@ export default function createLogin() {
     const formData = new FormData(loginForm);
 
     AjaxModule.Post({
-      callback(xhr) {
-        if (xhr.status === 202) {
+      callback(response) {
+        if (response.status === 202) {
           const ev = new CustomEvent('link', { detail: 'menu' });
           root.dispatchEvent(ev);
         } else {

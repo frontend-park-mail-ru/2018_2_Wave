@@ -1,34 +1,39 @@
 import AjaxModule from '../../modules/ajax';
-import { validateEdit, isValid } from '../validation/validation';
+import {
+  validateEdit,
+} from '../validation/validation';
 
 const editProfileTemplate = require('./editprofile.pug');
 
 const root = document.getElementById('root');
 
-const callbackEditProgile = (xhr) => {
-  const user = JSON.parse(xhr.responseText);
-  root.innerHTML = editProfileTemplate({
-    user,
-  });
-  validateEdit();
+const callbackEditProgile = (response) => {
+  response.json().then((user) => {
+    root.innerHTML = editProfileTemplate({
+      user,
+    });
 
-  const editProfileForm = root.getElementById('#editProfileForm');
-  editProfileForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    if (isValid()) {
+    const editProfileForm = root.querySelector('#editProfileForm');
+    editProfileForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      console.log('submit');
       const formData = new FormData(editProfileForm);
-
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
       AjaxModule.Put({
         callback() {
-          const ev = new CustomEvent('link', { detail: 'profile' });
+          const ev = new CustomEvent('link', {
+            detail: 'profile',
+          });
           root.dispatchEvent(ev);
         },
         path: '/user',
         body: formData,
       });
-    }
+    });
   });
+  validateEdit();
 };
 
 export default function createEditProfile() {

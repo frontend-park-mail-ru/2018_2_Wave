@@ -1,6 +1,9 @@
 #register.block
   div
-    form#editProfileForm
+    form#editProfileForm(
+      name='editprofile-form'
+      enctype='multipart/form-data'
+    )
       input#usernameInput(
         name= 'username'
         type= 'text'
@@ -10,7 +13,7 @@
         required
       )
       .input-requirements
-        p#usernameMessage Более 3 символов
+        p#usernameMessage At least 4 characters long
 
       input#passwordInput(
         name='password'
@@ -18,7 +21,7 @@
         placeholder='Password'
       )
       .input-requirements
-        p#passwordMessage Более 3 символов или пусто
+        p#passwordMessage At least 6 characters long or empty
 
       input#repeatPasswordInput(
         name='repeatpassword'
@@ -26,7 +29,13 @@
         placeholder='Repeat Password'
       )
       .input-requirements
-        p#repeatPasswordMessage Пароли должны совпадать
+        p#repeatPasswordMessage Passwords must match
+
+      label.button Choose avatar
+        input#fileInput(
+          name="avatar"
+          type="file"
+        )
 
       input.button(
         name='submit'

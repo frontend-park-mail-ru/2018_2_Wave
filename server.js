@@ -23,19 +23,19 @@ app.use(cookie());
 const users = {
   ostapenko: {
     username: 'ostapenko',
-    password: '1234',
+    password: '123456',
     score: 72,
     avatarSource: 'https://avatars3.githubusercontent.com/u/6782017?s=460&v=4',
   },
   dlipko: {
     username: 'dlipko',
-    password: '1234',
+    password: '123456',
     score: 72,
     avatarSource: 'https://avatars2.githubusercontent.com/u/22277868?s=460&v=4',
   },
   stanford: {
     username: 'stanford',
-    password: '1234',
+    password: '123456',
     score: 72,
     avatarSource: 'https://avatars1.githubusercontent.com/u/28190898?s=460&v=4',
   },
@@ -131,17 +131,23 @@ app.get('/users', (req, res) => {
 app.put('/user', (req, res) => {
   const id = req.cookies.sessionid;
   const oldusername = ids[id];
+  console.log(req.body);
   const {
     username,
     password,
+    filename,
   } = req.body;
 
   console.log('old', oldusername);
   console.log('new', username, password);
 
   users[oldusername].username = username;
-  if (password && !password.match(/^\S{4,}$/)) {
-    users[oldusername] = password;
+  if (password && password.match(/^\S{6,}$/)) {
+    users[oldusername].password = password;
+  }
+
+  if (filename) {
+    users[oldusername].avatarSource = `uploads/'${filename}`;
   }
 
   return res.status(200).json(users[oldusername]);

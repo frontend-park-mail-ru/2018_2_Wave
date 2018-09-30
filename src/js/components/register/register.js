@@ -8,6 +8,14 @@ const registerTemplate = require('./register.pug');
 
 const root = document.getElementById('root');
 
+const createRegisterCallback = (response) => {
+  if (response.status === 201) {
+    const ev = new CustomEvent('link', { detail: 'menu' });
+    root.dispatchEvent(ev);
+  } else {
+    // TODO: show error
+  }
+};
 
 export default function createRegister() {
   root.innerHTML = registerTemplate();
@@ -18,19 +26,11 @@ export default function createRegister() {
     const formData = new FormData(registerForm);
 
     AjaxModule.Post({
-      callback(xhr) {
-        if (xhr.status === 201) {
-          const ev = new CustomEvent('link', { detail: 'menu' });
-          root.dispatchEvent(ev);
-        } else {
-          // TODO: show error
-        }
-      },
+      callback: createRegisterCallback,
       path: '/register',
       body: formData,
     });
   });
 
-  // запускать в конце, после неё код не выполняется
   validate();
 }

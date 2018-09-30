@@ -5,13 +5,9 @@ const profileTemplate = require('./profile.pug');
 
 const root = document.getElementById('root');
 
-
-const createProfileCallback = (xhr) => {
-  console.log(xhr);
-  const user = JSON.parse(xhr.responseText);
-  console.log(user);
-  root.innerHTML = profileTemplate({
-    user,
+const createProfileCallback = (response) => {
+  response.json().then((user) => {
+    root.innerHTML = profileTemplate({ user });
   });
 };
 
