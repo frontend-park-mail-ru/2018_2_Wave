@@ -28,7 +28,7 @@ const usernameValidityChecks = [
     isInvalid(input) {
       return !input.value.match(/^\S{4,}$/);
     },
-    invalidityMessage: 'This input needs to be at least 3 characters',
+    invalidityMessage: 'This input needs to be at least 4 characters',
     id: 'usernameMessage',
   },
 ];
@@ -36,9 +36,9 @@ const usernameValidityChecks = [
 const passwordValidityChecks = [
   {
     isInvalid(input) {
-      return !input.value.match(/^\S{4,}$/);
+      return !input.value.match(/^\S{6,}$/);
     },
-    invalidityMessage: 'This input needs to be at least 3 characters',
+    invalidityMessage: 'This input needs to be at least 6 characters',
     id: 'passwordMessage',
   },
 ];
@@ -50,7 +50,7 @@ const passwordRepeatValidityChecks = [
       const passwordRepeatInput = document.getElementById('repeatPasswordInput');
       return (passwordRepeatInput.value !== passwordInput.value) || !passwordRepeatInput.value;
     },
-    invalidityMessage: 'Более 3 символов',
+    invalidityMessage: 'Passwords must match',
     id: 'repeatPasswordMessage',
   },
 ];
@@ -61,7 +61,7 @@ const passwordEditValidityChecks = [
     isInvalid(input) {
       return !input.value.match(/^$|^\S{4,}$/);
     },
-    invalidityMessage: 'Более 3 символов или пусто',
+    invalidityMessage: 'This input needs to be at least 4 characters',
     id: 'passwordMessage',
   },
 ];
@@ -73,7 +73,7 @@ const passwordRepeatEditValidityChecks = [
       const passwordRepeatInput = document.getElementById('repeatPasswordInput');
       return (passwordRepeatInput.value !== passwordInput.value);
     },
-    invalidityMessage: 'Пароли должны совпадать',
+    invalidityMessage: 'Passwords must match',
     id: 'repeatPasswordMessage',
   },
 ];
