@@ -6,9 +6,10 @@ const leaderBoardTemplate = require('./leaderboard.pug');
 const root = document.getElementById('root');
 
 
-const leaderboardCallback = (xhr) => {
-  const users = JSON.parse(xhr.responseText);
-  root.innerHTML = leaderBoardTemplate({ users });
+const leaderboardCallback = (response) => {
+  response.json().then((users) => {
+    root.innerHTML = leaderBoardTemplate({ users });
+  });
 };
 
 export default function createLeaderboard() {

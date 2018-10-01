@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# 2018_2_Wave
-Топ проект по фронтенду
-=======
 # Команда Wave
 
 ## Репозитории
@@ -25,4 +21,3 @@ old: [wave.now.sh](https://wave.now.sh)
 ## Ментор
 
 * Игорь Дружинин &mdash; [Drujininii](https://github.com/Drujininii)
->>>>>>> origin/develop
