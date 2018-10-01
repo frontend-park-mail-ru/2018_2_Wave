@@ -115,6 +115,12 @@ app.get('/me', (req, res) => {
   return res.status(200).json(users[username]);
 });
 
+app.head('/me', (req, res) => {
+  if (req.cookies.sessionid) {
+    return res.status(200).end();
+  }
+  return res.status(401).end();
+});
 
 app.get('/users', (req, res) => {
   const scorelist = Object.values(users)
@@ -128,7 +134,7 @@ app.get('/users', (req, res) => {
 });
 
 
-app.put('/user', (req, res) => {
+app.put('/user', upload.single('avatar'), (req, res) => {
   const id = req.cookies.sessionid;
   const oldusername = ids[id];
   console.log(req.body);

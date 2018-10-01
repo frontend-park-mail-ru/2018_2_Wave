@@ -1,0 +1,9 @@
+#errorMessage {
+    color: red;
+    overflow: hidden;
+    display: none;
+}
+
+#errorMessage.show{
+    display: block;
+}

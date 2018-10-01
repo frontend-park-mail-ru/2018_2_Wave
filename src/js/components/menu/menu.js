@@ -1,4 +1,5 @@
 // import menuTemplate from './menu.pug';
+import AjaxModule from '../../modules/ajax';
 
 const root = document.getElementById('root');
 
@@ -11,18 +12,28 @@ function createBlock(id) {
 }
 
 
-const menuButtons = {
+const menuLoginButtons = {
   play: 'Play',
   leaderboard: 'Leaderboard',
   profile: 'Profile',
-  editProfile: 'Edit profile',
+  settings: 'Settings',
+};
+
+const menuUnauthButtons = {
+  play: 'Play',
+  leaderboard: 'Leaderboard',
   settings: 'Settings',
 };
 
 
-export default function createMenu() {
+const createMenuCallback = (response) => {
   root.innerHTML = '';
   const menu = createBlock('menu');
+  let menuButtons = menuUnauthButtons;
+  if (response.status === 200) {
+    menuButtons = menuLoginButtons;
+  }
+
   Object.entries(menuButtons).forEach((entry) => {
     const href = entry[0];
     const title = entry[1];
@@ -36,4 +47,11 @@ export default function createMenu() {
   });
 
   root.appendChild(menu);
+};
+
+export default function createMenu() {
+  AjaxModule.Head({
+    callback: createMenuCallback,
+    path: '/me',
+  });
 }

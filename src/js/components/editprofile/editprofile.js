@@ -16,11 +16,7 @@ const callbackEditProgile = (response) => {
     const editProfileForm = root.querySelector('#editProfileForm');
     editProfileForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      console.log('submit');
       const formData = new FormData(editProfileForm);
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
       AjaxModule.Put({
         callback() {
           const ev = new CustomEvent('link', {
@@ -32,8 +28,8 @@ const callbackEditProgile = (response) => {
         body: formData,
       });
     });
+    validateEdit();
   });
-  validateEdit();
 };
 
 export default function createEditProfile() {

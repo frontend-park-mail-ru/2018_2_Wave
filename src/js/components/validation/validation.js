@@ -92,7 +92,7 @@ function validate() {
   passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
   passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
 
-  const inputs = document.querySelectorAll('input:not([type="submit"])');
+  const inputs = document.querySelectorAll('input:not([type="submit"]):not([type="file"])');
 
   for (let i = 0; i < inputs.length; i += 1) {
     inputs[i].CustomValidation.checkInput();
@@ -100,22 +100,23 @@ function validate() {
 }
 
 function validateEdit() {
-  const usernameInput = document.getElementById('usernameInput');
+  const usernameInput = document.querySelector('#usernameInput');
   const passwordInput = document.getElementById('passwordInput');
   const passwordRepeatInput = document.getElementById('repeatPasswordInput');
-
+  console.log('user');
   usernameInput.CustomValidation = new CustomValidation(usernameInput);
   usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
-
+  console.log('passwordInput');
   passwordInput.CustomValidation = new CustomValidation(passwordInput);
   passwordInput.CustomValidation.validityChecks = passwordEditValidityChecks;
-
+  console.log('passwordInput');
   passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
   passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatEditValidityChecks;
 
-  const inputs = document.querySelectorAll('input:not([type="submit"])');
+  const inputs = document.querySelectorAll('input:not([type="submit"]):not([type="file"])');
 
   for (let i = 0; i < inputs.length; i += 1) {
+    console.log(i, inputs[i]);
     inputs[i].CustomValidation.checkInput();
   }
 }
