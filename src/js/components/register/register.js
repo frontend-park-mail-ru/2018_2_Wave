@@ -31,6 +31,5 @@ export default function createRegister() {
       body: formData,
     });
   });
-
   validate();
 }

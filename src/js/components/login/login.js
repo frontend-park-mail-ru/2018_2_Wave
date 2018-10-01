@@ -1,4 +1,5 @@
 import AjaxModule from '../../modules/ajax';
+import './login.css';
 
 const loginTemplate = require('./login.pug');
 
@@ -20,7 +21,8 @@ export default function createLogin() {
           const ev = new CustomEvent('link', { detail: 'menu' });
           root.dispatchEvent(ev);
         } else {
-          // TODO: show error
+          const errorMessage = root.querySelector('#errorMessage');
+          errorMessage.classList.add('show');
         }
       },
       path: '/login',

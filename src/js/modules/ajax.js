@@ -29,11 +29,15 @@ function Put(params = {}) {
   ajax({ ...params, method: 'PUT' });
 }
 
+function Head(params = {}) {
+  ajax({ ...params, method: 'HEAD' });
+}
 
 const AjaxModule = {
   Get,
   Post,
   Put,
+  Head,
 };
 
 export default AjaxModule;
