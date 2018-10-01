@@ -36,13 +36,13 @@ paths:
           schema:
             $ref: "#/definitions/UserCredentials"
       responses:
-        201:
+        '201':
           description: "Created"
-        403:
+        '403':
           description: "Forbidden"
   
   /login:
-    get:
+    post:
       tags:
       - user
       summary: "Logging in an existing account."
@@ -53,14 +53,14 @@ paths:
       parameters:
         - name: body
           in: body
-          description: "Key user information."
+          description: "Extended user information."
           required: true
           schema:
-            $ref: "#/definitions/UserCredentials"
+            $ref: "#/definitions/UserExtended"
       responses:
-        202:
+        '202':
           description: "Accepted"
-        403:
+        '403':
           description: "Forbidden"
   
   /me:
@@ -80,12 +80,10 @@ paths:
           schema:
             $ref: "#/definitions/UserExtended"
       responses:
-        200:
+        '200':
           description: "OK"
-        500:
+        '500':
           description: "Internal Server Error"
-
-  /user:
     put:
       tags:
       - user
@@ -102,11 +100,11 @@ paths:
           schema:
             $ref: "#/definitions/UserExtended"
       responses:
-        202:
+        '202':
           description: "Accepted"
-        413:
+        '413':
           description: "Payload Too Large"
-        500:
+        '500':
           description: "Internal Server Error"
 
 definitions:
