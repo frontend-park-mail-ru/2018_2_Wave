@@ -27,6 +27,12 @@ const users = {
     score: 72,
     avatarSource: 'https://avatars3.githubusercontent.com/u/6782017?s=460&v=4',
   },
+  Drujininii: {
+    username: 'Drujininii',
+    password: '123456',
+    score: 72,
+    avatarSource: 'https://avatars3.githubusercontent.com/u/22628783?s=460&v=4',
+  },
   dlipko: {
     username: 'dlipko',
     password: '123456',
