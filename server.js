@@ -77,8 +77,9 @@ app.post('/register', upload.single('avatar'), (req, res) => {
   const {
     password,
     username,
-    filename,
   } = req.body;
+
+  const { filename } = req.file;
 
   if (!password
   || !username
@@ -95,7 +96,7 @@ app.post('/register', upload.single('avatar'), (req, res) => {
     password,
     username,
     score: 0,
-    avatarSource: `uploads/'${filename}`,
+    avatarSource: `uploads/${filename}`,
   };
 
   ids[id] = username;
