@@ -10,7 +10,8 @@ export default function createUserblock() {
   const user = {};
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', '/me', true);
+  xhr.open('GET', 'https://wavebackend.now.sh/me', true);
+  // xhr.open('GET', 'http://localhost:8080/me', true);
   xhr.withCredentials = true;
 
   xhr.onreadystatechange = () => {

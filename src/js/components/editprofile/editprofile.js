@@ -17,7 +17,7 @@ const callbackEditProgile = (response) => {
     editProfileForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = new FormData(editProfileForm);
-      AjaxModule.Put({
+      AjaxModule.Post({
         callback() {
           const ev = new CustomEvent('link', {
             detail: 'profile',
