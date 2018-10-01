@@ -19,7 +19,7 @@ const pages = {
   leaderboard: createLeaderboard,
   profile: createProfile,
   settings: createSettings,
-  editProfile: createEditProfile,
+  editprofile: createEditProfile,
 };
 
 
@@ -32,7 +32,6 @@ document.addEventListener('click', (event) => {
   event.preventDefault();
   const link = event.target;
 
-  root.innerHTML = '';
   pages[link.getAttribute('datahref')]();
 });
 
@@ -43,7 +42,6 @@ root.addEventListener('link', (event) => {
    * profile update */
   createUserblock();
 
-  root.innerHTML = '';
   pages[event.detail]();
 });
 
