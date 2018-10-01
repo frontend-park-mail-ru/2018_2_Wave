@@ -73,6 +73,14 @@ app.post('/login', upload.none(), (req, res) => {
 });
 
 
+app.get('/logout', (req, res) => {
+  const id = req.cookies.sessionid;
+  delete ids[id];
+
+  return res.status(200);
+});
+
+
 app.post('/register', upload.single('avatar'), (req, res) => {
   const {
     password,

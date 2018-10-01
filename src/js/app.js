@@ -32,6 +32,7 @@ document.addEventListener('click', (event) => {
   event.preventDefault();
   const link = event.target;
 
+  createUserblock();
   root.innerHTML = '';
   pages[link.getAttribute('datahref')]();
 });

@@ -20,6 +20,7 @@ export default function createUserblock() {
 
     if (xhr.status === 401) {
       user.authorized = false;
+      document.getElementById('username').innerHTML = '';
     } else if (xhr.status === 200) {
       user.authorized = true;
       user.avatarSource = JSON.parse(xhr.responseText).avatarSource;
