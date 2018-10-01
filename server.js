@@ -144,15 +144,11 @@ app.get('/users', (req, res) => {
 app.put('/user', upload.single('avatar'), (req, res) => {
   const id = req.cookies.sessionid;
   const oldusername = ids[id];
-  console.log(req.body);
   const {
     username,
     password,
     filename,
   } = req.body;
-
-  console.log('old', oldusername);
-  console.log('new', username, password);
 
   users[oldusername].username = username;
   if (password && password.match(/^\S{6,}$/)) {
