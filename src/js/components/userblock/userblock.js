@@ -23,6 +23,8 @@ export default function createUserblock() {
     } else if (xhr.status === 200) {
       user.authorized = true;
       user.avatarSource = JSON.parse(xhr.responseText).avatarSource;
+      user.name = JSON.parse(xhr.responseText).username;
+      document.getElementById('username').innerHTML = user.name;
     }
     userblock.innerHTML = userblockTemplate({ user });
 
