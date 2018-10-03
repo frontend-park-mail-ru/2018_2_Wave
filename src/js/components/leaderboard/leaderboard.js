@@ -5,16 +5,22 @@ const leaderBoardTemplate = require('./leaderboard.pug');
 
 const root = document.getElementById('root');
 
-
 const leaderboardCallback = (response) => {
-  response.json().then((users) => {
-    root.innerHTML = leaderBoardTemplate({ users });
+  response.json().then((data) => {
+    console.log(data.total)
+
+    root.innerHTML = leaderBoardTemplate({ 
+      users: data.users,
+      pagesCount: data.total,
+    });
   });
 };
 
 export default function createLeaderboard() {
+  const count = 5;
+  const start = 0;
   AjaxModule.Get({
     callback: leaderboardCallback,
-    path: '/users',
+    path: `/users/${start}/${count}`,
   });
 }

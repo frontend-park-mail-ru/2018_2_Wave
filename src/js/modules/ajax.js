@@ -1,3 +1,5 @@
+import BackendURI from './backend';
+
 const noop = () => null;
 
 function ajax({
@@ -10,8 +12,8 @@ function ajax({
   if (!(body instanceof FormData)) {
     body = JSON.stringify(body);
   }
-    fetch('https://wavebackend.now.sh' + path, {
-    // fetch('http://localhost:8080' + path, {
+
+  fetch(BackendURI(path), {
     method,
     body,
     mode: 'cors',

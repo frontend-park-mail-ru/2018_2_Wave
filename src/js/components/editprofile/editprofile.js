@@ -24,7 +24,7 @@ const callbackEditProgile = (response) => {
           });
           root.dispatchEvent(ev);
         },
-        path: '/user',
+        path: '/me',
         body: formData,
       });
     });

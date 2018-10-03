@@ -1,4 +1,4 @@
 if !user.authorized
   a#userblockbutton(datahref='login') login
 else
-  img#userblockAvatar(src='https://wavebackend.now.sh/'+user.avatarSource)
+  img#userblockAvatar(src=user.avatarSource)

@@ -1,3 +1,4 @@
+import BackendURI from '../../modules/backend';
 import './userblock.css';
 
 const userblockTemplate = require('./userblock.pug');
@@ -10,8 +11,7 @@ export default function createUserblock() {
   const user = {};
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'https://wavebackend.now.sh/me', true);
-  // xhr.open('GET', 'http://localhost:8080/me', true);
+  xhr.open('GET', BackendURI('/me'), true);
   xhr.withCredentials = true;
 
   xhr.onreadystatechange = () => {
@@ -24,7 +24,7 @@ export default function createUserblock() {
       document.getElementById('username').innerHTML = '';
     } else if (xhr.status === 200) {
       user.authorized = true;
-      user.avatarSource = JSON.parse(xhr.responseText).avatarSource;
+      user.avatarSource = BackendURI(JSON.parse(xhr.responseText).avatarSource);
       user.name = JSON.parse(xhr.responseText).username;
       document.getElementById('username').innerHTML = user.name;
     }
