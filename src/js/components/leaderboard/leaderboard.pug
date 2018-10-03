@@ -8,6 +8,12 @@
       tr
         td=user.username
         td=user.score
+  div.pagination
+    a &laquo
+    - for(var i = 1; i <= pagesCount; i++) {
+      a(page= i)= i
+    - }
+    a &raquo
 
   a.button(
     datahref='menu'

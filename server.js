@@ -4,7 +4,6 @@ const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const initMocks = require('./mocks');
 
 const app = express();
 
