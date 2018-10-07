@@ -19,92 +19,118 @@ produces:
   - application/json
   
 paths:
-  /signup:
-    get:
+  /user/signup:
+    post:
       tags:
-      - user
+      - "user"
       summary: "Creating an account."
       description: ""
-      operationId: signupUser
-      consumes: 
-      - "application/json"
+      operationId: "signupUser"
       parameters:
-        - name: body
-          in: body
+        - in: "body"
+          name: "body"
           description: "Key user information."
+          required: true
+          schema:
+            $ref: "#/definitions/UserExtended"
+      responses:
+        201:
+          description: "Created"
+        403:
+          description: "Forbidden"
+  
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Logging in an existing account."
+      description: ""
+      operationId: "loginUser"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Extended user information."
           required: true
           schema:
             $ref: "#/definitions/UserCredentials"
       responses:
-        '201':
-          description: "Created"
-        '403':
+        202:
+          description: "Accepted"
+        403:
           description: "Forbidden"
-  
-  /login:
+
+  /user/logout:
     post:
       tags:
-      - user
-      summary: "Logging in an existing account."
+      - "user"
+      summary: "Logout from an existing account."
       description: ""
-      operationId: loginUser
-      consumes: 
-      - "application/json"
-      parameters:
-        - name: body
-          in: body
-          description: "Extended user information."
-          required: true
-          schema:
-            $ref: "#/definitions/UserExtended"
+      operationId: "logoutUser"
       responses:
-        '202':
-          description: "Accepted"
-        '403':
-          description: "Forbidden"
+        200:
+          description: "OK"
+        500:
+          description: "Internal Server Error"
   
-  /me:
-    get:
+  /user/edit:
+    post:
       tags:
-      - user
-      summary: "Viewing current user's profile page."
+      - "user"
+      summary: "Editing current user's profile page."
       description: ""
-      operationId: meShowUser
-      consumes: 
-      - "application/json"
+      operationId: "editUser"
       parameters:
-        - name: body
-          in: body
+        - in: "body"
+          name: "body"
           description: "More detailed user information."
           required: true
           schema:
             $ref: "#/definitions/UserExtended"
+      responses:
+        200:
+          description: "OK"
+        413:
+          description: "Payload Too Large"
+        500:
+          description: "Internal Server Error"
+    
+  /user/:
+    get:
+      tags:
+      - "user"
+      summary: "Viewing current user's profile information."
+      description: ""
+      operationId: infoCurrentUser
       responses:
         '200':
           description: "OK"
         '500':
           description: "Internal Server Error"
-    put:
+
+  /user/:username:
+    get:
       tags:
-      - user
-      summary: "Edititng current user's profile information."
+      - "user"
+      summary: "Viewing selected user's profile information."
       description: ""
-      operationId: meEditUser
-      consumes: 
-      - "application/json"
-      parameters:
-        - name: body
-          in: body
-          description: "More detailed user information."
-          required: true
-          schema:
-            $ref: "#/definitions/UserExtended"
+      operationId: "infoSelectedUser"
       responses:
-        '202':
-          description: "Accepted"
-        '413':
-          description: "Payload Too Large"
-        '500':
+        200:
+          description: "OK"
+        500:
+          description: "Internal Server Error"
+
+  /user/:offset/:limit:
+    get:
+      tags:
+      - "user"
+      summary: "Viewing leaderboard."
+      description: ""
+      operationId: "leaderboard"
+      responses:
+        200:
+          description: "OK"
+        500:
           description: "Internal Server Error"
 
 definitions:
@@ -135,9 +161,6 @@ definitions:
       password:
         type: string
         example: pass123
-      score:
-        type: int
-        example: 21
       avatarSource:
         type: string
         example: <avatarSource>
