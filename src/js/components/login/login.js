@@ -25,7 +25,7 @@ export default function createLogin() {
           errorMessage.classList.add('show');
         }
       },
-      path: '/login',
+      path: '/user/login',
       body: formData,
     });
   });
