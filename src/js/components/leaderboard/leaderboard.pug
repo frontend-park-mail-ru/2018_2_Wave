@@ -11,7 +11,7 @@
   div.pagination
     a &laquo
     - for(var i = 1; i <= pagesCount; i++) {
-      a= i
+      a(page= i)= i
     - }
     a &raquo
 

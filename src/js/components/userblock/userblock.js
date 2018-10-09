@@ -11,7 +11,7 @@ export default function createUserblock() {
   const user = {};
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', BackendURI('/me'), true);
+  xhr.open('GET', BackendURI('/user'), true);
   xhr.withCredentials = true;
 
   xhr.onreadystatechange = () => {

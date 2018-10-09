@@ -27,7 +27,7 @@ export default function createRegister() {
 
     AjaxModule.Post({
       callback: createRegisterCallback,
-      path: '/signup',
+      path: '/user/signup',
       body: formData,
     });
   });

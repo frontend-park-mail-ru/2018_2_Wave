@@ -62,7 +62,7 @@ paths:
         403:
           description: "Forbidden"
   
-  /me:
+  /user:
     get:
       tags:
       - user
@@ -84,8 +84,8 @@ paths:
         500:
           description: "Internal Server Error"
 
-  /me:
-    put:
+  /user:
+    post:
       tags:
       - user
       summary: "Edititng current user's profile information."

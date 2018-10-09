@@ -24,7 +24,7 @@ const callbackEditProgile = (response) => {
           });
           root.dispatchEvent(ev);
         },
-        path: '/me',
+        path: '/user/edit',
         body: formData,
       });
     });
@@ -35,6 +35,6 @@ const callbackEditProgile = (response) => {
 export default function createEditProfile() {
   AjaxModule.Get({
     callback: callbackEditProgile,
-    path: '/me',
+    path: '/user',
   });
 }
