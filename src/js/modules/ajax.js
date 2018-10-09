@@ -10,8 +10,7 @@ function ajax({
   if (!(body instanceof FormData)) {
     body = JSON.stringify(body);
   }
-    fetch('https://wavebackend.now.sh' + path, {
-    // fetch('http://localhost:8080' + path, {
+  fetch(`https://rasseki.com${path}`, {
     method,
     body,
     mode: 'cors',
