@@ -8,6 +8,16 @@ const root = document.getElementById('root');
 
 export default function createUserblock() {
   const user = {};
+
+
+  fetch('https://rasseki.com/user', {
+    method: 'GET',
+    mode: 'cors',
+    credentials: 'include',
+  }).then((response) => {
+
+  });
+
   const xhr = new XMLHttpRequest();
 
   xhr.open('GET', 'https://rasseki.com/user', true);
