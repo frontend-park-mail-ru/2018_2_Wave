@@ -9,44 +9,29 @@ const root = document.getElementById('root');
 export default function createUserblock() {
   const user = {};
 
-
   fetch('https://rasseki.com/user', {
     method: 'GET',
     mode: 'cors',
     credentials: 'include',
   }).then((response) => {
-
-  });
-
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', 'https://rasseki.com/user', true);
-  xhr.withCredentials = true;
-
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4) {
-      return;
-    }
-
-    if (xhr.status === 401) {
+    if (response.status === 401) {
       user.authorized = false;
       document.getElementById('username').innerHTML = '';
-    } else if (xhr.status === 200) {
+      userblock.innerHTML = userblockTemplate({ user });
+    } else {
       user.authorized = true;
-      user.avatarSource = JSON.parse(xhr.responseText).avatarSource;
-      user.name = JSON.parse(xhr.responseText).username;
-      document.getElementById('username').innerHTML = user.name;
+      return response.json();
     }
+  }).then((data) => {
+    user.avatarSource = data.avatarSource;
+    user.name = data.username;
+    document.getElementById('username').innerHTML = user.name;
     userblock.innerHTML = userblockTemplate({ user });
 
-    if (user.authorized) {
-      const profileButton = document.getElementById('userblockAvatar');
-      profileButton.addEventListener('click', () => {
-        const ev = new CustomEvent('link', { detail: 'profile' });
-        root.dispatchEvent(ev);
-      });
-    }
-  };
-
-  xhr.send();
+    const profileButton = document.getElementById('userblockAvatar');
+    profileButton.addEventListener('click', () => {
+      const ev = new CustomEvent('link', { detail: 'profile' });
+      root.dispatchEvent(ev);
+    });
+  });
 }
