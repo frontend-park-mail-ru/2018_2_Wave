@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: './src/js/app.js',
+    app: './src/app.js',
   },
 
   output: {

@@ -13,10 +13,10 @@ export default function createProfile() {
         root.innerHTML = profileTemplate({ user });
         const logout = document.getElementById('logoutbutton');
         logout.addEventListener('click', () => {
-          AjaxModule.Get({ path: '/logout' });
+          AjaxModule.Post({ path: '/user/logout' });
         });
       });
     },
-    path: '/me',
+    path: '/user',
   });
 }

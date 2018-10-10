@@ -7,28 +7,30 @@ const root = document.getElementById('root');
 
 
 const leaderboardCallback = (response) => {
-  response.json().then((users) => {
+  const count = 2;
+
+  response.json().then((data) => {
     root.innerHTML = leaderBoardTemplate({ 
-      users,
+      users: data.users,
+      pagesCount: (data.total / count),
     });
     const pagination = root.querySelector('.pagination');
     pagination.addEventListener('click', (event) => {    
       const link = event.target;
-      const count = 2;
-      getUsers(count, count * link.getAttribute('page'));
+      getUsers(count * (link.getAttribute('page') - 1), count);
     });
   });
 };
 
-function getUsers(count, start) {
+function getUsers(start, count) {
   AjaxModule.Get({
     callback: leaderboardCallback,
-    path: `/users/${strat}/${count}`,
+    path: `/users/${start}/${count}`,
   });
 }
 
 export default function createLeaderboard() {
   const count = 2;
   const start = 0;
-  getUsers(coun, start);
+  getUsers(start, count);
 }

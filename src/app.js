@@ -7,7 +7,7 @@ import createSettings from './components/settings/settings';
 import createEditProfile from './components/editprofile/editprofile';
 import createUserblock from './components/userblock/userblock';
 
-import '../css/style.css';
+import './css/style.css';
 
 const root = document.getElementById('root');
 

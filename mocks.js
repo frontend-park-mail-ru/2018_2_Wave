@@ -62,7 +62,8 @@ const initMocks = (app) => {
       id,
     });
   });
-  app.post('/register', upload.single('avatar'), (req, res) => {
+
+  app.post('/signup', upload.single('avatar'), (req, res) => {
     const {
       password,
       username,
@@ -107,7 +108,6 @@ const initMocks = (app) => {
     });
   });
 
-
   app.get('/me', (req, res) => {
     const id = req.cookies.sessionid;
     const username = ids[id];
@@ -138,8 +138,7 @@ const initMocks = (app) => {
     return res.json(scorelist);
   });
 
-
-  app.put('/user', upload.single('avatar'), (req, res) => {
+  app.post('/me', upload.single('avatar'), (req, res) => {
     const id = req.cookies.sessionid;
     const oldusername = ids[id];
     console.log(req.body);
