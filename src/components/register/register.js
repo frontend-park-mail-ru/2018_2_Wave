@@ -1,21 +1,10 @@
 import AjaxModule from '../../modules/ajax';
 import './registration.css';
-import { validate /* , isValid */} from '../validation/validation';
-// Дима Л.: рабочая функция isValid
-// Дима П.: она клёвая, но не используется, ESLint матерится :(
+import { validate } from '../validation/validation';
 
 const registerTemplate = require('./register.pug');
 
 const root = document.getElementById('root');
-
-const createRegisterCallback = (response) => {
-  if (response.status === 201) {
-    const ev = new CustomEvent('link', { detail: 'menu' });
-    root.dispatchEvent(ev);
-  } else {
-    // TODO: show error
-  }
-};
 
 export default function createRegister() {
   root.innerHTML = registerTemplate();
@@ -26,9 +15,18 @@ export default function createRegister() {
     const formData = new FormData(registerForm);
 
     AjaxModule.Post({
-      callback: createRegisterCallback,
       path: '/user/signup',
       body: formData,
+      callback: {
+        success: () => {
+          const ev = new CustomEvent('link', { detail: 'menu' });
+          root.dispatchEvent(ev);
+        },
+        failure: (error) => {
+          console.log(error);
+          // TODO: show error
+        },
+      },
     });
   });
   validate();
