@@ -15,6 +15,6 @@ export default async function createProfile() {
       ajax.POST({ path: '/user/logout' });
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

@@ -15,7 +15,7 @@
       "  ${7:// failure!",
       "  // error.status - status code",
       "  // error.type - Client Error, Server Error or Unknown",
-      "  console.log(error);}",
+      "  console.error(error);}",
       "}"
     ]
   }

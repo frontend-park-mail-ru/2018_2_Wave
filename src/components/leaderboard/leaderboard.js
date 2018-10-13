@@ -22,7 +22,7 @@ async function getUsers(start, count) {
     });
   } catch (error) {
     // TODO: show error
-    console.log(error);
+    console.error(error);
   }
 }
 

@@ -22,7 +22,7 @@ export default function createRegister() {
       root.dispatchEvent(ev);
     } catch (error) {
       // TODO: show error
-      console.log(error);
+      console.error(error);
     }
   });
   validate();

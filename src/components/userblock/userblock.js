@@ -24,7 +24,7 @@ export default async function createUserblock() {
       root.dispatchEvent(ev);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     user.authorized = false;
     document.getElementById('username').innerHTML = '';
     userblock.innerHTML = userblockTemplate({ user });

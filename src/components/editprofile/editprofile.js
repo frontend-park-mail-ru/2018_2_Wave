@@ -10,7 +10,6 @@ function createEditForm() {
   const editProfileForm = root.querySelector('#editProfileForm');
   editProfileForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
     try {
       await ajax.GET({
         path: '/user/edit',
@@ -19,8 +18,8 @@ function createEditForm() {
       const ev = new CustomEvent('link', { detail: 'profile' });
       root.dispatchEvent(ev);
     } catch (error) {
-      // TODO: show error
-      console.log(error);
+      console.error(error);
+      // TODO: show interface error
     }
   });
 
@@ -34,6 +33,6 @@ export default async function createEditProfile() {
     root.innerHTML = editProfileTemplate({ user });
     createEditForm();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
