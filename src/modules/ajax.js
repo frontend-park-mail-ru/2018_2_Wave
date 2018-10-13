@@ -27,10 +27,6 @@ function ajax({
   method = 'GET',
   path = '/',
   body,
-  callback = {
-    success: () => null,
-    failure: () => null,
-  },
 } = {}) {
   const URI = URL + path;
   const params = {
@@ -40,7 +36,7 @@ function ajax({
     credentials: 'include',
   };
 
-  fetch(URI, params)
+  return fetch(URI, params)
     .then((response) => {
       const { status } = response;
       const codeType = getCodeType(status);
@@ -49,35 +45,23 @@ function ajax({
       ||  codeType === 'Client Error'
       ||  codeType === 'Unknown') {
         const errorEvent = errorEvents[status];
-        const error = { status, codeType, errorEvent };
+        const error = { status, type: codeType, event: errorEvent };
         if (errorEvent) bus.emit(errorEvent);
         throw error;
-      } else {
-        return response.text();
-      }
+      } else return response.text();
     })
-    .then(text => (text ? JSON.parse(text) : {}))
-    .then(data => callback.success(data))
-    .catch(error => callback.failure(error));
-}
-
-function Get(params = {}) {
-  ajax({ ...params, method: 'GET' });
-}
-
-function Post(params = {}) {
-  ajax({ ...params, method: 'POST' });
-}
-
-function Put(params = {}) {
-  ajax({ ...params, method: 'PUT' });
+    .then(text => (text ? JSON.parse(text) : {}));
 }
 
 
-const AjaxModule = {
-  Get,
-  Post,
-  Put,
-};
+function GET(params = {}) {
+  return ajax({ ...params, method: 'GET' });
+}
 
-export default AjaxModule;
+function POST(params = {}) {
+  return ajax({ ...params, method: 'POST' });
+}
+
+
+const AjaxModule = { GET, POST };
+export { AjaxModule as default };
