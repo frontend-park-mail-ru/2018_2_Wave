@@ -1,4 +1,4 @@
-const { bus } = window;
+import bus from './bus';
 
 
 const URL = 'https://rasseki.com';
@@ -45,7 +45,12 @@ function ajax({
       ||  codeType === 'Client Error'
       ||  codeType === 'Unknown') {
         const errorEvent = errorEvents[status];
-        const error = { status, type: codeType, event: errorEvent };
+        const error = {
+          status,
+          type: codeType,
+          message: response.statusText,
+          event: errorEvent,
+        };
         if (errorEvent) bus.emit(errorEvent);
         throw error;
       } else return response.text();
