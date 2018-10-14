@@ -1,40 +1,38 @@
-import AjaxModule from '../../modules/ajax';
-import {
-  validateEdit,
-} from '../validation/validation';
+import ajax from '../../modules/ajax';
+import { validateEdit } from '../validation/validation';
 
 const editProfileTemplate = require('./editprofile.pug');
 
 const root = document.getElementById('root');
 
-const callbackEditProgile = (response) => {
-  response.json().then((user) => {
-    root.innerHTML = editProfileTemplate({
-      user,
-    });
 
-    const editProfileForm = root.querySelector('#editProfileForm');
-    editProfileForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const formData = new FormData(editProfileForm);
-      AjaxModule.Post({
-        callback() {
-          const ev = new CustomEvent('link', {
-            detail: 'profile',
-          });
-          root.dispatchEvent(ev);
-        },
+function createEditForm() {
+  const editProfileForm = root.querySelector('#editProfileForm');
+  editProfileForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    try {
+      await ajax.GET({
         path: '/user/edit',
-        body: formData,
+        body: new FormData(editProfileForm),
       });
-    });
-    validateEdit();
+      const ev = new CustomEvent('link', { detail: 'profile' });
+      root.dispatchEvent(ev);
+    } catch (error) {
+      console.error(error);
+      // TODO: show interface error
+    }
   });
-};
 
-export default function createEditProfile() {
-  AjaxModule.Get({
-    callback: callbackEditProgile,
-    path: '/user',
-  });
+  validateEdit();
+}
+
+
+export default async function createEditProfile() {
+  try {
+    const user = await ajax.GET({ path: '/user' });
+    root.innerHTML = editProfileTemplate({ user });
+    createEditForm();
+  } catch (error) {
+    console.error(error);
+  }
 }

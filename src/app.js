@@ -1,3 +1,5 @@
+import './modules/bus';
+
 import createMenu from './components/menu/menu';
 import createLogin from './components/login/login';
 import createRegister from './components/register/register';

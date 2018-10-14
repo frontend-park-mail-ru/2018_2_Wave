@@ -3,7 +3,6 @@ class Bus {
     this.listeners = {};
   }
 
-
   listen(event, listener) {
     (this.listeners[event] || (this.listeners[event] = [])).push(listener);
   }
@@ -23,5 +22,7 @@ class Bus {
   }
 }
 
+
 const bus = new Bus();
+
 export default bus;

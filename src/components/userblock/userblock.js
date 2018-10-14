@@ -1,4 +1,5 @@
 import './userblock.css';
+import ajax from '../../modules/ajax';
 
 const userblockTemplate = require('./userblock.pug');
 
@@ -6,23 +7,12 @@ const userblock = document.getElementById('userblock');
 const root = document.getElementById('root');
 
 
-export default function createUserblock() {
+export default async function createUserblock() {
   const user = {};
 
-  fetch('https://rasseki.com/user', {
-    method: 'GET',
-    mode: 'cors',
-    credentials: 'include',
-  }).then((response) => {
-    if (response.status === 401) {
-      user.authorized = false;
-      document.getElementById('username').innerHTML = '';
-      userblock.innerHTML = userblockTemplate({ user });
-    } else {
-      user.authorized = true;
-      return response.json();
-    }
-  }).then((data) => {
+  try {
+    const data = await ajax.GET({ path: '/user' });
+    user.authorized = true;
     user.avatarSource = data.avatarSource;
     user.name = data.username;
     document.getElementById('username').innerHTML = user.name;
@@ -33,5 +23,10 @@ export default function createUserblock() {
       const ev = new CustomEvent('link', { detail: 'profile' });
       root.dispatchEvent(ev);
     });
-  });
+  } catch (error) {
+    console.error(error);
+    user.authorized = false;
+    document.getElementById('username').innerHTML = '';
+    userblock.innerHTML = userblockTemplate({ user });
+  }
 }

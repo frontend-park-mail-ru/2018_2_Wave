@@ -1,4 +1,4 @@
-import AjaxModule from '../../modules/ajax';
+import ajax from '../../modules/ajax';
 import './login.css';
 
 const loginTemplate = require('./login.pug');
@@ -10,23 +10,19 @@ export default function createLogin() {
   root.innerHTML = loginTemplate();
   const loginForm = document.getElementById('loginForm');
 
-  loginForm.addEventListener('submit', (event) => {
+  loginForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(loginForm);
-
-    AjaxModule.Post({
-      callback(response) {
-        if (response.status === 202) {
-          const ev = new CustomEvent('link', { detail: 'menu' });
-          root.dispatchEvent(ev);
-        } else {
-          const errorMessage = root.querySelector('#errorMessage');
-          errorMessage.classList.add('show');
-        }
-      },
-      path: '/user/login',
-      body: formData,
-    });
+    try {
+      await ajax.POST({
+        path: '/user/login',
+        body: new FormData(loginForm),
+      });
+      const ev = new CustomEvent('link', { detail: 'menu' });
+      root.dispatchEvent(ev);
+    } catch (error) {
+      const errorMessage = root.querySelector('#errorMessage');
+      errorMessage.classList.add('show');
+    }
   });
 }
