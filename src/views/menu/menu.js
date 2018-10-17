@@ -14,6 +14,6 @@ export default class MenuView extends BaseView {
   }
 
   render() {
-    super.render(buttons);
+    super.render({ buttons });
   }
 }
