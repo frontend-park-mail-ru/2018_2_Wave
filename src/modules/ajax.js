@@ -50,8 +50,9 @@ function ajax({
           type: codeType,
           message: response.statusText,
           event: errorEvent,
+          body: response.text() ? response.json() : {},
         };
-        if (errorEvent) bus.emit(errorEvent);
+        // if (errorEvent && !error.body) bus.emit(errorEvent);
         throw error;
       } else return response.text();
     })
