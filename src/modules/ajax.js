@@ -45,12 +45,13 @@ function ajax({
       ||  codeType === 'Client Error'
       ||  codeType === 'Unknown') {
         const errorEvent = errorEvents[status];
+        const responseBody = response.text();
         const error = {
           status,
           type: codeType,
           message: response.statusText,
           event: errorEvent,
-          body: response.text() ? response.json() : {},
+          body: responseBody ? JSON.stringify(responseBody) : {},
         };
         // if (errorEvent && !error.body) bus.emit(errorEvent);
         throw error;
