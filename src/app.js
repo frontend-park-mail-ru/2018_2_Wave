@@ -2,7 +2,7 @@ import bus from './modules/bus';
 import Router from './modules/router';
 
 import MenuView from './views/menu/menu';
-import createLogin from './views/login/login';
+import LoginView from './views/login/login';
 import createRegister from './views/register/register';
 import createLeaderboard from './views/leaderboard/leaderboard';
 import ProfileView from './views/profile/profile';
@@ -19,6 +19,7 @@ const router = new Router(root);
 router
   .register('/', MenuView)
   .register('/profile', ProfileView)
+  .register('/login', LoginView)
   .start();
 
 // const Menu = new MenuView(root);

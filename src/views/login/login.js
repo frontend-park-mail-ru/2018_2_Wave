@@ -1,28 +1,39 @@
 import ajax from '../../modules/ajax';
+import bus from '../../modules/bus';
+import BaseView from '../baseview';
 import './login.css';
 
-const loginTemplate = require('./login.pug');
-
-const root = document.getElementById('root');
+const template = require('./login.pug');
 
 
-export default function createLogin() {
-  root.innerHTML = loginTemplate();
-  const loginForm = document.getElementById('loginForm');
+export default class LoginView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
+  }
 
-  loginForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  show() {
+    super.show();
+    this.render();
+  }
 
-    try {
-      await ajax.POST({
-        path: '/user/login',
-        body: new FormData(loginForm),
-      });
-      const ev = new CustomEvent('link', { detail: 'menu' });
-      root.dispatchEvent(ev);
-    } catch (error) {
-      const errorMessage = root.querySelector('#errorMessage');
-      errorMessage.classList.add('show');
-    }
-  });
+  render() {
+    super.render();
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      try {
+        await ajax.POST({
+          path: '/user/login',
+          body: new FormData(loginForm),
+        });
+        bus.emit('link', '/');
+      } catch (error) {
+        console.error(error);
+        // ↓ will be redone soon ↓
+        const errorMessage = document.querySelector('#errorMessage');
+        errorMessage.classList.add('show');
+      }
+    });
+  }
 }
