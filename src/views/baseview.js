@@ -3,14 +3,22 @@ export default class BaseView {
     this.template = template;
     this.parent   = parent;
     this.wrapper  = document.createElement('div');
+    this.wrapper.hidden = true;
   }
 
   hide() {
-    this.wrapper.display = 'none';
+    this.wrapper.hidden = true;
   }
 
   show() {
-    this.wrapper.display = 'block';
+    // if (this.wrapper.innerHTML === '') {
+    //   // TODO: show skeleton
+    // }
+    this.wrapper.hidden = false;
+  }
+
+  get active() {
+    return !this.wrapper.hidden;
   }
 
   render(data) {

@@ -13,7 +13,7 @@ export default class MenuView extends BaseView {
     super(template, parent);
   }
 
-  render() {
+  update() {
     super.render({ buttons });
   }
 }
