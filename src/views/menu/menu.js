@@ -13,7 +13,15 @@ export default class MenuView extends BaseView {
     super(template, parent);
   }
 
-  update() {
+  show() {
+    super.show();
+    if (!this.rendered) {
+      // render only one time, because menu is unchangeable
+      this.render();
+    }
+  }
+
+  render() {
     super.render({ buttons });
   }
 }

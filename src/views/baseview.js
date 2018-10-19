@@ -6,20 +6,28 @@ export default class BaseView {
     this.wrapper.hidden = true;
   }
 
+
+  get active() {
+    return !this.wrapper.hidden;
+  }
+
+  get rendered() {
+    return !(this.wrapper.innerHTML === '');
+  }
+
+
   hide() {
     this.wrapper.hidden = true;
   }
 
   show() {
-    // if (this.wrapper.innerHTML === '') {
-    //   // TODO: show skeleton
-    // }
     this.wrapper.hidden = false;
+    // if (!this.rendered) {
+    //   // TODO: show skeleton:
+    //   // t.me/uxlive/6566
+    // }
   }
 
-  get active() {
-    return !this.wrapper.hidden;
-  }
 
   render(data) {
     this.wrapper.innerHTML = this.template(data || null);

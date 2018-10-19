@@ -32,11 +32,11 @@ export default class Router {
       });
 
       currentView.show();
-      currentView.update();
     }
 
     this.routes[path] = currentView;
   }
+
 
   start() {
     createUserblock();

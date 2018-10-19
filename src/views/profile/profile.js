@@ -10,7 +10,12 @@ export default class ProfileView extends BaseView {
     super(template, parent);
   }
 
-  async update() {
+  show() {
+    super.show();
+    this.render();
+  }
+
+  async render() {
     try {
       const user = await ajax.GET({ path: '/user' });
       super.render({ user });
