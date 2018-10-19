@@ -1,52 +1,41 @@
-import './modules/bus';
+import bus from './modules/bus';
+import Router from './modules/router';
 
-import createMenu from './components/menu/menu';
-import createLogin from './components/login/login';
-import createRegister from './components/register/register';
-import createLeaderboard from './components/leaderboard/leaderboard';
-import createProfile from './components/profile/profile';
-import createSettings from './components/settings/settings';
-import createEditProfile from './components/editprofile/editprofile';
-import createUserblock from './components/userblock/userblock';
+import MenuView from './views/menu/menu';
+import createLogin from './views/login/login';
+import createRegister from './views/register/register';
+import createLeaderboard from './views/leaderboard/leaderboard';
+import ProfileView from './views/profile/profile';
+import createSettings from './views/settings/settings';
+import createEditProfile from './views/editprofile/editprofile';
+import createUserblock from './views/userblock/userblock';
 
 import './css/style.css';
 
 const root = document.getElementById('root');
 
-const pages = {
-  play: createMenu,
-  menu: createMenu,
-  login: createLogin,
-  register: createRegister,
-  leaderboard: createLeaderboard,
-  profile: createProfile,
-  settings: createSettings,
-  editprofile: createEditProfile,
-};
+const router = new Router(root);
+
+router
+  .register('/', MenuView)
+  .register('/profile', ProfileView)
+  .start();
+
+// const Menu = new MenuView(root);
+// const Profile = new ProfileView(root);
+
+// const pages = {
+//   play: Menu.render,
+//   menu: Menu.render,
+//   login: createLogin,
+//   register: createRegister,
+//   leaderboard: createLeaderboard,
+//   profile: Profile.render,
+//   settings: createSettings,
+//   editprofile: createEditProfile,
+// };
 
 
-document.addEventListener('click', (event) => {
-  if (!(event.target instanceof HTMLAnchorElement)
-  || (event.target.getAttribute('type') === 'submit')) {
-    return;
-  }
-
-  event.preventDefault();
-  const link = event.target;
-
-  createUserblock();
-  pages[link.getAttribute('datahref')]();
-});
-
-
-root.addEventListener('link', (event) => {
-  /* this event dispatches after
-   * logging in, registering and
-   * profile update */
-  createUserblock();
-
-  pages[event.detail]();
-});
-
-createUserblock();
-createMenu();
+// createUserblock();
+// Menu.render();
+// Menu.show();
