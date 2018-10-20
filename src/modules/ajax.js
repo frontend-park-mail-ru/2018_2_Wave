@@ -54,6 +54,7 @@ function ajax({
           body: responseBody ? JSON.stringify(responseBody) : {},
         };
         // if (errorEvent && !error.body) bus.emit(errorEvent);
+        // FIXME: I need new api to use it! Where is my api, Tommy?
         throw error;
       } else return response.text();
     })
