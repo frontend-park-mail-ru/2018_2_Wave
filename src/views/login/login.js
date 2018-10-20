@@ -27,7 +27,9 @@ export default class LoginView extends BaseView {
           path: '/user/login',
           body: new FormData(loginForm),
         });
+        console.log('logged in successfuly');
         bus.emit('link', '/');
+        bus.emit('userUpdate');
       } catch (error) {
         console.error(error);
         // ↓ will be redone soon ↓
