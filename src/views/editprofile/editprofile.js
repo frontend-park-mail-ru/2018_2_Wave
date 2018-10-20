@@ -1,38 +1,48 @@
 import ajax from '../../modules/ajax';
+import bus from '../../modules/bus';
+import BaseView from '../baseview';
 import { validateEdit } from '../validation/validation';
 
-const editProfileTemplate = require('./editprofile.pug');
-
-const root = document.getElementById('root');
+const template = require('./editprofile.pug');
 
 
-function createEditForm() {
-  const editProfileForm = root.querySelector('#editProfileForm');
-  editProfileForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+export default class ProfileEditView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
+  }
+
+  show() {
+    super.show();
+    if (!this.rendered) {
+      // TODO: FIXME: get name from UserService and rerender
+      this.render();
+    }
+  }
+
+  async render() {
     try {
-      await ajax.GET({
-        path: '/user/edit',
-        body: new FormData(editProfileForm),
+      const user = await ajax.GET({ path: '/user' });
+      // TODO: get user from UserService
+      super.render({ user });
+
+      const editForm = document.getElementById('editProfileForm');
+      editForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        try {
+          await ajax.GET({
+            path: '/user/edit',
+            body: new FormData(editForm),
+          });
+          bus.emit('link', '/profile');
+          bus.emit('userUpdate');
+        } catch (error) {
+          console.error(error);
+          // TODO: show interface error
+        }
+        validateEdit();
       });
-      const ev = new CustomEvent('link', { detail: 'profile' });
-      root.dispatchEvent(ev);
     } catch (error) {
       console.error(error);
-      // TODO: show interface error
     }
-  });
-
-  validateEdit();
-}
-
-
-export default async function createEditProfile() {
-  try {
-    const user = await ajax.GET({ path: '/user' });
-    root.innerHTML = editProfileTemplate({ user });
-    createEditForm();
-  } catch (error) {
-    console.error(error);
   }
 }
