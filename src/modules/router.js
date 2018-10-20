@@ -1,5 +1,5 @@
 import bus from './bus';
-import createUserblock from '../views/userblock/userblock';
+
 
 export default class Router {
   constructor(root) {
@@ -30,7 +30,6 @@ export default class Router {
       Object.values(this.routes).forEach((view) => {
         if (view.active) view.hide();
       });
-
       currentView.show();
     }
 
@@ -39,7 +38,6 @@ export default class Router {
 
 
   start() {
-    createUserblock();
     this.open(window.location.pathname);
 
     document.addEventListener('click', (event) => {

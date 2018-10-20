@@ -1,32 +1,41 @@
-import './userblock.css';
 import ajax from '../../modules/ajax';
+import bus from '../../modules/bus';
+import BaseView from '../baseview';
+import './userblock.css';
 
-const userblockTemplate = require('./userblock.pug');
-
-const userblock = document.getElementById('userblock');
-const root = document.getElementById('root');
+const template = require('./userblock.pug');
 
 
-export default async function createUserblock() {
-  const user = {};
+export default class UserblockView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
+    bus.listen('userUpdate', this.update.bind(this));
+  }
 
-  try {
-    const data = await ajax.GET({ path: '/user' });
-    user.authorized = true;
-    user.avatarSource = data.avatarSource;
-    user.name = data.username;
-    document.getElementById('username').innerHTML = user.name;
-    userblock.innerHTML = userblockTemplate({ user });
+  update() {
+    super.show();
+    this.render();
+  }
 
-    const profileButton = document.getElementById('userblockAvatar');
-    profileButton.addEventListener('click', () => {
-      const ev = new CustomEvent('link', { detail: 'profile' });
-      root.dispatchEvent(ev);
-    });
-  } catch (error) {
-    console.error(error);
-    user.authorized = false;
-    document.getElementById('username').innerHTML = '';
-    userblock.innerHTML = userblockTemplate({ user });
+  async render() {
+    const user = {};
+    try {
+      // TODO: get it from UserService
+      const data = await ajax.GET({ path: '/user' });
+      user.authorized = true;
+      user.avatarSource = data.avatarSource;
+      user.name = data.username;
+      // TODO: FIXME: remove id
+      document.getElementById('username').innerHTML = user.name;
+      super.render({ user });
+      // TODO: FIXME: remove id
+      const profileButton = document.getElementById('userblockAvatar');
+      profileButton.addEventListener('click', bus.emit('link', '/profile'));
+    } catch (error) {
+      console.error(error);
+      user.authorized = false;
+      document.getElementById('username').innerHTML = '';
+      super.render({ user });
+    }
   }
 }
