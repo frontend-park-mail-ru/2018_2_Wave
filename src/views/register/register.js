@@ -1,29 +1,41 @@
 import ajax from '../../modules/ajax';
-import './registration.css';
+import bus from '../../modules/bus';
+import BaseView from '../baseview';
 import { validate } from '../validation/validation';
+import './registration.css';
 
-const registerTemplate = require('./register.pug');
-
-const root = document.getElementById('root');
+const template = require('./register.pug');
 
 
-export default function createRegister() {
-  root.innerHTML = registerTemplate();
-  const registerForm = document.getElementById('registerForm');
+export default class RegisterView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
+  }
 
-  registerForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    try {
-      await ajax.POST({
-        path: '/user/signup',
-        body: new FormData(registerForm),
-      });
-      const ev = new CustomEvent('link', { detail: 'menu' });
-      root.dispatchEvent(ev);
-    } catch (error) {
-      // TODO: show error
-      console.error(error);
-    }
-  });
-  validate();
+  show() {
+    super.show();
+    this.render();
+  }
+
+  render() {
+    super.render();
+    // TODO: FIXME: remove id
+    const registerForm = document.getElementById('registerForm');
+
+    registerForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      try {
+        await ajax.POST({
+          path: '/user/signup',
+          body: new FormData(registerForm),
+        });
+        bus.emit('link', '/');
+        bus.emit('userUpdate');
+      } catch (error) {
+        // TODO: show error
+        console.error(error);
+      }
+    });
+    validate();
+  }
 }
