@@ -58,6 +58,6 @@ export default class Router {
       () => this.open(window.location.pathname),
     );
 
-    bus.listen('link', () => this.open());
+    bus.listen('link', this.open.bind(this));
   }
 }
