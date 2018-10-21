@@ -3,6 +3,7 @@ export default class BaseView {
     this.template = template;
     this.parent   = parent;
     this.wrapper  = document.createElement('div');
+    this.wrapper.classList.add('wrapper');
     this.wrapper.hidden = true;
   }
 
