@@ -1,8 +1,15 @@
-const settingsTemplate = require('./settings.pug');
+import BaseView from '../baseview';
 
-const root = document.getElementById('root');
+const template = require('./settings.pug');
 
 
-export default function createSettings() {
-  root.innerHTML = settingsTemplate();
+export default class SettingsView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
+  }
+
+  show() {
+    super.show();
+    this.render();
+  }
 }
