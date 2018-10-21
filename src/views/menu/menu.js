@@ -3,9 +3,9 @@ import BaseView from '../baseview';
 const template = require('./menu.pug');
 
 const buttons = {
-  play: 'Play',
-  leaderboard: 'Leaderboard',
-  settings: 'Settings',
+  '/play': 'Play',
+  '/leaderboard': 'Leaderboard',
+  '/settings': 'Settings',
 };
 
 export default class MenuView extends BaseView {
