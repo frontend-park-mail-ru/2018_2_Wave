@@ -30,7 +30,7 @@ export default class UserblockView extends BaseView {
       super.render({ user });
       // TODO: FIXME: remove id
       const profileButton = document.getElementById('userblockAvatar');
-      profileButton.addEventListener('click', bus.emit('link', '/profile'));
+      profileButton.addEventListener('click', () => bus.emit('link', '/profile'));
     } catch (error) {
       console.error(error);
       user.authorized = false;

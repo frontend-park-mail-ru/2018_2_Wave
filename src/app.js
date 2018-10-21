@@ -4,10 +4,10 @@ import UserblockView from './views/userblock/userblock';
 import MenuView from './views/menu/menu';
 import LoginView from './views/login/login';
 import RegisterView from './views/register/register';
-import createLeaderboard from './views/leaderboard/leaderboard';
+// import createLeaderboard from './views/leaderboard/leaderboard';
 import ProfileView from './views/profile/profile';
-import createSettings from './views/settings/settings';
-import createEditProfile from './views/editprofile/editprofile';
+import SettingsView from './views/settings/settings';
+import ProfileEditView from './views/editprofile/editprofile';
 
 import './css/style.css';
 
@@ -22,6 +22,8 @@ router
   .register('/profile', ProfileView)
   .register('/login', LoginView)
   .register('/register', RegisterView)
+  .register('/profile/edit', ProfileEditView)
+  .register('/settings', SettingsView)
   .start();
 
 const userblockView = new UserblockView(userblock);
