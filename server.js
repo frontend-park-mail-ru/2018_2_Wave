@@ -6,8 +6,11 @@ const path = require('path');
 const app = express();
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '/public')));
 app.use(favicon(path.join(__dirname, '/public/img/favicon.png')));
+
+app.all('*/app.bundle.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/app.bundle.js'));
+});
 
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
