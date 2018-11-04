@@ -15,7 +15,17 @@ export default class Router {
 
 
   open(path) {
-    const currentView = this.routes[path];
+    const currentView = this.routes[path.split('?', 1)];
+    const params = {};
+    window.location.search
+      .substr(1)
+      .split('&', 5)
+      .forEach((item) => {
+        const [key, val] = item.split('=');
+        params[key] = val;
+      });
+
+    console.log(params);
 
     if (!currentView) {
       this.open('/');
@@ -30,7 +40,7 @@ export default class Router {
       Object.values(this.routes).forEach((view) => {
         if (view.active) view.hide();
       });
-      currentView.show();
+      currentView.show(params);
     }
 
     this.routes[path] = currentView;
