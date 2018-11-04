@@ -1,33 +1,38 @@
 import ajax from '../../modules/ajax';
+import BaseView from '../baseview';
 import './leaderboard.css';
 
-const leaderBoardTemplate = require('./leaderboard.pug');
-
-const root = document.getElementById('root');
+const template = require('./leaderboard.pug');
 
 
-async function getUsers(start, count) {
-  try {
-    const data = await ajax.GET({
-      path: `/users/${start}/${count}`,
-    });
-    root.innerHTML = leaderBoardTemplate({
-      users: data.users,
-      pagesCount: (data.total / count),
-    });
-    const pagination = root.querySelector('.pagination');
-    pagination.addEventListener('click', (event) => {
-      const link = event.target;
-      getUsers(count * (link.getAttribute('page') - 1), count);
-    });
-  } catch (error) {
-    // TODO: show error
-    console.error(error);
+export default class LeaderboardView extends BaseView {
+  constructor(parent) {
+    super(template, parent);
   }
-}
 
-export default function createLeaderboard() {
-  const start = 0;
-  const count = 2;
-  getUsers(start, count);
+  show({ page = 1, count = 1 } = {}) {
+    super.show();
+    this.render(page, count);
+  }
+
+  async render(page, count) {
+    try {
+      const data = await ajax.GET({
+        path: `/users/${page}/${count}`,
+      });
+      console.log(data);
+      super.render({
+        users: data.users,
+        pagesCount: (data.total / count),
+      });
+      const pagination = document.querySelector('.pagination');
+      // pagination.addEventListener('click', (event) => {
+      //   const link = event.target;
+      //   getUsers(count * (link.getAttribute('page') - 1), count);
+      // });
+    } catch (error) {
+      // TODO: show error
+      console.error(error);
+    }
+  }
 }

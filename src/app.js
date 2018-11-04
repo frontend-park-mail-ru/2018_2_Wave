@@ -4,7 +4,7 @@ import UserblockView from './views/userblock/userblock';
 import MenuView from './views/menu/menu';
 import LoginView from './views/login/login';
 import RegisterView from './views/register/register';
-// import createLeaderboard from './views/leaderboard/leaderboard';
+import LeaderboardView from './views/leaderboard/leaderboard';
 import ProfileView from './views/profile/profile';
 import SettingsView from './views/settings/settings';
 import ProfileEditView from './views/editprofile/editprofile';
@@ -24,6 +24,7 @@ router
   .register('/register', RegisterView)
   .register('/profile/edit', ProfileEditView)
   .register('/settings', SettingsView)
+  .register('/leaderboard', LeaderboardView)
   .start();
 
 const userblockView = new UserblockView(userblock);
