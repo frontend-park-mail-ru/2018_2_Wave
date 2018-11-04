@@ -32,12 +32,14 @@ function ajax({
   const params = {
     method,
     body: (body instanceof FormData) ? body : JSON.stringify(body),
-    mode: 'cors',
+    mode: 'no-cors',
     credentials: 'include',
   };
 
   return fetch(URI, params)
     .then((response) => {
+      console.log(response);
+
       const { status } = response;
       const codeType = getCodeType(status);
 
