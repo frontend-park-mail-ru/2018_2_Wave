@@ -21,7 +21,7 @@ export default class UserblockView extends BaseView {
     const user = {};
     try {
       // TODO: get it from UserService
-      const data = await ajax.GET({ path: '/user' });
+      const data = await ajax.GET({ path: '/users/me' });
       user.authorized = true;
       user.avatarSource = data.avatarSource;
       user.name = data.username;

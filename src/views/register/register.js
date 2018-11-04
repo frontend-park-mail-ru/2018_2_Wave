@@ -26,7 +26,7 @@ export default class RegisterView extends BaseView {
       event.preventDefault();
       try {
         await ajax.POST({
-          path: '/user/signup',
+          path: '/users',
           body: new FormData(registerForm),
         });
         bus.emit('link', '/');
@@ -36,6 +36,6 @@ export default class RegisterView extends BaseView {
         console.error(error);
       }
     });
-    validate();
+    // validate();
   }
 }

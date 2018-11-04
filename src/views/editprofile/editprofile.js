@@ -29,8 +29,8 @@ export default class ProfileEditView extends BaseView {
       editForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         try {
-          await ajax.GET({
-            path: '/user/edit',
+          await ajax.PUT({
+            path: '/users/me',
             body: new FormData(editForm),
           });
           bus.emit('link', '/profile');

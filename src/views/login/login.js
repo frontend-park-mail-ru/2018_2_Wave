@@ -24,7 +24,7 @@ export default class LoginView extends BaseView {
       event.preventDefault();
       try {
         await ajax.POST({
-          path: '/user/login',
+          path: '/session',
           body: new FormData(loginForm),
         });
         console.log('logged in successfuly');
