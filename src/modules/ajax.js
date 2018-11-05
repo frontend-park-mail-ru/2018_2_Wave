@@ -1,4 +1,4 @@
-import bus from './bus';
+// import bus from './bus';
 
 
 const URL = 'https://rasseki.com';
@@ -32,14 +32,11 @@ function ajax({
   const params = {
     method,
     body: (body instanceof FormData) ? body : JSON.stringify(body),
-    mode: 'no-cors',
     credentials: 'include',
   };
 
   return fetch(URI, params)
     .then((response) => {
-      console.log(response);
-
       const { status } = response;
       const codeType = getCodeType(status);
 
@@ -72,6 +69,20 @@ function POST(params = {}) {
   return ajax({ ...params, method: 'POST' });
 }
 
+function DELETE(params = {}) {
+  return ajax({ ...params, method: 'DELETE' });
+}
 
-const AjaxModule = { GET, POST };
+function PUT(params = {}) {
+  return ajax({ ...params, method: 'PUT' });
+}
+
+
+const AjaxModule = {
+  GET,
+  POST,
+  PUT,
+  DELETE,
+};
+
 export { AjaxModule as default };
