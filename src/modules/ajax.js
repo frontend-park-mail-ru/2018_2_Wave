@@ -53,9 +53,9 @@ function ajax({
           body: responseBody ? JSON.stringify(responseBody) : {},
         };
         // if (errorEvent && !error.body) bus.emit(errorEvent);
-        // FIXME:
-        throw error;
-      } else return response.text();
+        return Promise.reject(error);
+      }
+      return response.text();
     })
     .then(text => (text ? JSON.parse(text) : {}));
 }
