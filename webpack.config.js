@@ -17,7 +17,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.pug',
     }),
-    new HardSourceWebpackPlugin(),
+    new HardSourceWebpackPlugin({
+      cacheDirectory: 'node_modules/.cache/',
+    }),
   ],
 
   module: {
