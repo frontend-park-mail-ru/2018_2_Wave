@@ -1,4 +1,4 @@
-import bus from './bus';
+// import bus from './bus';
 
 
 const URL = 'https://rasseki.com';
@@ -32,7 +32,6 @@ function ajax({
   const params = {
     method,
     body: (body instanceof FormData) ? body : JSON.stringify(body),
-    mode: 'cors',
     credentials: 'include',
   };
 
@@ -45,13 +44,16 @@ function ajax({
       ||  codeType === 'Client Error'
       ||  codeType === 'Unknown') {
         const errorEvent = errorEvents[status];
+        const responseBody = response.text();
         const error = {
           status,
           type: codeType,
           message: response.statusText,
           event: errorEvent,
+          body: responseBody ? JSON.stringify(responseBody) : {},
         };
-        if (errorEvent) bus.emit(errorEvent);
+        // if (errorEvent && !error.body) bus.emit(errorEvent);
+        // FIXME:
         throw error;
       } else return response.text();
     })
@@ -59,14 +61,12 @@ function ajax({
 }
 
 
-function GET(params = {}) {
-  return ajax({ ...params, method: 'GET' });
-}
+const AjaxModule = {
+  GET: (params = {}) => ajax({ ...params, method: 'GET' }),
+  POST: (params = {}) => ajax({ ...params, method: 'POST' }),
+  PUT: (params = {}) => ajax({ ...params, method: 'DELETE' }),
+  DELETE: (params = {}) => ajax({ ...params, method: 'PUT' }),
+};
 
-function POST(params = {}) {
-  return ajax({ ...params, method: 'POST' });
-}
 
-
-const AjaxModule = { GET, POST };
 export { AjaxModule as default };

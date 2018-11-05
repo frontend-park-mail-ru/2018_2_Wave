@@ -8,8 +8,8 @@
         name='username'
         type='text'
         placeholder='Username'
-        minlength='4'
         required
+        novalidate
       )
       .input-requirements
         p#usernameMessage At least 4 characters long
@@ -18,8 +18,8 @@
         name='password'
         type='password'
         placeholder='Password'
-        minlength='6'
         required
+        novalidate
       )
       .input-requirements
         p#passwordMessage  At least 6 characters long
@@ -27,8 +27,8 @@
       input#repeatPasswordInput(
         type='password'
         placeholder='Repeat Password'
-        minlength='6'
         required
+        novalidate
       )
       .input-requirements
         p#repeatPasswordMessage Passwords must match
@@ -46,10 +46,10 @@
       )
 
       a.button(
-        datahref='menu'
+        href='/'
       ) Back
 
       p.message Already registered?
         a(
-          datahref='login'
+          href='/login'
         )  Sign In

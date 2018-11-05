@@ -1,52 +1,31 @@
-import './modules/bus';
+import Router from './modules/router';
 
-import createMenu from './components/menu/menu';
-import createLogin from './components/login/login';
-import createRegister from './components/register/register';
-import createLeaderboard from './components/leaderboard/leaderboard';
-import createProfile from './components/profile/profile';
-import createSettings from './components/settings/settings';
-import createEditProfile from './components/editprofile/editprofile';
-import createUserblock from './components/userblock/userblock';
+import UserblockView from './views/userblock/userblock';
+import MenuView from './views/menu/menu';
+import LoginView from './views/login/login';
+import RegisterView from './views/register/register';
+import LeaderboardView from './views/leaderboard/leaderboard';
+import ProfileView from './views/profile/profile';
+import SettingsView from './views/settings/settings';
+import ProfileEditView from './views/editprofile/editprofile';
 
 import './css/style.css';
 
+// TODO: FIXME: remove id
+const userblock = document.getElementById('userblock');
 const root = document.getElementById('root');
 
-const pages = {
-  play: createMenu,
-  menu: createMenu,
-  login: createLogin,
-  register: createRegister,
-  leaderboard: createLeaderboard,
-  profile: createProfile,
-  settings: createSettings,
-  editprofile: createEditProfile,
-};
+const router = new Router(root);
 
+router
+  .register('/', MenuView)
+  .register('/profile', ProfileView)
+  .register('/login', LoginView)
+  .register('/register', RegisterView)
+  .register('/profile/edit', ProfileEditView)
+  .register('/settings', SettingsView)
+  .register('/leaderboard', LeaderboardView)
+  .start();
 
-document.addEventListener('click', (event) => {
-  if (!(event.target instanceof HTMLAnchorElement)
-  || (event.target.getAttribute('type') === 'submit')) {
-    return;
-  }
-
-  event.preventDefault();
-  const link = event.target;
-
-  createUserblock();
-  pages[link.getAttribute('datahref')]();
-});
-
-
-root.addEventListener('link', (event) => {
-  /* this event dispatches after
-   * logging in, registering and
-   * profile update */
-  createUserblock();
-
-  pages[event.detail]();
-});
-
-createUserblock();
-createMenu();
+const userblockView = new UserblockView(userblock);
+userblockView.update();
