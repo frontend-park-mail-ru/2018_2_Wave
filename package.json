@@ -9,16 +9,11 @@
     "prod": "webpack -p"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.3",
-    "debug": "^3.1.0",
     "express": "^4.16.3",
-    "express-http-proxy": "^1.4.0",
+    "hard-source-webpack-plugin": "^0.12.0",
     "morgan": "^1.9.0",
-    "multer": "^1.4.0",
     "serve-favicon": "^2.5.0",
-    "style-loader": "^0.23.0",
-    "uuid": "^3.3.2"
+    "style-loader": "^0.23.0"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
@@ -29,6 +24,6 @@
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.2"
   }
 }

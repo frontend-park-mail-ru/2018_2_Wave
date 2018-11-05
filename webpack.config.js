@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const path = require('path');
 
 
@@ -12,25 +13,28 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
   },
 
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.pug',
+    }),
+    new HardSourceWebpackPlugin(),
+  ],
+
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        loaders: [
+          'style-loader',
+          'css-loader',
+        ],
       },
 
       {
         test: /\.pug$/,
-        use: 'pug-loader',
+        loader: 'pug-loader',
       },
     ],
   },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Demo',
-      template: './src/index.pug',
-    }),
-  ],
 
 };
