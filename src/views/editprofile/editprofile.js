@@ -21,7 +21,7 @@ export default class ProfileEditView extends BaseView {
 
   async render() {
     try {
-      const user = await ajax.GET({ path: '/user' });
+      const user = await ajax.GET({ path: '/users/me' });
       // TODO: get user from UserService
       super.render({ user });
 

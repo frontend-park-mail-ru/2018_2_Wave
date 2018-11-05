@@ -1,4 +1,5 @@
 import ajax from '../../modules/ajax';
+import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import './profile.css';
 
@@ -17,12 +18,13 @@ export default class ProfileView extends BaseView {
 
   async render() {
     try {
-      const user = await ajax.GET({ path: '/user' });
+      const user = await ajax.GET({ path: '/users/me' });
       super.render({ user });
       const logout = document.getElementById('logoutbutton');
-      logout.addEventListener('click', () => {
+      logout.addEventListener('click', async () => {
+        await ajax.DELETE({ path: '/session' });
         // TODO: to userService
-        ajax.POST({ path: '/user/logout' });
+        bus.emit('userUpdate');
       });
     } catch (error) {
       console.error(error);
