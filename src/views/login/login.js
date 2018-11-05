@@ -27,12 +27,12 @@ export default class LoginView extends BaseView {
           path: '/session',
           body: new FormData(loginForm),
         });
-        console.log('logged in successfuly');
+        console.log('logged in');
         bus.emit('link', '/');
         bus.emit('userUpdate');
       } catch (error) {
         console.error(error);
-        // ↓ will be redone soon ↓
+        // ↓ will be redone soon ↓ TODO: FIXME:
         const errorMessage = document.querySelector('#errorMessage');
         errorMessage.classList.add('show');
       }

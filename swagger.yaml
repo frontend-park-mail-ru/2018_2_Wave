@@ -17,7 +17,7 @@ paths:
       summary: "Create an account."
       description: ""
       operationId: signupUser
-      consumes: 
+      consumes:
         - "multipart/form-data"
       produces:
         - application/json
@@ -29,7 +29,7 @@ paths:
           schema:
             $ref: "#/definitions/UserCredentials"
       responses:
-        201: 
+        201:
           description: Created
         401:
           description: Unauthorized
@@ -115,7 +115,7 @@ paths:
       summary: "Get all users with their scores."
       description: ""
       operationId: leaders
-      consumes: 
+      consumes:
         - application/json
       produces:
         - application/json
@@ -141,7 +141,7 @@ paths:
       summary: "Log in into an existing account."
       description: ""
       operationId: loginUser
-      consumes: 
+      consumes:
         - "multipart/form-data"
       produces:
         - application/json
@@ -177,7 +177,7 @@ paths:
 definitions:
   ForbiddenRequest:
     type: object
-    properties: 
+    properties:
       reason:
         type: string
         example: <reason>
@@ -187,7 +187,7 @@ definitions:
     required:
       - page
       - count
-    properties: 
+    properties:
       page:
         type: integer
         minimum: 0
@@ -202,17 +202,17 @@ definitions:
     required:
       - username
       - score
-    properties: 
+    properties:
       username:
         type: string
         example: <username>
-      score: 
+      score:
         type: integer
         example: 0
 
   Leaderboard:
     type: object
-    properties: 
+    properties:
       users:
         type: array
         items:
@@ -223,7 +223,7 @@ definitions:
         example: 0
 
   UserCredentials:
-    type: object 
+    type: object
     required:
       - "username"
       - "password"

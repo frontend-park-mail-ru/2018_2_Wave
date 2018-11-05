@@ -25,7 +25,7 @@ export default class Router {
         params[key] = val;
       });
 
-    console.log(params);
+    // console.log(params);
 
     if (!currentView) {
       this.open('/');
@@ -59,7 +59,7 @@ export default class Router {
 
       const link = event.target;
 
-      console.log({ pathname: link.pathname });
+      // console.log({ pathname: link.pathname });
       this.open(link.pathname);
     });
 
