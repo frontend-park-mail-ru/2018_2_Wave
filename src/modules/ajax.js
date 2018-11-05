@@ -53,7 +53,7 @@ function ajax({
           body: responseBody ? JSON.stringify(responseBody) : {},
         };
         // if (errorEvent && !error.body) bus.emit(errorEvent);
-        // FIXME: I need new api to use it! Where is my api, Tommy?
+        // FIXME:
         throw error;
       } else return response.text();
     })
@@ -61,28 +61,12 @@ function ajax({
 }
 
 
-function GET(params = {}) {
-  return ajax({ ...params, method: 'GET' });
-}
-
-function POST(params = {}) {
-  return ajax({ ...params, method: 'POST' });
-}
-
-function DELETE(params = {}) {
-  return ajax({ ...params, method: 'DELETE' });
-}
-
-function PUT(params = {}) {
-  return ajax({ ...params, method: 'PUT' });
-}
-
-
 const AjaxModule = {
-  GET,
-  POST,
-  PUT,
-  DELETE,
+  GET: (params = {}) => ajax({ ...params, method: 'GET' }),
+  POST: (params = {}) => ajax({ ...params, method: 'POST' }),
+  PUT: (params = {}) => ajax({ ...params, method: 'DELETE' }),
+  DELETE: (params = {}) => ajax({ ...params, method: 'PUT' }),
 };
+
 
 export { AjaxModule as default };
