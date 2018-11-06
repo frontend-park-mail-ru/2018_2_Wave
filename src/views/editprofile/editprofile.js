@@ -1,4 +1,5 @@
-import { getProfile, updateProfile } from '../../modules/network';
+import { updateProfile } from '../../modules/network';
+import userService from '../../modules/userservice';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import { validateEdit } from '../validation/validation';
@@ -20,14 +21,21 @@ export default class ProfileEditView extends BaseView {
   }
 
   async render() {
-    const { err, profile } = await getProfile();
+    bus.ignore('userUpdated', this.render.bind(this));
+    const { err, user } = userService.getUser();
 
     if (err) {
-      console.error(err);
+      if (err === 'updating') {
+        bus.listen('userUpdated', this.render.bind(this));
+        // TODO: FIXME: draw skeleton or loader here
+      } else if (err !== 'unauthorized') {
+        console.error(err);
+      }
       return;
     }
-    // TODO: get from UserService
-    super.render({ user: profile });
+
+
+    super.render({ user });
 
     const editForm = document.getElementById('editProfileForm');
     editForm.addEventListener('submit', async (event) => {
