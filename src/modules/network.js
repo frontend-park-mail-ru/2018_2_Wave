@@ -26,6 +26,7 @@ async function getProfile() {
   }
 }
 
+/**  `await getProfile`  returns `{err}` OR  nothing.  */
 async function updateProfile(form) {
   try {
     return await ajax.PUT({
