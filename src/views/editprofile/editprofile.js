@@ -41,7 +41,7 @@ export default class ProfileEditView extends BaseView {
       }
 
       bus.emit('link', '/profile');
-      bus.emit('userUpdate');
+      bus.emit('checkUser');
 
       validateEdit();
     });

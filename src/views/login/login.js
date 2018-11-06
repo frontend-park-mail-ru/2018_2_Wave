@@ -31,7 +31,7 @@ export default class LoginView extends BaseView {
       if (!err) {
         console.log('logged in');
         bus.emit('link', '/');
-        bus.emit('userUpdate');
+        bus.emit('checkUser');
       } else {
         console.error(err);
         // ↓ will be redone soon ↓ TODO: FIXME:

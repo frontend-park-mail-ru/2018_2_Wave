@@ -32,7 +32,7 @@ export default class RegisterView extends BaseView {
       }
 
       bus.emit('link', '/');
-      bus.emit('userUpdate');
+      bus.emit('checkUser');
     });
   }
 }

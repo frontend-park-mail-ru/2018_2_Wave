@@ -1,4 +1,4 @@
-import { logout, getProfile } from "../../modules/network";
+import { logout, getProfile } from '../../modules/network';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import './profile.css';
@@ -28,7 +28,7 @@ export default class ProfileView extends BaseView {
     logoutButton.addEventListener('click', async () => {
       const { err } = await logout();
       if (err) console.error(err);
-      bus.emit('userUpdate');
+      bus.emit('checkUser');
     });
   }
 }
