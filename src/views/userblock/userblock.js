@@ -19,18 +19,21 @@ export default class UserblockView extends BaseView {
 
   async render() {
     console.log('Rendering UserBlock', userService.isLoggedIn());
+    const { loggedIn } = userService.isLoggedIn();
 
-    if (!userService.isLoggedIn()) {
+    if (!loggedIn) {
       document.getElementById('username').innerHTML = '';
       super.render({ authorized: false });
       return;
     }
 
-    const user = userService.getUser();
+
+    const { user } = userService.getUser();
 
     const authorized = true;
     // TODO: FIXME: remove id
     document.getElementById('username').innerHTML = user.username;
+
     super.render({ user, authorized });
     // TODO: FIXME: remove id
     const profileButton = document.getElementById('userblockAvatar');
