@@ -30,6 +30,7 @@ export default class ProfileView extends BaseView {
       if (error === 'updating') {
         console.log('Waiting until userservice updates...');
         bus.listen('userUpdated', this.render.bind(this));
+        // TODO: FIXME: draw skeleton or loader here
       } else if (error !== 'unauthorized') {
         console.error(error);
       }
