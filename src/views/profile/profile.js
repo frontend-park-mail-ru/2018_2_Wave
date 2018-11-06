@@ -1,4 +1,5 @@
-import { logout, getProfile } from '../../modules/network';
+import { logout } from '../../modules/network';
+import userService from '../../modules/userservice';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import './profile.css';
@@ -17,11 +18,24 @@ export default class ProfileView extends BaseView {
   }
 
   async render() {
-    const { err: error, profile: user } = await getProfile();
+    console.log('came in profile');
+
+    bus.ignore('userUpdated', this.render.bind(this));
+    const { err: error, user } = userService.getUser();
+
+    console.log('in profile', error, user);
+
+
     if (error) {
-      console.error(error);
+      if (error === 'updating') {
+        console.log('Waiting until userservice updates...');
+        bus.listen('userUpdated', this.render.bind(this));
+      } else if (error !== 'unauthorized') {
+        console.error(error);
+      }
       return;
     }
+
     super.render({ user });
 
     const logoutButton = document.getElementById('logoutbutton');
