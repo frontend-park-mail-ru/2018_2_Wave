@@ -8,25 +8,31 @@ class UserService {
     this.user = {};
     this.loggedIn = false;
     bus.listen('checkUser', this.update.bind(this));
+    this.update();
   }
 
 
   isLoggedIn() {
-    if (this.updated === false) {
-      console.error('User updates now...');
+    if (this.updating === true) {
+      return { err: 'updating' };
     }
 
-    return this.loggedIn;
+    return { loggedIn: this.loggedIn };
   }
 
 
   getUser() {
-    if (!this.isLoggedIn()) {
-      // TODO: return to login page!
-      console.error('not logged in!');
+    const { err, loggedIn } = this.isLoggedIn();
+
+    if (err) {
+      if (err === 'updating') return { err };
+      throw new Error();
+    } else if (!loggedIn) {
+      bus.emit('link', '/login');
+      return { err: 'unathorized' };
     }
 
-    return this.user;
+    return { user: this.user };
   }
 
 
@@ -43,16 +49,10 @@ class UserService {
       return;
     }
 
-    if (this.user !== user) {
-      this.user = user;
-      console.log('user changed');
-      bus.emit('userUpdated');
-    } else {
-      console.log('user not changed');
-    }
-
+    this.user = user;
     this.loggedIn = true;
     this.updating = false;
+    bus.emit('userUpdated');
   }
 }
 
