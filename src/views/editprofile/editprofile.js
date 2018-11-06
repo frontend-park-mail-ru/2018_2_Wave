@@ -14,10 +14,7 @@ export default class ProfileEditView extends BaseView {
 
   show() {
     super.show();
-    if (!this.rendered) {
-      // TODO: FIXME: get name from UserService and rerender
-      this.render();
-    }
+    this.render();
   }
 
   async render() {
