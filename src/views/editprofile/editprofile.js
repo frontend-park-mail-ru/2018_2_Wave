@@ -1,4 +1,4 @@
-import ajax from '../../modules/ajax';
+import { getProfile, updateProfile } from '../../modules/network';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import { validateEdit } from '../validation/validation';
@@ -20,29 +20,30 @@ export default class ProfileEditView extends BaseView {
   }
 
   async render() {
-    try {
-      const user = await ajax.GET({ path: '/users/me' });
-      // TODO: get user from UserService
-      super.render({ user });
+    const { err, profile } = await getProfile();
 
-      const editForm = document.getElementById('editProfileForm');
-      editForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        try {
-          await ajax.PUT({
-            path: '/users/me',
-            body: new FormData(editForm),
-          });
-          bus.emit('link', '/profile');
-          bus.emit('userUpdate');
-        } catch (error) {
-          console.error(error);
-          // TODO: show interface error
-        }
-        validateEdit();
-      });
-    } catch (error) {
-      console.error(error);
+    if (err) {
+      console.error(err);
+      return;
     }
+    // TODO: get from UserService
+    super.render({ user: profile });
+
+    const editForm = document.getElementById('editProfileForm');
+    editForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const { error } = await updateProfile();
+
+      if (error) {
+        console.error(error);
+        // TODO: show interface error
+      }
+
+      bus.emit('link', '/profile');
+      bus.emit('userUpdate');
+
+      validateEdit();
+    });
   }
 }
