@@ -4,7 +4,6 @@ import { getProfile } from './network';
 
 class UserService {
   constructor() {
-    console.log('userService constructs...');
     this.user = {};
     this.loggedIn = false;
     bus.listen('checkUser', this.update.bind(this));
@@ -13,11 +12,9 @@ class UserService {
 
 
   isLoggedIn() {
-    if (this.updating === true) {
-      return { err: 'updating' };
-    }
-
-    return { loggedIn: this.loggedIn };
+    return (this.updating === false)
+      ? { loggedIn: this.loggedIn }
+      : { err: 'updating' };
   }
 
 
@@ -38,16 +35,9 @@ class UserService {
 
   async update() {
     this.updating = true;
-    console.log('updating user...');
     const { err, profile: user } = await getProfile();
-    console.log(user);
 
-    if (err) {
-      // what is here?
-      console.error('user updating failed!');
-      console.error(err);
-      return;
-    }
+    if (err) return;
 
     this.user = user;
     this.loggedIn = true;

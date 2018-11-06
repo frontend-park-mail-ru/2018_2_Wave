@@ -29,7 +29,6 @@ export default class LoginView extends BaseView {
       const { err } = await login(loginData);
 
       if (!err) {
-        console.log('logged in');
         bus.emit('link', '/');
         bus.emit('checkUser');
       } else {

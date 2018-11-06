@@ -18,7 +18,6 @@ export default class UserblockView extends BaseView {
   }
 
   async render() {
-    console.log('Rendering UserBlock', userService.isLoggedIn());
     const { loggedIn } = userService.isLoggedIn();
 
     if (!loggedIn) {

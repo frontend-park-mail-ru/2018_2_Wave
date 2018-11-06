@@ -18,17 +18,11 @@ export default class ProfileView extends BaseView {
   }
 
   async render() {
-    console.log('came in profile');
-
     bus.ignore('userUpdated', this.render.bind(this));
     const { err: error, user } = userService.getUser();
 
-    console.log('in profile', error, user);
-
-
     if (error) {
       if (error === 'updating') {
-        console.log('Waiting until userservice updates...');
         bus.listen('userUpdated', this.render.bind(this));
         // TODO: FIXME: draw skeleton or loader here
       } else if (error !== 'unauthorized') {
