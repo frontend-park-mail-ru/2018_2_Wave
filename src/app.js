@@ -1,4 +1,6 @@
+import userService from './modules/userservice';
 import Router from './modules/router';
+import bus from './modules/bus';
 
 import UserblockView from './views/userblock/userblock';
 import MenuView from './views/menu/menu';
@@ -10,6 +12,7 @@ import SettingsView from './views/settings/settings';
 import ProfileEditView from './views/editprofile/editprofile';
 
 import './css/style.css';
+
 
 // TODO: FIXME: remove id
 const userblock = document.getElementById('userblock');
@@ -28,4 +31,4 @@ router
   .start();
 
 const userblockView = new UserblockView(userblock);
-userblockView.update();
+bus.listen('userUpdated', userblockView.update);
