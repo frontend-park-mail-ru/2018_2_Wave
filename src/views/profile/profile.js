@@ -1,4 +1,5 @@
-import { logout, getProfile } from "../../modules/network";
+import { logout } from '../../modules/network';
+import userService from '../../modules/userservice';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import './profile.css';
@@ -17,18 +18,26 @@ export default class ProfileView extends BaseView {
   }
 
   async render() {
-    const { err: error, profile: user } = await getProfile();
+    bus.ignore('userUpdated', this.render.bind(this));
+    const { err: error, user } = userService.getUser();
+
     if (error) {
-      console.error(error);
+      if (error === 'updating') {
+        bus.listen('userUpdated', this.render.bind(this));
+        // TODO: FIXME: draw skeleton or loader here
+      } else if (error !== 'unauthorized') {
+        console.error(error);
+      }
       return;
     }
+
     super.render({ user });
 
     const logoutButton = document.getElementById('logoutbutton');
     logoutButton.addEventListener('click', async () => {
       const { err } = await logout();
       if (err) console.error(err);
-      bus.emit('userUpdate');
+      bus.emit('checkUser');
     });
   }
 }
