@@ -64,8 +64,8 @@ function ajax({
 const AjaxModule = {
   GET: (params = {}) => ajax({ ...params, method: 'GET' }),
   POST: (params = {}) => ajax({ ...params, method: 'POST' }),
-  PUT: (params = {}) => ajax({ ...params, method: 'DELETE' }),
-  DELETE: (params = {}) => ajax({ ...params, method: 'PUT' }),
+  PUT: (params = {}) => ajax({ ...params, method: 'PUT' }),
+  DELETE: (params = {}) => ajax({ ...params, method: 'DELETE' }),
 };
 
 
