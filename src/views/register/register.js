@@ -1,7 +1,6 @@
-import ajax from '../../modules/ajax';
+import { register } from '../../modules/network';
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
-import { validate } from '../validation/validation';
 import './registration.css';
 
 const template = require('./register.pug');
@@ -24,18 +23,16 @@ export default class RegisterView extends BaseView {
 
     registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-      try {
-        await ajax.POST({
-          path: '/users',
-          body: new FormData(registerForm),
-        });
-        bus.emit('link', '/');
-        bus.emit('userUpdate');
-      } catch (error) {
+      const registerData = new FormData(registerForm);
+      const { err } = await register(registerData);
+      if (err) {
         // TODO: show error
-        console.error(error);
+        console.error(err);
+        return;
       }
+
+      bus.emit('link', '/');
+      bus.emit('userUpdate');
     });
-    // validate();
   }
 }

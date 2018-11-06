@@ -1,4 +1,4 @@
-import ajax from '../../modules/ajax';
+import { logout, getProfile } from "../../modules/network";
 import bus from '../../modules/bus';
 import BaseView from '../baseview';
 import './profile.css';
@@ -17,17 +17,18 @@ export default class ProfileView extends BaseView {
   }
 
   async render() {
-    try {
-      const user = await ajax.GET({ path: '/users/me' });
-      super.render({ user });
-      const logout = document.getElementById('logoutbutton');
-      logout.addEventListener('click', async () => {
-        await ajax.DELETE({ path: '/session' });
-        // TODO: to userService
-        bus.emit('userUpdate');
-      });
-    } catch (error) {
+    const { err: error, profile: user } = await getProfile();
+    if (error) {
       console.error(error);
+      return;
     }
+    super.render({ user });
+
+    const logoutButton = document.getElementById('logoutbutton');
+    logoutButton.addEventListener('click', async () => {
+      const { err } = await logout();
+      if (err) console.error(err);
+      bus.emit('userUpdate');
+    });
   }
 }

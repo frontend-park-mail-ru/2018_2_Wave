@@ -53,9 +53,9 @@ function ajax({
           body: responseBody ? JSON.stringify(responseBody) : {},
         };
         // if (errorEvent && !error.body) bus.emit(errorEvent);
-        // FIXME:
-        throw error;
-      } else return response.text();
+        return Promise.reject(error);
+      }
+      return response.text();
     })
     .then(text => (text ? JSON.parse(text) : {}));
 }
@@ -64,8 +64,8 @@ function ajax({
 const AjaxModule = {
   GET: (params = {}) => ajax({ ...params, method: 'GET' }),
   POST: (params = {}) => ajax({ ...params, method: 'POST' }),
-  PUT: (params = {}) => ajax({ ...params, method: 'DELETE' }),
-  DELETE: (params = {}) => ajax({ ...params, method: 'PUT' }),
+  PUT: (params = {}) => ajax({ ...params, method: 'PUT' }),
+  DELETE: (params = {}) => ajax({ ...params, method: 'DELETE' }),
 };
 
 
