@@ -1,4 +1,3 @@
-import userService from './modules/userservice';
 import Router from './modules/router';
 import bus from './modules/bus';
 
@@ -31,4 +30,4 @@ router
   .start();
 
 const userblockView = new UserblockView(userblock);
-bus.listen('userUpdated', userblockView.update);
+bus.listen('userUpdated', () => { userblockView.update(); });
