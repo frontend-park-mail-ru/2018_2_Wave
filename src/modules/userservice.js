@@ -52,7 +52,6 @@ class UserService {
     }
 
     this.updating = false;
-    console.log('userUpdated');
     bus.emit('userUpdated');
   }
 }
