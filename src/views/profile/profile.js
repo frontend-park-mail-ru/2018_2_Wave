@@ -37,7 +37,7 @@ export default class ProfileView extends BaseView {
     logoutButton.addEventListener('click', async () => {
       const { err } = await logout();
       if (err) console.error(err);
-      bus.emit('checkUser');
+      bus.emit('checkUser', 'logout');
     });
   }
 }
