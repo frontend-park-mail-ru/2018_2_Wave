@@ -37,11 +37,19 @@ class UserService {
     this.updating = true;
     const { err, profile: user } = await getProfile();
 
-    if (err) return;
+    if (err) {
+      if (err.status === 401) {
+        this.user = {};
+        this.loggedIn = false;
+      }
+      console.log(err);
+    } else {
+      this.user = user;
+      this.loggedIn = true;
+    }
 
-    this.user = user;
-    this.loggedIn = true;
     this.updating = false;
+    console.log('userUpdated');
     bus.emit('userUpdated');
   }
 }
