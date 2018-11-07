@@ -65,5 +65,9 @@ export default class Router {
     );
 
     bus.listen('link', this.open.bind(this));
+
+    bus.listen('unauthorized', () => { this.open('/login'); });
+    bus.listen('serverError',  () => { this.open('/error'); });
+    bus.listen('badGateway',   () => { this.open('/error'); });
   }
 }

@@ -1,4 +1,4 @@
-// import bus from './bus';
+import bus from './bus';
 
 
 const URL = 'https://rasseki.com';
@@ -7,6 +7,7 @@ const URL = 'https://rasseki.com';
 const errorEvents = {
   401: 'unauthorized',
   500: 'serverError',
+  502: 'badGateway',
 };
 
 function getCodeType(statusCode) {
@@ -52,7 +53,7 @@ function ajax({
           event: errorEvent,
           body: responseBody ? JSON.stringify(responseBody) : {},
         };
-        // if (errorEvent && !error.body) bus.emit(errorEvent);
+        if (errorEvent && !error.body) bus.emit(errorEvent);
         return Promise.reject(error);
       }
       return response.text();
