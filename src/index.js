@@ -1,10 +1,10 @@
 import SnakeGame from './snakeGame/index';
 import Terminal from './terminal/index';
-// import MainMenu from './mainMenu/index';
+import MainMenu from './mainMenu/index';
 
 import terminalTemplate from './terminal/index.pug';
 import snakeTemplate from './snakeGame/index.pug';
-// import mainMenuTemplate from './mainMenu/index.pug';
+import mainMenuTemplate from './mainMenu/index.pug';
 
 import css from './style.css';
 
@@ -37,9 +37,8 @@ bus.listen('snakeGame', (_) => {
   _ = new SnakeGame(root);
 });
 
-/*
-bus.listen('maimMenu', (_) => {
+
+bus.listen('mainMenu', (_) => {
   root.innerHTML = mainMenuTemplate();
   _ = new MainMenu();
 });
-*/

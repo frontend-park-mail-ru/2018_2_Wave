@@ -25,6 +25,7 @@ export default class Terminal {
       help: this.help.bind(this),
       menu: this.terminalMenu.bind(this),
       snake: this.snake.bind(this),
+      mainMenu: this.mainMenu.bind(this),
     };
 
     this.termControls = {
@@ -59,6 +60,10 @@ export default class Terminal {
     this.addCommandOut('<div>break</div>');
     // this.textInput.removeBell();
     this.renderTerm();
+  }
+
+  mainMenu() {
+    this.busController.emit('mainMenu');
   }
 
 
@@ -103,7 +108,7 @@ export default class Terminal {
   /* -------block----------------*/
   /*----------------------------*/
   getBlock() {
-    const block = document.getElementsByClassName('block');
+    const block = document.getElementsByClassName('terminal_block');
     return block[block.length - 1];
   }
 
