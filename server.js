@@ -3,11 +3,9 @@ const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 const https = require('https');
 
-const key  = fs.readFileSync('cert/server.key', 'utf8');
-const cert = fs.readFileSync('cert/server.pem', 'utf8');
-const credentials = { key, cert };
 
 const app = express();
 
@@ -24,5 +22,15 @@ app.all('*', (req, res) => {
 });
 
 
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(3000);
+http.createServer(app).listen(80);
+console.log('HTTP-server started');
+
+try {
+  const key  = fs.readFileSync('cert/server.key', 'utf8');
+  const cert = fs.readFileSync('cert/server.pem', 'utf8');
+  const credentials = { key, cert };
+  https.createServer(credentials, app).listen(443);
+  console.log('HTTPS-server started');
+} catch (err) {
+  console.log('HTTPS-server failed');
+}
