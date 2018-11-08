@@ -15,7 +15,7 @@ import './css/style.css';
 export default class UserForm {
   constructor() {
     this.userblock = document.getElementById('userblock');
-    [this.root] = document.getElementsByClassName('root');
+    this.root = document.getElementById('mainmenu_root');
 
     this.router = new Router(this.root);
 

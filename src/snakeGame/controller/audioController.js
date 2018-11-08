@@ -34,6 +34,7 @@ export default class AudioController {
   }
 
   mainAudioPlay() {
+    console.log('main audio play');
     this.mainAudio.play();
   }
 
