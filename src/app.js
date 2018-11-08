@@ -13,6 +13,19 @@ import ProfileEditView from './views/editprofile/editprofile';
 import './css/style.css';
 
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js', { scope: '/' })
+    .then((registration) => {
+      // Registration was successful
+      console.log('SW registration OK:', registration);
+    })
+    .catch((err) => {
+      // registration failed :(
+      console.log('SW registration FAIL:', err);
+    });
+}
+
+
 // TODO: FIXME: remove id
 const userblock = document.getElementById('userblock');
 const root = document.getElementById('root');

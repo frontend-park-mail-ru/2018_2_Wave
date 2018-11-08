@@ -17,6 +17,10 @@ app.all('*/app.bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/app.bundle.js'));
 });
 
+app.all('*/sw.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/sw.js'));
+});
+
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
