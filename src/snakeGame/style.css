@@ -1,0 +1,8 @@
+.container {
+    display: table;
+    margin: 0 auto;
+  }
+
+.root {
+  background-color: black;
+}

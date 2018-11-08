@@ -1,0 +1,72 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+body {
+  background: #575760;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+.block {
+  background: #393941;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2),
+              0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  margin: 7% auto 0;
+  padding: 30px 35px;
+}
+
+.button {
+  color: white;
+  background: #575760;
+
+  font-size: 14px;
+  font-family: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  padding: 15px;
+  margin: 15px 0;
+  display: block;
+
+  cursor: pointer;
+}
+
+.wrapper {
+  width: inherit;
+  height: inherit;
+}
+
+.button:hover, .button:active, .button:focus {
+  background: #2f8271;
+}
+
+input {
+  background: #f2f2f2;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  border: 0;
+  padding: 15px;
+  margin: 15px 0;
+  display: block;
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.message a {
+  color: #2f8271;
+  cursor: pointer;
+  /* text-decoration: none; */
+}

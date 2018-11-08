@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: './src/app.js',
+    app: './src/index.js',
   },
 
   output: {
@@ -35,6 +35,10 @@ module.exports = {
       {
         test: /\.pug$/,
         loader: 'pug-loader',
+      },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
       },
     ],
   },

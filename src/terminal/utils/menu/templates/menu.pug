@@ -1,0 +1,9 @@
+- let index = 1
+.menu
+    each func, field in menuList
+        - if (index === 1) {
+        div.focus(datahref= func tabIndex= index)= field
+        - } else {
+        div(datahref= func tabIndex= index)= field
+        - }
+        - index += 1;
