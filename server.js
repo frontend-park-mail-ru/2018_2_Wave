@@ -22,14 +22,14 @@ app.all('*', (req, res) => {
 });
 
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(8080);
 console.log('HTTP-server started');
 
 try {
   const key  = fs.readFileSync('cert/server.key', 'utf8');
   const cert = fs.readFileSync('cert/server.pem', 'utf8');
   const credentials = { key, cert };
-  https.createServer(credentials, app).listen(443);
+  https.createServer(credentials, app).listen(8443);
   console.log('HTTPS-server started');
 } catch (err) {
   console.log('HTTPS-server failed');
