@@ -5,8 +5,21 @@ export default class Router {
   constructor(root) {
     this.routes = {};
     this.root = root;
+
+    this.enviromentElem = document.createElement('div');
+    this.enviromentElem.classList.add('enviroment');
+    this.root.appendChild(this.enviromentElem);
+
+    this.contentElem = document.createElement('div');
+    this.contentElem.classList.add('content');
+    this.root.appendChild(this.contentElem);
   }
 
+
+  setEnviroment(View) {
+    this.enviroment = new View(this.enviromentElem);
+    return this;
+  }
 
   register(path, View) {
     this.routes[path] = new View(this.root);
@@ -15,7 +28,7 @@ export default class Router {
 
 
   open(path) {
-    const currentView = this.routes[path.split('?', 1)];
+    const openingView = this.routes[path.split('?', 1)];
     const params = {};
     window.location.search
       .substr(1)
@@ -25,7 +38,7 @@ export default class Router {
         params[key] = val;
       });
 
-    if (!currentView) {
+    if (!openingView) {
       this.open('/');
       return;
     }
@@ -34,14 +47,20 @@ export default class Router {
       window.history.pushState(null, '', path);
     }
 
-    if (!currentView.active) {
+    if (!openingView.active) {
       Object.values(this.routes).forEach((view) => {
         if (view.active) view.hide();
       });
-      currentView.show(params);
+
+      if (Object.prototype.hasOwnProperty.call(this, 'enviroment')) {
+        if (openingView.single) this.enviroment.hide();
+        else                    this.enviroment.show();
+      }
+
+      openingView.show(params);
     }
 
-    this.routes[path] = currentView;
+    this.routes[path] = openingView;
   }
 
 
