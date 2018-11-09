@@ -58,7 +58,7 @@ export default class Terminal {
 
   break() {
     this.addCommandOut('<div>break</div>');
-    // this.textInput.removeBell();
+    this.textInput.removeBell();
     this.renderTerm();
   }
 
