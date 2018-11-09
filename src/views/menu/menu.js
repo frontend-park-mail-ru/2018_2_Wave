@@ -8,6 +8,7 @@ const buttons = {
   '/settings': 'Settings',
 };
 
+
 export default class MenuView extends BaseView {
   constructor(parent) {
     super(template, parent);
