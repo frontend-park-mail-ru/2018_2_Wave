@@ -9,7 +9,7 @@ const template = require('./userblock.pug');
 export default class UserblockView extends BaseView {
   constructor(parent) {
     super(template, parent);
-    // bus.listen('userUpdated', this.update.bind(this));
+    bus.listen('userUpdated', this.update.bind(this));
   }
 
   update() {
@@ -27,15 +27,11 @@ export default class UserblockView extends BaseView {
     }
 
 
-    const { user } = userService.getUser();
-
     const authorized = true;
-    // TODO: FIXME: remove id
-    document.getElementById('username').innerHTML = user.username;
-
+    const { user } = userService.getUser();
     super.render({ user, authorized });
-    // TODO: FIXME: remove id
-    const profileButton = document.getElementById('userblockAvatar');
+
+    const [profileButton] = document.getElementsByClassName('userblock__avatar');
     profileButton.addEventListener('click', () => bus.emit('link', '/profile'));
   }
 }

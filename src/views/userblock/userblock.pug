@@ -1,4 +1,6 @@
-if !authorized
-  a#userblockbutton(href='/login') login
-else
-  img#userblockAvatar(src=user.avatar)
+.userblock
+  if !authorized
+    a.userblock__button.button(href='/login') login
+  else
+    img.userblock__avatar(src= "https://rasseki.com/" + user.avatar)
+  div.userblock__username= user.username
