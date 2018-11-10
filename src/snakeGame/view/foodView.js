@@ -6,8 +6,8 @@ export default class FoodView {
   }
 
   render() {
-    const x = (this.foodModel.getX() * this.levelModel.getCellSize()) + 0.5;
-    const y = (this.foodModel.getY() * this.levelModel.getCellSize()) + 0.5;
+    const x = (this.foodModel.getX() * this.levelModel.getCellSize().x) + 0.5;
+    const y = (this.foodModel.getY() * this.levelModel.getCellSize().y) + 0.5;
 
     this.context.beginPath();
     switch (this.foodModel.getType()) {

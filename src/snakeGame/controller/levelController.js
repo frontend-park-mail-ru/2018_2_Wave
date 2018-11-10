@@ -1,4 +1,4 @@
-import busController from '../utils/busController';
+import busController from '../../modules/busController';
 import Position from '../model/position';
 
 export default class LevelController {

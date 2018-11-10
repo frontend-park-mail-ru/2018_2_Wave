@@ -1,9 +1,11 @@
 import Position from './position';
+import Size from './size';
 
 export default class levelModel {
-  constructor(size, cellSize) {
+  constructor(size, cellWidth, cellHeight) {
     this.size = size;
-    this.cellSize = cellSize;
+    this.cellWidth = cellWidth;
+    this.cellHeight = cellHeight;
     this.map = new Array(this.size.getWidth() * this.size.getHeight()).fill(0);
   }
 
@@ -28,7 +30,7 @@ export default class levelModel {
   }
 
   getCellSize() {
-    return this.cellSize;
+    return new Size(this.cellWidth, this.cellHeight);
   }
 
   index(place) {

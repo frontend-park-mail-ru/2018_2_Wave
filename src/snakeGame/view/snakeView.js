@@ -6,9 +6,16 @@ export default class SnakeView {
   }
 
   render() {
+    this.context.font = '15px Arial';
+    this.context.fillStyle = '#99ff00';
+    this.snakeModel.getSegments().forEach((segment) => {
+      this.context.fillText(segment.letter, parseInt(segment.x, 10), parseInt(segment.y, 10));
+    });
+
     // snacke color
     // this.context.fillStyle = '#003300';
     // this.context.fillStyle = '#99ff00';
+    /*
     this.context.strokeStyle = '#009900';
 
     this.snakeModel.segments.forEach((segment) => {
@@ -29,13 +36,12 @@ export default class SnakeView {
       this.context.stroke();
       this.context.closePath();
 
-      /*
       this.context.strokeStyle = '#009900';
       this.context.fillStyle = '#99ff00';
       this.context.font = '15px Arial';
       this.context.fillText('$', x + this.levelModel.getCellSize() / 2,
         y + this.levelModel.getCellSize() / 2);
-        */
     });
+    */
   }
 }

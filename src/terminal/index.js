@@ -43,14 +43,14 @@ export default class Terminal {
     this.renderTerm(this.termBuffer);
   }
 
-  getLeader() {
+  getCommandIntro() {
     return `${this.cwd}:/$ `;
   }
 
   renderTerm(preText) {
     this.terminalAppendInnerHTML(blockTemplate({
       preText,
-      leader: this.getLeader(),
+      leader: this.getCommandIntro(),
 
     }));
     this.textInput = new TextInput(this.busController);
@@ -78,7 +78,24 @@ export default class Terminal {
   }
 
   snake() {
-    this.busController.emit('snakeGame');
+    this.busController.emit('snakeGame', {
+      snakeText: this.getLastLineText(),
+      snakeDOMRect: this.getLastLineCoordinates(),
+    });
+  }
+
+  getLastLineText() {
+    return `${this.getCommandIntro()}: snake`;
+  }
+
+  getLastLineCoordinates() {
+    console.log(this.getLastLine().getBoundingClientRect());
+    return this.getLastLine().getBoundingClientRect();
+  }
+
+  getLastLine() {
+    const leaders = this.terminal.getElementsByClassName('leader');
+    return leaders[leaders.length - 1];
   }
 
   terminalMenu() {

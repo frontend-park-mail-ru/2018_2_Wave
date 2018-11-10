@@ -1,4 +1,4 @@
-import busController from '../utils/busController';
+import busController from '../../modules/busController';
 
 export default class FoodController {
   constructor(foodModel, levelModel) {

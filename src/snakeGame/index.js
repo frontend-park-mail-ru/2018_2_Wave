@@ -1,7 +1,7 @@
 import Canvas from './utils/canvas';
 import keyboardController from '../modules/keyboardController';
 
-import busController from './utils/busController';
+import busController from '../modules/busController';
 
 import setRequestAnimationFrame from './utils/setRequestAnimationFrame';
 
@@ -27,7 +27,13 @@ import snakeTemplate from './index.pug';
 import Size from './model/size';
 
 export default class SnakeGame {
-  constructor(root) {
+  constructor(root, args) {
+    this.snakeText = args.snakeText;
+    this.DOMRect = args.snakeDOMRect;
+    this.cellWidth = this.DOMRect.width / (this.snakeText.length - ' snake'.length);
+    this.cellHeight = this.DOMRect.height;
+    this.startX = this.DOMRect.x;
+    this.startY = this.DOMRect.y;
     this.root = root;
     this.root.innerHTML = snakeTemplate();
     this.canvas = new Canvas();
@@ -35,7 +41,9 @@ export default class SnakeGame {
     this.keyboardController = keyboardController;
     this.busController = busController;
 
-    this.paused = true;
+    // for pause
+    // this.paused = true;
+    this.paused = false;
 
     this.directions = {
       Up: 'UP',
@@ -44,9 +52,11 @@ export default class SnakeGame {
       Right: 'RIGHT',
     };
 
+    // for pause
     this.eventsMethods = {
       Space: this.pause.bind(this),
     };
+
 
     setRequestAnimationFrame();
 
@@ -56,11 +66,11 @@ export default class SnakeGame {
   init() {
     this.userModel = new UserModel();
 
-    this.levelModel = new LevelModel(new Size(60, 40), 15);
+    this.levelModel = new LevelModel(new Size(100, 80), this.cellWidth, this.cellHeight);
     this.levelController = new LevelController(this.levelModel);
     this.levelView = new LevelView(this.levelModel, this.canvas);
 
-    this.snakeModel = new SnakeModel(new Position(3, 4));
+    this.snakeModel = new SnakeModel(this.snakeText, this.startX, this.startY);
     this.snakeController = new SnakeController(this.snakeModel, this.levelModel);
     this.snakeView = new SnakeView(this.snakeModel, this.levelModel, this.canvas);
 
@@ -70,17 +80,19 @@ export default class SnakeGame {
     this.foodController = new FoodController(this.foodModel, this.levelModel);
     this.foodView = new FoodView(this.foodModel, this.levelModel, this.canvas);
 
-    this.canvas.setSize(new Size(this.levelModel.cellSize * this.levelModel.getWidth() + 1,
-      this.levelModel.cellSize * this.levelModel.getHeight() + 33));
+    this.canvas.setSize(new Size(this.levelModel.cellWidth * this.levelModel.getWidth() + 1,
+      this.levelModel.cellHeight * this.levelModel.getHeight() + 33));
 
     this.audioController = new AudioController();
 
-
+  
+    // for pause
     this.update();
     this.render();
 
-    busController.setBusListeners(this.eventsMethods);
+    // busController.setBusListeners(this.eventsMethods);
     busController.emit('startGame');
+    this.gameLoop();
   }
 
   pause() {
@@ -94,20 +106,21 @@ export default class SnakeGame {
 
   update() {
     this.snakeController.update();
-    this.foodController.update();
+    // this.foodController.update();
   }
 
   render() {
-    this.levelView.render();
+    // this.levelView.render();
     this.snakeView.render();
-    this.foodView.render();
+    // this.foodView.render();
   }
 
   gameLoop() {
+    this.canvas.clear();
     this.update();
     this.render();
 
-    const fps = 5;
+    const fps = 10;
     if (!this.paused) {
       setTimeout(() => {
         requestAnimationFrame(this.gameLoop.bind(this));

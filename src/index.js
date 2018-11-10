@@ -32,9 +32,10 @@ window.addEventListener('load', (_) => {
 });
 
 
-bus.listen('snakeGame', (_) => {
+bus.listen('snakeGame', (args) => {
+  console.log('snake game start', args);
   root.innerHTML = snakeTemplate();
-  _ = new SnakeGame(root);
+  const snakeGame = new SnakeGame(root, args);
 });
 
 

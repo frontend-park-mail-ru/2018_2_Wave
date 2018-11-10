@@ -1,8 +1,10 @@
 import Position from './position';
 
 export default class SnakeModel {
-  constructor(position) {
-    this.segments  = [new Position(position.x + 1, position.y), position];
+  constructor(snakeText, startX, startY) {
+    this.segments  = [];
+    this.snakeText = snakeText;
+    this.startPosition = new Position(startX, startY);
 
     this.directions = {
       Up: 'UP',
@@ -14,24 +16,45 @@ export default class SnakeModel {
     this.directionsOposit = {
       UP: 'DOWN',
       DOWN: 'UP',
-      Left: 'RIGHT',
+      LEFT: 'RIGHT',
       RIGHT: 'RIGHT',
     };
 
-    this.direction = this.directions.DOWN;
+    this.direction = this.directions.RIGHT;
 
     this.destroyed = false;
     this.score     = 0;
+  }
+
+  getSegments() {
+    return this.segments;
   }
 
   popSegment() {
     this.segments.pop();
   }
 
+  pushSegment(segment) {
+    console.log(segment);
+    this.segments.push(segment);
+  }
+
+  unshiftSegment(segment) {
+    console.log('unshift segment', segment);
+    this.segments.unshift(segment);
+  }
+
   setDirection(direction) {
     this.direction = direction;
   }
 
+  getStartPosition() {
+    return this.startPosition;
+  }
+
+  getSnakeText() {
+    return this.snakeText;
+  }
 
   isOpositDirection(direction) {
     return direction === this.directionsOposit[this.direction];

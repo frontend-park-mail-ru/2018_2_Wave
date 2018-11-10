@@ -1,5 +1,5 @@
 import AudioModel from '../model/audioModel';
-import busController from '../utils/busController';
+import busController from '../../modules/busController';
 
 import gameOfThrones from '../static/audio/game_of_thrones.mp3';
 import radioactive from '../static/audio/radioactive.mp3';

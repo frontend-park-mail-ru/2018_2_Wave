@@ -19,10 +19,12 @@ export default class Canvas {
       throw new TypeError('Invalid size instance');
     }
 
-    this.canvas.width = size.width;
+    this.size = {
+      width: this.canvas.width,
+      height: this.canvas.height,
+    };
     this.canvas.width = size.width;
 
-    this.context.canvas.height = size.height;
     this.context.canvas.height = size.height;
   }
 

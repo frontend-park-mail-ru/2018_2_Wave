@@ -19,9 +19,9 @@ class BusController {
     });
   }
 
-  emit(event, data) {
+  emit(event, ...data) {
     console.log('emit', event, data);
-    bus.emit(event, data);
+    bus.emit(event, ...data);
   }
 }
 
