@@ -4,6 +4,7 @@ export default class FoodModel {
     this.birth    = Date.now();
     this.age      = 0;
     this.type     = 1;
+    this.foods    = 'illeatyouup';
   }
 
   getX() {

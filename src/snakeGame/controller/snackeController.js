@@ -41,15 +41,12 @@ export default class SnakeController {
   initSnake() {
     const snakeText = this.snakeModel.getSnakeText();
     for (let i = 0; i < snakeText.length; i += 1) {
-      console.log(this.snakeModel.getStartPosition().x + this.levelModel.cellWidth * i);
-      console.log(this.snakeModel.getStartPosition().x, this.levelModel.cellWidth, i);
       this.snakeModel.unshiftSegment({
         x: this.snakeModel.getStartPosition().x + this.levelModel.cellWidth * i,
         y: this.snakeModel.getStartPosition().y + this.levelModel.cellHeight,
         letter: snakeText[i],
       });
     }
-    console.log(this.snakeModel.getSegments());
   }
 
   findEmptyPlace() {
@@ -76,7 +73,6 @@ export default class SnakeController {
     const [head] = this.snakeModel.segments;
     let newX = head.x;
     let newY = head.y;
-    console.log('newX', newX, 'newY', newY);
 
     if (this.snakeModel.direction === this.directions.RIGHT) {
       newX += this.levelModel.getCellSize().getWidth();
@@ -88,21 +84,22 @@ export default class SnakeController {
       newY -= this.levelModel.getCellSize().getHeight();
     }
 
-
+    /*
     // wrap around the world, x-axis first
-    if (newX >= this.levelModel.getWidth()) {
+    if (newX >= this.levelModel.getWidth() * this.levelModel.getCellSize().getWidth()) {
       newX = 0;
     } else if (newX < 0) {
-      newX = (this.levelModel.getWidth() - 1);
+      newX = (this.levelModel.getWidth() * this.levelModel.getCellSize().getWidth() - 1);
     }
 
 
     // y-axis
-    if (newY >= this.levelModel.getHeight()) {
+    if (newY >= this.levelModel.getHeight() * this.levelModel.getCellSize().getHight()) {
       newY = 0;
     } else if (newY < 0) {
-      newY = (this.levelModel.getHeight() - 1);
+      newY = (this.levelModel.getHeight() * this.levelModel.getCellSize().getHight() - 1);
     }
+    */
 
 
     this.snakeModel.segments.unshift({

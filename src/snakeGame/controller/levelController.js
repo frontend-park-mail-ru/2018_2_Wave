@@ -29,6 +29,7 @@ export default class LevelController {
 
   generateLevel() {
 
+    /*
     const levelHeight = this.levelModel.getHeight();
     const levelWidth = this.levelModel.getWidth();
 
@@ -58,6 +59,7 @@ export default class LevelController {
         wallType = Math.floor(Math.random() * 3);
       }
     }
+    */
 
     return this.levelModel.getMap();
   }
