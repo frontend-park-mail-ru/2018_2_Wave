@@ -57,6 +57,7 @@ class KeyboardController {
       e.preventDefault();
       if (e.keyCode === 32) { // space
         bus.emit(e.code);
+        bus.emit('Input', ' ');
       } else {
         bus.emit(e.key);
       }

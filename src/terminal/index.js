@@ -28,6 +28,7 @@ export default class Terminal {
       snake: this.snake.bind(this),
       mainMenu: this.mainMenu.bind(this),
       love: this.love.bind(this),
+      'show abs': this.showAbs.bind(this),
     };
 
     this.termControls = {
@@ -56,13 +57,19 @@ export default class Terminal {
 
     }));
     this.textInput = new TextInput(this.busController);
+    this.getTextInput().scrollIntoView();
   }
 
   break() {
-    this.addCommandOut(`<div class='red'>break</div>`);
+    this.addCommandOut(`<div class='red'>\n     break</div>`);
     this.textInput.removeBell();
     this.busController.resetBusListeners(this.termCtrlControl);
     this.busController.setBusListeners(this.termControls);
+    this.renderTerm();
+  }
+
+  showAbs() {
+    this.addCommandOut(`<div class='red bold'><b>\n     NO</b></div>`);
     this.renderTerm();
   }
 
@@ -202,7 +209,8 @@ export default class Terminal {
     const line = this.textInput.getText();
 
     const argv = line.split(' ');
-    const command = argv[0];
+    // const command = argv[0];
+    const command = line;
     const argc = argv.length;
 
     argv.shift();
