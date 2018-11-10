@@ -88,6 +88,23 @@ export default class SnakeController {
       newY -= this.levelModel.getCellSize().getHeight();
     }
 
+
+    // wrap around the world, x-axis first
+    if (newX >= this.levelModel.getWidth()) {
+      newX = 0;
+    } else if (newX < 0) {
+      newX = (this.levelModel.getWidth() - 1);
+    }
+
+
+    // y-axis
+    if (newY >= this.levelModel.getHeight()) {
+      newY = 0;
+    } else if (newY < 0) {
+      newY = (this.levelModel.getHeight() - 1);
+    }
+
+
     this.snakeModel.segments.unshift({
       x: newX,
       y: newY,
@@ -105,22 +122,6 @@ export default class SnakeController {
 
     this.snakeModel.popSegment();
     // console.log(this.snakeModel.getSegments());
-    /*
-    // wrap around the world, x-axis first
-    if (newX >= this.levelModel.getWidth()) {
-      newX = 0;
-    } else if (newX < 0) {
-      newX = (this.levelModel.getWidth() - 1);
-    }
-
-
-    // y-axis
-    if (newY >= this.levelModel.getHeight()) {
-      newY = 0;
-    } else if (newY < 0) {
-      newY = (this.levelModel.getHeight() - 1);
-    }
-    */
 
     /*
     const position = new Position(newX, newY);

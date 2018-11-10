@@ -66,7 +66,7 @@ export default class SnakeGame {
   init() {
     this.userModel = new UserModel();
 
-    this.levelModel = new LevelModel(new Size(100, 80), this.cellWidth, this.cellHeight);
+    this.levelModel = new LevelModel(new Size(window.innerWidth, window.innerHeight), this.cellWidth, this.cellHeight);
     this.levelController = new LevelController(this.levelModel);
     this.levelView = new LevelView(this.levelModel, this.canvas);
 
@@ -80,8 +80,9 @@ export default class SnakeGame {
     this.foodController = new FoodController(this.foodModel, this.levelModel);
     this.foodView = new FoodView(this.foodModel, this.levelModel, this.canvas);
 
-    this.canvas.setSize(new Size(this.levelModel.cellWidth * this.levelModel.getWidth() + 1,
-      this.levelModel.cellHeight * this.levelModel.getHeight() + 33));
+    // this.canvas.setSize(new Size(this.levelModel.cellWidth * this.levelModel.getWidth() + 1,
+    //  this.levelModel.cellHeight * this.levelModel.getHeight() + 33));
+    this.canvas.setSize(new Size(window.innerWidth, window.innerHeight));
 
     this.audioController = new AudioController();
 
