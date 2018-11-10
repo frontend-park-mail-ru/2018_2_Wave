@@ -4,7 +4,9 @@ export default class FoodModel {
     this.birth    = Date.now();
     this.age      = 0;
     this.type     = 1;
-    this.foods    = 'illeatyouup';
+    this.foods    = 'illeatyouupqwertyuiopdfghjklsdfghjkldfghjkldfghjkdfghjkdfghjkfgh';
+    const letterIndex = Math.floor(Math.random() * this.foods.length);
+    this.currenLetter = this.foods[letterIndex];
   }
 
   getX() {
@@ -20,6 +22,9 @@ export default class FoodModel {
   }
 
   setFoodPosition(position) {
+    const letterIndex = Math.floor(Math.random() * this.foods.length);
+    this.currenLetter = this.foods[letterIndex];
+    console.log(this.currenLetter);
     this.position = position;
   }
 
