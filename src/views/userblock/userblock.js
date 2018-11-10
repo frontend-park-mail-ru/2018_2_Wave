@@ -21,8 +21,8 @@ export default class UserblockView extends BaseView {
     const { loggedIn } = userService.isLoggedIn();
 
     if (!loggedIn) {
-      document.getElementById('username').innerHTML = '';
-      super.render({ authorized: false });
+      const user = { username: '' };
+      super.render({ user, authorized: false });
       return;
     }
 

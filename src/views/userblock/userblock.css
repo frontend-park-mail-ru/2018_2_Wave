@@ -13,8 +13,20 @@
 
 
 .userblock__button {
+  color: white;
+
+  background: transparent !important;
   padding: 32px 0;
   margin: 0;
+
+  font-size: 14px;
+  font-family: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  display: block;
+  cursor: pointer;
 }
 
 .userblock__avatar {
