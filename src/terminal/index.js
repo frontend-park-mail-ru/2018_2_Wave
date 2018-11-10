@@ -57,8 +57,10 @@ export default class Terminal {
   }
 
   break() {
-    this.addCommandOut('<div>break</div>');
+    this.addCommandOut(`<div class='red'>break</div>`);
     this.textInput.removeBell();
+    this.busController.resetBusListeners(this.termCtrlControl);
+    this.busController.setBusListeners(this.termControls);
     this.renderTerm();
   }
 

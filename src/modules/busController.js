@@ -19,6 +19,11 @@ class BusController {
     });
   }
 
+  resetBusListeners(events) {
+    this.removeBusListeners(this.setListeners);
+    this.setBusListeners(events);
+  }
+
   emit(event, ...data) {
     console.log('emit', event, data);
     bus.emit(event, ...data);
