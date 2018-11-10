@@ -6,8 +6,9 @@ class KeyboardController {
       8, // backspace
       9, // tab
       13, // enter
+      27, // esc
       // 16, // shift
-      32, //space
+      32, // space
       37, // left arrow
       38, // up arrow
       39, // right arrow

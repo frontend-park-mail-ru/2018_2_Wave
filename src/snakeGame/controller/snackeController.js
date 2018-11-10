@@ -62,6 +62,7 @@ export default class SnakeController {
   }
 
   isColisionWithFood(position) {
+    // console.log('position', position);
     const isFood = this.levelModel.isFood(position);
     if (isFood) {
       busController.emit('pickFood', position, this.segments);
@@ -100,6 +101,11 @@ export default class SnakeController {
       newY = (this.levelModel.getHeight() * this.levelModel.getCellSize().getHight() - 1);
     }
     */
+
+    if (this.isColisionWithFood(new Position(parseInt(newX, 10), 
+                                              parseInt(newY, 10)))) {
+      console.log('collision');
+    }
 
 
     this.snakeModel.segments.unshift({

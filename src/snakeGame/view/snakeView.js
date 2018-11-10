@@ -6,13 +6,11 @@ export default class SnakeView {
   }
 
   render() {
-    this.context.beginPath();
     this.context.font = '15px Arial';
     this.context.fillStyle = '#99ff00';
     this.snakeModel.getSegments().forEach((segment) => {
       this.context.fillText(segment.letter, parseInt(segment.x, 10), parseInt(segment.y, 10));
     });
-    this.context.closePath();
 
     // snacke color
     // this.context.fillStyle = '#003300';

@@ -10,7 +10,6 @@ export default class levelModel {
   }
 
   setFood(position) {
-    console.log('setFoodOn', position);
     this.map[this.index(position)] = 3;
   }
 
