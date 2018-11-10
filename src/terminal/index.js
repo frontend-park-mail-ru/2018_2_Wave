@@ -5,6 +5,7 @@ import TextInput from './utils/textInput/textInput';
 import keyboardControler from '../modules/keyboardController';
 
 const blockTemplate = require('./templates/block.pug');
+const heartTemplate = require('./templates/heart.pug');
 
 export default class Terminal {
   constructor(config) {
@@ -26,6 +27,7 @@ export default class Terminal {
       menu: this.terminalMenu.bind(this),
       snake: this.snake.bind(this),
       mainMenu: this.mainMenu.bind(this),
+      love: this.love.bind(this),
     };
 
     this.termControls = {
@@ -66,6 +68,11 @@ export default class Terminal {
 
   mainMenu() {
     this.busController.emit('mainMenu');
+  }
+
+  love() {
+    this.addCommandOut(heartTemplate());
+    this.renderTerm();
   }
 
 

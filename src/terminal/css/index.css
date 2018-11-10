@@ -46,6 +46,15 @@
   .terminal .white {
     color: #fff;
   }
+  .terminal .pink {
+    color: pink;
+  }
+
+  .terminal .love {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   .terminal .bold {
     font-weight: bold;
   }
