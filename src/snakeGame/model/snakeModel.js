@@ -35,12 +35,10 @@ export default class SnakeModel {
   }
 
   pushSegment(segment) {
-    console.log(segment);
     this.segments.push(segment);
   }
 
   unshiftSegment(segment) {
-    console.log('unshift segment', segment);
     this.segments.unshift(segment);
   }
 

@@ -12,9 +12,7 @@ import bus from './modules/bus';
 
 const root = document.getElementsByClassName('root')[0];
 
-
-// main.js just fires up the application
-window.addEventListener('load', (_) => {
+const terminal = (_) => {
   root.innerHTML = terminalTemplate();
   const myTerm = new Terminal({
     el: document.getElementById('term'),
@@ -29,7 +27,12 @@ window.addEventListener('load', (_) => {
       return false;
     },
   });
-});
+};
+
+// main.js just fires up the application
+window.addEventListener('load', terminal);
+
+bus.listen('Escape', terminal);
 
 
 bus.listen('snakeGame', (args) => {

@@ -28,7 +28,7 @@ export default class Terminal {
       snake: this.snake.bind(this),
       mainMenu: this.mainMenu.bind(this),
       love: this.love.bind(this),
-      'show abs': this.showAbs.bind(this),
+      'show ads': this.showAbs.bind(this),
     };
 
     this.termControls = {
