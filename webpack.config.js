@@ -4,18 +4,16 @@ const path = require('path');
 
 
 module.exports = {
-  entry: {
-    app: './src/app.js',
-  },
+  entry: './src/app.js',
 
   output: {
-    filename: 'app.bundle.js',
     path: path.resolve(__dirname, 'public'),
+    filename: 'app.bundle.js',
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.pug',
+      template: 'src/index.pug',
     }),
     new HardSourceWebpackPlugin({
       cacheDirectory: 'node_modules/.cache/',
