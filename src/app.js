@@ -12,9 +12,7 @@ import ProfileEditView from './views/editprofile/editprofile';
 import './css/style.css';
 
 
-const [root] = document.getElementsByClassName('root');
-
-new Router(root)
+new Router(document.body)
   .setEnviroment(UserblockView)
   .register('/', MenuView)
   .register('/profile', ProfileView)
