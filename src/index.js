@@ -2,7 +2,6 @@ import SnakeGame from './snakeGame/index';
 import Terminal from './terminal/index';
 
 import terminalTemplate from './terminal/index.pug';
-import snakeTemplate from './snakeGame/index.pug';
 
 import css from './style.css';
 
@@ -34,7 +33,10 @@ bus.listen('Escape', terminal);
 
 
 bus.listen('snakeGame', (args) => {
-  console.log('snake game start', args);
-  root.innerHTML = snakeTemplate();
-  const snakeGame = new SnakeGame(root, args);
+  const snakeGame = new SnakeGame(root, {
+    snakeText: args.snakeText,
+    DOMRect: args.snakeDOMRect,
+    windowWidth: window.innerWidth,
+    windowHeight: window.innerHeight,
+  });
 });

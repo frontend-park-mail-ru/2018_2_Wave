@@ -39,14 +39,19 @@ export default class SnakeController {
   }
 
   initSnake() {
+    console.log('init1', this.snakeModel.getSegments());
     const snakeText = this.snakeModel.getSnakeText();
     for (let i = 0; i < snakeText.length; i += 1) {
+      console.log('init snake', this.snakeModel.getStartPosition().x + i,
+                                this.snakeModel.getStartPosition().y,
+                                snakeText[i]);
       this.snakeModel.unshiftSegment({
-        x: this.snakeModel.getStartPosition().x + this.levelModel.cellWidth * i,
-        y: this.snakeModel.getStartPosition().y + this.levelModel.cellHeight,
+        x: this.snakeModel.getStartPosition().x + i,
+        y: this.snakeModel.getStartPosition().y,
         letter: snakeText[i],
       });
     }
+    console.log('init', this.snakeModel.getSegments());
   }
 
   findEmptyPlace() {
@@ -76,14 +81,15 @@ export default class SnakeController {
     let newY = head.y;
 
     if (this.snakeModel.direction === this.directions.RIGHT) {
-      newX += this.levelModel.getCellSize().getWidth();
+      newX += 1;
     } else if (this.snakeModel.direction === this.directions.LEFT) {
-      newX -= this.levelModel.getCellSize().getWidth();
+      newX -= 1;
     } else if (this.snakeModel.direction === this.directions.DOWN) {
-      newY += this.levelModel.getCellSize().getHeight();
+      newY += 1;
     } else if (this.snakeModel.direction === this.directions.UP) {
-      newY -= this.levelModel.getCellSize().getHeight();
+      newY -= 1;
     }
+
 
     /*
     // wrap around the world, x-axis first
@@ -102,11 +108,9 @@ export default class SnakeController {
     }
     */
 
-    if (this.isColisionWithFood(new Position(parseInt(newX, 10), 
-                                              parseInt(newY, 10)))) {
+    if (this.isColisionWithFood(new Position(newX, newY))) {
       console.log('collision');
     }
-
 
     this.snakeModel.segments.unshift({
       x: newX,
@@ -116,6 +120,8 @@ export default class SnakeController {
 
     let temp = 'tempValue';
 
+    console.log(this.snakeModel.getSegments());
+
     const segments = this.snakeModel.getSegments();
     for (let i = segments.length - 1; i >= 0; i -= 1) {
       const letter = segments[i].letter;
@@ -124,6 +130,8 @@ export default class SnakeController {
     }
 
     this.snakeModel.popSegment();
+
+
     // console.log(this.snakeModel.getSegments());
 
     /*

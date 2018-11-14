@@ -9,7 +9,6 @@ import LevelModel from './model/levelModel';
 import SnakeModel from './model/snakeModel';
 import FoodModel from './model/foodModel';
 import UserModel from './model/userModel';
-import Position from './model/position';
 
 import LevelController from './controller/levelController';
 import SnakeController from './controller/snackeController';
@@ -29,14 +28,29 @@ import Size from './model/size';
 export default class SnakeGame {
   constructor(root, args) {
     this.snakeText = args.snakeText;
-    this.DOMRect = args.snakeDOMRect;
-    this.cellWidth = this.DOMRect.width / (this.snakeText.length - ' snake'.length);
-    this.cellHeight = this.DOMRect.height;
-    this.startX = this.DOMRect.x;
-    this.startY = this.DOMRect.y;
+    this.DOMRect = args.DOMRect;
+    console.log(args);
+    console.log(this.DOMRect);
+    this.cellWidth = Math.floor(this.DOMRect.width / (this.snakeText.length - 'snake'.length));
+    this.cellHeight = Math.floor(this.DOMRect.height);
+    this.startX = Math.floor(this.DOMRect.x / this.cellWidth);
+    this.startY = Math.floor(this.DOMRect.y / this.cellHeight);
+    this.windowWidth = args.windowWidth;
+    this.windowHeight = args.windowHeight;
+    this.widthCellCount = Math.floor(this.windowWidth / this.cellWidth);
+    this.heightCellCount = Math.floor(this.windowHeight / this.cellHeight);
     this.root = root;
     this.root.innerHTML = snakeTemplate();
     this.canvas = new Canvas();
+
+    console.log('this.cellWidth', this.cellWidth);
+    console.log('this.cellHeight', this.cellHeight);
+    console.log('this.startX', this.startX);
+    console.log('this.startY', this.startY);
+    console.log('this.windowWidth', this.windowWidth);
+    console.log('this.windowHeight', this.windowHeight);
+    console.log('this.widthCellCount', this.widthCellCount);
+    console.log('this.heightCellCount', this.heightCellCount);
 
     this.keyboardController = keyboardController;
     this.busController = busController;
@@ -66,10 +80,12 @@ export default class SnakeGame {
   init() {
     this.userModel = new UserModel();
 
-    this.levelModel = new LevelModel(new Size(parseInt(window.innerWidth/this.cellWidth), 
-                                              parseInt(window.innerHeight/this.cellHeight)), 
-                                              parseInt(this.cellWidth),
-                                              parseInt(this.cellHeight));
+    this.levelModel = new LevelModel(new Size(this.widthCellCount,
+      this.heightCellCount),
+      this.cellWidth,
+      this.cellHeight);
+
+    
     this.levelController = new LevelController(this.levelModel);
     this.levelView = new LevelView(this.levelModel, this.canvas);
 

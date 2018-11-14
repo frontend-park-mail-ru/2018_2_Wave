@@ -33,6 +33,14 @@ export default class levelModel {
     return new Size(this.cellWidth, this.cellHeight);
   }
 
+  getCellWidth() {
+    return this.cellWidth;
+  }
+
+  getCellHeight() {
+    return this.cellHeight;
+  }
+
   index(place) {
     return ((place.getX() * this.size.getWidth()) + place.getY());
   }

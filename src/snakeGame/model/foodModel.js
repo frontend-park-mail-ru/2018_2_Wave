@@ -1,6 +1,6 @@
 export default class FoodModel {
   constructor() {
-    this.life     = 1000;
+    this.life     = 30000;
     this.birth    = Date.now();
     this.age      = 0;
     this.type     = 1;
