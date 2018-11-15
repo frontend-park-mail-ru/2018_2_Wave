@@ -33,10 +33,40 @@ bus.listen('Escape', terminal);
 
 
 bus.listen('snakeGame', (args) => {
-  const snakeGame = new SnakeGame(root, {
-    snakeText: args.snakeText,
+
+
+  this.startX = Math.floor(this.DOMRect.x / this.cellWidth);
+  this.startY = Math.floor(this.DOMRect.y / this.cellHeight);
+
     DOMRect: args.snakeDOMRect,
     windowWidth: window.innerWidth,
     windowHeight: window.innerHeight,
+  const snakeGame = new SnakeGame({
+    root:root,
+    cellWidth: Math.floor(args.DOMRect.width) / (args.snakeText.length - 'snake'.length),
+    cellHeight: Math.floor(args.DOMRect.height),
+    cellHeightCount: 
+
+    
+    players: [{
+      username: 'dlipko',
+      snake: {
+        text: 'dlipko',
+        segments: [],
+      }
+      
+    },
+    {
+      username: 'bozaro',
+      snake: {
+        text: 'bozaro',
+        segments: [{ x: 30, y: 40, letter: 'e' },
+                  { x: 30, y: 41, letter: 'b' },
+                  { x: 30, y: 42, letter: 'a' }],
+      }
+    }],
+
+    foods: [],
+
   });
 });
