@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 
@@ -19,6 +20,10 @@ module.exports = {
       cacheDirectory: 'node_modules/.cache/',
     }),
   ],
+
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
 
   module: {
     rules: [
