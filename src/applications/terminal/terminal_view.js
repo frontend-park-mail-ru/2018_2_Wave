@@ -23,6 +23,11 @@ class TerminalView extends BaseView {
     if (!this.input) return null;
     const { value } = this.input;
 
+    const line = this.input.parentElement;
+    line.removeChild(this.input);
+    line.innerHTML += messageTemplate({ string: value });
+    this.input = null;
+
     return value;
   }
 
