@@ -19,6 +19,14 @@ class TerminalView extends BaseView {
   }
 
 
+  processInput() {
+    if (!this.input) return null;
+    const { value } = this.input;
+
+    return value;
+  }
+
+
   printString(string) {
     if (!this.rendered) this.render();
 
@@ -30,9 +38,9 @@ class TerminalView extends BaseView {
     if (!this.rendered) this.render();
 
     this.terminal.innerHTML += inputTemplate({ intro });
-    const [input] = this.terminal.getElementsByClassName('terminal__input');
-    input.focus();
-    input.select();
+    [this.input] = this.terminal.getElementsByClassName('terminal__input');
+    this.input.focus();
+    this.input.select();
   }
 }
 
