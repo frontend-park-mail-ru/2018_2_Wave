@@ -1,5 +1,5 @@
 @import url(
-  https://fonts.googleapis.com/css?family=Roboto+Mono:400&subset=cyrillic
+  https://fonts.googleapis.com/css?family=Roboto+Mono:300&subset=cyrillic
 );
 
 body {
@@ -30,5 +30,6 @@ body {
   font-size: inherit;
   outline: none;
 
+  padding: 0;
   width: 100%;
 }
