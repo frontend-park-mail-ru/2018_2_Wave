@@ -21,7 +21,7 @@ class TerminalApp {
     switch (ev.keyCode) {
       case 13:  // enter
         ev.preventDefault();
-        this.enterPressed();
+        this.readInput();
         break;
       default:
         break;
@@ -29,9 +29,9 @@ class TerminalApp {
   }
 
 
-  // enterPressed() {
-
-  // }
+  readInput() {
+    console.log(this.view.processInput());
+  }
 
 
   /*  terminal commands  */
@@ -55,13 +55,13 @@ class TerminalApp {
     const intro = 'stanford@rasseki:~/$';
     this.view.addInput(intro);
     Object.keys(this.listeners).forEach((key) => {
-      document.addEventListener(key, this.listeners[key]);
+      document.addEventListener(key, this.listeners[key].bind(this));
     });
   }
 
   stop() {
     Object.keys(this.listeners).forEach((key) => {
-      document.removeEventListener(key, this.listeners[key]);
+      document.removeEventListener(key, this.listeners[key].bind(this));
     });
   }
 }
