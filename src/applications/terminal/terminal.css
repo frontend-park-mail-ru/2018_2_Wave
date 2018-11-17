@@ -17,10 +17,6 @@ body {
   white-space: pre;
 }
 
-.last {
-  width: 100%;
-}
-
 .terminal__input {
   background: none;
   user-select: none;
