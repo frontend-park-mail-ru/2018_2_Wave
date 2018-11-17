@@ -6,6 +6,7 @@ export default class BaseView {
     this.wrapper.classList.add('wrapper');
     this.wrapper.hidden = true;
     this.single = false;
+    // if true, we hide all other views when this one is active
   }
 
 
@@ -24,10 +25,11 @@ export default class BaseView {
 
   show() {
     this.wrapper.hidden = false;
-    // if (!this.rendered) {
-    //   // TODO: show skeleton:
-    //   // t.me/uxlive/6566
-    // }
+    if (!this.rendered) {
+      // TODO: show skeleton:
+      // t.me/uxlive/6566
+      this.render();
+    }
   }
 
 
