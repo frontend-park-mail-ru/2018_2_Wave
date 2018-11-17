@@ -1,0 +1,34 @@
+@import url(
+  https://fonts.googleapis.com/css?family=Roboto+Mono:400&subset=cyrillic
+);
+
+body {
+  background: black;
+}
+
+.terminal {
+  background: black;
+  color: chartreuse;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.terminal_line {
+  display: flex;
+  white-space: pre;
+}
+
+.last {
+  width: 100%;
+}
+
+.terminal__input {
+  background: none;
+  user-select: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+
+  width: 100%;
+}
