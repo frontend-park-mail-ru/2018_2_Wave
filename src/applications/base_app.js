@@ -11,12 +11,13 @@ export default class BaseApp {
     }
 
     this.active = false;
+    this.started = false;
   }
 
 
   changeView(viewName) {
-    // анимульки смены вьюх писать в переопределённом методе,
-    // не забыв вызвать super.changeView()
+    // write view change animations in overridden method
+    // do not forget to call super.changeView() first!
     if (!this.views.hasOwnProperty(viewName)) {
       console.error('No such view');
       return;
@@ -28,11 +29,13 @@ export default class BaseApp {
 
 
   start() {
+    this.started = true;
     this.active = true;
     this.currentView.show();
   }
 
   stop() {
+    this.started = false;
     this.active = false;
     this.currentView.hide();
     this.parent.innerHTML = '';
@@ -44,6 +47,10 @@ export default class BaseApp {
   }
 
   resume() {
+    if (!this.started) {
+      this.start();
+      return;
+    }
     this.active = true;
     this.currentView.show();
   }
