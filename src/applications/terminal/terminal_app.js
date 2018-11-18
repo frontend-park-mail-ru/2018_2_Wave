@@ -1,10 +1,10 @@
 import TerminalView from './terminal_view';
+import BaseApp from '../base_app';
 
 
-class TerminalApp {
+class TerminalApp extends BaseApp {
   constructor(parent) {
-    this.parent = parent;
-    this.view = new TerminalView(parent);
+    super(parent, TerminalView);
 
     this.intro = 'stanford@rasseki:~/$';
 
@@ -19,71 +19,46 @@ class TerminalApp {
     };
 
     this.commandHistory = [];
+  }
 
-    this.active = false;
+  get view() {
+    // this app has only one view
+    // and this is current
+    return this.currentView;
+  }
+
+  /**  terminal DOM element  */
+  get terminal() {
+    return this.view.terminal;
   }
 
 
-  /*  service methods  */
+  /*   service methods   */
   start() {
-    this.resume();
+    super.start();
+    this.addListeners();
     this.view.printString('Hello!');
     this.view.addInput(this.intro);
   }
 
   stop() {
-    this.pause();
+    super.stop();
+    this.removeListeners();
     this.commandHistory = [];
   }
 
   pause() {
-    this.active = false;
-    this.view.hide();
-    Object.keys(this.listeners).forEach((key) => {
-      this.view.removeEventListener(key, this.listeners[key].bind(this));
-    });
+    super.resume();
+    this.removeListeners();
   }
 
   resume() {
-    this.active = true;
-    this.view.show();
-    Object.keys(this.listeners).forEach((key) => {
-      this.view.addEventListener(key, this.listeners[key].bind(this));
-    });
+    super.resume();
+    this.addListeners();
   }
 
 
-  /*   handlers   */
-  handleKeypress(ev) {
-    switch (ev.keyCode) {
-      case 13:  // enter
-        ev.preventDefault();
-        this.handleCommand();
-        break;
-      default:
-        break;
-    }
-  }
-
-  handleCommand() {
-    const command = this.view.processInput();
-
-    if (command) {
-      if (this.commands.hasOwnProperty(command)) {
-        this.commands[command].call(this);
-      } else {
-        this.view.printString();
-        this.view.printString(`${command}: command not found`);
-        this.view.printString();
-      }
-      this.commandHistory.push(command);
-    }
-
-    this.view.addInput(this.intro);
-  }
-
-
-  /*  terminal commands  */
+  /*   terminal commands   */
   help() {
     Object.keys(this.commands).forEach((key) => {
       this.view.printString(key);
@@ -98,6 +73,48 @@ class TerminalApp {
 
   clear() {
     this.view.clear();
+  }
+
+
+  /*   handlers and listeners   */
+  handleKeypress(ev) {
+    switch (ev.keyCode) {
+      case 13:  // enter
+        ev.preventDefault();
+        this.handleCommand();
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**  reads and process command from input  */
+  handleCommand() {
+    const command = this.view.processInput();
+
+    if (command) {
+      if (this.commands.hasOwnProperty(command)) {
+        this.commands[command].call(this);
+      } else {
+        this.view.printString();
+        this.view.printString(`${command}: command not found`);
+        this.view.printString();
+      }
+      this.commandHistory.push(command);
+    }
+    this.view.addInput(this.intro);
+  }
+
+  removeListeners() {
+    Object.keys(this.listeners).forEach((key) => {
+      this.terminal.removeEventListener(key, this.listeners[key].bind(this));
+    });
+  }
+
+  addListeners() {
+    Object.keys(this.listeners).forEach((key) => {
+      this.terminal.addEventListener(key, this.listeners[key].bind(this));
+    });
   }
 }
 
