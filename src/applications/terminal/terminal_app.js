@@ -1,11 +1,15 @@
 import TerminalView from './terminal_view';
 
+
 class TerminalApp {
-  constructor() {
-    this.view = new TerminalView(document.body);  // FIXME:
+  constructor(parent) {
+    this.parent = parent;
+    this.view = new TerminalView(parent);
+
+    this.intro = 'stanford@rasseki:~/$';
 
     this.listeners = {
-      keydown: this.handle,
+      keydown: this.handleKeypress,
     };
 
     this.commands = {
@@ -16,11 +20,41 @@ class TerminalApp {
 
     this.commandHistory = [];
 
-    this.intro = 'stanford@rasseki:~/$';
+    this.active = false;
   }
 
 
-  handle(ev) {
+  /*  service methods  */
+  start() {
+    this.resume();
+    this.view.printString('Hello!');
+    this.view.addInput(this.intro);
+  }
+
+  stop() {
+    this.pause();
+    this.commandHistory = [];
+  }
+
+  pause() {
+    this.active = false;
+    this.view.hide();
+    Object.keys(this.listeners).forEach((key) => {
+      this.view.removeEventListener(key, this.listeners[key].bind(this));
+    });
+  }
+
+  resume() {
+    this.active = true;
+    this.view.show();
+    Object.keys(this.listeners).forEach((key) => {
+      this.view.addEventListener(key, this.listeners[key].bind(this));
+    });
+  }
+
+
+  /*   handlers   */
+  handleKeypress(ev) {
     switch (ev.keyCode) {
       case 13:  // enter
         ev.preventDefault();
@@ -30,7 +64,6 @@ class TerminalApp {
         break;
     }
   }
-
 
   handleCommand() {
     const command = this.view.processInput();
@@ -59,29 +92,12 @@ class TerminalApp {
 
   history() {
     this.commandHistory.forEach((command) => {
-      this.view.printString(`* ${command}`);
+      this.view.printString(` * ${command}`);
     });
   }
 
   clear() {
     this.view.clear();
-  }
-
-
-  /*  service methods  */
-  start() {
-    this.view.show();
-    this.view.printString('Hello!');
-    this.view.addInput(this.intro);
-    Object.keys(this.listeners).forEach((key) => {
-      document.addEventListener(key, this.listeners[key].bind(this));
-    });
-  }
-
-  stop() {
-    Object.keys(this.listeners).forEach((key) => {
-      document.removeEventListener(key, this.listeners[key].bind(this));
-    });
   }
 }
 
