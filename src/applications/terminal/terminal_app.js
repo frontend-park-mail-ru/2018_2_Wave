@@ -11,9 +11,12 @@ class TerminalApp {
     this.commands = {
       help: this.help,
       history: this.history,
+      clear: this.clear,
     };
 
     this.commandHistory = [];
+
+    this.intro = 'stanford@rasseki:~/$';
   }
 
 
@@ -21,7 +24,7 @@ class TerminalApp {
     switch (ev.keyCode) {
       case 13:  // enter
         ev.preventDefault();
-        this.readInput();
+        this.handleCommand();
         break;
       default:
         break;
@@ -29,8 +32,21 @@ class TerminalApp {
   }
 
 
-  readInput() {
-    console.log(this.view.processInput());
+  handleCommand() {
+    const command = this.view.processInput();
+
+    if (command) {
+      if (this.commands.hasOwnProperty(command)) {
+        this.commands[command].call(this);
+      } else {
+        this.view.printString();
+        this.view.printString(`${command}: command not found`);
+        this.view.printString();
+      }
+      this.commandHistory.push(command);
+    }
+
+    this.view.addInput(this.intro);
   }
 
 
@@ -43,17 +59,20 @@ class TerminalApp {
 
   history() {
     this.commandHistory.forEach((command) => {
-      this.view.printString(command);
+      this.view.printString(`* ${command}`);
     });
+  }
+
+  clear() {
+    this.view.clear();
   }
 
 
   /*  service methods  */
   start() {
     this.view.show();
-    this.view.printString('stanford@rasseki:~/$ hello terminal');
-    const intro = 'stanford@rasseki:~/$';
-    this.view.addInput(intro);
+    this.view.printString('Hello!');
+    this.view.addInput(this.intro);
     Object.keys(this.listeners).forEach((key) => {
       document.addEventListener(key, this.listeners[key].bind(this));
     });
