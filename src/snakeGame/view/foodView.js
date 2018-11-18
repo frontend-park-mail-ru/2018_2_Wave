@@ -6,8 +6,8 @@ export default class FoodView {
   }
 
   render() {
-    const x = (this.foodModel.getX() * this.levelModel.getCellSize().getWidth());
-    const y = (this.foodModel.getY() * this.levelModel.getCellSize().getHeight());
+    const x = this.foodModel.x * this.levelModel.cellWidth;
+    const y = this.foodModel.y * this.levelModel.cellHeight;
 
     this.context.beginPath();
     this.context.font = '15px Arial';
@@ -16,7 +16,8 @@ export default class FoodView {
     // this.context.fillText('a', x, y);
     this.context.fillText(this.foodModel.currenLetter, x, y);
 
-    // this.context.fillRect(x, y, this.levelModel.getCellSize().getWidth(), this.levelModel.getCellSize().getHeight());
+    // this.context.fillRect(x, y, this.levelModel.getCellSize().getWidth(),
+    //  this.levelModel.getCellSize().getHeight());
     this.context.closePath();
   }
 }

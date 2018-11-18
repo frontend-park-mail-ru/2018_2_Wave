@@ -19,8 +19,14 @@ class KeyboardController {
       67, // ctrl+c
 
     ];
+  }
 
+  start() {
     document.addEventListener('keydown', this.acceptInput.bind(this));
+  }
+
+  stop() {
+    document.removeEventListener('keydown', this.acceptInput.bind(this));
   }
 
   isControlKey(keyCode) {

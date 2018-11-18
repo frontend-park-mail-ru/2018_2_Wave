@@ -1,14 +1,24 @@
 import SnakeGame from './snakeGame/index';
 import Terminal from './terminal/index';
 
+import Router from './modules/router';
+import bus from './modules/bus';
+
 import terminalTemplate from './terminal/index.pug';
 
 import css from './style.css';
 
-import bus from './modules/bus';
-
 const root = document.getElementsByClassName('root')[0];
 
+const router = new Router(root);
+
+router
+  .register('/', TerminalView)
+  .register('/profile', GameView)
+  .start();
+
+
+/*
 const terminal = () => {
   root.innerHTML = terminalTemplate();
   const myTerm = new Terminal({
@@ -28,8 +38,6 @@ const terminal = () => {
 
 // main.js just fires up the application
 window.addEventListener('load', terminal);
-
-bus.listen('Escape', terminal);
 
 
 bus.listen('snakeGame', (args) => {
@@ -70,3 +78,4 @@ bus.listen('snakeGame', (args) => {
 
   });
 });
+*/
