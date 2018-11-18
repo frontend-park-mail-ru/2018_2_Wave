@@ -19,22 +19,26 @@ class TerminalView extends BaseView {
   }
 
 
+  clear() {
+    this.terminal.innerHTML = '';
+  }
+
+
   processInput() {
     if (!this.input) return null;
     const { value } = this.input;
-
     const line = this.input.parentElement;
+
     line.removeChild(this.input);
     line.innerHTML += messageTemplate({ string: value });
-    this.input = null;
 
+    this.input = null;
     return value;
   }
 
 
   printString(string) {
     if (!this.rendered) this.render();
-
     this.terminal.innerHTML += messageTemplate({ string });
   }
 
