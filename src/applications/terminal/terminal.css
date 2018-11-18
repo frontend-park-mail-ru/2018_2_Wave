@@ -1,5 +1,5 @@
 @import url(
-  https://fonts.googleapis.com/css?family=Cousine:300&subset=cyrillic
+  https://fonts.googleapis.com/css?family=Roboto+Mono:300,cyrillic
 );
 
 body {
@@ -9,7 +9,8 @@ body {
 .terminal {
   background: black;
   color: greenyellow;
-  font-family: 'Cousine', monospace;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
 }
 
 .terminal_line {
