@@ -10,6 +10,7 @@ class TerminalApp extends BaseApp {
 
     this.listeners = {
       keydown: this.handleKeypress,
+      click: this.focusInput,
     };
 
     this.commands = {
@@ -105,15 +106,26 @@ class TerminalApp extends BaseApp {
     this.view.addInput(this.intro);
   }
 
+  focusInput() {
+    console.log('focusing!');
+    const input = this.view.getInput();
+    if (input) {
+      input.focus();
+    }
+  }
+
+
   removeListeners() {
     Object.keys(this.listeners).forEach((key) => {
-      this.terminal.removeEventListener(key, this.listeners[key].bind(this));
+      // FIXME:
+      document./*this.terminal.*/removeEventListener(key, this.listeners[key].bind(this));
     });
   }
 
   addListeners() {
     Object.keys(this.listeners).forEach((key) => {
-      this.terminal.addEventListener(key, this.listeners[key].bind(this));
+      // FIXME:
+      document./*this.terminal.*/addEventListener(key, this.listeners[key].bind(this));
     });
   }
 }
