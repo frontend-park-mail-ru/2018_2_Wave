@@ -19,10 +19,29 @@ class TerminalView extends BaseView {
   }
 
 
+  /*  simple rendering methods  */
   clear() {
     this.terminal.innerHTML = '';
   }
 
+  printString(string) {
+    if (!this.rendered) this.render();
+    const empty = !string || string === '';
+    console.log(empty);
+
+    this.terminal.innerHTML += messageTemplate(
+      { string: empty ? '' : string },
+    );
+  }
+
+
+  /*  working with inputs  */
+  getInput() {
+    if (this.input) return this.input;
+    [this.input] = this.terminal.getElementsByClassName('terminal__input');
+    if (!this.input) return null;
+    return this.input;
+  }
 
   processInput() {
     if (!this.input) return null;
@@ -36,25 +55,12 @@ class TerminalView extends BaseView {
     return value;
   }
 
-
-  printString(string) {
-    if (!this.rendered) this.render();
-    const empty = !string || string === '';
-    console.log(empty);
-
-    this.terminal.innerHTML += messageTemplate(
-      { string: empty ? '' : string },
-    );
-  }
-
-
   addInput(intro) {
     if (!this.rendered) this.render();
 
     this.terminal.innerHTML += inputTemplate({ intro });
     [this.input] = this.terminal.getElementsByClassName('terminal__input');
     this.input.focus();
-    this.input.select();
   }
 }
 
