@@ -1,5 +1,5 @@
 @import url(
-  https://fonts.googleapis.com/css?family=Roboto+Mono:300&subset=cyrillic
+  https://fonts.googleapis.com/css?family=Cousine:300&subset=cyrillic
 );
 
 body {
@@ -8,8 +8,8 @@ body {
 
 .terminal {
   background: black;
-  color: chartreuse;
-  font-family: 'Roboto Mono', monospace;
+  color: greenyellow;
+  font-family: 'Cousine', monospace;
 }
 
 .terminal_line {
