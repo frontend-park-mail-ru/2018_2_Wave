@@ -39,7 +39,12 @@ class TerminalView extends BaseView {
 
   printString(string) {
     if (!this.rendered) this.render();
-    this.terminal.innerHTML += messageTemplate({ string });
+    const empty = !string || string === '';
+    console.log(empty);
+
+    this.terminal.innerHTML += messageTemplate(
+      { string: empty ? '' : string },
+    );
   }
 
 
