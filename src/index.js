@@ -1,20 +1,12 @@
-import SnakeGame from './snakeGame/index';
-import Terminal from './terminal/index';
-
 import Router from './modules/router';
-import bus from './modules/bus';
-
-import terminalTemplate from './terminal/index.pug';
-
-import css from './style.css';
+import GameView from './snakeGame/view/gameView';
 
 const root = document.getElementsByClassName('root')[0];
 
 const router = new Router(root);
 
 router
-  .register('/', TerminalView)
-  .register('/profile', GameView)
+  .register('/', GameView)
   .start();
 
 

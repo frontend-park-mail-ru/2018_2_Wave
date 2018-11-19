@@ -19,56 +19,56 @@ export default class OfflineGame extends GameCore {
     this.windowHeight = args.windowHeight;
     this.widthCellCount = Math.floor(this.windowWidth / this.cellWidth);
     this.heightCellCount = Math.floor(this.windowHeight / this.cellHeight);
-    this.root = args.root;
-    this.root.innerHTML = snakeTemplate();
-    this.canvas = new Canvas();
 
-    this.keyboardController = keyboardController;
+    this.controller = controller;
     this.busController = busController;
 
     // for pause
     // this.paused = true;
     this.paused = false;
 
-    this.directions = {
-      Up: 'UP',
-      Down: 'DOWN',
-      Left: 'LEFT',
-      Right: 'RIGHT',
-    };
-
     // for pause
     this.eventsMethods = {
       Space: this.pause.bind(this),
     };
 
-
-    setRequestAnimationFrame();
-
-    this.init();
-
-
+    this.start();
   }
 
   start() {
     super.start();
-    this.state = {
-      bullets: [],
-      me: {
-        coll: 2,
-      },
-    };
 
-    this.state.items = Array.from(new Array(3 * 5), (_, position) => ({
-      coll: position % 5,
-      row: position < 5 ? 0 : (position / 5) | 0,
-      dead: false,
-      fadeSpeed: 0,
-      fadeLevel: 0,
-    }));
+    this.levelModel = new LevelModel(new Size(this.widthCellCount,
+      this.heightCellCount));
+
+    this.levelController = new LevelController(this.levelModel);
+    this.levelView = new LevelView(this.levelModel, this.canvas);
+
+    this.snakeModel = new Snake(this.snakeText, this.startX, this.startY);
+    this.snakeController = new SnakeController(this.snakeModel, this.levelModel);
+    this.snakeView = new SnakeView(this.snakeModel, this.canvas);
+
+
+
+    this.foodModel = new FoodModel();
+    this.foodController = new FoodController(this.foodModel, this.levelModel);
+    this.foodView = new FoodView(this.foodModel, this.canvas);
+
+
+    this.canvas.setSize(new Size(window.innerWidth, window.innerHeight));
+
+    this.audioController = new AudioController();
+
+  
+    // for pause
+    this.update();
+    this.render();
+
+    busController.emit('startGame');
+    this.gameLoop();
 
     setTimeout(() => {
-      bus.emit(events.START_GAME, this.state);
+      this.busController.emit(events.START_GAME, this.state);
     });
   }
 
@@ -129,7 +129,7 @@ export default class OfflineGame extends GameCore {
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
 
-    bus.emit('CLOSE_GAME');
+    this.busCOntroller.emit('CLOSE_GAME');
   }
 
   onGameStateChanged(evt) {

@@ -1,14 +1,14 @@
 export default class FoodView {
-  constructor(foodModel, levelModel, canvas) {
+  constructor(foodModel, canvas) {
     this.foodModel = foodModel;
-    this.levelModel = levelModel;
     this.context = canvas.context;
   }
 
   render() {
-    const x = this.foodModel.x * this.levelModel.cellWidth;
-    const y = this.foodModel.y * this.levelModel.cellHeight;
+    const [x] = this.foodModel;
+    const [y] = this.foodModel;
 
+    // TODO create method for canvas
     this.context.beginPath();
     this.context.font = '15px Arial';
     this.context.fillStyle = '#99ff00';

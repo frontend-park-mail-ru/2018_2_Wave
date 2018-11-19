@@ -4,8 +4,6 @@ import OnlineGame from './core/online';
 import GameScene from './core/gameScene';
 import keyboardController from '../modules/keyboardController';
 
-// keyboard controller
-// import GameControllers from './core/';
 
 export default class Game {
   constructor(mode, canvas) {
@@ -24,9 +22,9 @@ export default class Game {
     }
 
     this.gameScene = new GameScene(canvas);
-    this.keyboardController = keyboardController;
 
-    this.gameCore = new GameConstructor(this.gameControllers, this.gameScene);
+    this.keyboardController = keyboardController;
+    this.gameCore = new GameConstructor(this.keyboardController, this.gameScene);
   }
 
   start() {

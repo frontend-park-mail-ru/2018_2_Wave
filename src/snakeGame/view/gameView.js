@@ -7,14 +7,16 @@ import snakeTemplate from '../index.pug';
 export default class GameView extends BaseView {
   constructor(parent) {
     super(snakeTemplate, parent);
-    this.canvas = null;
     this.game = null;
 
+    // on the future
+    /*
     this.bus.on('CLOSE_GAME', () => {
       if (this.active) {
         this.router.open('/');
       }
     });
+    */
   }
 
   show() {
@@ -31,42 +33,31 @@ export default class GameView extends BaseView {
     return this;
   }
 
-  create(attrs) {
-    super.create(attrs);
-    this.canvas = this.el.querySelector('.js-canvas');
-    this.ctx = this.canvas.getContext('2d');
+  create() {
+    super.create();
 
-    this.doGame(attrs);
+    this.doGame();
     return this;
   }
 
-  doGame(pathname) {
+  doGame() {
     let mode = '';
+    // TODO think about chosing game mode
+    /*
     if (pathname === '/game/online-mode') {
       mode = GAME_MODES.ONLINE;
     } else {
       mode = GAME_MODES.OFFLINE;
     }
-    this.game = new Game(mode, this.canvas);
-    this.game.start();
-  }
+    */
 
-  do7() {
-    const ctx = this.ctx;
-    const canvas = this.canvas;
-    const scene = new Scene(ctx);
-
-    let start = performance.now();
-
-    function render(now) {
-      const delay = (now - start) / 100;
-      start = now;
-
-
-      scene.render();
-      requestAnimationFrame(render);
+    if (navigator.onLine) {
+      mode = GAME_MODES.ONLINE;
+    } else {
+      mode = GAME_MODES.OFFLINE;
     }
 
-    requestAnimationFrame(render);
+    this.game = new Game(mode);
+    this.game.start();
   }
 }

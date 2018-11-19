@@ -1,47 +1,42 @@
 import busController from '../../modules/busController';
+import Canvas from '../utils/canvas';
 
 export default class GameScene {
-  constructor(canvas) {
+  constructor() {
     this.busCOntroller = busController;
-    this.canvas = canvas;
-    const ctx = canvas.getContext('2d');
-    this.ctx = ctx;
+    this.canvas = new Canvas(this.wrapper);
+    this.ctx = this.canvas.context;
     this.state = null;
     this.requestFrameId = null;
 
     this.lastFrameTime = 0;
+    this.id = 0;
 
     this.renderScene = this.renderScene.bind(this);
   }
 
   init(state) {
+
   }
 
-  setState(state) {
-    const scene = this.scene;
+  ID() {
+    this.id += 1;
+    return `#${this.id}`;
+  }
 
-    this.state = state;
+  push(object) {
+    const id = this.ID();
+    this.objects[id] = object;
+    
+    return id;
+  }
 
-    this.me.x = 50 + state.me.coll * 75;
-
-    this.field.forEach((b, pos) => {
-      const item = state.items[pos];
-      if (item.dead && b.id) {
-        scene.remove(b.id);
-        return;
-      }
-
-      if (item.fadeLevel) {
-        if (!b.fadeLevel) {
-          scene.toBack(b.id);
-        }
-
-        b.fadeLevel = item.fadeLevel;
-      }
-    });
+  setState(sceneObjects) {
+    
   }
 
   renderScene(now) {
+    this.backView.forEach(figure => figure.render());
     this.requestFrameId = requestAnimationFrame(this.renderScene);
   }
 

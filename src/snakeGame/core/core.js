@@ -1,7 +1,3 @@
-// import events from 'events';
-// import bus from '../../modules/bus';
-
-import keyboardController from '../../modules/keyboardController';
 import busController from '../../modules/busController';
 
 export default class GameCore {
@@ -9,8 +5,6 @@ export default class GameCore {
     this.controller = controller;
     this.scene = scene;
 
-
-    this.keyboardController = keyboardController;
     this.busController = busController;
 
     // for pause
@@ -31,17 +25,16 @@ export default class GameCore {
       CONTROLS_PRESSED: this.onControllsPressed.bind(this),
       GAME_STATE_CHANGED: this.onGameStateChanged.bind(this),
     };
-
-    this.busController.setBusListeners(this.eventsMethods);
   }
 
   start() {
+    this.busController.setBusListeners(this.eventsMethods);
   }
 
   destroy() {
     busController.removeBusListeners(this.eventsMethods);
 
-    this.controller.destroy();
+    this.controller.stop();
     this.scene.stop();
   }
 
@@ -59,9 +52,5 @@ export default class GameCore {
 
   onGameStateChanged(evt) {
     throw new Error('This method must be overridden');
-  }
-
-  _pressed(name, data) {
-    return KEYS[name].some(k => data[k.toLowerCase()]);
   }
 }
