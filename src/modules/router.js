@@ -67,20 +67,22 @@ export default class Router {
 
 
   open(path) {
-    console.log(path);
+    const { app: appName, view, params } = processPath(path);
 
-    let { app, view, params } = processPath(path);
-    console.log({ app, view, params });
+    let app;
+    if (!appName) app = this.routes['/'];
+    else if (!this.routes.hasOwnProperty(appName)) {
+      this.open('/');
+      return;
+    } else app = this.routes[appName];
 
-    if (!app) app = this.routes['/'];
-    else if (!this.routes.hasOwnProperty(app)) {
-      app = this.routes['/'];
-      view = null;
-      params = null;
-    } else app = this.routes[app];
-
-    if (view && app.views.hasOwnProperty(view)) {
-      app.changeView(view, params);
+    if (view) {
+      if (app.views.hasOwnProperty(view)) {
+        app.changeView(view, params);
+      } else {
+        this.open(appName);
+        return;
+      }
     }
 
     if (!app.active) {
@@ -103,6 +105,10 @@ export default class Router {
 
 
   start() {
+    if (!this.routes.hasOwnProperty('/')) {
+      throw new Error('No main app!');
+    }
+
     this.open(
       window.location.pathname
       + window.location.search,
