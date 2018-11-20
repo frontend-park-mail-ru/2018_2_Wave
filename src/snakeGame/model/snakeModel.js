@@ -23,7 +23,18 @@ export default class SnakeModel {
     this.direction = this.directions.RIGHT;
 
     this.destroyed = false;
-    this.score     = 0;
+  }
+
+  init({
+    segments,
+    snakeText,
+    startPosition,
+    destroyed,
+  }) {
+    this.segments = segments;
+    this.snakeText = snakeText;
+    this.startPosition = startPosition;
+    this.destroyed = destroyed;
   }
 
   getSegments() {

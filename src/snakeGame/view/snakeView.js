@@ -1,20 +1,22 @@
 export default class SnakeView {
-  constructor(snakeModel, canvas) {
-    this.context = canvas.getContext();
+  constructor(snakeModel) {
     this.snakeModel = snakeModel;
   }
 
-  render() {
-    // TODO mpve tocanvas
-    this.context.font = '15px Arial';
-    this.context.fillStyle = '#99ff00';
+  render(canvas) {
+    const font = 'Arial';
+    const size = 15;
+    const fillStyle = '#99ff00';
 
     this.snakeModel.getSegments().forEach((segment) => {
-      this.context.fillText(
-        segment.letter,
-        segment.x,
-        segment.y,
-      );
+      canvas.drawLetter({
+        font,
+        size,
+        fillStyle,
+        x: segment.x,
+        y: segment.y,
+        letter: segment.letter,
+      });
     });
   }
 }

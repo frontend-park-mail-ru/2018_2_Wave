@@ -2,11 +2,9 @@ import Position from './position';
 import Size from './size';
 
 export default class levelModel {
-  constructor(size, cellWidth, cellHeight) {
+  constructor(size) {
     this.size = size;
-    this.cellWidth = cellWidth;
-    this.cellHeight = cellHeight;
-    this.map = new Array(this.size.getWidth() * this.size.getHeight()).fill(0);
+    this.map = new Array(this.size.width * this.size.height).fill(0);
   }
 
   setFood(position) {
@@ -31,14 +29,6 @@ export default class levelModel {
 
   getCellSize() {
     return new Size(this.cellWidth, this.cellHeight);
-  }
-
-  getCellWidth() {
-    return this.cellWidth;
-  }
-
-  getCellHeight() {
-    return this.cellHeight;
   }
 
   index(place) {
