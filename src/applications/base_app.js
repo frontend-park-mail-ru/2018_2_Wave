@@ -1,5 +1,6 @@
 export default class BaseApp {
-  constructor(parent, MainView, Views) {
+  constructor(appURL, parent, MainView, Views) {
+    this.url = appURL;
     this.parent = parent;
     this.views = { main: new MainView(this.parent) };
     this.currentView = this.views.main;
@@ -15,15 +16,18 @@ export default class BaseApp {
   }
 
 
-  changeView(viewName) {
+  changeView(viewUrl, params) {
     // write view change animations in overridden method
     // do not forget to call super.changeView() first!
-    if (!this.views.hasOwnProperty(viewName)) {
-      console.error('No such view');
-      return;
-    }
     this.currentView.hide();
-    this.currentView = this.views[viewName];
+    if (!this.views.hasOwnProperty(viewUrl)) {
+      console.error('No such view');
+      this.currentView = this.views.main;
+    } else {
+      this.currentView = this.views[viewUrl];
+    }
+
+    this.currentView.render(params);
     if (this.active) this.currentView.show();
   }
 
