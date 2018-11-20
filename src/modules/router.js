@@ -43,16 +43,11 @@ export default class Router {
   constructor(root) {
     this.routes = {};
     this.root = root;
-
-    // this.enviromentElem = document.createElement('div');
-    // this.enviromentElem.classList.add('enviroment');
-    // this.root.appendChild(this.enviromentElem);
-
-    // this.contentElem = document.createElement('div');
-    // this.contentElem.classList.add('content');
-    // this.root.appendChild(this.contentElem);
   }
 
+  // TODO: write this method
+  // TODO: grant some previleges to main app
+  // TODO: get wrapper-div from main app
 
   // setMainApp(App) {
   //   this.enviroment = new View(this.enviromentElem);
@@ -61,6 +56,7 @@ export default class Router {
 
   registerApp(url, App) {
     const app = new App(url, this.root);
+    // TODO: create app object only when app opens
     this.routes[url] = app;
     return this;
   }
