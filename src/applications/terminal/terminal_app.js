@@ -3,8 +3,8 @@ import BaseApp from '../base_app';
 
 
 class TerminalApp extends BaseApp {
-  constructor(parent) {
-    super(parent, TerminalView);
+  constructor(url, parent) {
+    super(url, parent, TerminalView);
 
     this.intro = 'stanford@rasseki:~/$';
 
