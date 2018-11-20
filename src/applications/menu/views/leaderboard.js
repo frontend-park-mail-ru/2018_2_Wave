@@ -1,5 +1,5 @@
 import { getLeaders } from '../../modules/network';
-import BaseView from '../baseview';
+import BaseView from '../../baseview';
 import './leaderboard.css';
 
 const template = require('./leaderboard.pug');
@@ -8,11 +8,6 @@ const template = require('./leaderboard.pug');
 export default class LeaderboardView extends BaseView {
   constructor(parent) {
     super(template, parent);
-  }
-
-  show({ page = 1, count = 1 } = {}) {
-    super.show();
-    this.render(page, count);
   }
 
   // TODO: FIXME: check order!!!
