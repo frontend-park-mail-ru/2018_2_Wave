@@ -1,4 +1,4 @@
-import BaseView from '../../views/baseview';
+import BaseView from '../base_view';
 
 import terminalTemplate from './templates/terminal.pug';
 import messageTemplate from './templates/message.pug';
