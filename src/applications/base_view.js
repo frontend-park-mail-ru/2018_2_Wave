@@ -5,8 +5,8 @@ export default class BaseView {
     this.wrapper  = document.createElement('div');
     this.wrapper.classList.add('wrapper');
     this.wrapper.hidden = true;
-    this.single = false;
-    // if true, we hide all other views when this one is active
+    this.isPage = true;
+    // has url and isn't enviromental block
   }
 
 
