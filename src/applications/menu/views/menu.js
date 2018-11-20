@@ -1,6 +1,6 @@
-import BaseView from '../baseview';
+import BaseView from '../../base_view';
 
-const template = require('./menu.pug');
+const template = require('../templates/menu.pug');
 
 const buttons = {
   '/play': 'Play',

@@ -1,6 +1,6 @@
-import BaseView from '../baseview';
+import BaseView from '../../base_view';
 
-const template = require('./settings.pug');
+const template = require('../templates/settings.pug');
 
 
 export default class SettingsView extends BaseView {

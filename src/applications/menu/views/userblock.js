@@ -1,14 +1,16 @@
-import userService from '../../modules/userservice';
-import bus from '../../modules/bus';
-import BaseView from '../baseview';
-import './userblock.css';
+import userService from '../../../modules/userservice';
+import bus from '../../../modules/bus';
+import BaseView from '../../base_view';
 
-const template = require('./userblock.pug');
+import '../styles/userblock.css';
+
+const template = require('../templates/userblock.pug');
 
 
 export default class UserblockView extends BaseView {
   constructor(parent) {
     super(template, parent);
+    this.isPage = false;
     bus.listen('userUpdated', this.update.bind(this));
   }
 

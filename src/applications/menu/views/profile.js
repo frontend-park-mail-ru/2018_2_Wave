@@ -1,10 +1,10 @@
-import { logout } from '../../modules/network';
-import userService from '../../modules/userservice';
-import bus from '../../modules/bus';
-import BaseView from '../baseview';
-import './profile.css';
+import { logout } from '../../../modules/network';
+import userService from '../../../modules/userservice';
+import bus from '../../../modules/bus';
+import BaseView from '../../base_view';
+import '../styles/profile.css';
 
-const template = require('./profile.pug');
+const template = require('../templates/profile.pug');
 
 
 export default class ProfileView extends BaseView {

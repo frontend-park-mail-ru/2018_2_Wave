@@ -1,10 +1,10 @@
-import bus from '../../modules/bus';
-import BaseView from '../baseview';
-import { login } from '../../modules/network';
+import bus from '../../../modules/bus';
+import BaseView from '../../base_view';
+import { login } from '../../../modules/network';
 
-import './login.css';
+import '../styles/login.css';
 
-const template = require('./login.pug');
+const template = require('../templates/login.pug');
 
 
 export default class LoginView extends BaseView {

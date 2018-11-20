@@ -1,8 +1,8 @@
-import { getLeaders } from '../../modules/network';
-import BaseView from '../../baseview';
-import './leaderboard.css';
+import { getLeaders } from '../../../modules/network';
+import BaseView from '../../base_view';
+import '../styles/leaderboard.css';
 
-const template = require('./leaderboard.pug');
+const template = require('../templates/leaderboard.pug');
 
 
 export default class LeaderboardView extends BaseView {

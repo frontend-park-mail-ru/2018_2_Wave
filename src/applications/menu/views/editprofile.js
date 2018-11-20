@@ -1,10 +1,9 @@
-import { updateProfile } from '../../modules/network';
-import userService from '../../modules/userservice';
-import bus from '../../modules/bus';
-import BaseView from '../baseview';
-import { validateEdit } from '../validation/validation';
+import { updateProfile } from '../../../modules/network';
+import userService from '../../../modules/userservice';
+import bus from '../../../modules/bus';
+import BaseView from '../../base_view';
 
-const template = require('./editprofile.pug');
+const template = require('../templates/editprofile.pug');
 
 
 export default class ProfileEditView extends BaseView {
@@ -47,8 +46,6 @@ export default class ProfileEditView extends BaseView {
 
       bus.emit('link', '/profile');
       bus.emit('checkUser');
-
-      validateEdit();
     });
   }
 }

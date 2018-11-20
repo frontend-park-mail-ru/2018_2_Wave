@@ -1,9 +1,9 @@
-import { register } from '../../modules/network';
-import bus from '../../modules/bus';
-import BaseView from '../baseview';
-import './registration.css';
+import { register } from '../../../modules/network';
+import bus from '../../../modules/bus';
+import BaseView from '../../base_view';
+import '../styles/registration.css';
 
-const template = require('./register.pug');
+const template = require('../templates/register.pug');
 
 
 export default class RegisterView extends BaseView {
