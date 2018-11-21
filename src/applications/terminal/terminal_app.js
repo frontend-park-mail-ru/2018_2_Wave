@@ -49,7 +49,7 @@ class TerminalApp extends BaseApp {
   }
 
   pause() {
-    super.resume();
+    super.pause();
     this.removeListeners();
   }
 
