@@ -3,17 +3,19 @@ import bus from './busController';
 class KeyboardController {
   constructor() {
     this.controls = [
-      8, // backspace
-      9, // tab
-      13, // enter
-      27, // esc
+      // 8, // backspace
+      // 9, // tab
+      // 13, // enter
+      // 27, // esc
       // 16, // shift
-      32, // space
+      // 32, // space
       37, // left arrow
       38, // up arrow
       39, // right arrow
       40, // down arrow
     ];
+
+    this.lastCommand = undefined;
 
     this.ctrlControl = [
       67, // ctrl+c
@@ -33,19 +35,30 @@ class KeyboardController {
     return (this.controls.indexOf(keyCode) > -1);
   }
 
+  getLastCommand() {
+    const temp = this.lastCommand;
+    this.lastCommand = undefined;
+    return temp;
+  }
+
+  /*
   isInputKey(keyCode) {
     return (keyCode >= 48 && keyCode <= 90 
       || keyCode >= 96 && keyCode <= 111
       || keyCode >= 186 && keyCode <= 222);
   }
+  */
 
+  /*
   isCtrlControl(keyCode) {
     return (this.ctrlControl.indexOf(keyCode) > -1);
   }
+  */
 
   acceptInput(e) {
     const keyCode =  e.which || e.keyCode;
 
+    /*
     if (e.ctrlKey) {
       if (this.isCtrlControl(keyCode)) {
         e.preventDefault();
@@ -53,21 +66,20 @@ class KeyboardController {
       }
       return;
     }
+    */
 
+    /*
     if (this.isInputKey(e.keyCode)) {
       e.preventDefault();
       bus.emit('Input', e.key);
       return;
     }
+    */
 
-    if (this.isControlKey(e.keyCode)) {
+    if (this.isControlKey(keyCode)) {
       e.preventDefault();
-      if (e.keyCode === 32) { // space
-        bus.emit(e.code);
-        bus.emit('Input', ' ');
-      } else {
-        bus.emit(e.key);
-      }
+      bus.emit(e.key);
+      this.lastCommand = e.key;
     }
   }
 }

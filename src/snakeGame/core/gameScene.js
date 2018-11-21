@@ -2,8 +2,8 @@
 import Canvas from '../utils/canvas';
 
 export default class GameScene {
-  constructor(windowSize, cellSize) {
-    this.canvas = new Canvas(this.wrapper, cellSize);
+  constructor(root, windowSize, cellSize) {
+    this.canvas = new Canvas(root, cellSize);
     this.canvas.setSize(windowSize);
 
     this.state = null;
@@ -11,6 +11,7 @@ export default class GameScene {
 
     this.lastFrameTime = 0;
     this.id = 0;
+    this.views = [];
 
     this.renderScene = this.renderScene.bind(this);
   }

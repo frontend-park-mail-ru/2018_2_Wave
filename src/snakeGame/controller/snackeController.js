@@ -13,6 +13,14 @@ export default class SnakeController {
       RIGHT: 'RIGHT',
     };
 
+    this.keyboardDirections = {
+      ArrowUp: 'UP',
+      ArrowDown: 'DOWN',
+      ArrowLeft: 'LEFT',
+      ArrowRight: 'RIGHT',
+    };
+
+    /*
     this.eventsMethods = {
       ArrowUp: _ => this.setDirection(this.directions.UP),
       ArrowDown: _ => this.setDirection(this.directions.DOWN),
@@ -21,7 +29,7 @@ export default class SnakeController {
     };
 
     this.setEventListeners();
-    this.initSnake();
+    */
   }
 
 
@@ -29,29 +37,20 @@ export default class SnakeController {
     this.busController.setBusListeners(this.eventsMethods);
   }
 
-  setDirection(direction) {
-    /*
-    if (this.snakeModel.isOpositDirection(direction)) {
-      this.snakeModel.turnAround();
-    }
-    */
-    this.snakeModel.setDirection(direction);
+  setDirection(keyboardDirection) {
+    this.snakeModel.setDirection(this.keyboardDirections[keyboardDirection]);
   }
 
-  initSnake() {
-    console.log('init1', this.snakeModel.getSegments());
+  init() {
     const snakeText = this.snakeModel.getSnakeText();
     for (let i = 0; i < snakeText.length; i += 1) {
-      console.log('init snake', this.snakeModel.getStartPosition().x + i,
-                                this.snakeModel.getStartPosition().y,
-                                snakeText[i]);
       this.snakeModel.unshiftSegment({
         x: this.snakeModel.getStartPosition().x + i,
         y: this.snakeModel.getStartPosition().y,
         letter: snakeText[i],
       });
     }
-    console.log('init', this.snakeModel.getSegments());
+    console.log('head init', this.snakeModel.getSegments()[0]);
   }
 
   findEmptyPlace() {
@@ -91,22 +90,20 @@ export default class SnakeController {
     }
 
 
-    /*
     // wrap around the world, x-axis first
-    if (newX >= this.levelModel.getWidth() * this.levelModel.getCellSize().getWidth()) {
+    if (newX >= this.levelModel.getWidth()) {
       newX = 0;
     } else if (newX < 0) {
-      newX = (this.levelModel.getWidth() * this.levelModel.getCellSize().getWidth() - 1);
+      newX = this.levelModel.getWidth() - 1;
     }
 
 
     // y-axis
-    if (newY >= this.levelModel.getHeight() * this.levelModel.getCellSize().getHight()) {
+    if (newY >= this.levelModel.getHeight()) {
       newY = 0;
     } else if (newY < 0) {
-      newY = (this.levelModel.getHeight() * this.levelModel.getCellSize().getHight() - 1);
+      newY = this.levelModel.getHeight() - 1;
     }
-    */
 
     if (this.isColisionWithFood(new Position(newX, newY))) {
       console.log('collision');
@@ -120,11 +117,9 @@ export default class SnakeController {
 
     let temp = 'tempValue';
 
-    console.log(this.snakeModel.getSegments());
-
     const segments = this.snakeModel.getSegments();
     for (let i = segments.length - 1; i >= 0; i -= 1) {
-      const letter = segments[i].letter;
+      const { letter } = segments[i];
       segments[i].letter = temp;
       temp = letter;
     }
@@ -132,7 +127,7 @@ export default class SnakeController {
     this.snakeModel.popSegment();
 
 
-    // console.log(this.snakeModel.getSegments());
+    console.log('newhead', this.snakeModel.getSegments()[0]);
 
     /*
     const position = new Position(newX, newY);

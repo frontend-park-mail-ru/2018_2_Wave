@@ -1,9 +1,23 @@
 import GameCore from './core';
 import events from './events';
 import busController from '../../modules/busController';
+import Size from '../model/size';
+
+import LevelController from '../controller/levelController';
+import SnakeController from '../controller/snackeController';
+import FoodController from '../controller/foodController';
+import AudioController from '../controller/audioController';
+
+import LevelView from '../view/levelView';
+import SnakeView from '../view/snakeView';
+import FoodView from '../view/foodView';
+
+import LevelModel from '../model/levelModel';
+import SnakeModel from '../model/snakeModel';
+import FoodModel from '../model/foodModel';
 
 export default class OfflineGame extends GameCore {
-  constructor(controller, scene) {
+  constructor(controller, scene, gameInitData) {
     super(controller, scene);
 
     this.state = {};
@@ -11,113 +25,73 @@ export default class OfflineGame extends GameCore {
     this.gameloopRequestId = null;
     this.lastFrame = 0;
 
-    this.snakeText = args.snakeText;
-    this.DOMRect = args.DOMRect;
-    this.cellWidth = args.cellWidth;
-    this.cellHeight = args.cellHeight;
-    this.windowWidth = args.windowWidth;
-    this.windowHeight = args.windowHeight;
-    this.widthCellCount = Math.floor(this.windowWidth / this.cellWidth);
-    this.heightCellCount = Math.floor(this.windowHeight / this.cellHeight);
+    this.snakeText = gameInitData.snakeText;
+    // this.DOMRect = gameInitData.DOMRect;
+    this.startX = gameInitData.DOMRect.x;
+    this.startY = gameInitData.DOMRect.y;
 
-    this.controller = controller;
+    this.cellCount = gameInitData.cellCount;
+
+    this.scene = scene;
+    this.keyboardController = controller;
     this.busController = busController;
 
-    // for pause
-    // this.paused = true;
-    this.paused = false;
+    this.controllers = [];
 
-    // for pause
-    this.eventsMethods = {
-      Space: this.pause.bind(this),
-    };
 
-    this.start();
+    this.level = new LevelModel(this.cellCount);
+
+    this.levelController = new LevelController(this.level);
+    this.controllers.push(this.levelController);
+    this.scene.push(new LevelView(this.level));
+
+    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY);
+    this.snakeController = new SnakeController(this.snake, this.level);
+    this.controllers.push(this.snakeController);
+    this.scene.push(new SnakeView(this.snake));
+
+    this.food = new FoodModel();
+    this.foodController = new FoodController(this.food, this.level);
+    this.controllers.push(this.foodController);
+    this.scene.push(new FoodView(this.food));
+
+    // this.audioController = new AudioController();
   }
 
   start() {
     super.start();
 
-    this.levelModel = new LevelModel(new Size(this.widthCellCount,
-      this.heightCellCount));
-
-    this.levelController = new LevelController(this.levelModel);
-    this.levelView = new LevelView(this.levelModel, this.canvas);
-
-    this.snakeModel = new Snake(this.snakeText, this.startX, this.startY);
-    this.snakeController = new SnakeController(this.snakeModel, this.levelModel);
-    this.snakeView = new SnakeView(this.snakeModel, this.canvas);
-
-
-
-    this.foodModel = new FoodModel();
-    this.foodController = new FoodController(this.foodModel, this.levelModel);
-    this.foodView = new FoodView(this.foodModel, this.canvas);
-
-
-    this.canvas.setSize(new Size(window.innerWidth, window.innerHeight));
-
-    this.audioController = new AudioController();
-
-  
-    // for pause
-    this.update();
-    this.render();
-
-    busController.emit('startGame');
-    this.gameLoop();
+    this.controllers.forEach(controller => controller.init());
 
     setTimeout(() => {
-      this.busController.emit(events.START_GAME, this.state);
+      this.busController.emit(events.START_GAME);
     });
   }
 
   onGameStarted(evt) {
-    this.controller.start();
-    this.scene.init(evt);
+    // this.scene.init(evt);
     this.scene.start();
 
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
 
+  update() {
+    this.controllers.forEach(controller => controller.update());
+  }
+
   gameloop(now) {
     const delay = now - this.lastFrame;
     this.lastFrame = now;
 
-    this.state.bullets = this.state.bullets
-      .map((bullet) => {
-        bullet.percents += 0.02;
-        return bullet;
-      })
-      .filter((bullet) => {
-        if (bullet.percents >= 1 && bullet.row >= 0) {
-          this.state.items[bullet.row * 5 + bullet.coll].fadeSpeed = rand(10, 20) / 1000;
-          return false;
-        }
-
-        return bullet.percents < 1;
-      });
-
-    this.state.items = this.state.items.map((item) => {
-      if (item.fadeSpeed) {
-        item.fadeLevel += item.fadeSpeed;
-      }
-
-      if (item.fadeLevel >= 1) {
-        item.dead = true;
-      }
-
-      return item;
-    });
-
-    bus.emit(events.GAME_STATE_CHANGED, this.state);
-
-    if (!this.state.items.find(item => !item.dead)) {
-      setTimeout(() => {
-        bus.emit(events.FINISH_GAME);
-      });
+    if (this.keyboardController.lastCommand) {
+      this.snakeController.setDirection(this.keyboardController.getLastCommand());
     }
+
+    this.update();
+
+    busController.emit(events.GAME_STATE_CHANGED);
+    // check if dead
 
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
@@ -128,11 +102,6 @@ export default class OfflineGame extends GameCore {
 
   onGameFinished(evt) {
     cancelAnimationFrame(this.gameloopRequestId);
-
-    this.busCOntroller.emit('CLOSE_GAME');
-  }
-
-  onGameStateChanged(evt) {
-    this.scene.setState(evt);
+    this.busController.emit('CLOSE_GAME');
   }
 }

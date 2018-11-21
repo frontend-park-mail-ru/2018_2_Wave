@@ -27,8 +27,11 @@ export default class LevelController {
     this.levelModel.setFood(position);
   }
 
-  generateLevel() {
+  init() {
+    this.generateLevel();
+  }
 
+  generateLevel() {
     /*
     const levelHeight = this.levelModel.getHeight();
     const levelWidth = this.levelModel.getWidth();

@@ -39,7 +39,7 @@ export default class Router {
         if (view.active) view.hide();
       });
       currentView.show(params);
-      currentView.ctreate(path);
+      currentView.create(path);
     }
 
     this.routes[path] = currentView;

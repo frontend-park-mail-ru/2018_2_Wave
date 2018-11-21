@@ -34,7 +34,7 @@ export default class GameView extends BaseView {
   }
 
   create() {
-    super.create();
+    // super.create();
 
     this.doGame();
     return this;
@@ -57,7 +57,19 @@ export default class GameView extends BaseView {
       mode = GAME_MODES.OFFLINE;
     }
 
-    this.game = new Game(mode);
+    const gameInitData = {
+      snakeText: 'qwertyuiop',
+      DOMRect: {
+        x: 10,
+        y: 10,
+        width: 120,
+        height: 18,
+      },
+      windowWidth: 1300,
+      windowHeight: 700,
+    };
+
+    this.game = new Game(mode, this.wrapper, gameInitData);
     this.game.start();
   }
 }

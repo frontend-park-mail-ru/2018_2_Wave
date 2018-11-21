@@ -8,7 +8,7 @@ export default class FoodModel {
     life = 30000,
     birth = Date.now(),
     age = 0,
-    type = 1,
+    type = 3,
     currentLetter = this.foods[Math.floor(Math.random() * this.foods.length)],
   }) {
     this.life = life;
@@ -30,7 +30,7 @@ export default class FoodModel {
     return this.type;
   }
 
-  setFoodPosition(position) {
+  setPosition(position) {
     const letterIndex = Math.floor(Math.random() * this.foods.length);
     this.currentLetter = this.foods[letterIndex];
     this.position = position;

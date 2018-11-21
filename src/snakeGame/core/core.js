@@ -22,8 +22,8 @@ export default class GameCore {
     // TODO add variable from events
       START_GAME: this.onGameStarted.bind(this),
       FINISH_GAME: this.onGameFinished.bind(this),
-      CONTROLS_PRESSED: this.onControllsPressed.bind(this),
-      GAME_STATE_CHANGED: this.onGameStateChanged.bind(this),
+      // CONTROLS_PRESSED: this.onControllsPressed.bind(this),
+      // GAME_STATE_CHANGED: this.onGameStateChanged.bind(this),
     };
   }
 
@@ -38,9 +38,11 @@ export default class GameCore {
     this.scene.stop();
   }
 
+  /*
   onControllsPressed(evt) {
     throw new Error('This method must be overridden');
   }
+  */
 
   onGameStarted(evt) {
     throw new Error('This method must be overridden');
@@ -50,7 +52,9 @@ export default class GameCore {
     throw new Error('This method must be overridden');
   }
 
+  /*
   onGameStateChanged(evt) {
     throw new Error('This method must be overridden');
   }
+  */
 }

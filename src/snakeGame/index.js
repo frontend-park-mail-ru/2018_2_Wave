@@ -8,11 +8,12 @@ import Size from './model/size';
 
 
 export default class Game {
-  constructor(mode, gameInitData) {
+  constructor(mode, root, gameInitData) {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
-        GameConstructor = OnlineGame;
+        // GameConstructor = OnlineGame;
+        GameConstructor = OfflineGame;
         break;
       }
       case GAME_MODES.OFFLINE: {
@@ -23,23 +24,14 @@ export default class Game {
         throw new Error(`Invalid game mode ${mode}`);
     }
 
-    /*
-    const gameInitData = {
-      snakeText: ,
-      DOMRect,
-      widthWidth,
-      windowHeight,
-    }
-    */
-
-    const cellWidth = gameInitData.DOMRect.width / (this.snakeText.length - ' snake'.length);
+    const cellWidth = gameInitData.DOMRect.width / (gameInitData.snakeText.length - ' snake'.length);
     const cellHeight = gameInitData.DOMRect.height;
 
     // реальные размеры одной ячейки
     this.cellSize = new Size(cellWidth, cellHeight);
 
-    const [windowWidth] = gameInitData;
-    const [windowHeight] = gameInitData;
+    const { windowWidth } = gameInitData;
+    const { windowHeight } = gameInitData;
 
     // реальные размеры окна для игры
     this.windowSize = new Size(windowWidth, windowHeight);
@@ -48,12 +40,15 @@ export default class Game {
     const heightCellCount = Math.floor(windowHeight / cellHeight);
 
     // размерность поля игры
-    this.cellCount = new Size(widthCellCount, heightCellCount);
+    gameInitData.cellCount = new Size(widthCellCount, heightCellCount);
 
+    console.log('this.cellSize', this.cellSize);
+    console.log('this.windowSize', this.windowSize);
+    console.log('gameInitData.cellCount', gameInitData.cellCount);
 
-    this.gameScene = new GameScene(this.windowSize, this.cellSize);
+    this.gameScene = new GameScene(root, this.windowSize, this.cellSize);
     this.keyboardController = keyboardController;
-    this.gameCore = new GameConstructor(this.keyboardController, this.gameScene);
+    this.gameCore = new GameConstructor(this.keyboardController, this.gameScene, gameInitData);
   }
 
   start() {
