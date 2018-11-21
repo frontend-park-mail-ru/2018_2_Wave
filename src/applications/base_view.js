@@ -5,8 +5,8 @@ export default class BaseView {
     this.wrapper  = document.createElement('div');
     this.wrapper.classList.add('wrapper');
     this.wrapper.hidden = true;
-    this.isPage = true;
-    // has url and isn't enviromental block
+    // this.isPage = true;
+    // // has url and isn't enviromental block
   }
 
 
