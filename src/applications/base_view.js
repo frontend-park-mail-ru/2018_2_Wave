@@ -25,11 +25,7 @@ export default class BaseView {
 
   show() {
     this.wrapper.hidden = false;
-    if (!this.rendered) {
-      // TODO: show skeleton:
-      // t.me/uxlive/6566
-      this.render();
-    }
+    if (!this.rendered) this.render();
   }
 
 
