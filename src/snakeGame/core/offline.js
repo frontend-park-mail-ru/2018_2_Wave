@@ -24,6 +24,7 @@ export default class OfflineGame extends GameCore {
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
+    this.framesPerSecond = 10;
 
     this.snakeText = gameInitData.snakeText;
     // this.DOMRect = gameInitData.DOMRect;
@@ -73,7 +74,8 @@ export default class OfflineGame extends GameCore {
     this.scene.start();
 
     this.lastFrame = performance.now();
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    //his.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.gameloop();
   }
 
   update() {
@@ -81,19 +83,23 @@ export default class OfflineGame extends GameCore {
   }
 
   gameloop(now) {
-    const delay = now - this.lastFrame;
-    this.lastFrame = now;
+    setTimeout((_) => {
+      const delay = now - this.lastFrame;
+      this.lastFrame = now;
 
-    if (this.keyboardController.lastCommand) {
-      this.snakeController.setDirection(this.keyboardController.getLastCommand());
-    }
+      if (this.keyboardController.lastCommand) {
+        this.snakeController.setDirection(this.keyboardController.getLastCommand());
+      }
 
-    this.update();
+      this.update();
 
-    // busController.emit(events.GAME_STATE_CHANGED);
-    // check if dead
+      this.scene.renderScene();
 
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      // busController.emit(events.GAME_STATE_CHANGED);
+      // check if dead
+
+      this.gameloopRequestId = requestAnimationFrame(this.gameloop.bind(this));
+    }, 1000 / this.framesPerSecond);
   }
 
   onControllsPressed(evt) {

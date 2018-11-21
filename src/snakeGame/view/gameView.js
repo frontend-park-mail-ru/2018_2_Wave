@@ -65,8 +65,8 @@ export default class GameView extends BaseView {
         width: 120,
         height: 18,
       },
-      windowWidth: 1300,
-      windowHeight: 700,
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight,
     };
 
     this.game = new Game(mode, this.wrapper, gameInitData);

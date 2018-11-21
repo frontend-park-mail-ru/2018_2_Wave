@@ -10,7 +10,6 @@ export default class LevelView {
     let y;
     let cx;
     let cy;
-    console.log('level render');
 
     canvas.setBlackBackground(this.levelModel.size.width,
       this.levelModel.size.height);

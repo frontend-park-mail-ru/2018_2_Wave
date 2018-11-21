@@ -12,8 +12,9 @@ export default class GameScene {
     this.lastFrameTime = 0;
     this.id = 0;
     this.views = {};
-
     this.renderScene = this.renderScene.bind(this);
+
+    this.framesPerSecond = 10;
   }
 
   /*
@@ -39,13 +40,20 @@ export default class GameScene {
   */
 
   renderScene() {
+  
+    //setTimeout((_) => {
+      // this.requestFrameId = requestAnimationFrame(this.renderScene.bind(this));
     Object.values(this.views).forEach(figure => figure.render(this.canvas));
-    this.requestFrameId = requestAnimationFrame(this.renderScene);
+    //}, 1000 / this.framesPerSecond);
+
+    // Object.values(this.views).forEach(figure => figure.render(this.canvas));
+    // this.requestFrameId = requestAnimationFrame(this.renderScene);
   }
 
   start() {
-    this.lastFrameTime = performance.now();
-    this.requestFrameId = requestAnimationFrame(this.renderScene);
+    // this.lastFrameTime = performance.now();
+    // this.requestFrameId = requestAnimationFrame(this.renderScene);
+    this.renderScene();
   }
 
   stop() {

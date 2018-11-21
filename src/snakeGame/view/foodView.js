@@ -4,7 +4,7 @@ export default class FoodView {
   }
 
   render(canvas) {
-    canvas.darwLetter({
+    canvas.drawLetter({
       font: 'Arial',
       size: 15,
       fillStyle: '#99ff00',
