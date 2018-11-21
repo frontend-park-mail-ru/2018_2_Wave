@@ -5,32 +5,28 @@ import bus from './bus';
 
 /**  proceeds path and urlencoded params
  *   to app name, view name and params array  */
-function processPath(fullPath) {
+function processPath(fullPath, params) {
   const result = {};
-  let [path, params] = fullPath.split('?');
 
-  path = path.slice(1);
-  if (fullPath.slice(-1) === '/') {
-    console.log('removing last');
+  let path = fullPath.slice(1);
+  if (path.slice(-1) === '/') {
     path = path.slice(0, -1);
   }
 
   if (params) {
-    const paramPairs = params.split('&', 5);
-    params = {};
-    paramPairs.forEach((item) => {
-      const [key, val] = item.split('=');
-      params[key] = val;
-    });
-    result.params = params;
+    result.params = {};
+    params
+      .split('&', 5)
+      .forEach((item) => {
+        const [key, val] = item.split('=');
+        result.params[key] = val;
+      });
   }
 
   const separator = path.indexOf('/');
   if (separator !== -1) {
-    const app = path.slice(0, separator);
-    const view = path.slice(separator + 1);
-    result.app = app;
-    result.view = view;
+    result.app = path.slice(0, separator);
+    result.view = path.slice(separator + 1);
   } else {
     result.app = path;
   }
@@ -64,10 +60,15 @@ export default class Router {
 
   open(path) {
     const { app: appName, view, params } = processPath(path);
+    console.log({ appName, view, params });
+
 
     let app;
     if (!appName) app = this.routes['/'];
     else if (!this.routes.hasOwnProperty(appName)) {
+      if (this.routes['/'].hasOwnProperty(app)) {
+
+      }
       this.open('/');
       return;
     } else app = this.routes[appName];
@@ -105,9 +106,12 @@ export default class Router {
       throw new Error('No main app!');
     }
 
-    this.open(
-      window.location.pathname
-      + window.location.search,
+    const { pathname, search } = window.location;
+    this.open(pathname, search);
+
+    window.addEventListener(
+      'popstate',
+      () => this.open(pathname + (search || '')),
     );
 
     document.addEventListener('click', (event) => {
@@ -118,16 +122,8 @@ export default class Router {
       event.preventDefault();
 
       const link = event.target;
-      this.open(link.pathname + link.params);
+      this.open(link.pathname, link.search);
     });
-
-    window.addEventListener(
-      'popstate',
-      () => this.open(
-        window.location.pathname
-        + window.location.search,
-      ),
-    );
 
     bus.listen('link', this.open.bind(this));
   }
