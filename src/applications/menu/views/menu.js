@@ -3,7 +3,7 @@ import BaseView from '../../base_view';
 const template = require('../templates/menu.pug');
 
 const buttons = {
-  '/play': 'Play',
+  '/terminal': 'Terminal',
   '/leaderboard': 'Leaderboard',
   '/settings': 'Settings',
 };
