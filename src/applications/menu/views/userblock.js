@@ -11,11 +11,9 @@ export default class UserblockView extends BaseView {
   constructor(parent) {
     super(template, parent);
     this.isPage = false;
-    bus.listen('userUpdated', this.update.bind(this));
   }
 
   update() {
-    super.show();
     this.render();
   }
 
