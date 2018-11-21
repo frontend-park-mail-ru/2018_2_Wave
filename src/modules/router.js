@@ -29,6 +29,37 @@ export default class Router {
   constructor(root) {
     this.routes = {};
     this.root = root;
+
+    this.listeners = [
+      {
+        target: window,
+        event: 'popstate',
+        method: this.openFromAddressBar.bind(this),
+      },
+      {
+        target: document,
+        event: 'click',
+        method: this.openClickedLink.bind(this),
+      },
+    ];
+  }
+
+
+  // TODO: write this method
+  // TODO: grant some previleges to main app
+  // TODO: get wrapper-div from main app
+
+  // setMainApp(App) {
+  //   this.enviroment = new View(this.enviromentElem);
+  //   return this;
+  // }
+
+  registerApp(url, App) {
+    const app = new App(url, this.root);
+    if (url === '/') this.mainApp = app;
+    // TODO: create app object only when app opens
+    this.routes[url] = app;
+    return this;
   }
 
 
@@ -37,25 +68,13 @@ export default class Router {
       throw new Error('No main app!');
     }
 
-    const { pathname, search } = window.location;
-    this.open(pathname, search);
-
-    window.addEventListener(
-      'popstate', () => this.open(pathname, search),
-    );
-
-    document.addEventListener('click', (event) => {
-      if (!(event.target instanceof HTMLAnchorElement)
-      || (event.target.getAttribute('type') === 'submit')) {
-        return;
-      }
-      event.preventDefault();
-
-      const link = event.target;
-      this.open(link.pathname, link.search);
-    });
-
+    this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
+
+    this.listeners.forEach((listener) => {
+      const { target, event, method } = listener;
+      target.addEventListener(event, method);
+    });
   }
 
 
@@ -91,20 +110,16 @@ export default class Router {
   }
 
 
-  // TODO: write this method
-  // TODO: grant some previleges to main app
-  // TODO: get wrapper-div from main app
+  openFromAddressBar() {
+    const { pathname, search } = window.location;
+    this.open(pathname, search);
+  }
 
-  // setMainApp(App) {
-  //   this.enviroment = new View(this.enviromentElem);
-  //   return this;
-  // }
-
-  registerApp(url, App) {
-    const app = new App(url, this.root);
-    if (url === '/') this.mainApp = app;
-    // TODO: create app object only when app opens
-    this.routes[url] = app;
-    return this;
+  openClickedLink(event) {
+    if ((event.target instanceof HTMLAnchorElement)
+    && (event.target.getAttribute('type') !== 'submit')) {
+      event.preventDefault();
+      this.open(event.target.pathname, event.target.search);
+    }
   }
 }
