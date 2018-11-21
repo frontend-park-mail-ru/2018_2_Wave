@@ -127,7 +127,7 @@ export default class SnakeController {
     this.snakeModel.popSegment();
 
 
-    console.log('newhead', this.snakeModel.getSegments()[0]);
+    // console.log('newhead', this.snakeModel.getSegments()[0]);
 
     /*
     const position = new Position(newX, newY);

@@ -90,7 +90,7 @@ export default class OfflineGame extends GameCore {
 
     this.update();
 
-    busController.emit(events.GAME_STATE_CHANGED);
+    // busController.emit(events.GAME_STATE_CHANGED);
     // check if dead
 
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);

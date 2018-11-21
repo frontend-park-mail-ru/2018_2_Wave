@@ -28,7 +28,7 @@ export default class Canvas {
     this.context.canvas.height = size.height;
   }
 
-  drawLeter({
+  drawLetter({
     font = 'Arial',
     fillStyle = '#99ff00',
     stroke = undefined,

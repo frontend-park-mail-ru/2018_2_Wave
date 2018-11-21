@@ -11,7 +11,7 @@ export default class GameScene {
 
     this.lastFrameTime = 0;
     this.id = 0;
-    this.views = [];
+    this.views = {};
 
     this.renderScene = this.renderScene.bind(this);
   }
@@ -39,7 +39,7 @@ export default class GameScene {
   */
 
   renderScene() {
-    this.views.forEach(figure => figure.render(this.canvas));
+    Object.values(this.views).forEach(figure => figure.render(this.canvas));
     this.requestFrameId = requestAnimationFrame(this.renderScene);
   }
 

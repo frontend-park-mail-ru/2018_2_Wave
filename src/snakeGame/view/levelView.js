@@ -10,9 +10,10 @@ export default class LevelView {
     let y;
     let cx;
     let cy;
+    console.log('level render');
 
     canvas.setBlackBackground(this.levelModel.size.width,
-      this.levelModel.cell.hight);
+      this.levelModel.size.height);
 
     for (x = 0; x < this.levelModel.getWidth(); x += 1) {
       for (y = 0; y < this.levelModel.getHeight(); y += 1) {

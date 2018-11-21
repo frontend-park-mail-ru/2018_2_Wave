@@ -5,7 +5,7 @@ export default class FoodModel {
   }
 
   init({
-    life = 30000,
+    life = 3000,
     birth = Date.now(),
     age = 0,
     type = 3,
@@ -24,6 +24,10 @@ export default class FoodModel {
 
   getY() {
     return this.position.y;
+  }
+
+  getPosition() {
+    return this.position;
   }
 
   getType() {
