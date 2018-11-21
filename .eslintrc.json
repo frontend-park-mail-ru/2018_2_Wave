@@ -9,6 +9,8 @@
     "no-multi-spaces":"off",
     "linebreak-style":"off",
     "key-spacing": ["error", { "mode": "minimum" }],
-    "no-prototype-builtins":"off"
+    "no-prototype-builtins":"off",
+    "one-var": ["error", {"initialized": "never", "uninitialized": "always"}],
+    "one-var-declaration-per-line":"off"
   }
 }
