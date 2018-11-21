@@ -19,6 +19,9 @@ export default class FoodController {
 
   setNewPlace() {
     busController.emit('food', this.food.getLetter(), this.food.getPosition());
+    if (this.food.position) {
+      this.level.removeFood(this.food.position);
+    }
     const emptyCell = this.level.getEmptyCell();
     this.food.setPosition(emptyCell);
     this.level.setFood(emptyCell);

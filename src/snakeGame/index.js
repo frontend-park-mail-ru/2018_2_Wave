@@ -12,8 +12,7 @@ export default class Game {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
-        // GameConstructor = OnlineGame;
-        GameConstructor = OfflineGame;
+        GameConstructor = OnlineGame;
         break;
       }
       case GAME_MODES.OFFLINE: {

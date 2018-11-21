@@ -5,7 +5,7 @@ export default class FoodModel {
   }
 
   init({
-    life = 3000,
+    life = 7000,
     birth = Date.now(),
     age = 0,
     type = 3,

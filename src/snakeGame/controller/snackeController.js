@@ -2,9 +2,9 @@ import Position from '../model/position';
 import busController from '../../modules/busController';
 
 export default class SnakeController {
-  constructor(snakeModel, levelModel) {
-    this.levelModel = levelModel;
-    this.snakeModel = snakeModel;
+  constructor(snake, level) {
+    this.level = level;
+    this.snake = snake;
     this.busController = busController;
     this.directions = {
       UP: 'UP',
@@ -20,16 +20,9 @@ export default class SnakeController {
       ArrowRight: 'RIGHT',
     };
 
-    /*
-    this.eventsMethods = {
-      ArrowUp: _ => this.setDirection(this.directions.UP),
-      ArrowDown: _ => this.setDirection(this.directions.DOWN),
-      ArrowLeft: _ => this.setDirection(this.directions.LEFT),
-      ArrowRight: _ =>  this.setDirection(this.directions.RIGHT),
+    this.events = {
+      food: this.snakeAppendLetter.bind(this),
     };
-
-    this.setEventListeners();
-    */
   }
 
 
@@ -38,40 +31,41 @@ export default class SnakeController {
   }
 
   setDirection(keyboardDirection) {
-    this.snakeModel.setDirection(this.keyboardDirections[keyboardDirection]);
+    this.snake.setDirection(this.keyboardDirections[keyboardDirection]);
   }
 
   init() {
-    const snakeText = this.snakeModel.getSnakeText();
+    const snakeText = this.snake.getSnakeText();
     for (let i = 0; i < snakeText.length; i += 1) {
-      this.snakeModel.unshiftSegment({
-        x: this.snakeModel.getStartPosition().x + i,
-        y: this.snakeModel.getStartPosition().y,
+      this.snake.unshiftSegment({
+        x: this.snake.getStartPosition().x + i,
+        y: this.snake.getStartPosition().y,
         letter: snakeText[i],
       });
     }
-    console.log('head init', this.snakeModel.getSegments()[0]);
+    console.log('head init', this.snake.getSegments()[0]);
   }
 
   findEmptyPlace() {
     while (true) {
-      const rec = this.levelModel.emptyCell();
-      if (this.levelModel.getField(rec.x + 1, rec.y) === 0
-            && this.levelModel.getField(rec.x + 2, rec.y) === 0) {
-        this.snakeModel.segments[0] = new Position(rec.x, rec.y);
-        this.snakeModel.segments[1].x = new Position(rec.x + 1, rec.y);
+      const rec = this.level.emptyCell();
+      if (this.level.getField(rec.x + 1, rec.y) === 0
+            && this.level.getField(rec.x + 2, rec.y) === 0) {
+        this.snake.segments[0] = new Position(rec.x, rec.y);
+        this.snake.segments[1].x = new Position(rec.x + 1, rec.y);
         break;
       }
     }
   }
 
   isColisionWithFood(position) {
-    const isFood = this.levelModel.isFood(position);
+    const isFood = this.level.isFood(position);
     return isFood;
   }
 
   snakeAppendLetter(letter, position) {
-    this.snakeModel.segments.unshift({
+    busController.removeBusListeners(this.events);
+    this.snake.segments.unshift({
       x: position.x,
       y: position.y,
       letter,
@@ -80,42 +74,41 @@ export default class SnakeController {
 
 
   move() {
-    const [head] = this.snakeModel.segments;
+    const [head] = this.snake.segments;
     let newX = head.x;
     let newY = head.y;
 
-    if (this.snakeModel.direction === this.directions.RIGHT) {
+    if (this.snake.direction === this.directions.RIGHT) {
       newX += 1;
-    } else if (this.snakeModel.direction === this.directions.LEFT) {
+    } else if (this.snake.direction === this.directions.LEFT) {
       newX -= 1;
-    } else if (this.snakeModel.direction === this.directions.DOWN) {
+    } else if (this.snake.direction === this.directions.DOWN) {
       newY += 1;
-    } else if (this.snakeModel.direction === this.directions.UP) {
+    } else if (this.snake.direction === this.directions.UP) {
       newY -= 1;
     }
 
 
     // wrap around the world, x-axis first
-    if (newX >= this.levelModel.getWidth()) {
+    if (newX >= this.level.getWidth()) {
       newX = 0;
     } else if (newX < 0) {
-      newX = this.levelModel.getWidth() - 1;
+      newX = this.level.getWidth() - 1;
     }
 
-
     // y-axis
-    if (newY >= this.levelModel.getHeight()) {
+    if (newY >= this.level.getHeight()) {
       newY = 0;
     } else if (newY < 0) {
-      newY = this.levelModel.getHeight() - 1;
+      newY = this.level.getHeight() - 1;
     }
 
     const position = new Position(newX, newY);
     if (this.isColisionWithFood(position)) {
-      busController.setBusListeners({ food: this.snakeAppendLetter.bind(this) });
+      busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
     } else {
-      this.snakeModel.segments.unshift({
+      this.snake.segments.unshift({
         x: newX,
         y: newY,
         letter: 'tempValue',
@@ -123,22 +116,22 @@ export default class SnakeController {
 
       let temp = 'tempValue';
 
-      const segments = this.snakeModel.getSegments();
+      const segments = this.snake.getSegments();
       for (let i = segments.length - 1; i >= 0; i -= 1) {
         const { letter } = segments[i];
         segments[i].letter = temp;
         temp = letter;
       }
 
-      this.snakeModel.popSegment();
+      this.snake.popSegment();
     }
 
 
     /*
     if (!this.isColisionWithFood(position)) {
-      this.snakeModel.popSegment();
+      this.snake.popSegment();
     }
-    this.snakeModel.segments.unshift(position);
+    this.snake.segments.unshift(position);
     */
   }
 

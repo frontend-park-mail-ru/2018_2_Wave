@@ -1,6 +1,7 @@
 export default class FoodView {
   constructor(foodModel) {
     this.foodModel = foodModel;
+    this.letters = false;
   }
 
   render(canvas) {

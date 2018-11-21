@@ -4,7 +4,8 @@ export default class Canvas {
   constructor(root, cellSize) {
     [this.canvas] = root.getElementsByClassName('canvas');
     this.context = this.canvas.getContext('2d');
-    this.cellSize = cellSize;
+    // this.cellSize = cellSize;
+    this.cellSize = new Size(9, 9);
   }
 
   getSize() {
@@ -24,6 +25,7 @@ export default class Canvas {
       width: this.canvas.width,
       height: this.canvas.height,
     };
+
     this.canvas.width = size.width;
     this.context.canvas.height = size.height;
   }
@@ -50,18 +52,37 @@ export default class Canvas {
     this.context.closePath();
   }
 
-  setBlackBackground(width, height) {
-    // set black cackground color
-    this.context.fillStyle = '#000000';
-    this.context.lineWidth = 1;
+  drawRect({
+    fillStyle = '#000000',
+    strokeStyle = '#009900',
+    // lineWidth = 1,
+    lineCap = 'square',
+    x,
+    y,
+    width,
+    height,
+  }) {
+
+    this.context.fillStyle = fillStyle;
+    this.context.strokeStyle = strokeStyle;
+    // this.context.lineWidth = lineWidth;
     // Sets square style of the end caps for a line
 
-    this.context.lineCap = 'square';
-    this.context.fillRect(
-      0,
-      0,
-      width * this.cellSize.width,
-      height * this.cellSize.height,
-    );
+    this.context.lineCap = lineCap;
+    this.context.beginPath();
+
+    this.context.rect(x * this.cellSize.width, y * this.cellSize.height, width * this.cellSize.width, height * this.cellSize.height);
+    this.context.fill();
+    this.context.stroke();
+    this.context.closePath();
+  }
+
+  setBlackBackground(width, height) {
+    this.drawRect({
+      x: 0,
+      y: 0,
+      width,
+      height,
+    });
   }
 }

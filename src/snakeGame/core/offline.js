@@ -20,7 +20,6 @@ export default class OfflineGame extends GameCore {
   constructor(controller, scene, gameInitData) {
     super(controller, scene);
 
-    this.state = {};
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
