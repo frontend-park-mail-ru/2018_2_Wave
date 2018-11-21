@@ -9,7 +9,6 @@ export default class LevelController {
     this.maxWallLength  = this.levelModel.getHeight() / 4;
 
     this.eventsMethosds = {
-      setFood: this.setFoodOnMap.bind(this),
       pickFood: this.removeFoodFromMap.bind(this),
     };
 
@@ -18,13 +17,8 @@ export default class LevelController {
     this.generateLevel();
   }
 
-  removeFoodFromMap(position, orderedSegments) {
+  removeFoodFromMap(position) {
     this.levelModel.removeFood(position);
-    this.busController.emit('resetFood', this.levelModel.getEmptyCell(orderedSegments));
-  }
-
-  setFoodOnMap(position) {
-    this.levelModel.setFood(position);
   }
 
   init() {

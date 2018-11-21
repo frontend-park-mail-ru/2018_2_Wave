@@ -22,6 +22,10 @@ export default class FoodModel {
     return this.position.x;
   }
 
+  getLetter() {
+    return this.currentLetter;
+  }
+
   getY() {
     return this.position.y;
   }

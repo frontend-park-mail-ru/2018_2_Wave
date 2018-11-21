@@ -66,13 +66,18 @@ export default class SnakeController {
   }
 
   isColisionWithFood(position) {
-    // console.log('position', position);
     const isFood = this.levelModel.isFood(position);
-    if (isFood) {
-      busController.emit('pickFood', position, this.segments);
-    }
     return isFood;
   }
+
+  snakeAppendLetter(letter, position) {
+    this.snakeModel.segments.unshift({
+      x: position.x,
+      y: position.y,
+      letter,
+    });
+  }
+
 
   move() {
     const [head] = this.snakeModel.segments;
@@ -105,37 +110,34 @@ export default class SnakeController {
       newY = this.levelModel.getHeight() - 1;
     }
 
-    if (this.isColisionWithFood(new Position(newX, newY))) {
-      console.log('collision');
+    const position = new Position(newX, newY);
+    if (this.isColisionWithFood(position)) {
+      busController.setBusListeners({ food: this.snakeAppendLetter.bind(this) });
+      busController.emit('pickFood', position);
+    } else {
+      this.snakeModel.segments.unshift({
+        x: newX,
+        y: newY,
+        letter: 'tempValue',
+      });
+
+      let temp = 'tempValue';
+
+      const segments = this.snakeModel.getSegments();
+      for (let i = segments.length - 1; i >= 0; i -= 1) {
+        const { letter } = segments[i];
+        segments[i].letter = temp;
+        temp = letter;
+      }
+
+      this.snakeModel.popSegment();
     }
 
-    this.snakeModel.segments.unshift({
-      x: newX,
-      y: newY,
-      letter: 'tempValue',
-    });
-
-    let temp = 'tempValue';
-
-    const segments = this.snakeModel.getSegments();
-    for (let i = segments.length - 1; i >= 0; i -= 1) {
-      const { letter } = segments[i];
-      segments[i].letter = temp;
-      temp = letter;
-    }
-
-    this.snakeModel.popSegment();
-
-
-    // console.log('newhead', this.snakeModel.getSegments()[0]);
 
     /*
-    const position = new Position(newX, newY);
-
     if (!this.isColisionWithFood(position)) {
       this.snakeModel.popSegment();
     }
-    // place the new element at the front of the array
     this.snakeModel.segments.unshift(position);
     */
   }
