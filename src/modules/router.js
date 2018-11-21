@@ -5,6 +5,7 @@ import bus from './bus';
 
 /**  proceeds urlencoded params to array  */
 function splitParams(string) {
+  if (!string) return null;
   const params = {};
   string
     .split('&', 5)
@@ -40,8 +41,7 @@ export default class Router {
     this.open(pathname, search);
 
     window.addEventListener(
-      'popstate',
-      () => this.open(pathname + (search || '')),
+      'popstate', () => this.open(pathname, search),
     );
 
     document.addEventListener('click', (event) => {
@@ -60,13 +60,8 @@ export default class Router {
 
 
   open(fullPath, paramString) {
-    console.log(fullPath, paramString);
-
-
     const path = clearPath(fullPath);
-    const params = paramString
-      ? splitParams(paramString)
-      : null;
+    const params = splitParams(paramString);
 
     let app;
     if (this.routes.hasOwnProperty(path)) {
