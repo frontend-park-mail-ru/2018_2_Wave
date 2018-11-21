@@ -19,11 +19,11 @@ export default class BaseApp {
   changeView(viewUrl, params) {
     // write view change animations in overridden method
     // do not forget to call super.changeView() first!
-    this.currentView.hide();
     if (!this.views.hasOwnProperty(viewUrl)) {
       console.error('No such view');
       this.currentView = this.views.main;
     } else {
+      this.currentView.hide();
       this.currentView = this.views[viewUrl];
     }
 
