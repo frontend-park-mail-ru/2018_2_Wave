@@ -27,7 +27,6 @@ class TerminalView extends Element {
   printString(string) {
     if (!this.rendered) this.render();
     const empty = !string || string === '';
-    console.log(empty);
 
     this.terminal.innerHTML += messageTemplate(
       { string: empty ? '' : string },

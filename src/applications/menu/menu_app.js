@@ -1,6 +1,6 @@
 import BaseApp from '../base_app';
 
-import MainView from './views/main';
+import Enviroment from './views/env';
 import MenuView from './views/menu';
 import LoginView from './views/login';
 import RegisterView from './views/register';
@@ -14,7 +14,7 @@ import './styles/style.css';
 
 export default class MenuApp extends BaseApp {
   constructor(appUrl, parent) {
-    const env = new MainView(parent);
+    const env = new Enviroment(parent);
     const Views = {
       login: LoginView,
       register: RegisterView,
