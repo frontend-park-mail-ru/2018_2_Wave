@@ -3,7 +3,7 @@ import Element from '../../element';
 import template from '../templates/env.pug';
 
 
-export default class Enviroment extends Element {
+export default class GameEnv extends Element {
   constructor(parent) {
     super(template, parent);
     super.render();
@@ -16,10 +16,5 @@ export default class Enviroment extends Element {
 
   show() {
     super.show();
-    this.userblock.show();
-  }
-
-  async render() {
-    this.userblock.render();
   }
 }
