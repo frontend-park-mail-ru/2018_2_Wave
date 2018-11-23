@@ -1,12 +1,12 @@
 import Element from '../../element';
-import Game from '../index';
-import GAME_MODES from '../modes';
+import Game from '../game/core/game';
+import GAME_MODES from '../game/core/modes';
 
-import snakeTemplate from '../index.pug';
+import template from '../templates/game.pug';
 
 export default class GameView extends Element {
   constructor(parent) {
-    super(snakeTemplate, parent);
+    super(template, parent);
     this.game = null;
 
     // on the future
@@ -19,14 +19,6 @@ export default class GameView extends Element {
     */
   }
 
-  show() {
-    super.show();
-    this.render();
-  }
-
-  render() {
-    super.render();
-  }
 
   destroy() {
     this.game.destroy();

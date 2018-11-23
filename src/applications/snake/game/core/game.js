@@ -1,12 +1,9 @@
 import GAME_MODES from './modes';
-import OfflineGame from './core/offline';
-import OnlineGame from './core/online';
-import GameScene from './core/gameScene';
-import keyboardController from './modules/keyboardController';
-
-import Size from './model/size';
-
-import css from './style.css';
+import OfflineGame from './offline';
+import OnlineGame from './online';
+import GameScene from './gameScene';
+import keyboardController from '../modules/keyboardController';
+import Size from '../model/size';
 
 
 export default class Game {
