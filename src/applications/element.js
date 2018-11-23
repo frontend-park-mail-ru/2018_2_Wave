@@ -1,11 +1,9 @@
-export default class BaseView {
+export default class Element {
   constructor(template, parent) {
     this.template = template;
     this.parent   = parent;
     this.wrapper  = document.createElement('div');
     this.wrapper.hidden = true;
-    // this.isPage = true;
-    // // has url and isn't enviromental block
   }
 
 
