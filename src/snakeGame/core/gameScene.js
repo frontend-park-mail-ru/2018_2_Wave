@@ -1,4 +1,4 @@
-// import busController from '../../modules/busController';
+// import busController from '../modules/busController';
 import Canvas from '../utils/canvas';
 
 export default class GameScene {

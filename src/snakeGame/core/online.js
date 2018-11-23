@@ -1,6 +1,6 @@
 import GameCore from './core';
 import events from './events';
-import busController from '../../modules/busController';
+import busController from '../modules/busController';
 import Size from '../model/size';
 
 import LevelController from '../controller/levelController';
@@ -18,7 +18,7 @@ import SnakeModel from '../model/snakeModel';
 import FoodModel from '../model/foodModel';
 import EnemiesModel from '../model/enemiesModel';
 
-import ws from '../../modules/webSocket';
+import ws from '../modules/webSocket';
 
 export default class OnlineGame extends GameCore {
   constructor(controller, scene, gameInitData) {

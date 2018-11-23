@@ -1,5 +1,5 @@
 import Position from '../model/position';
-import busController from '../../modules/busController';
+import busController from '../modules/busController';
 
 export default class SnakeController {
   constructor(snake, level) {

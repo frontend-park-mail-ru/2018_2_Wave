@@ -1,6 +1,6 @@
 import GameCore from './core';
 import events from './events';
-import busController from '../../modules/busController';
+import busController from '../modules/busController';
 import Size from '../model/size';
 
 import LevelController from '../controller/levelController';
