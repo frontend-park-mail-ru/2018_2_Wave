@@ -2,8 +2,8 @@
 import Canvas from '../utils/canvas';
 
 export default class GameScene {
-  constructor(root, windowSize, cellSize) {
-    this.canvas = new Canvas(root, cellSize);
+  constructor(canvas, windowSize, cellSize) {
+    this.canvas = new Canvas(canvas, cellSize);
     this.canvas.setSize(windowSize);
 
     this.state = null;

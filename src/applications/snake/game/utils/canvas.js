@@ -1,8 +1,8 @@
-import Size from '../model/size';
+import Size from '../models/size';
 
 export default class Canvas {
-  constructor(root, cellSize) {
-    [this.canvas] = root.getElementsByClassName('canvas');
+  constructor(canvas, cellSize) {
+    this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
     this.cellSize = cellSize;
     // this.cellSize = new Size(9, 9);
