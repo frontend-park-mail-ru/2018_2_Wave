@@ -4,6 +4,7 @@ const template = require('../templates/menu.pug');
 
 const buttons = {
   '/terminal': 'Terminal',
+  '/snake': 'Anacondus',
   '/leaderboard': 'Leaderboard',
   '/settings': 'Settings',
 };
