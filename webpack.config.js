@@ -17,7 +17,7 @@ module.exports = {
       template: 'src/index.html',
     }),
     new HardSourceWebpackPlugin({
-      cacheDirectory: 'node_modules/.cache/',
+      cacheDirectory: '.cache/',
     }),
   ],
 
