@@ -1,12 +1,12 @@
 import { updateProfile } from '../../../modules/network';
 import userService from '../../../modules/userservice';
 import bus from '../../../modules/bus';
-import BaseView from '../../base_view';
+import Element from '../../element';
 
 const template = require('../templates/editprofile.pug');
 
 
-export default class ProfileEditView extends BaseView {
+export default class ProfileEditView extends Element {
   constructor(parent) {
     super(template, parent);
   }

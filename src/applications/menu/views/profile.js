@@ -1,13 +1,13 @@
 import { logout } from '../../../modules/network';
 import userService from '../../../modules/userservice';
 import bus from '../../../modules/bus';
-import BaseView from '../../base_view';
+import Element from '../../element';
 import '../styles/profile.css';
 
 const template = require('../templates/profile.pug');
 
 
-export default class ProfileView extends BaseView {
+export default class ProfileView extends Element {
   constructor(parent) {
     super(template, parent);
   }

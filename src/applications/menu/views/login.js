@@ -1,5 +1,5 @@
 import bus from '../../../modules/bus';
-import BaseView from '../../base_view';
+import Element from '../../element';
 import { login } from '../../../modules/network';
 
 import '../styles/login.css';
@@ -7,7 +7,7 @@ import '../styles/login.css';
 const template = require('../templates/login.pug');
 
 
-export default class LoginView extends BaseView {
+export default class LoginView extends Element {
   constructor(parent) {
     super(template, parent);
   }

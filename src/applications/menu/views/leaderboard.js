@@ -1,11 +1,11 @@
 import { getLeaders } from '../../../modules/network';
-import BaseView from '../../base_view';
+import Element from '../../element';
 import '../styles/leaderboard.css';
 
 const template = require('../templates/leaderboard.pug');
 
 
-export default class LeaderboardView extends BaseView {
+export default class LeaderboardView extends Element {
   constructor(parent) {
     super(template, parent);
   }

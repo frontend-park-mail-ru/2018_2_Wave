@@ -1,4 +1,4 @@
-import BaseView from '../base_view';
+import Element from '../element';
 
 import terminalTemplate from './templates/terminal.pug';
 import messageTemplate from './templates/message.pug';
@@ -7,7 +7,7 @@ import inputTemplate from './templates/input.pug';
 import './terminal.css';
 
 
-class TerminalView extends BaseView {
+class TerminalView extends Element {
   constructor(parent) {
     super(terminalTemplate, parent);
   }

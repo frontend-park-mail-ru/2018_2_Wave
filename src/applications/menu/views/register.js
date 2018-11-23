@@ -1,12 +1,12 @@
 import { register } from '../../../modules/network';
 import bus from '../../../modules/bus';
-import BaseView from '../../base_view';
+import Element from '../../element';
 import '../styles/registration.css';
 
 const template = require('../templates/register.pug');
 
 
-export default class RegisterView extends BaseView {
+export default class RegisterView extends Element {
   constructor(parent) {
     super(template, parent);
   }

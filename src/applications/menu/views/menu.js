@@ -1,4 +1,4 @@
-import BaseView from '../../base_view';
+import Element from '../../element';
 
 const template = require('../templates/menu.pug');
 
@@ -9,7 +9,7 @@ const buttons = {
 };
 
 
-export default class MenuView extends BaseView {
+export default class MenuView extends Element {
   constructor(parent) {
     super(template, parent);
   }
