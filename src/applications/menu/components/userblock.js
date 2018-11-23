@@ -1,13 +1,13 @@
 import userService from '../../../modules/userservice';
 import bus from '../../../modules/bus';
-import BaseView from '../../base_view';
+import Element from '../../element';
 
 import '../styles/userblock.css';
 
 const template = require('../templates/userblock.pug');
 
 
-export default class UserblockView extends BaseView {
+export default class UserBlock extends Element {
   constructor(parent) {
     super(template, parent);
     this.isPage = false;
