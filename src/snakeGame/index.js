@@ -6,6 +6,8 @@ import keyboardController from '../modules/keyboardController';
 
 import Size from './model/size';
 
+import css from './style.css';
+
 
 export default class Game {
   constructor(mode, root, gameInitData) {
@@ -16,14 +18,15 @@ export default class Game {
         break;
       }
       case GAME_MODES.OFFLINE: {
-        GameConstructor = OfflineGame;
+        // GameConstructor = OfflineGame;
+        GameConstructor = OnlineGame;
         break;
       }
       default:
         throw new Error(`Invalid game mode ${mode}`);
     }
 
-    const cellWidth = gameInitData.DOMRect.width / (gameInitData.snakeText.length - ' snake'.length);
+    const cellWidth = gameInitData.DOMRect.width;
     const cellHeight = gameInitData.DOMRect.height;
 
     // реальные размеры одной ячейки

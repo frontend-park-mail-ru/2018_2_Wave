@@ -85,7 +85,7 @@ export default class OnlineGame extends GameCore {
 
   start() {
     super.start();
-    ws.send('start-game', null);
+    // ws.send('lobby_create', {room_type: 'room_type'});
 
     this.controllers.forEach(controller => controller.init());
 

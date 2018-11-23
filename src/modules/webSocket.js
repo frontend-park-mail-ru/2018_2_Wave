@@ -34,7 +34,7 @@ class Ws {
 
   send(type, payload) {
     // костыль
-    this.waitForConnection(_ => this.ws.send(JSON.stringify({ type, payload })), 5000);
+    this.waitForConnection(_ => this.ws.send(JSON.stringify({ room_id: 'app',type, payload })), 5000);
   }
 
   waitForConnection(callback, interval) {

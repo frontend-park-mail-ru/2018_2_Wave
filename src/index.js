@@ -2,8 +2,9 @@ import Router from './modules/router';
 import GameView from './snakeGame/view/gameView';
 
 const root = document.getElementsByClassName('root')[0];
-
 const router = new Router(root);
+
+import css from './style.css';
 
 router
   .register('/', GameView)

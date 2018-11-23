@@ -58,15 +58,17 @@ export default class GameView extends BaseView {
     }
 
     const gameInitData = {
-      snakeText: 'qwertyuiop',
+      snakeText: 'qwertyuiopqe',
       DOMRect: {
         x: 10,
         y: 10,
-        width: 120,
+        width: 18,
         height: 18,
       },
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
+      // windowWidth: window.innerWidth,
+      // windowHeight: window.innerHeight,
+      windowWidth: 800,
+      windowHeight: 800,
     };
 
     this.game = new Game(mode, this.wrapper, gameInitData);

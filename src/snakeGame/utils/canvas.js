@@ -4,8 +4,8 @@ export default class Canvas {
   constructor(root, cellSize) {
     [this.canvas] = root.getElementsByClassName('canvas');
     this.context = this.canvas.getContext('2d');
-    // this.cellSize = cellSize;
-    this.cellSize = new Size(9, 9);
+    this.cellSize = cellSize;
+    // this.cellSize = new Size(9, 9);
   }
 
   getSize() {
