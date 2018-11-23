@@ -1,7 +1,7 @@
 import BaseApp from '../base_app';
 
+import MainView from './views/main';
 import MenuView from './views/menu';
-import UserblockView from './views/userblock';
 import LoginView from './views/login';
 import RegisterView from './views/register';
 import LeaderboardView from './views/leaderboard';
@@ -11,10 +11,11 @@ import ProfileEditView from './views/editprofile';
 
 import './styles/style.css';
 
+
 export default class MenuApp extends BaseApp {
   constructor(appUrl, parent) {
+    const env = new MainView(parent);
     const Views = {
-      userblock: UserblockView,
       login: LoginView,
       register: RegisterView,
       leaderboard: LeaderboardView,
@@ -23,9 +24,17 @@ export default class MenuApp extends BaseApp {
       'profile/edit': ProfileEditView,
     };
 
-    super(appUrl, parent, MenuView, Views);
+    super(appUrl, env.getContainer(), MenuView, Views);
 
-    this.env = this.views.userblock;
+    this.env = env;
+    this.content = this.env.getContainer();
+
+    // Object.keys(Views).forEach((key) => {
+    //   this.views[key] = new Views[key](this.content);
+    // });
+
+    // this.appWrapper = ???
+    // hmmm let me think what kind of shit it should be
   }
 
 
@@ -34,13 +43,17 @@ export default class MenuApp extends BaseApp {
     super.start();
   }
 
+  // stop() {
+  //   console.error('Cannot stop main app');
+  // }
+
   pause() {
     this.env.hide();
     super.pause();
   }
 
   resume() {
-    super.resume();
     this.env.show();
+    super.resume();
   }
 }

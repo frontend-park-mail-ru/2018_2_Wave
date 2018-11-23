@@ -16,7 +16,7 @@ export default class MainView extends Element {
 
   getContainer() {
     if (!this.rendered) this.render();
-    this.content = this.wrapper.getElementsByClassName('content');
+    [this.content] = this.wrapper.getElementsByClassName('content');
     return this.content;
   }
 
