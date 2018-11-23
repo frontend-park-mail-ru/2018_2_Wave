@@ -29,9 +29,6 @@ export default class MenuApp extends BaseApp {
     this.env = env;
     this.content = this.env.getContainer();
 
-    // Object.keys(Views).forEach((key) => {
-    //   this.views[key] = new Views[key](this.content);
-    // });
 
     // this.appWrapper = ???
     // hmmm let me think what kind of shit it should be

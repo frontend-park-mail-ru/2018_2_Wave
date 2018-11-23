@@ -14,7 +14,6 @@ export default class Enviroment extends Element {
   }
 
   getContainer() {
-    if (!this.rendered) this.render();
     [this.content] = this.wrapper.getElementsByClassName('content');
     return this.content;
   }
