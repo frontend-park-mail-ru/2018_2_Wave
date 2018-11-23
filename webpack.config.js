@@ -39,6 +39,10 @@ module.exports = {
         test: /\.pug$/,
         loader: 'pug-loader',
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+      },
     ],
   },
 
