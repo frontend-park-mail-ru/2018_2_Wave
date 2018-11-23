@@ -1,0 +1,13 @@
+.block#profile
+  img(src= "https://rasseki.com/" + user.avatar)
+  h3= user.username
+  h3= 'Score: ' + user.score
+  a.button(
+    href='/profile/edit'
+  ) Edit
+  a.button#logoutbutton(
+    href='/'
+  ) logout
+  a.button(
+    href='/'
+  ) Back

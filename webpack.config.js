@@ -1,26 +1,29 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 
 module.exports = {
-  entry: {
-    app: './src/app.js',
-  },
+  entry: './src/app.js',
 
   output: {
-    filename: 'app.bundle.js',
     path: path.resolve(__dirname, 'public'),
+    filename: 'app.bundle.js',
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.pug',
+      template: 'src/index.html',
     }),
     new HardSourceWebpackPlugin({
-      cacheDirectory: 'node_modules/.cache/',
+      cacheDirectory: '.cache/',
     }),
   ],
+
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
 
   module: {
     rules: [
