@@ -1,4 +1,4 @@
-import bus from '../../modules/bus';
+import bus from '../../../modules/bus';
 
 class Ws {
   constructor() {

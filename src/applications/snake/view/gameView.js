@@ -1,10 +1,10 @@
-import BaseView from '../../views/baseview';
+import Element from '../../element';
 import Game from '../index';
 import GAME_MODES from '../modes';
 
 import snakeTemplate from '../index.pug';
 
-export default class GameView extends BaseView {
+export default class GameView extends Element {
   constructor(parent) {
     super(snakeTemplate, parent);
     this.game = null;
