@@ -5,12 +5,11 @@ import UserBlock from '../components/userblock';
 import template from '../templates/main.pug';
 
 
-export default class MainView extends Element {
+export default class Enviroment extends Element {
   constructor(parent) {
     super(template, parent);
     super.render();
     const [userblockPlace] = this.wrapper.getElementsByClassName('header');
-    console.log(userblockPlace);
     this.userblock = new UserBlock(userblockPlace);
   }
 
