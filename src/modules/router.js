@@ -45,15 +45,6 @@ export default class Router {
   }
 
 
-  // TODO: write this method
-  // TODO: grant some previleges to main app
-  // TODO: get wrapper-div from main app
-
-  // setMainApp(App) {
-  //   this.enviroment = new View(this.enviromentElem);
-  //   return this;
-  // }
-
   registerApp(url, App) {
     const app = new App(url, this.root);
     if (url === '/') this.mainApp = app;
@@ -92,6 +83,8 @@ export default class Router {
     } else {
       this.open('/');
     }
+
+    this.currentApp = app;
 
     if (!app.active) {
       Object.values(this.routes).forEach((knownApp) => {
