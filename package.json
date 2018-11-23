@@ -4,7 +4,7 @@
   "main": "public/app.js",
   "scripts": {
     "prestart": "webpack -d",
-    "start": "node server",
+    "start": "node ./server/server.js",
     "dev": "webpack -d --watch",
     "prod": "webpack -p"
   },
