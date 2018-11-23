@@ -1,4 +1,4 @@
-import busController from '../modules/busController';
+import busController from '../../modules/busController';
 
 export default class GameCore {
   constructor(controller, scene) {

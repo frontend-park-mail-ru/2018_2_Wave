@@ -1,5 +1,5 @@
-import busController from '../modules/busController';
-import Position from '../model/position';
+import busController from '../../modules/busController';
+import Position from '../models/position';
 
 export default class LevelController {
   constructor(levelModel) {

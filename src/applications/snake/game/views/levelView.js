@@ -1,4 +1,4 @@
-import Position from '../model/position';
+import Position from '../models/position';
 
 export default class LevelView {
   constructor(levelModel) {

@@ -1,24 +1,24 @@
 import GameCore from './core';
 import events from './events';
-import busController from '../modules/busController';
-import Size from '../model/size';
+import busController from '../../modules/busController';
+import Size from '../models/size';
 
-import LevelController from '../controller/levelController';
-import SnakeController from '../controller/snackeController';
-import FoodController from '../controller/foodController';
-import AudioController from '../controller/audioController';
+import LevelController from '../controllers/levelController';
+import SnakeController from '../controllers/snackeController';
+import FoodController from '../controllers/foodController';
+import AudioController from '../controllers/audioController';
 
-import LevelView from '../view/levelView';
-import SnakeView from '../view/snakeView';
-import FoodView from '../view/foodView';
-import EnemiesView from '../view/enemiesView';
+import LevelView from '../views/levelView';
+import SnakeView from '../views/snakeView';
+import FoodView from '../views/foodView';
+import EnemiesView from '../views/enemiesView';
 
-import LevelModel from '../model/levelModel';
-import SnakeModel from '../model/snakeModel';
-import FoodModel from '../model/foodModel';
-import EnemiesModel from '../model/enemiesModel';
+import LevelModel from '../models/levelModel';
+import SnakeModel from '../models/snakeModel';
+import FoodModel from '../models/foodModel';
+import EnemiesModel from '../models/enemiesModel';
 
-import ws from '../modules/webSocket';
+import ws from '../../modules/webSocket';
 
 export default class OnlineGame extends GameCore {
   constructor(controller, scene, gameInitData) {
