@@ -1,13 +1,13 @@
-import GAME_MODES from './modes';
-import OfflineGame from './offline';
-import OnlineGame from './online';
-import GameScene from './gameScene';
+import GAME_MODES from './core/modes';
+import OfflineGame from './core/offline';
+import OnlineGame from './core/online';
+import GameScene from './core/gameScene';
 import keyboardController from '../modules/keyboardController';
-import Size from '../model/size';
+import Size from './models/size';
 
 
 export default class Game {
-  constructor(mode, root, gameInitData) {
+  constructor(mode, canvas, gameInitData) {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
@@ -45,7 +45,7 @@ export default class Game {
     console.log('this.windowSize', this.windowSize);
     console.log('gameInitData.cellCount', gameInitData.cellCount);
 
-    this.gameScene = new GameScene(root, this.windowSize, this.cellSize);
+    this.gameScene = new GameScene(canvas, this.windowSize, this.cellSize);
     this.keyboardController = keyboardController;
     this.gameCore = new GameConstructor(this.keyboardController, this.gameScene, gameInitData);
   }
