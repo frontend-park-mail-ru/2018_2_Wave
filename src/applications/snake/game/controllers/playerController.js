@@ -8,6 +8,7 @@ export default class FoodController {
 
     this.events = {
       DEAD: this.setDead.bind(this),
+      pickFood: this.addToScore.bind(this),
     };
 
     this.busController.setBusListeners(this.events);
@@ -21,6 +22,10 @@ export default class FoodController {
 
   setDead() {
     busController.removeBusListeners(this.events);
-    this.isDead = true;
+    this.player.setDead();
+  }
+
+  addToScore(value = 1) {
+    this.player.addToScore(value);
   }
 }

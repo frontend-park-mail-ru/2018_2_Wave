@@ -1,5 +1,3 @@
-import busController from '../../modules/busController';
-
 export default class Player {
   constructor() {
     this.score = 0;
@@ -11,7 +9,10 @@ export default class Player {
   }
 
   setDead() {
-    busController.removeBusListeners(this.events);
     this.isDead = true;
+  }
+
+  addToScore(value = 1) {
+    this.score += value;
   }
 }
