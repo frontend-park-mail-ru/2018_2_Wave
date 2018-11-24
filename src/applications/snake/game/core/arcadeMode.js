@@ -18,13 +18,13 @@ import SnakeModel from '../models/snakeModel';
 import FoodModel from '../models/foodModel';
 import PlayerModel from '../models/playerModel';
 
-export default class OfflineGame extends GameCore {
+export default class ArcadeMode extends GameCore {
   constructor(controller, scene, gameInitData) {
     super(controller, scene);
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
-    this.framesPerSecond = 10;
+    this.framesPerSecond = 20;
     this.paused = false;
 
     this.snakeText = gameInitData.snakeText;
@@ -101,6 +101,7 @@ export default class OfflineGame extends GameCore {
       }
 
       this.scene.renderScene();
+
       this.gameloopRequestId = requestAnimationFrame(this.gameloop);
     }, 1000 / this.framesPerSecond);
   }

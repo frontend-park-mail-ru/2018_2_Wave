@@ -14,7 +14,6 @@ export default class FoodController {
   init() {
     this.food.init({});
     this.setNewPlace();
-    console.log('init food', this.food.getPosition());
   }
 
   setNewPlace() {
