@@ -5,18 +5,20 @@ import Size from '../models/size';
 
 import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
-import FoodController from '../controllers/foodController';
+import FoodsController from '../controllers/foodsController';
 import AudioController from '../controllers/audioController';
 import PlayerController from '../controllers/playerController';
+import FrameSpeedController from '../controllers/frameSpeedController';
 
 import LevelView from '../views/levelView';
 import SnakeView from '../views/snakeView';
-import FoodView from '../views/foodView';
+import FoodsView from '../views/foodsView';
 
 import LevelModel from '../models/levelModel';
 import SnakeModel from '../models/snakeModel';
-import FoodModel from '../models/foodModel';
+import FoodsModel from '../models/foodsModel';
 import PlayerModel from '../models/playerModel';
+import FrameSpeedModel from '../models/frameSpeedModel';
 
 export default class ArcadeMode extends GameCore {
   constructor(controller, scene, gameInitData) {
@@ -24,7 +26,6 @@ export default class ArcadeMode extends GameCore {
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
-    this.framesPerSecond = 20;
     this.paused = false;
 
     this.snakeText = gameInitData.snakeText;
@@ -39,6 +40,9 @@ export default class ArcadeMode extends GameCore {
 
     this.controllers = [];
 
+    this.frameSpeed = new FrameSpeedModel();
+    this.frameSpeedController = new FrameSpeedController(this.frameSpeed);
+    this.controllers.push(this.frameSpeedController);
 
     this.level = new LevelModel(this.cellCount);
     
@@ -54,10 +58,11 @@ export default class ArcadeMode extends GameCore {
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
 
-    this.food = new FoodModel();
-    this.foodController = new FoodController(this.food, this.level);
-    this.controllers.push(this.foodController);
-    this.scene.push(new FoodView(this.food));
+    // передаем колличество еды на поле
+    this.foods = new FoodsModel(10);
+    this.foodsController = new FoodsController(this.foods, this.level);
+    this.controllers.push(this.foodsController);
+    this.scene.push(new FoodsView(this.foods));
 
     this.audioController = new AudioController();
 
@@ -103,7 +108,7 @@ export default class ArcadeMode extends GameCore {
       this.scene.renderScene();
 
       this.gameloopRequestId = requestAnimationFrame(this.gameloop);
-    }, 1000 / this.framesPerSecond);
+    }, 1000 / this.frameSpeed.getSpeed());
   }
 
   pause() {

@@ -7,13 +7,19 @@ export default class FoodController {
     this.busController = busController;
 
     busController.setBusListeners({
-      pickFood: this.setNewPlace.bind(this),
+      pickFood: this.pickFood.bind(this),
     });
   }
 
   init() {
-    this.food.init({});
+    this.food.init({ life: Math.floor(Math.random() * 10000) });
     this.setNewPlace();
+  }
+
+  pickFood(position) {
+    if (position && position.x === this.food.getX() && position.y === this.food.getY()) {
+      this.setNewPlace(position);
+    }
   }
 
   setNewPlace() {

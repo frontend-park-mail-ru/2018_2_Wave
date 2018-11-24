@@ -1,6 +1,6 @@
 export default class FoodsModel {
   constructor(foodCount) {
-    this.foodCount = foodCount;
+    this.count = foodCount;
     this.foods = [];
     return this;
   }

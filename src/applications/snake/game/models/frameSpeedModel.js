@@ -3,7 +3,14 @@ export default class FrameSpeedModel {
     this.framesPerSecond = startSpeed;
   }
 
-  setFramesSpeed(speed) {
+  setFrameSpeed(speed) {
     this.framesPerSecond = speed;
+  }
+
+  getSpeed() {
+    return this.framesPerSecond;
+  }
+
+  init() {
   }
 }
