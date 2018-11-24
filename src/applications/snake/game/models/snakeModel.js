@@ -17,16 +17,16 @@ export default class SnakeModel {
       UP: 'DOWN',
       DOWN: 'UP',
       LEFT: 'RIGHT',
-      RIGHT: 'RIGHT',
+      RIGHT: 'LEFT',
     };
 
     this.direction = this.directions.RIGHT;
-
+    this.prevDirection = this.direction;
     this.destroyed = false;
   }
 
   init({
-    segments,
+    segments = [],
     snakeText,
     startPosition,
     destroyed,
@@ -54,6 +54,7 @@ export default class SnakeModel {
   }
 
   setDirection(direction) {
+    this.prevDirection = this.direction;
     this.direction = direction;
   }
 
@@ -65,8 +66,8 @@ export default class SnakeModel {
     return this.snakeText;
   }
 
-  isOpositDirection(direction) {
-    return direction === this.directionsOposit[this.direction];
+  isReverse() {
+    return this.direction === this.directionsOposit[this.prevDirection];
   }
 
   turnAround() {

@@ -106,9 +106,12 @@ export default class SnakeController {
       newY = this.level.getHeight() - 1;
     }
 
+
     const position = new Position(newX, newY);
     if (this.isColisionWithWall(position)) {
-      busController.emit('DEAD');
+      busController.emit('DEAD', 'WALL_COLLISION');
+    } else if (this.snake.isReverse()) {
+      busController.emit('DEAD', 'REVERSE');
     } else if (this.isColisionWithFood(position)) {
       busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
