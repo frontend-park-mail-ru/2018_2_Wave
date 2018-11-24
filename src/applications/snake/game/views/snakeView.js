@@ -21,7 +21,7 @@ export default class SnakeView {
       } else {
         canvas.drawRect({
           fillStyle: '#003300',
-          strokeStyle: '#009900',
+          strokeStyle: 'greenyellow',
           x: segment.x,
           y: segment.y,
           width: 1,

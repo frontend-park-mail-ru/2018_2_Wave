@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "public/app.js",
   "scripts": {
-    "prestart": "webpack -d",
     "start": "node ./server/server.js",
     "dev": "webpack -d --watch",
     "prod": "webpack -p"
