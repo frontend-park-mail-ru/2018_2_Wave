@@ -7,6 +7,7 @@ import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
 import FoodController from '../controllers/foodController';
 import AudioController from '../controllers/audioController';
+import PlayerController from '../controllers/playerController';
 
 import LevelView from '../views/levelView';
 import SnakeView from '../views/snakeView';
@@ -15,6 +16,7 @@ import FoodView from '../views/foodView';
 import LevelModel from '../models/levelModel';
 import SnakeModel from '../models/snakeModel';
 import FoodModel from '../models/foodModel';
+import PlayerModel from '../models/playerModel';
 
 export default class OfflineGame extends GameCore {
   constructor(controller, scene, gameInitData) {
@@ -22,7 +24,6 @@ export default class OfflineGame extends GameCore {
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
-    this.lastFrame = 0;
     this.framesPerSecond = 10;
 
     this.snakeText = gameInitData.snakeText;
@@ -39,6 +40,9 @@ export default class OfflineGame extends GameCore {
 
 
     this.level = new LevelModel(this.cellCount);
+    
+    this.player = new PlayerModel();
+    this.playerController = new PlayerController(this.player);
 
     this.levelController = new LevelController(this.level);
     this.controllers.push(this.levelController);
@@ -54,14 +58,14 @@ export default class OfflineGame extends GameCore {
     this.controllers.push(this.foodController);
     this.scene.push(new FoodView(this.food));
 
-    // this.audioController = new AudioController();
+    this.audioController = new AudioController();
   }
 
   start() {
+    this.controllers.forEach(controller => controller.init());
     super.start();
 
-    this.controllers.forEach(controller => controller.init());
-
+    this.audioController.start();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
@@ -83,24 +87,26 @@ export default class OfflineGame extends GameCore {
 
       this.scene.renderScene();
 
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop.bind(this));
+      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
     }, 1000 / this.framesPerSecond);
   }
 
   pause() {
     super.pause();
+    this.audioController.pause();
     cancelAnimationFrame(this.gameloopRequestId);
   }
 
   resume() {
     super.resume();
-
+    this.audioController.resume();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
 
   destroy() {
     super.destroy();
+    this.audioController.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
   }
 }

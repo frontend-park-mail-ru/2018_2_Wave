@@ -59,8 +59,11 @@ export default class SnakeController {
   }
 
   isColisionWithFood(position) {
-    const isFood = this.level.isFood(position);
-    return isFood;
+    return this.level.isFood(position);
+  }
+
+  isColisionWithWall(position) {
+    return this.level.isWall(position);
   }
 
   snakeAppendLetter(letter, position) {
@@ -104,7 +107,9 @@ export default class SnakeController {
     }
 
     const position = new Position(newX, newY);
-    if (this.isColisionWithFood(position)) {
+    if (this.isColisionWithWall(position)) {
+      busController.emit('DEAD');
+    } else if (this.isColisionWithFood(position)) {
       busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
     } else {
@@ -125,14 +130,6 @@ export default class SnakeController {
 
       this.snake.popSegment();
     }
-
-
-    /*
-    if (!this.isColisionWithFood(position)) {
-      this.snake.popSegment();
-    }
-    this.snake.segments.unshift(position);
-    */
   }
 
   update() {

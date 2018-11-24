@@ -17,11 +17,6 @@ export default class AudioController {
       turnDown,
     ];
 
-    this.eventsMethods = {
-      startGame: this.mainAudioPlay.bind(this),
-    };
-
-    this.busController.setBusListeners(this.eventsMethods);
     this.init();
   }
 
@@ -30,15 +25,21 @@ export default class AudioController {
     const randomAudioIndex = Math.floor(Math.random() * (audios - 1));
     const mainAudio = this.mainAudios[randomAudioIndex];
     this.mainAudio = new AudioModel(mainAudio);
-    this.mainAudioPlay();
   }
 
-  mainAudioPlay() {
-    console.log('main audio play');
+  start() {
     this.mainAudio.play();
   }
 
-  mainAudioPause() {
+  pause() {
+    this.mainAudio.pause();
+  }
+
+  resume() {
+    this.mainAudio.play();
+  }
+
+  destroy() {
     this.mainAudio.pause();
   }
 }

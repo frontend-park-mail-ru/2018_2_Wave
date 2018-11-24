@@ -30,10 +30,7 @@ export default class SnakeApp extends BaseApp {
   pause() {
     this.env.hide();
     super.pause();
-
-
-    // TODO: FIXME: achtung!!!
-    this.game.destroy();
+    this.game.pause();
   }
 
   resume() {
@@ -48,16 +45,6 @@ export default class SnakeApp extends BaseApp {
 
 
   initGame() {
-    // TODO think about chosing game mode
-    /*
-    if (pathname === '/game/online-mode') {
-      mode = GAME_MODES.ONLINE;
-    } else {
-      mode = GAME_MODES.OFFLINE;
-    }
-    */
-
-
     const gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {

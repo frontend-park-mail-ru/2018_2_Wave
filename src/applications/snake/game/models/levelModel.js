@@ -19,6 +19,11 @@ export default class levelModel {
     return this.map[this.index(position)] === 3;
   }
 
+  isWall(position) {
+    return this.map[this.index(position)] === 1
+    || this.map[this.index(position)] === 2;
+  }
+
   getWidth() {
     return this.size.getWidth();
   }
