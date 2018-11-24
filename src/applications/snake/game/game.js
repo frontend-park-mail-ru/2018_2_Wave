@@ -11,12 +11,13 @@ export default class Game {
     let GameConstructor = null;
     switch (mode) {
       case GAME_MODES.ONLINE: {
-        GameConstructor = OnlineGame;
+        // GameConstructor = OnlineGame;
+        GameConstructor = OfflineGame;
         break;
       }
       case GAME_MODES.OFFLINE: {
-        // GameConstructor = OfflineGame;
-        GameConstructor = OnlineGame;
+        GameConstructor = OfflineGame;
+        // GameConstructor = OnlineGame;
         break;
       }
       default:
@@ -51,12 +52,18 @@ export default class Game {
   }
 
   start() {
-    this.keyboardController.start();
     this.gameCore.start();
   }
 
+  pause() {
+    this.gameCore.pause();
+  }
+
+  resume() {
+    this.gameCore.resume();
+  }
+
   destroy() {
-    this.keyboardController.stop();
     this.gameCore.destroy();
   }
 }

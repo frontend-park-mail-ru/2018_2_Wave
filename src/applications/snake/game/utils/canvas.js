@@ -59,10 +59,9 @@ export default class Canvas {
     lineCap = 'square',
     x,
     y,
-    width,
-    height,
+    width = 1,
+    height = 1,
   }) {
-
     this.context.fillStyle = fillStyle;
     this.context.strokeStyle = strokeStyle;
     // this.context.lineWidth = lineWidth;
@@ -71,7 +70,8 @@ export default class Canvas {
     this.context.lineCap = lineCap;
     this.context.beginPath();
 
-    this.context.rect(x * this.cellSize.width, y * this.cellSize.height, width * this.cellSize.width, height * this.cellSize.height);
+    this.context.rect(x * this.cellSize.width, y * this.cellSize.height, 
+      width * this.cellSize.width, height * this.cellSize.height);
     this.context.fill();
     this.context.stroke();
     this.context.closePath();

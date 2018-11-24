@@ -2,11 +2,11 @@ import busController from '../../modules/busController';
 import Position from '../models/position';
 
 export default class LevelController {
-  constructor(levelModel) {
+  constructor(level) {
     this.busController = busController;
-    this.levelModel = levelModel;
+    this.level = level;
 
-    this.maxWallLength  = this.levelModel.getHeight() / 4;
+    this.maxWallLength  = this.level.getHeight() / 4;
 
     this.eventsMethosds = {
       pickFood: this.removeFoodFromMap.bind(this),
@@ -18,7 +18,7 @@ export default class LevelController {
   }
 
   removeFoodFromMap(position) {
-    this.levelModel.removeFood(position);
+    this.level.removeFood(position);
   }
 
   init() {
@@ -26,39 +26,46 @@ export default class LevelController {
   }
 
   generateLevel() {
-    /*
-    const levelHeight = this.levelModel.getHeight();
-    const levelWidth = this.levelModel.getWidth();
+    const levelHeight = this.level.size.height;
+    const levelWidth = this.level.size.width;
+
+    this.maxWallLength = 10;
 
     let wallLength = this.maxWallLength;
     let wallType = 1;
 
-    console.log(levelHeight, levelWidth, wallLength);
+    // TODO переделать нормально
     for (let x = 0; x < levelWidth; x += 1) {
       if (wallLength) {
-        this.levelModel.setWall(new Position(x, 0), wallType);
-        this.levelModel.setWall(new Position(x, levelHeight - 1), wallType);
+        if (wallType) {
+          this.level.setWall(new Position(x, 0), wallType);
+          this.level.setWall(new Position(x, levelHeight - 1), wallType);
+        }
         wallLength -= 1;
       } else {
-        wallLength = this.maxWallLength;
-        wallType = Math.floor(Math.random() * 3);
+        console.log('wallType', wallType);
+        wallLength = Math.floor(Math.random() * this.maxWallLength) + 3;
+        if (wallType) {
+          wallType = 0;
+        } else {
+          wallType = Math.floor(Math.random() * 2) + 1;
+        }
       }
     }
 
     wallLength = this.maxWallLength;
     for (let y = 0; y < levelHeight; y += 1) {
       if (wallLength) {
-        this.levelModel.setWall(new Position(0, y), wallType);
-        this.levelModel.setWall(new Position(levelWidth - 1, y), wallType);
+        this.level.setWall(new Position(0, y), wallType);
+        this.level.setWall(new Position(levelWidth - 1, y), wallType);
         wallLength -= 1;
       } else {
         wallLength = this.maxWallLength;
         wallType = Math.floor(Math.random() * 3);
       }
     }
-    */
 
-    return this.levelModel.getMap();
+    return this.level.getMap();
   }
 
   update() {

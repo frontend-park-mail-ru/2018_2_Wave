@@ -26,7 +26,6 @@ export default class OfflineGame extends GameCore {
     this.framesPerSecond = 10;
 
     this.snakeText = gameInitData.snakeText;
-    // this.DOMRect = gameInitData.DOMRect;
     this.startX = gameInitData.DOMRect.x;
     this.startY = gameInitData.DOMRect.y;
 
@@ -63,19 +62,10 @@ export default class OfflineGame extends GameCore {
 
     this.controllers.forEach(controller => controller.init());
 
-    setTimeout(() => {
-      this.busController.emit(events.START_GAME);
-    });
-  }
-
-  onGameStarted(evt) {
-    // this.scene.init(evt);
-    this.scene.start();
-
     this.lastFrame = performance.now();
-    //his.gameloopRequestId = requestAnimationFrame(this.gameloop);
-    this.gameloop();
+    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
+
 
   update() {
     this.controllers.forEach(controller => controller.update());
@@ -83,7 +73,6 @@ export default class OfflineGame extends GameCore {
 
   gameloop(now) {
     setTimeout((_) => {
-      const delay = now - this.lastFrame;
       this.lastFrame = now;
 
       if (this.keyboardController.lastCommand) {
@@ -94,19 +83,24 @@ export default class OfflineGame extends GameCore {
 
       this.scene.renderScene();
 
-      // busController.emit(events.GAME_STATE_CHANGED);
-      // check if dead
-
       this.gameloopRequestId = requestAnimationFrame(this.gameloop.bind(this));
     }, 1000 / this.framesPerSecond);
   }
 
-  onControllsPressed(evt) {
-
+  pause() {
+    super.pause();
+    cancelAnimationFrame(this.gameloopRequestId);
   }
 
-  onGameFinished(evt) {
+  resume() {
+    super.resume();
+
+    this.lastFrame = performance.now();
+    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+  }
+
+  destroy() {
+    super.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
-    this.busController.emit('CLOSE_GAME');
   }
 }

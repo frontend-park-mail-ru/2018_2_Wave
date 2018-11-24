@@ -7,6 +7,8 @@ import GameEnv from './views/env';
 import GameView from './views/game_field';
 import Game from './game/game';
 
+import css from './style.css';
+
 
 export default class SnakeApp extends BaseApp {
   constructor(appUrl, parent) {
@@ -67,7 +69,7 @@ export default class SnakeApp extends BaseApp {
       // windowWidth: window.innerWidth,
       // windowHeight: window.innerHeight,
       windowWidth: 800,
-      windowHeight: 800,
+      windowHeight: 500,
     };
 
     const mode = navigator.onLine
