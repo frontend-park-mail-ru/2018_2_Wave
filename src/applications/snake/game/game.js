@@ -13,6 +13,9 @@ export default class Game {
 
     // change mode
     mode = GAME_MODES.ARCADE;
+    // mode = GAME_MODES.ONLINE;
+    // mode = GAME_MODES.OFFLINE;
+
     switch (mode) {
       case GAME_MODES.ONLINE: {
         // GameConstructor = OnlineGame;
