@@ -25,6 +25,7 @@ export default class OfflineGame extends GameCore {
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.framesPerSecond = 10;
+    this.paused = false;
 
     this.snakeText = gameInitData.snakeText;
     this.startX = gameInitData.DOMRect.x;
@@ -59,6 +60,18 @@ export default class OfflineGame extends GameCore {
     this.scene.push(new FoodView(this.food));
 
     this.audioController = new AudioController();
+
+    this.resume =  this.resume.bind(this);
+    this.resumeEvents = {
+      Space: this.resume,
+    };
+
+    this.pause = this.pause.bind(this);
+    this.stopEvents = {
+      Space: this.pause,
+    };
+
+    busController.setBusListeners(this.stopEvents);
   }
 
   start() {
@@ -83,7 +96,9 @@ export default class OfflineGame extends GameCore {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
-      this.update();
+      if (!this.paused) {
+        this.update();
+      }
 
       this.scene.renderScene();
 
@@ -92,16 +107,19 @@ export default class OfflineGame extends GameCore {
   }
 
   pause() {
+    this.paused = true;
+    busController.removeBusListeners(this.stopEvents);
+    busController.setBusListeners(this.resumeEvents);
     super.pause();
     this.audioController.pause();
-    cancelAnimationFrame(this.gameloopRequestId);
   }
 
   resume() {
+    busController.removeBusListeners(this.resumeEvents);
+    busController.setBusListeners(this.stopEvents);
     super.resume();
     this.audioController.resume();
-    this.lastFrame = performance.now();
-    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+    this.paused = false;
   }
 
   destroy() {

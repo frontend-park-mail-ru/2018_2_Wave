@@ -10,13 +10,13 @@ export default class GameCore {
   }
 
   pause() {
-    this.keyboardController.stop();
-    this.scene.pause();
+    // this.keyboardController.stop();
+    // this.scene.pause();
   }
 
   resume() {
-    this.keyboardController.start();
-    this.scene.resume();
+    // this.keyboardController.start();
+    // this.scene.resume();
   }
 
   destroy() {

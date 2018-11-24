@@ -8,7 +8,10 @@ class KeyboardController {
       // 13, // enter
       // 27, // esc
       // 16, // shift
-      // 32, // space
+      32, // space
+    ];
+
+    this.snakeControls = [
       37, // left arrow
       38, // up arrow
       39, // right arrow
@@ -39,6 +42,10 @@ class KeyboardController {
     const temp = this.lastCommand;
     this.lastCommand = undefined;
     return temp;
+  }
+
+  isSnakeControls(keyCode) {
+    return (this.snakeControls.indexOf(keyCode) > -1);
   }
 
   /*
@@ -78,7 +85,10 @@ class KeyboardController {
 
     if (this.isControlKey(keyCode)) {
       e.preventDefault();
-      bus.emit(e.key);
+      bus.emit(e.code);
+    } else if (this.isSnakeControls(keyCode)) {
+      e.preventDefault();
+      bus.emit(e.code);
       this.lastCommand = e.key;
     }
   }
