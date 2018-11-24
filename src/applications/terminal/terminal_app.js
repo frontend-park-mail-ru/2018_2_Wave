@@ -1,12 +1,13 @@
 import TerminalView from './terminal_view';
 import BaseApp from '../base_app';
-
+import messages from './messages';
+import bus from '../../modules/bus';
 
 class TerminalApp extends BaseApp {
   constructor(url, parent) {
     super(url, parent, TerminalView);
 
-    this.intro = 'stanford@rasseki:~/$';
+    this.intro = 'stanford@wave:~/$';
 
     this.listeners = {
       keydown: this.handleKeypress.bind(this),
@@ -17,6 +18,7 @@ class TerminalApp extends BaseApp {
       help: this.help,
       history: this.history,
       clear: this.clear,
+      snake: () => bus.emit('link', '/snake'),
     };
 
     this.commandHistory = [];
@@ -38,7 +40,7 @@ class TerminalApp extends BaseApp {
   start() {
     super.start();
     this.addListeners();
-    this.view.printString('Hello!');
+    this.view.printBlock(messages.hello);
     this.view.addInput(this.intro);
   }
 
@@ -61,8 +63,9 @@ class TerminalApp extends BaseApp {
 
   /*   terminal commands   */
   help() {
+    this.view.printString('Available commands:');
     Object.keys(this.commands).forEach((key) => {
-      this.view.printString(key);
+      this.view.printString(` * ${key}`);
     });
   }
 
@@ -126,7 +129,6 @@ class TerminalApp extends BaseApp {
     Object.keys(this.listeners).forEach((key) => {
       // FIXME:
       document./*this.terminal.*/removeEventListener(key, this.listeners[key]);
-      
     });
   }
 }
