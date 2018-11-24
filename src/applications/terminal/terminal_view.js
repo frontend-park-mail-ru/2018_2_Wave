@@ -2,9 +2,10 @@ import Element from '../element';
 
 import terminalTemplate from './templates/terminal.pug';
 import messageTemplate from './templates/message.pug';
+import textblockTemplate from './templates/textblock.pug';
 import inputTemplate from './templates/input.pug';
 
-import './terminal.css';
+import './styles/terminal.css';
 
 
 class TerminalView extends Element {
@@ -31,6 +32,13 @@ class TerminalView extends Element {
     this.terminal.innerHTML += messageTemplate(
       { string: empty ? '' : string },
     );
+  }
+
+  printBlock(text) {
+    if (!text) return;
+    if (!this.rendered) this.render();
+
+    this.terminal.innerHTML += textblockTemplate({ text });
   }
 
 
