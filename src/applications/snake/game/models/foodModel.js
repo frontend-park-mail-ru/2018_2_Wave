@@ -11,7 +11,11 @@ export default class FoodModel {
     type = 3,
     currentLetter = this.foods[Math.floor(Math.random() * this.foods.length)],
   }) {
-    this.life = life;
+    if (life < 2000) {
+      this.life = 2000;
+    } else {
+      this.life = life;
+    }
     this.birth = birth;
     this.age = age;
     this.type = type;
