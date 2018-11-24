@@ -47,4 +47,8 @@ export default class FoodModel {
   resetBirth() {
     this.birth = Date.now();
   }
+
+  getTimeToDeath() {
+    return this.life + this.birth - Date.now();
+  }
 }
