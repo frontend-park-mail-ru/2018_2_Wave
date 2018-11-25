@@ -18,7 +18,7 @@ import SnakeModel from '../models/snakeModel';
 import FoodModel from '../models/foodModel';
 import EnemiesModel from '../models/enemiesModel';
 
-import ws from '../../modules/webSocket';
+import ws from '../../../../modules/webSocket';
 
 export default class OnlineGame extends GameCore {
   constructor(controller, scene, gameInitData) {

@@ -20,7 +20,7 @@ body {
     margin: 0;
 }
 
-.header {
+.chat__header {
     border-style: solid;
     border-width: 1px 0px;
     border-color: greenyellow;
@@ -36,7 +36,7 @@ body {
     height: 50px;
 }
 
-.main {
+.chat__main {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
