@@ -6,7 +6,7 @@ class Ws {
     this.bus = bus;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'ws://chat.rasseki.com';
+    const address = 'wss://chat.rasseki.com/chat';
     this.ws = new WebSocket(address);
 
     this.ws.onopen = (event) => {
@@ -17,23 +17,31 @@ class Ws {
       this.ws.onclose = () => {
         console.log('WebSocket closed');
       };
+
+      this.refreshTimer = setInterval(() => {
+        this.send('empty');
+      }, 30000);
     };
   }
 
+
   handleMessage(event) {
-    const messageText = event.data;
+    const messageText = event;
+    // console.log({ messageText });
+
 
     try {
-      const message = JSON.parse(messageText);
-      this.bus.emit(message.type, message.payload);
+      const message = JSON.parse(messageText.data);
+      console.log(message.room_id);
+      this.bus.emit(message.room_id, JSON.parse(message.payload));
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
     }
   }
 
-  send(type, payload) {
+  send(signal, payload) {
     // костыль
-    this.waitForConnection(_ => this.ws.send(JSON.stringify({ room_id: 'app',type, payload })), 5000);
+    this.waitForConnection(() => this.ws.send(JSON.stringify({ room_id: 'manager', signal, payload })), 5000);
   }
 
   waitForConnection(callback, interval) {

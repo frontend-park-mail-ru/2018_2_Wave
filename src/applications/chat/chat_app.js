@@ -10,6 +10,9 @@ export default class ChatApp extends BaseApp {
 
   start() {
     super.start();
-    this.chat.updateChats();
+    setTimeout(() => {
+      this.chat.askForChats();
+      console.log('hello');
+    }, 2000);
   }
 }
