@@ -3,10 +3,11 @@ import Element from '../../element';
 const template = require('../templates/menu.pug');
 
 const buttons = {
-  '/terminal': 'Terminal',
-  '/snake': 'Anacondus',
-  '/leaderboard': 'Leaderboard',
-  '/settings': 'Settings',
+  '/terminal': 'Terminalium',
+  '/snake': 'Anacondium',
+  '/chat': 'Chatium',
+  '/leaderboard': 'Leaderboardium',
+  '/settings': 'Settium',
 };
 
 
