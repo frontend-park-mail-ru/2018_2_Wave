@@ -6,12 +6,11 @@ class Ws {
     this.bus = bus;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'ws://127.0.0.1:9600/conn/ws';
+    const address = 'ws://chat.rasseki.com';
     this.ws = new WebSocket(address);
 
     this.ws.onopen = (event) => {
       console.log(`WebSocket on address ${address} opened`);
-      console.dir(this.ws);
       console.log(this.ws.onmessage);
       this.ws.onmessage = this.handleMessage.bind(this);
 
