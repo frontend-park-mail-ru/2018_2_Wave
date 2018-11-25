@@ -1,5 +1,5 @@
 import bus from './busController';
-import SwipeDetector from './swipeDetector';
+import swipeDetector from './swipeDetector';
 
 class KeyboardController {
   constructor() {
@@ -26,7 +26,7 @@ class KeyboardController {
 
     ];
 
-    this.swipeDetector = new SwipeDetector();
+    this.swipeDetector = swipeDetector;
   }
 
   start() {
@@ -43,10 +43,21 @@ class KeyboardController {
     return (this.controls.indexOf(keyCode) > -1);
   }
 
+  isCommand() {
+    return (this.lastCommand || this.swipeDetector.lastCommand);
+  }
+
   getLastCommand() {
-    const temp = this.lastCommand;
-    this.lastCommand = undefined;
-    return temp;
+    if (this.lastCommand) {
+      const temp = this.lastCommand;
+      this.lastCommand = undefined;
+      return temp;
+    }
+
+    if (this.swipeDetector.isCommand()) {
+      return this.swipeDetector.getLastCommand();
+    }
+    return undefined;
   }
 
   isSnakeControls(keyCode) {
@@ -55,7 +66,7 @@ class KeyboardController {
 
   /*
   isInputKey(keyCode) {
-    return (keyCode >= 48 && keyCode <= 90 
+    return (keyCode >= 48 && keyCode <= 90
       || keyCode >= 96 && keyCode <= 111
       || keyCode >= 186 && keyCode <= 222);
   }

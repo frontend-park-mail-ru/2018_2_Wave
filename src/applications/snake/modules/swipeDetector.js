@@ -1,6 +1,4 @@
-import bus from './busController';
-
-export default class swipeDetector {
+class SwipeDetector {
   constructor(root = document) {
     this.root = root;
     this.allowedTime = 3000;
@@ -11,6 +9,7 @@ export default class swipeDetector {
       touchmove: this.touchMove.bind(this),
       touchend: this.touchEnd.bind(this),
     };
+    this.lastCommand = undefined;
   }
 
   start() {
@@ -23,6 +22,17 @@ export default class swipeDetector {
     Object.keys(this.events).forEach(
       event => this.root.removeEventListener(event, this.events[event], false),
     );
+  }
+
+
+  isCommand() {
+    return this.lastCommand;
+  }
+
+  getLastCommand() {
+    const temp = this.lastCommand;
+    this.lastCommand = undefined;
+    return temp;
   }
 
   touchStart(e) {
@@ -44,8 +54,6 @@ export default class swipeDetector {
     this.dx = element.pageX - this.startX;
     this.dy = element.pageY - this.startY;
     this.dtime = Date.now() - this.startTime;
-    alert(this.dx);
-    alert(this.dy);
 
     if (this.dtime <= this.allowedTime) {
       // if (Math.abs(this.dx) >= this.threshold && Math.abs(this.dy) <= this.restraint) { // 2nd condition for horizontal swipe met
@@ -55,15 +63,15 @@ export default class swipeDetector {
       // }
       if (Math.abs(this.dx) > Math.abs(this.dy)) {
         this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
-        alert(this.swipeDir);
       } else {
         this.swipeDir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown';
-        alert(this.swipeDir);
       }
     }
 
-    alert(this.swipeDir);
-    bus.emit(this.swipeDir);
+    this.lastCommand = this.swipeDir;
     e.preventDefault();
   }
 }
+
+const swipeDetector = new SwipeDetector();
+export default swipeDetector;

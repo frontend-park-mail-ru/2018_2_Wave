@@ -110,7 +110,7 @@ export default class OnlineGame extends GameCore {
       const delay = now - this.lastFrame;
       this.lastFrame = now;
 
-      if (this.keyboardController.lastCommand) {
+      if (this.keyboardController.isCommand()) {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 

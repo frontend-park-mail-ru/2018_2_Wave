@@ -92,7 +92,7 @@ export default class OfflineGame extends GameCore {
     setTimeout((_) => {
       this.lastFrame = now;
 
-      if (this.keyboardController.lastCommand) {
+      if (this.keyboardController.isCommand()) {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
