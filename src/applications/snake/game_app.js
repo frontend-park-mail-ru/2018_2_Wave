@@ -7,7 +7,7 @@ import GameEnv from './views/env';
 import GameView from './views/game_field';
 import Game from './game/game';
 
-import './style.css';
+import './styles/style.css';
 
 
 export default class SnakeApp extends BaseApp {
