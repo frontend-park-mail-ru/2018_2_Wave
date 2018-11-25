@@ -1,7 +1,7 @@
 import bus from './bus';
 
 
-const URL = 'https://api.rasseki.com';
+const URL = 'http://192.168.43.251:9600';
 
 // errors which are handled by another modules
 const errorEvents = {

@@ -3,10 +3,9 @@ import bus from './busController';
 export default class swipeDetector {
   constructor(root = document) {
     this.root = root;
-    this.allowedTime = 300;
+    this.allowedTime = 3000;
     this.threshold = 150; // required min distance traveled to be considered swipe
     this.restraint = 100;
-    this.swipeDir = '';
     this.events = {
       touchstart: this.touchStart.bind(this),
       touchmove: this.touchMove.bind(this),
@@ -27,9 +26,9 @@ export default class swipeDetector {
   }
 
   touchStart(e) {
-    const element = e.e.changedTouches[0];
-    this.stratX = element.pageX();
-    this.startY = element.pageY();
+    const element = e.changedTouches.item(0);
+    this.startX = element.pageX;
+    this.startY = element.pageY;
     this.startTime = Date.now();
     e.preventDefault();
   }
@@ -40,18 +39,30 @@ export default class swipeDetector {
   }
 
   touchEnd(e) {
-    const element = e.e.changedTouches[0];
-    this.dx = element.pageX() - this.stratX;
-    this.dy = element.pageY() - this.stratY;
-
+    // const element = e.changedTouches[0];
+    const element = e.changedTouches.item(0);
+    this.dx = element.pageX - this.startX;
+    this.dy = element.pageY - this.startY;
     this.dtime = Date.now() - this.startTime;
+    alert(this.dx);
+    alert(this.dy);
+
     if (this.dtime <= this.allowedTime) {
-      if (Math.abs(this.dx) >= this.threshold && Math.abs(this.dy) <= this.restraint) { // 2nd condition for horizontal swipe met
-        this.swipedir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight'; // if dist traveled is negative, it indicates left swipe
-      } else if (Math.abs(this.dy) >= this.threshold && Math.abs(this.dx) <= this.restraint) { // 2nd condition for vertical swipe met
-        this.swipedir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown'; // if dist traveled is negative, it indicates up swipe
+      // if (Math.abs(this.dx) >= this.threshold && Math.abs(this.dy) <= this.restraint) { // 2nd condition for horizontal swipe met
+      //   this.swipedir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight'; // if dist traveled is negative, it indicates left swipe
+      // } else if (Math.abs(this.dy) >= this.threshold && Math.abs(this.dx) <= this.restraint) { // 2nd condition for vertical swipe met
+      //   this.swipedir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown'; // if dist traveled is negative, it indicates up swipe
+      // }
+      if (Math.abs(this.dx) > Math.abs(this.dy)) {
+        this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
+        alert(this.swipeDir);
+      } else {
+        this.swipeDir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown';
+        alert(this.swipeDir);
       }
     }
+
+    alert(this.swipeDir);
     bus.emit(this.swipeDir);
     e.preventDefault();
   }

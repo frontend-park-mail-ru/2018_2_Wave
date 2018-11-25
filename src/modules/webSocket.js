@@ -6,42 +6,52 @@ class Ws {
     this.bus = bus;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'wss://chat.rasseki.com/chat';
+    const address = 'ws://192.168.43.251:9600/conn/ws';
     this.ws = new WebSocket(address);
 
     this.ws.onopen = (event) => {
       console.log(`WebSocket on address ${address} opened`);
-      console.log(this.ws.onmessage);
       this.ws.onmessage = this.handleMessage.bind(this);
 
       this.ws.onclose = () => {
         console.log('WebSocket closed');
       };
 
-      this.refreshTimer = setInterval(() => {
-        this.send('empty');
-      }, 30000);
+      this.send({
+        room_id: 'app',
+        signal: 'add_to_room',
+        payload: {
+          room_id: 'snake',
+        },
+      });
+
+      setTimeout(() => {
+        this.send({
+          room_id: 'snake',
+          signal: 'game_play',
+        });
+      }, 1000);
     };
   }
 
-
   handleMessage(event) {
     const messageText = event;
+    console.log(event);
     // console.log({ messageText });
-
 
     try {
       const message = JSON.parse(messageText.data);
       console.log(message.room_id);
-      this.bus.emit(message.room_id, JSON.parse(message.payload));
+      console.log(message.payload);
+      this.bus.emit(message.room_id, message.payload);
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
     }
   }
 
-  send(signal, payload) {
+  send(data) {
     // костыль
-    this.waitForConnection(() => this.ws.send(JSON.stringify({ room_id: 'manager', signal, payload })), 5000);
+    this.waitForConnection(() => { console.log('send', data); this.ws.send(JSON.stringify(data)); }, 5000);
   }
 
   waitForConnection(callback, interval) {
