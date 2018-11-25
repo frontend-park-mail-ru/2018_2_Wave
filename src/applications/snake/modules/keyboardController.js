@@ -1,4 +1,5 @@
 import bus from './busController';
+import SwipeDetector from './swipeDetector';
 
 class KeyboardController {
   constructor() {
@@ -24,14 +25,18 @@ class KeyboardController {
       67, // ctrl+c
 
     ];
+
+    this.swipeDetector = new SwipeDetector();
   }
 
   start() {
     document.addEventListener('keydown', this.acceptInput.bind(this));
+    this.swipeDetector.start();
   }
 
   stop() {
     document.removeEventListener('keydown', this.acceptInput.bind(this));
+    this.swipeDetector.stop();
   }
 
   isControlKey(keyCode) {
