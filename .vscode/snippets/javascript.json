@@ -1,0 +1,22 @@
+{
+  "ajax": {
+    "prefix": "ajax",
+    "scope": "javascript,typescript",
+    "body": [
+      "${1:// Achtung! Функция, в которой идёт вызов ajax, должна быть async!}",
+      "try {",
+      "  const data = await ajax.${2|GET,POST|}({",
+      "    path: '${3:/path}',",
+      "    ${4:body: ${5:someData},}",
+      "  });",
+      "  ${6:// success!",
+      "  console.log(data);}",
+      "} catch (error) {",
+      "  ${7:// failure!",
+      "  // error.status - status code",
+      "  // error.type - Client Error, Server Error or Unknown",
+      "  console.error(error);}",
+      "}"
+    ]
+  }
+}

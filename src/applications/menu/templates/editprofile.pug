@@ -1,0 +1,45 @@
+#register.block
+  div
+    form#editProfileForm(
+      name='editprofile-form'
+      enctype='multipart/form-data'
+    )
+      input#usernameInput(
+        name= 'username'
+        type= 'text'
+        placeholder= 'Username'
+        minlength='4'
+        value= user.username
+        required
+      )
+      .input-requirements
+        p#usernameMessage At least 4 characters long
+
+      input#passwordInput(
+        name='password'
+        type='password'
+        placeholder='Password'
+      )
+      .input-requirements
+        p#passwordMessage At least 6 characters long or empty
+
+      input#repeatPasswordInput(
+        name='repeatpassword'
+        type='password'
+        placeholder='Repeat Password'
+      )
+      .input-requirements
+        p#repeatPasswordMessage Passwords must match
+
+      label.button Choose avatar
+        input#fileInput(
+          name="avatar"
+          type="file"
+        )
+
+      input.button(
+        name='submit'
+        type='submit'
+        value='Save'
+        href='/profile'
+      )
