@@ -33,15 +33,15 @@ class Ws {
     try {
       const message = JSON.parse(messageText.data);
       console.log(message.room_id);
-      this.bus.emit(message.room_id, JSON.parse(message.payload));
+      this.bus.emit('new_chat', JSON.parse(message.payload));
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
     }
   }
 
-  send(signal, payload) {
+  send(room_id, signal, payload) {
     // костыль
-    this.waitForConnection(() => this.ws.send(JSON.stringify({ room_id: 'manager', signal, payload })), 5000);
+    this.waitForConnection(() => this.ws.send(JSON.stringify({ room_id, signal, payload })), 5000);
   }
 
   waitForConnection(callback, interval) {
@@ -58,4 +58,5 @@ class Ws {
 }
 
 const ws = new Ws();
+window.ws = ws;
 export default ws;

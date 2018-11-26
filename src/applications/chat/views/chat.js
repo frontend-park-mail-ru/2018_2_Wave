@@ -20,39 +20,26 @@ export default class ChatView extends Element {
   }
 
   askForChats() {
-    bus.listen('manager', this.updateChats);
-    ws.send('lobby_list');
+    bus.listen('new_chat', this.updateChats);
+    ws.send('manager', 'lobby_list');
   }
 
   updateChats(payload) {
     console.log({ payload });
     // get chat list
-    bus.ignore('manager', this.updateChats);
+    bus.ignore('new_chat', this.updateChats);
 
     const rooms = [
-      {
-        avatar: '/img/avatars/default',
-        room_id: '1',
-        name: 'vasya',
-        last: 'hello',
-      },
-      {
-        avatar: '/img/avatars/default',
-        room_id: '2',
-        name: 'petya',
-        last: 'hello',
-      },
       ...payload,
     ];
 
-    console.log('here');
-
-    this.roomList.innerHTML = '';
+    // this.roomList.innerHTML = '';
 
     rooms.forEach((room) => {
       this.roomList.innerHTML += roomTemplate({ room });
     });
 
+    
     // this.roomList.addEventListener('click', (event) => {
     //   console.log(event.target);
     // });
