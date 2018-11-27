@@ -4,8 +4,8 @@
   "main": "public/app.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "prestart": "webpack -d",
-    "dev": "webpack -d --watch",
+    "build": "webpack -d --watch --info-verbosity verbose",
+    "watch": "webpack --watch --info-verbosity verbose",
     "prod": "webpack -p"
   },
   "dependencies": {
@@ -14,6 +14,7 @@
     "hard-source-webpack-plugin": "^0.12.0",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "style-loader": "^0.23.0"
   },
   "devDependencies": {

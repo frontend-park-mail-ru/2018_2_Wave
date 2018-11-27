@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
@@ -12,12 +13,17 @@ module.exports = {
     filename: 'app.bundle.js',
   },
 
+  watch: true,
+
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
     new HardSourceWebpackPlugin({
       cacheDirectory: '.cache/',
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'src/sw.js'),
     }),
   ],
 
