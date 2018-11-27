@@ -9,14 +9,26 @@ new Router(document.body)
   .registerApp('snake', Snake)
   .start();
 
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js', { scope: '/' })
+  navigator.serviceWorker.register('./sw.js')
     .then((registration) => {
       // Registration was successful
       console.log('SW registration OK:', registration);
     })
     .catch((err) => {
       // registration failed :(
-      console.log('SW registration FAIL:', err);
+      console.log({ err });
     });
 }
+
+
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('/sw-test/sw.js', { scope: '/sw-test/' }).then(function(reg) {
+//     // регистрация сработала
+//     console.log('Registration succeeded. Scope is ' + reg.scope);
+//   }).catch(function(error) {
+//     // регистрация прошла неудачно
+//     console.log('Registration failed with ' + error);
+//   });
+// };

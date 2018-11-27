@@ -2,6 +2,7 @@ node_modules
 public/app.bundle.js
 public/index.html
 public/uploads
+public/sw.js
 dist
 cert
 .cache
