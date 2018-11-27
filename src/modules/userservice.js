@@ -33,20 +33,28 @@ class UserService {
   }
 
 
-  async update() {
+  async update(action) {
     this.updating = true;
-    const { err, profile: user } = await getProfile();
 
-    if (err) return;
+    if (action === 'logout') {
+      this.loggedIn = false;
+      this.user = {};
+    } else {
+      const { err, profile: user } = await getProfile();
+      if (err) {
+        if (err.status !== 401) console.error(err);
+        this.user = {};
+        this.loggedIn = false;
+      } else {
+        this.user = user;
+        this.loggedIn = true;
+      }
+    }
 
-    this.user = user;
-    this.loggedIn = true;
     this.updating = false;
     bus.emit('userUpdated');
   }
 }
 
 
-const userService = new UserService();
-
-export default userService;
+export default new UserService();

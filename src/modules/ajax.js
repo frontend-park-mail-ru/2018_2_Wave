@@ -1,7 +1,7 @@
 import bus from './bus';
 
 
-const URL = 'https://rasseki.com';
+const URL = 'https://api.rasseki.com';
 
 // errors which are handled by another modules
 const errorEvents = {
@@ -63,9 +63,9 @@ function ajax({
 
 
 const AjaxModule = {
-  GET: (params = {}) => ajax({ ...params, method: 'GET' }),
-  POST: (params = {}) => ajax({ ...params, method: 'POST' }),
-  PUT: (params = {}) => ajax({ ...params, method: 'PUT' }),
+  GET:    (params = {}) => ajax({ ...params, method: 'GET'    }),
+  POST:   (params = {}) => ajax({ ...params, method: 'POST'   }),
+  PUT:    (params = {}) => ajax({ ...params, method: 'PUT'    }),
   DELETE: (params = {}) => ajax({ ...params, method: 'DELETE' }),
 };
 
