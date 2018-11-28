@@ -7,14 +7,35 @@ export default class LevelView {
   }
 
   render(canvas) {
-    let x,
-      y,
-      cx,
-      cy;
-
     canvas.setBlackBackground(this.levelModel.size.width,
       this.levelModel.size.height);
 
+    this.levelModel.walls.forEach((wall) => {
+      const color = '#330000';
+      const strokeStyle = '#ff0000';
+      const size  = 1;
+      if (this.letters) {
+        canvas.drawLetter({
+          fillStyle: color,
+          font: 'Arial',
+          strokeStyle,
+          size,
+          letter: '*',
+          x: wall.x,
+          y: wall.y + size / 2 * 1.5,
+        });
+      } else {
+        canvas.drawRect({
+          fillStyle: color,
+          strokeStyle,
+          x: wall.x,
+          y: wall.y,
+        });
+      }
+    });
+
+
+    /*
     for (x = 0; x < this.levelModel.size.width; x += 1) {
       for (y = 0; y < this.levelModel.size.height; y += 1) {
         const type = this.levelModel.getField(new Position(x, y));
@@ -59,5 +80,6 @@ export default class LevelView {
         }
       }
     }
+    */
   }
 }

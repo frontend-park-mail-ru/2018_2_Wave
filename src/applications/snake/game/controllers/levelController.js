@@ -65,7 +65,6 @@ export default class LevelController {
       }
     }
 
-    return this.level.getMap();
   }
 
   update() {

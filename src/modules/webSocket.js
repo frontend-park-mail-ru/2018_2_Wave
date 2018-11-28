@@ -6,7 +6,7 @@ class Ws {
     this.bus = bus;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'ws://192.168.43.251:9600/conn/ws';
+    const address = 'ws://localhost:9600/conn/ws';
     this.ws = new WebSocket(address);
 
     this.ws.onopen = (event) => {
@@ -16,21 +16,6 @@ class Ws {
       this.ws.onclose = () => {
         console.log('WebSocket closed');
       };
-
-      this.send({
-        room_id: 'app',
-        signal: 'add_to_room',
-        payload: {
-          room_id: 'snake',
-        },
-      });
-
-      setTimeout(() => {
-        this.send({
-          room_id: 'snake',
-          signal: 'game_play',
-        });
-      }, 1000);
     };
   }
 

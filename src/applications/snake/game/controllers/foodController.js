@@ -31,7 +31,6 @@ export default class FoodController {
     this.food.setPosition(emptyCell);
     this.level.setFood(emptyCell);
     this.food.resetBirth();
-    console.log('new food place', emptyCell);
   }
 
   update() {

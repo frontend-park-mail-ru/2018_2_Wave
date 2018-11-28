@@ -1,7 +1,7 @@
 import bus from './bus';
 
 
-const URL = 'http://192.168.43.251:9600';
+const URL = 'http://localhost:9600';
 
 // errors which are handled by another modules
 const errorEvents = {

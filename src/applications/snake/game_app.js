@@ -45,6 +45,24 @@ export default class SnakeApp extends BaseApp {
 
 
   initGame() {
+
+    /*
+    this.send({
+      room_id: 'app',
+      signal: 'add_to_room',
+      payload: {
+        room_id: 'snake',
+      },
+    });
+
+    setTimeout(() => {
+      this.send({
+        room_id: 'snake',
+        signal: 'game_play',
+      });
+    }, 1000);
+    */
+
     const gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {
