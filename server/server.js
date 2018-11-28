@@ -8,10 +8,10 @@ const app = express();
 ws(app);
 
 app.use(morgan('dev'));
-app.use(favicon(path.join(__dirname, '../public/img/favicon.png')));
+app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
 
 app.all('*/sw.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/sw.js'));
+  res.sendFile(path.join(__dirname, '../public/sw.js'));
 });
 
 app.all('*/app.bundle.js', (req, res) => {
