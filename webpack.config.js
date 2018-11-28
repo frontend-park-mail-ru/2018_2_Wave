@@ -40,14 +40,17 @@ module.exports = {
           'css-loader',
         ],
       },
-
+      {
+        test: /\.ico$/,
+        loader: 'file-loader?name=favicon.ico',
+      },
       {
         test: /\.pug$/,
         loader: 'pug-loader',
       },
       {
         test: /\.mp3$/,
-        loader: 'file-loader',
+        loader: 'file-loader?name=music/[hash].[ext]',
       },
     ],
   },
