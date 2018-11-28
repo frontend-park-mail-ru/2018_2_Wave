@@ -6,7 +6,7 @@ class Ws {
     this.wsRouter = wsRouter;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'ws://localhost:9600/conn/ws';
+    const address = 'ws://localhost:9605/conn/ws';
     this.ws = new WebSocket(address);
 
     this.ws.onopen = (event) => {
@@ -16,30 +16,13 @@ class Ws {
       this.ws.onclose = () => {
         console.log('WebSocket closed');
       };
-/*
-      this.send({
-        room_id: 'app',
-        signal: 'add_to_room',
-        payload: {
-          room_id: 'snake',
-        },
-      });
-
-      setTimeout(() => {
-        this.send({
-          room_id: 'snake',
-          signal: 'game_play',
-        });
-      }, 1000);
-*/
-
     };
   }
 
   handleMessage(event) {
     try {
       const message = JSON.parse(event.data);
-      console.log(message);
+      console.log('handle message', message);
       this.wsRouter.sendByRoute(message);
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
@@ -48,7 +31,7 @@ class Ws {
 
   send(data) {
     // костыль
-    this.waitForConnection(() => { console.log('send', data); this.ws.send(JSON.stringify(data)); }, 5000);
+    this.waitForConnection(() => { console.log('send', data); this.ws.send(JSON.stringify(data)); }, 0);
   }
 
   waitForConnection(callback, interval) {

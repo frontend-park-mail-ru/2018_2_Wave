@@ -70,7 +70,7 @@ export default class SnakeApp extends BaseApp {
     }, 1000);
     */
 
-    let gameInitData = {
+   this.gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {
         x: 10,
@@ -88,10 +88,11 @@ export default class SnakeApp extends BaseApp {
       this.mode = GAME_MODES.ONLINE;
       webSocket.addToRoom();
       this.startGame = this.startGame.bind(this);
-      busController.setBusListeners({ data: this.startGame });
+      busController.setBusListeners({ STATUS_OK: this.startGame });
+      busController.setBusListeners({ data: this.setUserId.bind(this) });
     } else {
       this.mode = GAME_MODES.OFFLINE;
-      this.game = new Game(this.mode, this.gameContainer, gameInitData);
+      this.game = new Game(this.mode, this.gameContainer, this.gameInitData);
       // TODO: FIXME: call this in view after button press!
       this.game.start();
     }
@@ -99,9 +100,12 @@ export default class SnakeApp extends BaseApp {
     // this.game = new Game(mode, this.gameContainer, gameInitData);
   }
 
-  startGame(userId) {
+  setUserId(userId) {
+    this.userId = userId;
+  }
+
+  startGame() {
     this.gameInitData = {};
-    this.user_id = userId;
     busController.removeBusListeners({ data: this.startGame });
     webSocket.startGame();
     this.statusTick = this.statusTick.bind(this);
@@ -119,7 +123,7 @@ export default class SnakeApp extends BaseApp {
         width: 6,
         height: 6,
       },
-      user_id: this.user_id,
+      userId: this.userId,
       windowWidth: payload.scene_size.X * 6,
       windowHeight: payload.scene_size.Y * 6,
     };

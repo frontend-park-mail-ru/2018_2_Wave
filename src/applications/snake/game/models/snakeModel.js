@@ -1,8 +1,9 @@
 import Position from './position';
 
 export default class SnakeModel {
-  constructor(snakeText, startX, startY) {
+  constructor(snakeText, startX, startY, snakeId) {
     this.segments  = [];
+    this.snakeId = snakeId;
     this.snakeText = snakeText;
     this.startPosition = new Position(startX, startY);
 
@@ -76,5 +77,20 @@ export default class SnakeModel {
 
   getDirection() {
     return this.direction;
+  }
+
+  setState(snakes) {
+    this.segments  = [];
+    snakes.forEach((snake) => {
+      if (snake.user_id === this.snakeId) {
+        snake.body.forEach((segment) => {
+          this.segments.push({
+            x: segment.position.X,
+            y: segment.position.Y,
+            letter: segment.letter,
+          });
+        });
+      }
+    });
   }
 }

@@ -20,6 +20,7 @@ export default class levelModel {
     return levelModel.indexOf(this.food, position) !== -1;
   }
 
+
   static indexOf(list, position) {
     let index = -1;
     list.some((element, listIndex) => {
@@ -56,7 +57,7 @@ export default class levelModel {
     return !(this.isFood(position) || this.isWall(position));
   }
 
-  setWall(position, type) {
+  setWall(position) {
     this.walls.push(position);
   }
 

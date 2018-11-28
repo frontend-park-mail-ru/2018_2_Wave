@@ -16,7 +16,7 @@ export default class FoodsModel {
     this.foods = [];
     foods.forEach((apple) => {
       const newFood = new FoodModel();
-      newFood.setPosition(new Position(apple.position.X, apple.position.Y))
+      newFood.setPosition(new Position(apple.position.X, apple.position.Y));
       this.push(newFood);
     });
   }

@@ -9,7 +9,6 @@ export default class FoodsView {
     foods.foods.forEach(food => this.foodsView.push(new FoodView(food)));
   }
 
-
   render(canvas) {
     this.foodsView.forEach(foodView => foodView.render(canvas));
   }

@@ -11,12 +11,14 @@ import AudioController from '../controllers/audioController';
 import LevelView from '../views/levelView';
 import SnakeView from '../views/snakeView';
 import FoodsView from '../views/foodsView';
-import EnemiesView from '../views/enemiesView';
+import EnemyView from '../views/enemyView';
 
 import LevelModel from '../models/levelModel';
 import SnakeModel from '../models/snakeModel';
 import FoodsModel from '../models/foodsModel';
-import EnemiesModel from '../models/enemiesModel';
+import EnemyModel from '../models/enemyModel';
+
+import webSocket from '../../modules/webSocket';
 
 import wsMessageParser from '../../modules/wsMessageParser';
 
@@ -30,7 +32,7 @@ export default class OnlineGame extends GameCore {
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
-    this.framesPerSecond = 20;
+    this.framesPerSecond = 30;
 
     this.snakeText = gameInitData.snakeText;
     // this.DOMRect = gameInitData.DOMRect;
@@ -51,7 +53,7 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY);
+    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY, gameInitData.userId);
     this.snakeController = new SnakeController(this.snake, this.level);
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
@@ -61,29 +63,11 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
 
-    this.enemies = new EnemiesModel();
-    this.scene.push(new EnemiesView(this.enemies));
-    this.enemies.push({
-      segments: [
-        {
-          x: 3,
-          y: 3,
-          letter: 'c',
-        },
-        {
-          x: 4,
-          y: 3,
-          letter: 'a',
-        },
-        {
-          x: 5,
-          y: 3,
-          letter: 'e',
-        },
-      ],
-    });
+    this.enemie = new EnemyModel(gameInitData.userId);
+    this.scene.push(new EnemyView(this.enemie));
 
-    this.wsMessageParser.setModel('snake', this.snake);
+    this.wsMessageParser.setModel('snakes', this.snake);
+    this.wsMessageParser.setModel('snakes', this.enemie);
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
 
@@ -110,7 +94,8 @@ export default class OnlineGame extends GameCore {
       this.lastFrame = now;
 
       if (this.keyboardController.isCommand()) {
-        this.snakeController.setDirection(this.keyboardController.getLastCommand());
+        webSocket.sendDirection(this.keyboardController.getLastCommand());
+        // this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
       this.scene.renderScene();

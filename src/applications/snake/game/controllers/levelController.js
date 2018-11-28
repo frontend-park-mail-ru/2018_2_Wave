@@ -43,7 +43,6 @@ export default class LevelController {
         }
         wallLength -= 1;
       } else {
-        console.log('wallType', wallType);
         wallLength = Math.floor(Math.random() * this.maxWallLength) + 3;
         if (wallType) {
           wallType = 0;
