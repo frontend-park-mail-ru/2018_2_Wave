@@ -5,29 +5,32 @@ import Size from '../models/size';
 
 import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
-import FoodController from '../controllers/foodController';
+import FoodsController from '../controllers/foodsController';
 import AudioController from '../controllers/audioController';
 
 import LevelView from '../views/levelView';
 import SnakeView from '../views/snakeView';
-import FoodView from '../views/foodView';
+import FoodsView from '../views/foodsView';
 import EnemiesView from '../views/enemiesView';
 
 import LevelModel from '../models/levelModel';
 import SnakeModel from '../models/snakeModel';
-import FoodModel from '../models/foodModel';
+import FoodsModel from '../models/foodsModel';
 import EnemiesModel from '../models/enemiesModel';
 
-import ws from '../../../../modules/webSocket';
+import wsMessageParser from '../../modules/wsMessageParser';
+
 
 export default class OnlineGame extends GameCore {
   constructor(controller, scene, gameInitData) {
     super(controller, scene);
 
+    this.wsMessageParser = wsMessageParser;
+
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
-    this.framesPerSecond = 10;
+    this.framesPerSecond = 20;
 
     this.snakeText = gameInitData.snakeText;
     // this.DOMRect = gameInitData.DOMRect;
@@ -53,92 +56,95 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
 
-    this.food = new FoodModel();
-    this.foodController = new FoodController(this.food, this.level);
-    this.controllers.push(this.foodController);
-    this.scene.push(new FoodView(this.food));
+    this.foods = new FoodsModel(10);
+    this.foodsController = new FoodsController(this.foods, this.level);
+    this.controllers.push(this.foodsController);
+    this.scene.push(new FoodsView(this.foods));
 
     this.enemies = new EnemiesModel();
     this.scene.push(new EnemiesView(this.enemies));
     this.enemies.push({
       segments: [
         {
-          x: 20,
-          y: 20,
+          x: 3,
+          y: 3,
           letter: 'c',
         },
         {
-          x: 21,
-          y: 20,
+          x: 4,
+          y: 3,
           letter: 'a',
         },
         {
-          x: 22,
-          y: 20,
+          x: 5,
+          y: 3,
           letter: 'e',
         },
       ],
     });
 
+    this.wsMessageParser.setModel('snake', this.snake);
+    this.wsMessageParser.setModel('food', this.foods);
+    this.wsMessageParser.setModel('walls', this.level);
+
     // this.audioController = new AudioController();
   }
 
+
   start() {
+    // this.controllers.forEach(controller => controller.init());
     super.start();
-    // ws.send('lobby_create', {room_type: 'room_type'});
 
-    this.controllers.forEach(controller => controller.init());
-
-    setTimeout(() => {
-      this.busController.emit(events.START_GAME);
-    });
-  }
-
-  onGameStarted(evt) {
-    this.scene.start();
-
+    // this.audioController.start();
     this.lastFrame = performance.now();
-    this.gameloop();
+    this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
+
 
   update() {
-    this.controllers.forEach(controller => controller.update());
+    // this.controllers.forEach(controller => controller.update());
   }
 
   gameloop(now) {
     setTimeout((_) => {
-      const delay = now - this.lastFrame;
       this.lastFrame = now;
 
       if (this.keyboardController.isCommand()) {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
-      this.update();
-
       this.scene.renderScene();
-
-      // busController.emit(events.GAME_STATE_CHANGED);
-      // check if dead
-
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop.bind(this));
+      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
     }, 1000 / this.framesPerSecond);
   }
 
-
-  onGameFinished(evt) {
-    cancelAnimationFrame(this.gameloopRequestId);
-    this.busController.emit('CLOSE_GAME');
+  pause() {
+    this.paused = true;
+    busController.removeBusListeners(this.stopEvents);
+    busController.setBusListeners(this.resumeEvents);
+    super.pause();
+    // this.audioController.pause();
   }
 
-  // ??????????????
-  onControllsPressed(evt) {
-    if (this.pressed('LEFT', evt)) {
-      // ws.send('game-command', 'LEFT');
-    } else if (this.pressed('RIGHT', evt)) {
-      // ws.send('game-command', 'RIGHT');
-    } else if (this.pressed('FIRE', evt)) {
-      // ws.send('game-command', 'FIRE');
-    }
+  resume() {
+    busController.removeBusListeners(this.resumeEvents);
+    busController.setBusListeners(this.stopEvents);
+    super.resume();
+    // this.audioController.resume();
+    this.paused = false;
+  }
+
+  destroy() {
+    super.destroy();
+    // this.audioController.destroy();
+    cancelAnimationFrame(this.gameloopRequestId);
+  }
+
+
+  onGameStarted(evt) {
+    this.scene.start();
+
+    this.lastFrame = performance.now();
+    this.gameloop();
   }
 }

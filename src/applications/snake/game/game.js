@@ -11,15 +11,12 @@ export default class Game {
   constructor(mode, canvas, gameInitData) {
     let GameConstructor = null;
 
-    // change mode
-    mode = GAME_MODES.ARCADE;
-    // mode = GAME_MODES.ONLINE;
     // mode = GAME_MODES.OFFLINE;
-
+    
     switch (mode) {
       case GAME_MODES.ONLINE: {
         // GameConstructor = OnlineGame;
-        GameConstructor = OfflineGame;
+        GameConstructor = OnlineGame;
         break;
       }
       case GAME_MODES.OFFLINE: {

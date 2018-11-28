@@ -7,11 +7,18 @@ import GameEnv from './views/env';
 import GameView from './views/game_field';
 import Game from './game/game';
 
+import webSocket from './modules/webSocket';
+import wsRouter from '../../modules/wsRouter';
+import wsMessageParser from './modules/wsMessageParser';
+import busController from './modules/busController';
+
 import './style.css';
 
 
 export default class SnakeApp extends BaseApp {
   constructor(appUrl, parent) {
+    wsRouter.addMessageParser('snake_game', wsMessageParser);
+
     const env = new GameEnv(parent);
     super(appUrl, env.getContainer(), GameView);
 
@@ -63,7 +70,7 @@ export default class SnakeApp extends BaseApp {
     }, 1000);
     */
 
-    const gameInitData = {
+    let gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {
         x: 10,
@@ -77,12 +84,47 @@ export default class SnakeApp extends BaseApp {
       windowHeight: 500,
     };
 
-    const mode = navigator.onLine
-      ? GAME_MODES.ONLINE
-      : GAME_MODES.OFFLINE;
-    this.game = new Game(mode, this.gameContainer, gameInitData);
+    if (navigator.onLine) {
+      this.mode = GAME_MODES.ONLINE;
+      webSocket.addToRoom();
+      this.startGame = this.startGame.bind(this);
+      busController.setBusListeners({ data: this.startGame });
+    } else {
+      this.mode = GAME_MODES.OFFLINE;
+      this.game = new Game(this.mode, this.gameContainer, gameInitData);
+      // TODO: FIXME: call this in view after button press!
+      this.game.start();
+    }
 
-    // TODO: FIXME: call this in view after button press!
+    // this.game = new Game(mode, this.gameContainer, gameInitData);
+  }
+
+  startGame(userId) {
+    this.gameInitData = {};
+    this.user_id = userId;
+    busController.removeBusListeners({ data: this.startGame });
+    webSocket.startGame();
+    this.statusTick = this.statusTick.bind(this);
+    busController.setBusListeners({ STATUS_TICK: this.statusTick });
+  }
+
+  statusTick(payload) {
+    busController.removeBusListeners({ STATUS_TICK: this.statusTick });
+    this.gameInitData.payload = payload;
+    this.gameInitData = {
+      snakeText: 'qwertyuiopqe',
+      DOMRect: {
+        x: 10,
+        y: 10,
+        width: 6,
+        height: 6,
+      },
+      user_id: this.user_id,
+      windowWidth: payload.scene_size.X * 6,
+      windowHeight: payload.scene_size.Y * 6,
+    };
+
+    this.game = new Game(this.mode, this.gameContainer, this.gameInitData);
     this.game.start();
   }
 }

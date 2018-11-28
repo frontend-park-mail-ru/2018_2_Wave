@@ -1,9 +1,9 @@
-import bus from './bus';
+import wsRouter from './wsRouter';
 
 class Ws {
   constructor() {
     // this.host = window.location.host;
-    this.bus = bus;
+    this.wsRouter = wsRouter;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
     const address = 'ws://localhost:9600/conn/ws';
@@ -16,19 +16,31 @@ class Ws {
       this.ws.onclose = () => {
         console.log('WebSocket closed');
       };
+/*
+      this.send({
+        room_id: 'app',
+        signal: 'add_to_room',
+        payload: {
+          room_id: 'snake',
+        },
+      });
+
+      setTimeout(() => {
+        this.send({
+          room_id: 'snake',
+          signal: 'game_play',
+        });
+      }, 1000);
+*/
+
     };
   }
 
   handleMessage(event) {
-    const messageText = event;
-    console.log(event);
-    // console.log({ messageText });
-
     try {
-      const message = JSON.parse(messageText.data);
-      console.log(message.room_id);
-      console.log(message.payload);
-      this.bus.emit(message.room_id, message.payload);
+      const message = JSON.parse(event.data);
+      console.log(message);
+      this.wsRouter.sendByRoute(message);
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
     }

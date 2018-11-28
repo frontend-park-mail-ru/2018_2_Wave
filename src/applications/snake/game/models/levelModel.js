@@ -4,25 +4,20 @@ import Size from './size';
 export default class levelModel {
   constructor(size) {
     this.size = size;
-    // this.map = new Array(this.size.width * this.size.height).fill(0);
     this.walls = [];
     this.food = [];
   }
 
   setFood(position) {
-    // this.map[this.index(position)] = 3;
     this.food.push(position);
   }
 
   removeFood(position) {
-    // this.map[this.index(position)] = 0;
     this.food.splice(this.food.indexOf(position), 1);
   }
 
   isFood(position) {
-    console.log(this.food.indexOf(position));
     return levelModel.indexOf(this.food, position) !== -1;
-    // return this.map[this.index(position)] === 3;
   }
 
   static indexOf(list, position) {
@@ -39,8 +34,6 @@ export default class levelModel {
 
   isWall(position) {
     return levelModel.indexOf(this.walls, position) !== -1;
-    /*return this.map[this.index(position)] === 1
-    || this.map[this.index(position)] === 2;*/
   }
 
   getWidth() {
@@ -59,24 +52,11 @@ export default class levelModel {
     return ((place.getX() * this.size.getWidth()) + place.getY());
   }
 
-  /*
-  getField(position) {
-    return this.map[this.index(position)];
-  }
-
-
-  getMap() {
-    return this.map;
-  }
-  */
-
   isEmpty(position) {
-    // return this.map[this.index(position)] === 0;
     return !(this.isFood(position) || this.isWall(position));
   }
 
   setWall(position, type) {
-    // this.map[this.index(position)] = type;
     this.walls.push(position);
   }
 
@@ -108,5 +88,12 @@ export default class levelModel {
       attempts += 1;
     }
     return undefined;
+  }
+
+  setState(walls) {
+    this.walls = [];
+    walls.forEach((wall) => {
+      this.setWall(new Position(wall.X, wall.Y));
+    });
   }
 }
