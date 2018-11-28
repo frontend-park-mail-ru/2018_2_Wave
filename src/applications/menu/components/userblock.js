@@ -11,6 +11,8 @@ export default class UserBlock extends Element {
   constructor(parent) {
     super(template, parent);
     this.isPage = false;
+
+    bus.listen('userUpdated', this.update.bind(this));
   }
 
   update() {
