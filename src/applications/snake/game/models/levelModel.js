@@ -77,7 +77,7 @@ export default class levelModel {
 
   setWall(position, type) {
     // this.map[this.index(position)] = type;
-    
+    this.walls.push(position);
   }
 
   static isOrdered(orderedPositions, position) {
