@@ -1,8 +1,5 @@
 node_modules
-public/app.bundle.js
-public/index.html
-public/uploads
-public/sw.js
+public
 dist
 cert
 .cache
