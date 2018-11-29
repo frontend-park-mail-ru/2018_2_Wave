@@ -1,28 +1,14 @@
+const fallback = require('express-history-api-fallback');
 const express = require('express');
-const favicon = require('serve-favicon');
 const morgan = require('morgan');
-const path = require('path');
 const ws = require('express-ws');
 
 const app = express();
 ws(app);
 
 app.use(morgan('dev'));
-app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
-
-app.all('*/sw.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/sw.js'));
-});
-
-app.all('*/app.bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/app.bundle.js'));
-});
-
-// app.use(express.static(path.join(__dirname, '/public')));
-
-app.all('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+app.use(express.static('./public'));
+app.use(fallback('index.html', { root: 'public' }));
 
 const port = process.env.PORT || 3000;
 
