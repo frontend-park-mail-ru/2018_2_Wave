@@ -8,7 +8,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(KEY)
       .then((cache) => {
-        console.log('cache open');
         return cache.addAll(assets);
       })
       .catch(err => console.log({ err })),
