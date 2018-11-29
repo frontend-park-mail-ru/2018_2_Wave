@@ -41,16 +41,16 @@ module.exports = {
         ],
       },
       {
-        test: /\.ico$/,
-        loader: 'file-loader?name=favicon.ico',
-      },
-      {
         test: /\.pug$/,
         loader: 'pug-loader',
       },
       {
         test: /\.mp3$/,
         loader: 'file-loader?name=music/[hash].[ext]',
+      },
+      {
+        test: /\.ico$/,
+        loader: 'file-loader?name=favicon.ico',
       },
     ],
   },

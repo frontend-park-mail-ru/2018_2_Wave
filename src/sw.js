@@ -7,9 +7,7 @@ const { assets } = global.serviceWorkerOption;
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(KEY)
-      .then((cache) => {
-        return cache.addAll(assets);
-      })
+      .then(cache => cache.addAll(assets))
       .catch(err => console.log({ err })),
   );
 });
@@ -34,6 +32,6 @@ self.addEventListener('fetch', (event) => {
               return response;
             }));
       })
-      .catch(error => console.log(error)),
+      .catch(error => console.log({ err: error })),
   );
 });
