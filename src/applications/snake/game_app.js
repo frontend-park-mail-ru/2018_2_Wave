@@ -1,15 +1,14 @@
 import GAME_MODES from './game/core/modes';
 
-
 import BaseApp from '../base_app';
 
 import GameEnv from './views/env';
 import GameView from './views/game_field';
 import Game from './game/game';
 
-import wsMessgase from './modules/wsMessage';
-import wsRouter from '../../modules/wsRouter';
+import WsMessage from './modules/wsMessage';
 import wsMessageParser from './modules/wsMessageParser';
+import WebSocket from '../../modules/webSocket';
 import busController from './modules/busController';
 
 import './style.css';
@@ -17,10 +16,11 @@ import './style.css';
 
 export default class SnakeApp extends BaseApp {
   constructor(appUrl, parent) {
-    wsRouter.addMessageParser('snake_game', wsMessageParser);
-
     const env = new GameEnv(parent);
     super(appUrl, env.getContainer(), GameView);
+    this.webSocket = new WebSocket(wsMessageParser);
+    this.wsMessage = new WsMessage(this.webSocket);
+
 
     this.env = env;
     this.gameContainer = this.views.main.getCanvas();
@@ -30,6 +30,10 @@ export default class SnakeApp extends BaseApp {
   start() {
     this.env.show();
     super.start();
+    this.webSocket.connect();
+    // menu.start();
+    // menu return game mode
+    // this.initGame(gameMode);
 
     this.initGame();
   }
@@ -47,30 +51,14 @@ export default class SnakeApp extends BaseApp {
 
 
   stop() {
+    this.webSocket.close();
     this.game.destroy();
   }
 
 
   initGame() {
-
-    /*
-    this.send({
-      room_id: 'app',
-      signal: 'add_to_room',
-      payload: {
-        room_id: 'snake',
-      },
-    });
-
-    setTimeout(() => {
-      this.send({
-        room_id: 'snake',
-        signal: 'game_play',
-      });
-    }, 1000);
-    */
-
-   this.gameInitData = {
+    
+    this.gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {
         x: 10,
@@ -86,7 +74,7 @@ export default class SnakeApp extends BaseApp {
 
     if (navigator.onLine) {
       this.mode = GAME_MODES.ONLINE;
-      wsMessgase.addToRoom();
+      this.wsMessage.addToRoom();
       this.startGame = this.startGame.bind(this);
       busController.setBusListeners({ STATUS_OK: this.startGame });
       busController.setBusListeners({ data: this.setUserId.bind(this) });
@@ -100,14 +88,11 @@ export default class SnakeApp extends BaseApp {
     // this.game = new Game(mode, this.gameContainer, gameInitData);
   }
 
-  setUserId(userId) {
-    this.userId = userId;
-  }
 
   startGame() {
     this.gameInitData = {};
     busController.removeBusListeners({ data: this.startGame });
-    wsMessgase.startGame();
+    wsMessage.startGame();
     this.statusTick = this.statusTick.bind(this);
     busController.setBusListeners({ STATUS_TICK: this.statusTick });
   }
@@ -130,5 +115,9 @@ export default class SnakeApp extends BaseApp {
 
     this.game = new Game(this.mode, this.gameContainer, this.gameInitData);
     this.game.start();
+  }
+
+  handleWsMessage(data) {
+
   }
 }

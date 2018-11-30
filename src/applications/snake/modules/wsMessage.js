@@ -1,8 +1,6 @@
-import globalWs from '../../../modules/webSocket';
-
-class WebSocket {
-  constructor() {
-    this.ws = globalWs;
+export default class WsMessage {
+  constructor(webSocket) {
+    this.ws = webSocket;
   }
 
   addToRoom() {
@@ -53,8 +51,4 @@ class WebSocket {
     }
     this.sendAction(direction);
   }
-
-
 }
-
-export default new WebSocket();

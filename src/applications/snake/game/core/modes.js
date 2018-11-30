@@ -1,5 +1,6 @@
 export default {
   ONLINE: 'ONLINE',
   OFFLINE: 'OFFLINE',
+  SINGLONLINE: 'SINGLONLINE',
   ARCADE: 'ARCADE',
 };

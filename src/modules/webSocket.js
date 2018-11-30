@@ -4,15 +4,18 @@ export default class Ws {
     this.mesageParser = mesageParser;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    const address = 'ws://localhost:9605/conn/ws';
-    this.ws = new WebSocket(address);
+    this.address = 'ws://localhost:9605/conn/ws';
+  }
+
+  connect() {
+    this.ws = new WebSocket(this.address);
 
     this.ws.onopen = (event) => {
-      console.log(`WebSocket on address ${address} opened`);
+      console.log(`WebSocket on address ${this.address} opened`);
       this.ws.onmessage = this.handleMessage.bind(this);
 
       this.ws.onclose = () => {
-        mesageParser.emit();
+        this.mesageParser.emit('close');
       };
     };
   }
