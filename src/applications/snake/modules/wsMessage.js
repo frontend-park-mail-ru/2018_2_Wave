@@ -5,10 +5,9 @@ export default class WsMessage {
 
   addToRoom() {
     this.ws.send({
-      room_id: 'app',
       signal: 'add_to_room',
       payload: {
-        room_id: 'snake',
+        room_token: 'snake',
       },
     });
   }

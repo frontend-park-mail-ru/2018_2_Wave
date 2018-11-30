@@ -7,7 +7,7 @@ import GameView from './views/game_field';
 import Game from './game/game';
 
 import WsMessage from './modules/wsMessage';
-import wsMessageParser from './modules/wsMessageParser';
+import WsMessageParser from './modules/wsMessageParser';
 import WebSocket from '../../modules/webSocket';
 import busController from './modules/busController';
 
@@ -18,7 +18,8 @@ export default class SnakeApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new GameEnv(parent);
     super(appUrl, env.getContainer(), GameView);
-    this.webSocket = new WebSocket(wsMessageParser);
+    this.wsMessageParser = new WsMessageParser(this);
+    this.webSocket = new WebSocket(this.wsMessageParser);
     this.wsMessage = new WsMessage(this.webSocket);
 
 
@@ -77,7 +78,7 @@ export default class SnakeApp extends BaseApp {
       this.wsMessage.addToRoom();
       this.startGame = this.startGame.bind(this);
       busController.setBusListeners({ STATUS_OK: this.startGame });
-      busController.setBusListeners({ data: this.setUserId.bind(this) });
+      busController.setBusListeners({ data: this.setUserToken.bind(this) });
     } else {
       this.mode = GAME_MODES.OFFLINE;
       this.game = new Game(this.mode, this.gameContainer, this.gameInitData);
@@ -88,11 +89,16 @@ export default class SnakeApp extends BaseApp {
     // this.game = new Game(mode, this.gameContainer, gameInitData);
   }
 
+  setUserToken(userToken) {
+    console.log('set user token', userToken);
+    this.userToken = userToken;
+  }
+
 
   startGame() {
     this.gameInitData = {};
     busController.removeBusListeners({ data: this.startGame });
-    wsMessage.startGame();
+    this.wsMessage.startGame();
     this.statusTick = this.statusTick.bind(this);
     busController.setBusListeners({ STATUS_TICK: this.statusTick });
   }
@@ -108,7 +114,7 @@ export default class SnakeApp extends BaseApp {
         width: 6,
         height: 6,
       },
-      userId: this.userId,
+      userToken: this.userToken,
       windowWidth: payload.scene_size.X * 6,
       windowHeight: payload.scene_size.Y * 6,
     };

@@ -1,11 +1,16 @@
 import busController from './busController';
+import status from './wsStatus';
 
-class WsMessageParser {
-  constructor() {
+export default class WsMessageParser {
+  constructor(owner) {
+    this.owner = owner;
     this.models = {};
   }
 
-  parseMessage(message) {
+  parse(message) {
+    if (message.status === status.STATUS_TOKEN) {
+      this.owner.setUserToken(message.payload.user_token);
+    }
     if (message.status === 'STATUS_OK') {
       busController.emit('STATUS_OK', message);
     }
@@ -30,5 +35,3 @@ class WsMessageParser {
     this.models[route].push(model);
   }
 }
-
-export default new WsMessageParser();

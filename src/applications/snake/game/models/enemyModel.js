@@ -1,13 +1,13 @@
 export default class EnemyModel {
-  constructor(userId) {
-    this.userId = userId;
+  constructor(userToken) {
+    this.userToken = userToken;
     this.segments = [];
   }
 
   setState(snakes) {
     this.segments  = [];
     snakes.forEach((snake) => {
-      if (snake.user_id !== this.userId) {
+      if (snake.user_id !== this.userToken) {
         snake.body.forEach((segment) => {
           this.segments.push({
             x: segment.position.X,

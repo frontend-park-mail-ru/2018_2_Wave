@@ -53,7 +53,7 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY, gameInitData.userId);
+    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY, gameInitData.userToken);
     this.snakeController = new SnakeController(this.snake, this.level);
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
@@ -63,7 +63,7 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
 
-    this.enemie = new EnemyModel(gameInitData.userId);
+    this.enemie = new EnemyModel(gameInitData.userToken);
     this.scene.push(new EnemyView(this.enemie));
 
     this.wsMessageParser.setModel('snakes', this.snake);
