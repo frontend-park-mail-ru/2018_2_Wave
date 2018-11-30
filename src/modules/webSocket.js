@@ -1,9 +1,7 @@
-import wsRouter from './wsRouter';
-
-class Ws {
-  constructor() {
+export default class Ws {
+  constructor(mesageParser) {
     // this.host = window.location.host;
-    this.wsRouter = wsRouter;
+    this.mesageParser = mesageParser;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
     const address = 'ws://localhost:9605/conn/ws';
@@ -14,7 +12,7 @@ class Ws {
       this.ws.onmessage = this.handleMessage.bind(this);
 
       this.ws.onclose = () => {
-        console.log('WebSocket closed');
+        mesageParser.emit();
       };
     };
   }
@@ -22,8 +20,7 @@ class Ws {
   handleMessage(event) {
     try {
       const message = JSON.parse(event.data);
-      console.log('handle message', message);
-      this.wsRouter.sendByRoute(message);
+      this.mesageParser.parse(message);
     } catch (err) {
       console.error('smth went wront in handleMessage: ', err);
     }
@@ -39,13 +36,13 @@ class Ws {
       callback();
     } else {
       const that = this;
-      // optional: implement backoff for interval here
       setTimeout(() => {
         that.waitForConnection(callback, interval);
       }, interval);
     }
   }
-}
 
-const ws = new Ws();
-export default ws;
+  close() {
+    this.ws.close();
+  }
+}

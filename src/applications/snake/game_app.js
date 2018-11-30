@@ -7,7 +7,7 @@ import GameEnv from './views/env';
 import GameView from './views/game_field';
 import Game from './game/game';
 
-import webSocket from './modules/webSocket';
+import wsMessgase from './modules/wsMessage';
 import wsRouter from '../../modules/wsRouter';
 import wsMessageParser from './modules/wsMessageParser';
 import busController from './modules/busController';
@@ -86,7 +86,7 @@ export default class SnakeApp extends BaseApp {
 
     if (navigator.onLine) {
       this.mode = GAME_MODES.ONLINE;
-      webSocket.addToRoom();
+      wsMessgase.addToRoom();
       this.startGame = this.startGame.bind(this);
       busController.setBusListeners({ STATUS_OK: this.startGame });
       busController.setBusListeners({ data: this.setUserId.bind(this) });
@@ -107,7 +107,7 @@ export default class SnakeApp extends BaseApp {
   startGame() {
     this.gameInitData = {};
     busController.removeBusListeners({ data: this.startGame });
-    webSocket.startGame();
+    wsMessgase.startGame();
     this.statusTick = this.statusTick.bind(this);
     busController.setBusListeners({ STATUS_TICK: this.statusTick });
   }

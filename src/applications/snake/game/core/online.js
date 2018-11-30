@@ -18,7 +18,7 @@ import SnakeModel from '../models/snakeModel';
 import FoodsModel from '../models/foodsModel';
 import EnemyModel from '../models/enemyModel';
 
-import webSocket from '../../modules/webSocket';
+import wsMessgase from '../../modules/wsMessage';
 
 import wsMessageParser from '../../modules/wsMessageParser';
 
@@ -94,7 +94,7 @@ export default class OnlineGame extends GameCore {
       this.lastFrame = now;
 
       if (this.keyboardController.isCommand()) {
-        webSocket.sendDirection(this.keyboardController.getLastCommand());
+        wsMessgase.sendDirection(this.keyboardController.getLastCommand());
         // this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
