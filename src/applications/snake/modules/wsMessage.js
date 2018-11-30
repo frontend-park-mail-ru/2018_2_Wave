@@ -1,27 +1,29 @@
+import config from './wsConfig';
+
 export default class WsMessage {
   constructor(webSocket) {
     this.ws = webSocket;
   }
 
-  addToRoom() {
+  addToRoom(room_token = config.DEFAULT_ROOM_TOKEN) {
     this.ws.send({
       signal: 'add_to_room',
       payload: {
-        room_token: 'snake',
+        room_token,
       },
     });
   }
 
-  startGame() {
+  startGame(room_token = config.DEFAULT_ROOM_TOKEN) {
     this.ws.send({
-      room_id: 'snake',
+      room_token,
       signal: 'game_play',
     });
   }
 
-  sendAction(direction) {
+  sendAction(direction, room_token = config.DEFAULT_ROOM_TOKEN) {
     this.ws.send({
-      room_id: 'snake',
+      room_token,
       signal: 'game_action',
       payload: {
         action: direction,
@@ -29,24 +31,31 @@ export default class WsMessage {
     });
   }
 
+  sendGameExit(room_token = config.DEFAULT_ROOM_TOKEN) {
+    this.ws.send({
+      room_token,
+      signal: 'game_exit',
+    });
+  }
+
   sendDirection(keyboardDirection) {
     let direction;
-    switch(keyboardDirection) {
+    switch (keyboardDirection) {
       case 'ArrowUp':
         direction = 'move_down';
-      break;
+        break;
 
       case 'ArrowDown':
         direction = 'move_up';
-      break;
+        break;
 
       case 'ArrowLeft':
         direction = 'move_left';
-      break;
+        break;
 
       case 'ArrowRight':
         direction = 'move_right';
-      break;
+        break;
     }
     this.sendAction(direction);
   }

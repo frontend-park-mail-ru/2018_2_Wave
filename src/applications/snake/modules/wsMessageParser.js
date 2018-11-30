@@ -1,5 +1,5 @@
 import busController from './busController';
-import status from './wsStatus';
+import config from './wsConfig';
 
 export default class WsMessageParser {
   constructor(owner) {
@@ -7,10 +7,20 @@ export default class WsMessageParser {
     this.models = {};
   }
 
+  /**
+   * @param {message from ws for parsing} message
+   */
   parse(message) {
-    if (message.status === status.STATUS_TOKEN) {
-      this.owner.setUserToken(message.payload.user_token);
+    // TODO uncomit on api change
+    // if (message.status === config.STATUS_TOKEN) {
+    //   this.owner.setUserToken(message.payload.user_token);
+    // }
+
+    console.log(message);
+    if (message.user_token) {
+      this.owner.setUserToken(message.user_token);
     }
+
     if (message.status === 'STATUS_OK') {
       busController.emit('STATUS_OK', message);
     }
