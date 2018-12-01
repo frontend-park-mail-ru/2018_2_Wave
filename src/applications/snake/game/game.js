@@ -3,7 +3,6 @@ import OfflineGame from './core/offline';
 import OnlineGame from './core/online';
 import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
-import keyboardController from '../modules/keyboardController';
 import Size from './models/size';
 
 
@@ -53,8 +52,7 @@ export default class Game {
     console.log('gameInitData.cellCount', gameInitData.cellCount);
 
     this.gameScene = new GameScene(canvas, this.windowSize, this.cellSize);
-    this.keyboardController = keyboardController;
-    this.gameCore = new GameConstructor(this.keyboardController, this.gameScene, gameInitData);
+    this.gameCore = new GameConstructor(this.gameScene, gameInitData);
   }
 
   start() {

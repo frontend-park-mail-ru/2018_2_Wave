@@ -21,8 +21,8 @@ import PlayerModel from '../models/playerModel';
 import FrameSpeedModel from '../models/frameSpeedModel';
 
 export default class ArcadeMode extends GameCore {
-  constructor(controller, scene, gameInitData) {
-    super(controller, scene);
+  constructor(scene, gameInitData) {
+    super(scene);
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;

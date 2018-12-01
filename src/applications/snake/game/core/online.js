@@ -24,8 +24,8 @@ import wsMessageParser from '../../modules/wsMessageParser';
 
 
 export default class OnlineGame extends GameCore {
-  constructor(controller, scene, gameInitData) {
-    super(controller, scene);
+  constructor(scene, gameInitData) {
+    super(scene);
 
     this.wsMessageParser = wsMessageParser;
 

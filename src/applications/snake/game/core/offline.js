@@ -19,8 +19,8 @@ import FoodModel from '../models/foodModel';
 import PlayerModel from '../models/playerModel';
 
 export default class OfflineGame extends GameCore {
-  constructor(controller, scene, gameInitData) {
-    super(controller, scene);
+  constructor(scene, gameInitData) {
+    super(scene);
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
