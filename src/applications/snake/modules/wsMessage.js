@@ -56,6 +56,9 @@ export default class WsMessage {
       case 'ArrowRight':
         direction = 'move_right';
         break;
+      default:
+        direction = 'move_right';
+        break;
     }
     this.sendAction(direction);
   }

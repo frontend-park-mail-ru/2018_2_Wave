@@ -10,8 +10,6 @@ import Size from './models/size';
 export default class Game {
   constructor(mode, canvas, gameInitData) {
     let GameConstructor = null;
-
-    // mode = GAME_MODES.OFFLINE;
     
     switch (mode) {
       case GAME_MODES.ONLINE: {

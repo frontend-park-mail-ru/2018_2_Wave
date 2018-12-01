@@ -6,7 +6,7 @@ class KeyboardController {
     this.controls = [
       // 8, // backspace
       // 9, // tab
-      // 13, // enter
+      13, // enter
       // 27, // esc
       // 16, // shift
       32, // space
@@ -100,10 +100,8 @@ class KeyboardController {
     */
 
     if (this.isControlKey(keyCode)) {
-      e.preventDefault();
       bus.emit(e.code);
     } else if (this.isSnakeControls(keyCode)) {
-      e.preventDefault();
       bus.emit(e.code);
       this.lastCommand = e.key;
     }

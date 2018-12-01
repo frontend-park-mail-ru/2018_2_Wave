@@ -73,7 +73,9 @@ export default class SnakeApp extends BaseApp {
       windowHeight: 500,
     };
 
-    if (navigator.onLine) {
+
+    if (false) {
+    // if (navigator.onLine) {
       this.mode = GAME_MODES.ONLINE;
       this.wsMessage.addToRoom();
       this.startGame = this.startGame.bind(this);

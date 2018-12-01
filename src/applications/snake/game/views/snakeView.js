@@ -20,8 +20,9 @@ export default class SnakeView {
         });
       } else {
         canvas.drawRect({
-          fillStyle: '#003300',
-          strokeStyle: 'greenyellow',
+          // fillStyle: '#003300',
+          fillStyle: 'black',
+          // strokeStyle: 'greenyellow',
           x: segment.x,
           y: segment.y,
           width: 1,

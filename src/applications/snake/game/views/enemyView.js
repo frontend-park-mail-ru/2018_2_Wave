@@ -21,7 +21,7 @@ export default class EnemyView {
         });
       } else {
         canvas.drawRect({
-          fillStyle: '#cc0000',
+          // fillStyle: '#cc0000',
           strokeStyle: '#fc7874',
           x: segment.x,
           y: segment.y,

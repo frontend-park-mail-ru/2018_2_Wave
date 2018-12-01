@@ -55,23 +55,23 @@ export default class Canvas {
   drawRect({
     fillStyle = '#000000',
     strokeStyle = '#009900',
-    // lineWidth = 1,
+    lineWidth = 1,
     lineCap = 'square',
     x,
     y,
     width = 1,
     height = 1,
+    space = 4,
   }) {
     this.context.fillStyle = fillStyle;
     this.context.strokeStyle = strokeStyle;
-    // this.context.lineWidth = lineWidth;
+    this.context.lineWidth = lineWidth;
     // Sets square style of the end caps for a line
 
     this.context.lineCap = lineCap;
     this.context.beginPath();
-
-    this.context.rect(x * this.cellSize.width, y * this.cellSize.height, 
-      width * this.cellSize.width, height * this.cellSize.height);
+    this.context.rect(x * this.cellSize.width + space, y * this.cellSize.height + space,
+      width * this.cellSize.width - space, height * this.cellSize.height - space);
     this.context.fill();
     this.context.stroke();
     this.context.closePath();
@@ -83,6 +83,7 @@ export default class Canvas {
       y: 0,
       width,
       height,
+      space: 4,
     });
   }
 }
