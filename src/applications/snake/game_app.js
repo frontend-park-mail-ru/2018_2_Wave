@@ -41,7 +41,7 @@ export default class GameApp extends AppElement {
     super.start();
     // super.show();
     // this.webSocket.connect();
-    // this.keyboardController.start();
+    this.keyboardController.start();
     // this.gameMenu.start();
     // menu return game mode
     // this.initGame(gameMode);

@@ -21,9 +21,9 @@ export default class BaseMenu extends Element {
   }
 
   start() {
-    // [this.parent] = this.parent.getElementsByClassName('snakemenu-buttons');
-    // this.setFirstFosus();
-    // this.busController.setBusListeners(this.eventsMethods);
+    [this.parent] = this.parent.getElementsByClassName('main-menu');
+    this.setFirstFosus();
+    this.busController.setBusListeners(this.eventsMethods);
   }
 
   processLine() {
