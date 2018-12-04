@@ -2,6 +2,7 @@ import GameCore from './core';
 import events from './events';
 import busController from '../../modules/busController';
 import Size from '../models/size';
+import keyboardController from '../../modules/keyboardController';
 
 import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
@@ -34,7 +35,6 @@ export default class OfflineGame extends GameCore {
     this.cellCount = gameInitData.cellCount;
 
     this.scene = scene;
-    this.keyboardController = controller;
     this.busController = busController;
 
     this.controllers = [];
@@ -92,7 +92,7 @@ export default class OfflineGame extends GameCore {
     setTimeout((_) => {
       this.lastFrame = now;
 
-      if (this.keyboardController.isCommand()) {
+      if (keyboardController.isCommand()) {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 

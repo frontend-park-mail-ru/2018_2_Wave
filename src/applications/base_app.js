@@ -1,7 +1,7 @@
 export default class BaseApp {
   constructor(appURL, parent, MainView, Views) {
     this.url = appURL;
-    this.views = { main: new MainView(parent) };
+    this.views = { main: new MainView(parent, appURL) };
     this.currentView = this.views.main;
 
     if (Views) {
@@ -34,6 +34,9 @@ export default class BaseApp {
   start() {
     this.started = true;
     this.active = true;
+    if (this.currentView.start) {
+      this.currentView.start();
+    }
     this.currentView.show();
   }
 

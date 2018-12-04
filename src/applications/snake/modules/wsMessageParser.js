@@ -11,12 +11,10 @@ export default class WsMessageParser {
    * @param {message from ws for parsing} message
    */
   parse(message) {
-    // TODO uncomit on api change
-    // if (message.status === config.STATUS_TOKEN) {
-    //   this.owner.setUserToken(message.payload.user_token);
-    // }
-
     console.log(message);
+    if (message.status === config.STATUS_TOKEN) {
+      this.owner.setUserToken(message.payload.user_token);
+    }
     if (message.user_token) {
       this.owner.setUserToken(message.user_token);
     }

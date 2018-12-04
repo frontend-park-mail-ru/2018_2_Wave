@@ -31,10 +31,6 @@
 
 }
 
-.snakemenu_buttons {
-
-}
-
 .snakemenu-button {
   color: white;
   text-align: center;
@@ -46,7 +42,7 @@
   cursor: pointer;
 }
 
-.snakemenu-button-focus {
+.snakemenu-button_focus {
   color: #fd00f1;
 }
 
