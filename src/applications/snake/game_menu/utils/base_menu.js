@@ -2,11 +2,12 @@ import busController from '../../modules/busController';
 import Element from '../../../element';
 
 export default class BaseMenu extends Element {
-  constructor(parent, focusClass, template) {
+  constructor(parent, template, containerName) {
     super(template, parent);
-    this.focusClass = focusClass;
     this.firstFocus = undefined;
     this.busController = busController;
+    this.containerName = containerName;
+    this.focusClass = 'snakemenu-button_focus';
 
     this.eventsMethods = {
       Tab: this.toggleMenuDown.bind(this),
@@ -20,15 +21,22 @@ export default class BaseMenu extends Element {
     super.show();
   }
 
+  hide() {
+    super.hide();
+  }
+
   start() {
-    [this.parent] = this.parent.getElementsByClassName('main-menu');
+    [this.parent] = this.parent.getElementsByClassName(this.containerName);
     this.setFirstFosus();
     this.busController.setBusListeners(this.eventsMethods);
   }
 
   processLine() {
     this.stop();
-    this.busController.emit(`${this.getFocus().getAttribute('datahref')}`, []);
+    this.hide();
+    const datahref = this.getFocus()[0].getAttribute('datahref');
+
+    this.busController.emit(`MENU_${datahref}`, datahref);
   }
 
   render() {
@@ -40,7 +48,7 @@ export default class BaseMenu extends Element {
   }
 
   getFocus() {
-    return this.parent.getElementsByClassName(this.focusClass);
+    return (this.parent.getElementsByClassName(this.focusClass));
   }
 
   setFirstFosus() {

@@ -3,4 +3,5 @@ export default {
   OFFLINE: 'OFFLINE',
   SINGLONLINE: 'SINGLONLINE',
   ARCADE: 'ARCADE',
+  CLASSIC: 'CLASSIC',
 };
