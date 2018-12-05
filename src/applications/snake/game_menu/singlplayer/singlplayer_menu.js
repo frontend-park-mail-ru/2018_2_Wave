@@ -12,7 +12,8 @@ const buttons = {
 
 export default class SinglplayerMenu extends BaseMenu {
   constructor(parent) {
-    super(SinglplayerTemplate, parent);
+    const [wrapper] = parent.getElementsByClassName('singlpayer-menu');
+    super(SinglplayerTemplate, parent, wrapper);
     this.render();
   }
 

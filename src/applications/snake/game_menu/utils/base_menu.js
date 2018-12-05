@@ -18,7 +18,6 @@ export default class BaseMenu extends Element {
 
   show() {
     super.show();
-    this.start();
     if (!this.rendered) {
       // render only one time, because menu is unchangeable
       this.render();
