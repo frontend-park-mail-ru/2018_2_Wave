@@ -2,6 +2,10 @@ body {
     margin: 0px;
 }
 
+html, 
+body {
+    height: 100%;
+}
 
 .root {
     width: 100%;
