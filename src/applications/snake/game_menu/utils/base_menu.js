@@ -2,8 +2,8 @@ import busController from '../../modules/busController';
 import Element from '../../../element';
 
 export default class BaseMenu extends Element {
-  constructor(template, parent) {
-    super(template, parent);
+  constructor(template, parent, wrapper) {
+    super(template, parent, wrapper);
     this.firstFocus = undefined;
     this.busController = busController;
     this.focusClass = 'snakemenu-button_focus';

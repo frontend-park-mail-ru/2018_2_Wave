@@ -12,7 +12,8 @@ const buttons = {
 
 export default class MainMenuView extends BaseMenu {
   constructor(parent) {
-    super(MainMenuTemplate, parent);
+    const [wrapper] = parent.getElementsByClassName('main-menu');
+    super(MainMenuTemplate, parent, wrapper);
     this.render();
   }
 
