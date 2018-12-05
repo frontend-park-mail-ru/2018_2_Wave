@@ -1,5 +1,3 @@
 .main-menu
-    a.snakemenu-button(datahref = "SINGLPLAYER") Singlplayer
-    a.snakemenu-button(datahref = "MULTIPLAYER") Multiplayer
-    a.snakemenu-button(datahref = "SETTINGS") Settings
-    a.snakemenu-button(datahref = "EXIT") Exit
+  each value, key in buttons
+    a.snakemenu-button(href=key)=value

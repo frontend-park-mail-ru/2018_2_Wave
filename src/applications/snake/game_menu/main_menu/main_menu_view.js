@@ -2,10 +2,18 @@ import BaseMenu from '../utils/base_menu';
 
 import MainMenuTemplate from './main_menu.pug';
 
+const buttons = {
+  '/singlplayer': 'Singlplayer',
+  '/multiplayer': 'Multiplayer',
+  '/gsmesettings': 'Settings',
+  '/leaderboard': 'Leaderboardium',
+  '/terminal': 'exit',
+};
+
 export default class MainMenuView extends BaseMenu {
-  constructor(parent, appUrl) {
-    super(parent, MainMenuTemplate, 'main-menu');
-    super.render();
+  constructor(parent) {
+    super(MainMenuTemplate, parent);
+    this.render();
   }
 
   start() {
@@ -18,5 +26,9 @@ export default class MainMenuView extends BaseMenu {
 
   show() {
     super.show();
+  }
+
+  render() {
+    super.render({ buttons });
   }
 }

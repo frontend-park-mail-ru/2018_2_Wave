@@ -1,19 +1,13 @@
 import BaseMenu from '../utils/base_menu';
 import busController from '../../modules/busController';
 
-import SinglplayerTemplate from './singlplayer.pug';
+import MultiplayerTemplate from './multiplayer.pug';
 
-
-const buttons = {
-  '/classic': 'CLASSIC',
-  '/arcade': 'ARCADE',
-  '/mainmenu': 'BACK',
-};
-
-export default class SinglplayerMenu extends BaseMenu {
-  constructor(parent) {
-    super(SinglplayerTemplate, parent);
-    this.render();
+export default class MultiplayerMenu extends BaseMenu {
+  constructor(parent, appUrl) {
+    super(parent, MultiplayerTemplate, 'multiplayer-menu');
+    super.render();
+    this.setBusListener();
   }
 
   setBusListener() {
@@ -25,20 +19,12 @@ export default class SinglplayerMenu extends BaseMenu {
   }
 
   start() {
-    this.setBusListener();
+    super.show();
     super.start();
   }
 
   stop() {
     this.removeBusListeners();
     super.stop();
-  }
-
-  show() {
-    super.show();
-  }
-
-  render() {
-    super.render({ buttons });
   }
 }

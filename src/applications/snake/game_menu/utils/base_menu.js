@@ -2,11 +2,10 @@ import busController from '../../modules/busController';
 import Element from '../../../element';
 
 export default class BaseMenu extends Element {
-  constructor(parent, template, containerName) {
+  constructor(template, parent) {
     super(template, parent);
     this.firstFocus = undefined;
     this.busController = busController;
-    this.containerName = containerName;
     this.focusClass = 'snakemenu-button_focus';
 
     this.eventsMethods = {
@@ -19,6 +18,11 @@ export default class BaseMenu extends Element {
 
   show() {
     super.show();
+    this.start();
+    if (!this.rendered) {
+      // render only one time, because menu is unchangeable
+      this.render();
+    }
   }
 
   hide() {
@@ -27,8 +31,8 @@ export default class BaseMenu extends Element {
 
   start() {
     [this.parent] = this.parent.getElementsByClassName(this.containerName);
-    this.setFirstFosus();
-    this.busController.setBusListeners(this.eventsMethods);
+    // this.setFirstFosus();
+    // this.busController.setBusListeners(this.eventsMethods);
   }
 
   processLine() {
@@ -39,8 +43,8 @@ export default class BaseMenu extends Element {
     this.busController.emit(`MENU_${datahref}`, datahref);
   }
 
-  render() {
-    super.render();
+  render(data) {
+    super.render(data);
   }
 
   stop() {

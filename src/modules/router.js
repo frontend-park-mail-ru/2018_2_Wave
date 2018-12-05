@@ -74,13 +74,22 @@ export default class Router {
     const params = splitParams(paramString);
 
     let app;
+
     if (this.routes.hasOwnProperty(path)) {
       app = this.routes[path];
       if (app === this.mainApp) app.changeView('main', params);
-    } else if (this.mainApp.views.hasOwnProperty(path)) {
-      app = this.mainApp;
-      app.changeView(path, params);
     } else {
+      Object.values(this.routes).some((currentApp) => {
+        if (currentApp.views.hasOwnProperty(path)) {
+          app = currentApp;
+          app.changeView(path, params);
+          return true;
+        }
+        return false;
+      });
+    }
+
+    if (!app) {
       this.open('/');
     }
 
