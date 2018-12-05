@@ -33,7 +33,7 @@ export default class UserBlock extends Element {
     const { user } = userService.getUser();
     super.render({ user, authorized });
 
-    const [profileButton] = document.getElementsByClassName('userblock__avatar');
+    const [profileButton] = this.wrapper.getElementsByClassName('icon__img');
     profileButton.addEventListener('click', () => bus.emit('link', '/profile'));
   }
 }
