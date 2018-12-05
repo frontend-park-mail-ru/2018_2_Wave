@@ -77,7 +77,8 @@ export default class Router {
 
     if (this.routes.hasOwnProperty(path)) {
       app = this.routes[path];
-      if (app === this.mainApp) app.changeView('main', params);
+      // if (app === this.mainApp) app.changeView('main', params);
+      app.changeView('main', params);
     } else {
       Object.values(this.routes).some((currentApp) => {
         if (currentApp.views.hasOwnProperty(path)) {
