@@ -41,6 +41,11 @@
 
 }
 
+/* cause 'hidden' property does not work with flex-box */
+[hidden] {
+  display: none !important;
+}
+
 .snakemenu-button {
   color: white;
   text-align: center;
