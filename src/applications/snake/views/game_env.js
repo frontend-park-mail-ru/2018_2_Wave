@@ -5,13 +5,12 @@ import GameTemplate from '../templates/game.pug';
 
 export default class Enviroment extends Element {
   constructor(parent) {
-    super(GameTemplate, parent);
+    super(GameTemplate, parent, 'game-container', 'application');
     super.render();
   }
 
   getContainer() {
-    [this.content] = this.wrapper.getElementsByClassName('game-container');
-    return this.content;
+    return this.wrapper;
   }
 
   show() {
