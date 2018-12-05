@@ -4,6 +4,7 @@ import Menu from './applications/menu/menu_app';
 import Snake from './applications/snake/game_app';
 
 import '../static/favicon.ico';
+import './style.pcss';
 
 new Router(document.body)
   .registerApp('/', Menu)
