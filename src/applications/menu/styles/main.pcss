@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+body {
+  background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+  margin: 0px;
+}
+
+
+.grid-body {
+  display: grid;
+  /* box-sizing: border-box; */
+  overflow: hidden;
+
+  height: calc(100vh - 40px);
+  width:  calc(100vw - 80px);
+  /* max-width: 1400px; */
+  padding: 20px 40px;
+
+
+  grid-template-rows: 40px 1fr 150px;
+  grid-template-columns: 40% 1fr 20%;
+  row-gap: 10px;
+
+  grid-template-areas:
+    "userblock . icon-set"
+    "content content content"
+    "panel panel panel"
+}
+
+
+@media (max-width: 640px) {
+  .grid-body {
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "userblock"
+      "content"
+      "panel";
+  }
+}

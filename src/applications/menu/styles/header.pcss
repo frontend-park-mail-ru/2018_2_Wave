@@ -1,0 +1,46 @@
+.icon-set {
+  grid-area: icon-set;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+
+  overflow: hidden;
+  margin: 5px;
+
+  cursor: pointer;
+}
+
+.icon__img {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+.userblock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin: 0 5px;
+}
+
+.userblock__name {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+
+@media (max-width: 640px) {
+  .userblock__name {
+    justify-content: center;
+  }
+}
