@@ -17,6 +17,8 @@ export default class BaseMenu extends Element {
   }
 
   show() {
+    this.setFirstFosus();
+    this.busController.setBusListeners(this.eventsMethods);
     super.show();
     if (!this.rendered) {
       // render only one time, because menu is unchangeable
@@ -29,17 +31,15 @@ export default class BaseMenu extends Element {
   }
 
   start() {
-    [this.parent] = this.parent.getElementsByClassName(this.containerName);
-    // this.setFirstFosus();
-    // this.busController.setBusListeners(this.eventsMethods);
+    this.busController.setBusListeners(this.eventsMethods);
   }
 
   processLine() {
     this.stop();
     this.hide();
-    const datahref = this.getFocus()[0].getAttribute('datahref');
+    const datahref = this.getFocus()[0].getAttribute('href');
 
-    this.busController.emit(`MENU_${datahref}`, datahref);
+    this.busController.emit('link', datahref);
   }
 
   render(data) {
@@ -51,11 +51,11 @@ export default class BaseMenu extends Element {
   }
 
   getFocus() {
-    return (this.parent.getElementsByClassName(this.focusClass));
+    return (this.wrapper.getElementsByClassName(this.focusClass));
   }
 
   setFirstFosus() {
-    this.focus = this.parent.firstChild;
+    this.focus = this.wrapper.firstChild;
     this.focusElement(this.focus);
   }
 
@@ -63,14 +63,14 @@ export default class BaseMenu extends Element {
     const [focus] = this.getFocus();
     focus.classList.remove(this.focusClass);
     const previousSibling = focus.previousElementSibling;
-    this.focusElement(previousSibling || this.parent.lastElementChild);
+    this.focusElement(previousSibling || this.wrapper.lastElementChild);
   }
 
   toggleMenuDown() {
     const [focus] = this.getFocus();
     focus.classList.remove(this.focusClass);
     const nextSibling = focus.nextElementSibling;
-    this.focusElement(nextSibling || this.parent.firstElementChild);
+    this.focusElement(nextSibling || this.wrapper.firstElementChild);
   }
 
   focusElement(element) {
