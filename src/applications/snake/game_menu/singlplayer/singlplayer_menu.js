@@ -1,20 +1,22 @@
 import BaseMenu from '../utils/base_menu';
 import busController from '../../modules/busController';
 
+import GAME_MODE from '../../game/core/modes';
+
 import SinglplayerTemplate from './singlplayer.pug';
 
 
 const buttons = {
-  '/game': {
-    text: 'CLASSIC',
-    params: 'mode=singlplayer&type=classic',
+  CLASSIC: {
+    href: '/game',
+    params: `mode=${GAME_MODE.CLASSIC}&type=${GAME_MODE.SINGLPLAYER}`,
   },
-  '/arcade': {
-    text: 'ARCADE',
-    params: 'mode=singlplayer&params=classic',
+  ARCADE: {
+    href: '/game',
+    params: `mode=${GAME_MODE.CLASSIC}&type=${GAME_MODE.SINGLPLAYER}`,
   },
-  '/mainmenu': {
-    text: 'BACK',
+  BACK: {
+    href: '/mainmenu',
   },
 };
 

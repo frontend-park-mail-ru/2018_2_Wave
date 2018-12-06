@@ -9,12 +9,15 @@ import BaseApp from '../../base_app';
 
 
 export default class Game {
-  constructor(mode = GAME_MODES.ONLINE, canvas, gameInitData) {
+  constructor(gameInfo, canvas, gameInitData) {
     let GameConstructor = null;
-    mode = GAME_MODES.OFFLINE;
-    switch (mode) {
+    switch (gameInfo.mode) {
       case GAME_MODES.ONLINE: {
         GameConstructor = OnlineGame;
+        break;
+      }
+      case GAME_MODES.OFFLINE: {
+        GameConstructor = OfflineGame;
         break;
       }
       case GAME_MODES.OFFLINE: {

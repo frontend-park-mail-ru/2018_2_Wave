@@ -8,50 +8,40 @@ import Element from '../../../element';
 export default class GameView extends Element {
   constructor(parent) {
     super(SnakeGameTemplate, parent, 'snakegame-container');
-
-    this.events = {
-      MENU_CLASSIC: this.initGame.bind(this),
-    };
-
-    this.setBusListeners();
   }
 
-  setBusListeners() {
-    busController.setBusListeners(this.events);
-  }
-
-  initGame(mode) {
-    this.show();
-    console.log('init', mode);
-    this.gameInitData = {
-      snakeText: 'qwertyuiopqe',
-      DOMRect: {
-        x: 10,
-        y: 10,
-        width: 18,
-        height: 18,
-      },
-      // windowWidth: window.innerWidth,
-      // windowHeight: window.innerHeight,
-      windowWidth: 800,
-      windowHeight: 500,
-    };
+  // initGame(mode) {
+  //   this.show();
+  //   console.log('init', mode);
+  //   this.gameInitData = {
+  //     snakeText: 'qwertyuiopqe',
+  //     DOMRect: {
+  //       x: 10,
+  //       y: 10,
+  //       width: 9,
+  //       height: 9,
+  //     },
+  //     // windowWidth: window.innerWidth,
+  //     // windowHeight: window.innerHeight,
+  //     windowWidth: 50,
+  //     windowHeight: 50,
+  //   };
 
 
-    // if (navigator.onLine) {
-    if (false) {
-      this.mode = GAME_MODES.ONLINE;
-      this.wsMessage.addToRoom();
-      this.startGame = this.startGame.bind(this);
-      busController.setBusListeners({ STATUS_OK: this.startGame });
-      busController.setBusListeners({ data: this.setUserToken.bind(this) });
-    } else {
-      this.mode = GAME_MODES.OFFLINE;
-      this.game = new Game(this.mode, this.env.getCanvas(), this.gameInitData);
-      // TODO: FIXME: call this in view after button press!
-      this.game.start();
-    }
-  }
+  //   // if (navigator.onLine) {
+  //   if (false) {
+  //     this.mode = GAME_MODES.ONLINE;
+  //     this.wsMessage.addToRoom();
+  //     this.startGame = this.startGame.bind(this);
+  //     busController.setBusListeners({ STATUS_OK: this.startGame });
+  //     busController.setBusListeners({ data: this.setUserToken.bind(this) });
+  //   } else {
+  //     this.mode = GAME_MODES.OFFLINE;
+  //     this.game = new Game(this.mode, this.env.getCanvas(), this.gameInitData);
+  //     // TODO: FIXME: call this in view after button press!
+  //     this.game.start();
+  //   }
+  // }
 
 
   show() {
@@ -60,6 +50,8 @@ export default class GameView extends Element {
 
   render(gameParams) {
     super.render();
+
+    gameParams.onLine = navigator.onLine;
 
     this.gameInitData = {
       snakeText: 'qwertyuiopqe',
@@ -70,8 +62,8 @@ export default class GameView extends Element {
         height: 6,
       },
       userToken: this.userToken,
-      windowWidth: 800,
-      windowHeight: 800,
+      windowWidth: 600,
+      windowHeight: 400,
     };
 
     console.log('game params:', gameParams);
