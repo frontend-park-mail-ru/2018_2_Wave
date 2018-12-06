@@ -4,10 +4,14 @@ import Element from '../../element';
 
 import template from '../templates/main.pug';
 
-
-import '../styles/main.pcss';
+import '../styles/tile.pcss';
+import '../styles/caroosel.pcss';
+import '../styles/content.pcss';
 import '../styles/header.pcss';
+import '../styles/main.pcss';
+import '../styles/menu.pcss';
 import '../styles/rename.pcss';
+import '../styles/tile-panel.pcss';
 
 
 export default class Enviroment extends Element {
@@ -25,10 +29,10 @@ export default class Enviroment extends Element {
 
   show() {
     super.show();
-    this.userblock.show();
+    // this.userblock.show();
   }
 
   async render() {
-    this.userblock.render();
+    // this.userblock.render();
   }
 }

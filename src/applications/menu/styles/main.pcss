@@ -18,14 +18,15 @@ body {
   padding: 20px 40px;
 
 
-  grid-template-rows: 40px 1fr 150px;
+  grid-template-rows: 40px 20% 1fr 20%;
   grid-template-columns: 40% 1fr 20%;
   row-gap: 10px;
 
   grid-template-areas:
     "userblock . icon-set"
+    "title title title"
     "content content content"
-    "panel panel panel"
+    "menu menu menu"
 }
 
 
@@ -36,6 +37,6 @@ body {
     grid-template-areas:
       "userblock"
       "content"
-      "panel";
+      "menu";
   }
 }

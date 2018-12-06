@@ -1,0 +1,30 @@
+.menu {
+  grid-area: menu;
+
+  &__tile-panel {
+    width: inherit;
+    height: 250px;
+    align-items: center;
+  }
+
+  &__tile {
+    justify-content: flex-end;
+    height: 150px;
+    width: 250px;
+
+    &:hover > .tile__card {
+      transform: translateY(-10px);
+      background-color: #005697;
+    }
+
+    &:hover > .tile__card::after {
+      transform:scale(.9);
+      box-shadow: 0px 0px 20px 2px #005697;
+    }
+
+    &:hover .tile-name {
+      color: white;
+      transform: scale(1.1);
+    }
+  }
+}

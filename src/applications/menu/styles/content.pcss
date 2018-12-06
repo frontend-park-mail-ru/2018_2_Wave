@@ -1,0 +1,23 @@
+.content-title {
+  grid-area: title;
+}
+
+.content {
+  grid-area: content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__tile-panel {
+    height: 60%;
+  }
+
+  &__tile {
+    justify-content: center;
+
+    height: 90%;
+    width: 400px;
+  }
+}

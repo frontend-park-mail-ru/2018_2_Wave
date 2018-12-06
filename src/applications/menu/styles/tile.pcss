@@ -1,0 +1,48 @@
+.tile {
+  margin: 0 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+
+  &__card {
+    height: 80%;
+    width: inherit;
+    display: flex;
+    /* overflow: hidden; */
+
+    border-radius: 5px;
+    background-color: rgba(100%, 100%, 100%,0.1);
+
+    transition: all 0.3s ease-out;
+
+    &:after {
+      content:"";
+      position: absolute;
+      width: 100%;
+      bottom: -4px;
+      z-index: -1;
+
+      transition: all 0.4s ease-out;
+    }
+  }
+
+  &__background {
+    border-radius: 5px;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  &__name {
+    display: inline-block;
+
+    font-size: 16px;
+    font-family: Roboto;
+    color: #C0C0C0;
+    margin: 5px;
+
+    transition: all 0.3s ease-out;
+  }
+}
