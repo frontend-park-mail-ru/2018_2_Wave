@@ -6,19 +6,22 @@ body {
   margin: 0px;
 }
 
+:root {
+  --big-font-size: calc(100vh / 9);
+}
 
 .grid-body {
   display: grid;
   /* box-sizing: border-box; */
   overflow: hidden;
 
-  height: calc(100vh - 40px);
-  width:  calc(100vw - 80px);
+  height: calc(100vh);
+  width:  calc(100vw - 160px);
   /* max-width: 1400px; */
-  padding: 20px 40px;
+  padding: 0 80px;
 
 
-  grid-template-rows: 40px 20% 1fr 20%;
+  grid-template-rows: 14% 19% 1fr 27%;
   grid-template-columns: 40% 1fr 20%;
   row-gap: 10px;
 

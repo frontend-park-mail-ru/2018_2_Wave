@@ -1,6 +1,19 @@
-.content-title {
-  grid-area: title;
+:root {
+  --big-font-size: calc(100vh / 9);
 }
+
+.title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font-size: var(--big-font-size);
+  color: white;
+
+  margin: 0 10px;
+}
+
 
 .content {
   grid-area: content;
@@ -11,13 +24,13 @@
   align-items: flex-start;
 
   &__tile-panel {
-    height: 60%;
+    height: 80%;
+    max-height: 400px;
   }
 
   &__tile {
     justify-content: center;
 
-    height: 90%;
-    width: 400px;
+    width: 450px;
   }
 }

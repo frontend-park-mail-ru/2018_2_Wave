@@ -1,30 +1,33 @@
 .menu {
   grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &__tile-panel {
     width: inherit;
-    height: 250px;
+    height: 70%;
     align-items: center;
   }
 
   &__tile {
     justify-content: flex-end;
-    height: 150px;
-    width: 250px;
+
+    width: 300px;
 
     &:hover > .tile__card {
       transform: translateY(-10px);
-      background-color: #005697;
+      background-color: #4462C4;
     }
 
     &:hover > .tile__card::after {
       transform:scale(.9);
-      box-shadow: 0px 0px 20px 2px #005697;
+      box-shadow: 0px 0px 30px 2px #4462C4;
     }
 
-    &:hover .tile-name {
+    &:hover .tile__name {
       color: white;
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
   }
 }
