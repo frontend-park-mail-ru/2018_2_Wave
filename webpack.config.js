@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 
@@ -27,26 +26,22 @@ module.exports = {
     }),
   ],
 
-  optimization: {
-    minimizer: [new UglifyJsPlugin()],
-  },
-
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
+          // { loader: 'css-loader', options: { importLoaders: 1 } },
         ],
       },
       {
         test: /\.pcss$/,
         use: [
           'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
+          // { loader: 'css-loader', options: { importLoaders: 1 } },
         ],
       },
       {
