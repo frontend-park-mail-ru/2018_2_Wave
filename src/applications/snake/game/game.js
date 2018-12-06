@@ -1,4 +1,4 @@
-import GAME_MODES from './core/modes';
+import GAME_MODE from './core/modes';
 import OfflineGame from './core/offline';
 import OnlineGame from './core/online';
 import ArcadeGame from './core/arcadeMode';
@@ -12,19 +12,17 @@ export default class Game {
   constructor(gameInfo, canvas, gameInitData) {
     let GameConstructor = null;
     switch (gameInfo.mode) {
-      case GAME_MODES.ONLINE: {
-        GameConstructor = OnlineGame;
+      case GAME_MODE.CLASSIC: {
+        if (gameInfo.type === GAME_MODE.SINGLPLAYER) {
+          // GameConstructor = OnlineGame;
+          GameConstructor = OfflineGame;
+        } else {
+          GameConstructor = OfflineGame;
+        }
         break;
       }
-      case GAME_MODES.OFFLINE: {
-        GameConstructor = OfflineGame;
-        break;
-      }
-      case GAME_MODES.OFFLINE: {
-        GameConstructor = OfflineGame;
-        break;
-      }
-      case GAME_MODES.ARCADE: {
+
+      case GAME_MODE.ARCADE: {
         GameConstructor = ArcadeGame;
         break;
       }

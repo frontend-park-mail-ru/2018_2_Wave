@@ -13,7 +13,7 @@ const buttons = {
   },
   ARCADE: {
     href: '/game',
-    params: `mode=${GAME_MODE.CLASSIC}&type=${GAME_MODE.SINGLPLAYER}`,
+    params: `mode=${GAME_MODE.ARCADE}&type=${GAME_MODE.SINGLPLAYER}`,
   },
   BACK: {
     href: '/mainmenu',

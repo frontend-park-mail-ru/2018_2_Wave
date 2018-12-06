@@ -1,7 +1,9 @@
 import GameCore from './core';
 import events from './events';
+import keyboardController from '../../modules/keyboardController';
 import busController from '../../modules/busController';
 import Size from '../models/size';
+
 
 import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
@@ -35,7 +37,7 @@ export default class ArcadeMode extends GameCore {
     this.cellCount = gameInitData.cellCount;
 
     this.scene = scene;
-    this.keyboardController = controller;
+    this.keyboardController = keyboardController;
     this.busController = busController;
 
     this.controllers = [];
