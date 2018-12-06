@@ -5,9 +5,17 @@ import SinglplayerTemplate from './singlplayer.pug';
 
 
 const buttons = {
-  '/classic': 'CLASSIC',
-  '/arcade': 'ARCADE',
-  '/mainmenu': 'BACK',
+  '/game': {
+    text: 'CLASSIC',
+    params: 'mode=singlplayer&type=classic',
+  },
+  '/arcade': {
+    text: 'ARCADE',
+    params: 'mode=singlplayer&params=classic',
+  },
+  '/mainmenu': {
+    text: 'BACK',
+  },
 };
 
 export default class SinglplayerMenu extends BaseMenu {

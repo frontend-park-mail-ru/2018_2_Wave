@@ -1,22 +1,13 @@
-import BaseApp from '../../../base_app';
-import GAME_MODES from '../core/modes';
-
 import busController from '../../modules/busController';
 import Game from '../game';
 
 import SnakeGameTemplate from '../templates/snakegame.pug';
-import GameEnv from './game_env';
 
 import Element from '../../../element';
 
 export default class GameView extends Element {
   constructor(parent) {
-    const env = new GameEnv(parent);
-
-    super(SnakeGameTemplate, parent);
-
-    this.env = env;
-    this.content = this.env.getContainer();
+    super(SnakeGameTemplate, parent, 'snakegame-container');
 
     this.events = {
       MENU_CLASSIC: this.initGame.bind(this),
@@ -64,10 +55,36 @@ export default class GameView extends Element {
 
 
   show() {
-    this.env.show();
+    super.show();
   }
 
-    // startGame() {
+  render(gameParams) {
+    super.render();
+
+    this.gameInitData = {
+      snakeText: 'qwertyuiopqe',
+      DOMRect: {
+        x: 10,
+        y: 10,
+        width: 6,
+        height: 6,
+      },
+      userToken: this.userToken,
+      windowWidth: 800,
+      windowHeight: 800,
+    };
+
+    console.log('game params:', gameParams);
+    const [canvas] = this.wrapper.getElementsByClassName('snakegame-canvas');
+    this.game = new Game(gameParams, canvas, this.gameInitData);
+    this.game.start();
+  }
+
+  hide() {
+    super.hide();
+  }
+
+  // startGame() {
   //   this.gameInitData = {};
   //   busController.removeBusListeners({ data: this.startGame });
   //   this.wsMessage.startGame();

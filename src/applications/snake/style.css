@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.snakemenu, .main-menu{
+.main-menu, .singlpayer-menu {
 
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;
@@ -10,7 +10,6 @@
   padding: 0px 10px;
 
   width: 70vw;
-  height: 100vh;
 
   display: flex;
   justify-content: center;

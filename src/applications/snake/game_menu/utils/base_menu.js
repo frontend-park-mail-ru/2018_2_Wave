@@ -1,5 +1,6 @@
 import busController from '../../modules/busController';
 import Element from '../../../element';
+import levelModel from '../../game/models/levelModel';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper) {
@@ -37,9 +38,10 @@ export default class BaseMenu extends Element {
   processLine() {
     this.stop();
     this.hide();
-    const datahref = this.getFocus()[0].getAttribute('href');
+    const href = this.getFocus()[0].getAttribute('href');
+    const params = this.getFocus()[0].getAttribute('params');
 
-    this.busController.emit('link', datahref);
+    this.busController.emit('link', href, params);
   }
 
   render(data) {
