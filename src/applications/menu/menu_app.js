@@ -9,8 +9,6 @@ import MenuView from './views/menu';
 // import SettingsView from './views/settings';
 // import ProfileEditView from './views/editprofile';
 
-
-
 export default class MenuApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new Enviroment(parent);
