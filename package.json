@@ -16,8 +16,10 @@
     "postcss": "^7.0.6",
     "postcss-cssnext": "^3.1.0",
     "postcss-google-font": "^0.1.1",
+    "postcss-import": "^12.0.1",
     "serviceworker-webpack-plugin": "^1.0.1",
-    "style-loader": "^0.23.0"
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.2"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
@@ -26,6 +28,7 @@
     "eslint-plugin-import": "^2.14.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-font-magician": "^2.2.1",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "pug": "^2.0.3",

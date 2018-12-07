@@ -29,19 +29,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'postcss-loader',
-          // { loader: 'css-loader', options: { importLoaders: 1 } },
-        ],
-      },
-      {
         test: /\.pcss$/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              singleton: true,
+            },
+          },
           'postcss-loader',
-          // { loader: 'css-loader', options: { importLoaders: 1 } },
         ],
       },
       {
@@ -55,6 +51,11 @@ module.exports = {
       {
         test: /\.ico$/,
         loader: 'file-loader?name=favicon.ico',
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|otf|svg|png|jpg)$/,
+        // loader: 'url-loader?limit=30000&name=./[name]-[hash].[ext]',
+        loader: 'url-loader?limit=30000&name=./[name].[ext]',
       },
     ],
   },
