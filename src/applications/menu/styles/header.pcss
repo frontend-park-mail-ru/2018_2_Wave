@@ -1,3 +1,8 @@
+:root {
+  --avatar-diameter: calc(5vh)
+}
+
+
 .icon-set {
   grid-area: icon-set;
 
@@ -6,8 +11,9 @@
 }
 
 .icon {
-  height: 60px;
-  width: 60px;
+  height: var(--avatar-diameter);
+  width: var(--avatar-diameter);
+
   border-radius: 50%;
 
   overflow: hidden;
@@ -33,7 +39,8 @@
 
 .userblock__name {
   color: white;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: var(--main-font); */
+  font-family: Gilroy-Light;
   font-size: 26px;
   margin: 0 15px;
 }
