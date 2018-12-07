@@ -10,10 +10,19 @@
     align-items: center;
   }
 
+  &__card {
+    background-color: rgba(100%, 100%, 100%,0.1);
+
+    &:after {
+      bottom: -4px;
+      transition: all 0.4s ease-out;
+    }
+  }
+
   &__tile {
     justify-content: flex-end;
-
     width: 25vh;
+
 
     &:hover > .tile__card {
       transform: translateY(-10px);
@@ -21,7 +30,7 @@
     }
 
     &:hover > .tile__card::after {
-      transform:scale(.9);
+      transform: scale(.9);
       box-shadow: 0px 0px 30px 2px #4462C4;
     }
 

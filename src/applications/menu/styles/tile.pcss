@@ -10,24 +10,18 @@
   cursor: pointer;
 
   &__card {
+    // position: absolute;
+    border-radius: 5px;
+    display: flex;
     height: 90%;
     width: inherit;
-    display: flex;
-    /* overflow: hidden; */
-
-    border-radius: 5px;
-    background-color: rgba(100%, 100%, 100%,0.1);
-
     transition: all 0.3s ease-out;
 
     &:after {
       content:"";
       position: absolute;
       width: 100%;
-      bottom: -4px;
       z-index: -1;
-
-      transition: all 0.4s ease-out;
     }
   }
 
@@ -43,7 +37,7 @@
     margin: 3px 5px;
 
     font: 100% Roboto;
-    color: #C0C0C0;
+    color: rgb(100%, 100%, 100%, 0.6);
 
     transition: all 0.3s ease-out;
   }
