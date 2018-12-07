@@ -16,6 +16,9 @@ import '../styles/tile-panel.pcss';
 import '../../../../static/fonts/Gilroy-ExtraBold.otf';
 import '../../../../static/fonts/Gilroy-Light.otf';
 
+import '../../../../static/img/triss.jpg';
+import '../../../../static/img/terminal.jpg';
+
 export default class Enviroment extends Element {
   constructor(parent) {
     super(template, parent);
