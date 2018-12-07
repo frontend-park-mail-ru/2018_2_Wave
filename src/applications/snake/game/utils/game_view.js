@@ -46,29 +46,48 @@ export default class GameView extends Element {
 
   show() {
     super.show();
+    this.startGame(this.gameParams);
   }
 
   render(gameParams) {
+    this.gameParams = gameParams;
     super.render();
+  }
 
-    gameParams.onLine = navigator.onLine;
+  startGame(gameParams) {
+    // if (!this.gameParams) {
+    //   busController.emit('link', '/mainmenu');
+    //   return;
+    // }
 
+    if (!gameParams) {
+      this.gameParams = {
+        mode: 'CLASSIC',
+        type: 'SINGLPLAYER',
+      };
+    }
+
+    this.gameParams.onLine = navigator.onLine;
+
+    const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
       snakeText: 'qwertyuiopqe',
       DOMRect: {
         x: 10,
         y: 10,
-        width: 6,
-        height: 6,
+        width: 15,
+        height: 15,
       },
       userToken: this.userToken,
-      windowWidth: 600,
-      windowHeight: 400,
+      windowWidth: canvasWrapper.clientWidth,
+      windowHeight: canvasWrapper.clientHeight,
+      widthCellCount: 60,
+      heightCellCount: 40,
     };
 
-    console.log('game params:', gameParams);
+    console.log('game params:', this.gameInitData);
     const [canvas] = this.wrapper.getElementsByClassName('snakegame-canvas');
-    this.game = new Game(gameParams, canvas, this.gameInitData);
+    this.game = new Game(this.gameParams, canvas, this.gameInitData);
     this.game.start();
   }
 

@@ -1,10 +1,7 @@
 import BaseMenu from '../utils/base_menu';
-import busController from '../../modules/busController';
-
-import GAME_MODE from '../../game/core/modes';
-
 import SinglplayerTemplate from './singlplayer.pug';
 
+import GAME_MODE from '../../game/core/modes';
 
 const buttons = {
   CLASSIC: {
@@ -26,21 +23,11 @@ export default class SinglplayerMenu extends BaseMenu {
     this.render();
   }
 
-  setBusListener() {
-    busController.setBusListeners({ MENU_SINGLPLAYER: this.start.bind(this) });
-  }
-
-  removeBusListeners() {
-    busController.setBusListeners({ SINGLPLAYER: this.start.bind(this) });
-  }
-
   start() {
-    this.setBusListener();
     super.start();
   }
 
   stop() {
-    this.removeBusListeners();
     super.stop();
   }
 

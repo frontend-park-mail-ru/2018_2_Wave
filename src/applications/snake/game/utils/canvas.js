@@ -81,6 +81,7 @@ export default class Canvas {
     this.drawRect({
       x: 0,
       y: 0,
+      strokeStyle: 'black',
       width,
       height,
       space: 4,

@@ -7,7 +7,7 @@ import Menu from './applications/menu/menu_app';
 import './style.css';
 
 new Router(document.body)
-  .registerApp('/', Menu)
+  .registerApp('/', Terminal)
   .registerApp('menu', Menu)
   .registerApp('terminal', Terminal)
   .registerApp('snake', Snake)

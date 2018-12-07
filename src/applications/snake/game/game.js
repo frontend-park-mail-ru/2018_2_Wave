@@ -26,27 +26,30 @@ export default class Game {
         GameConstructor = ArcadeGame;
         break;
       }
+
+      case GAME_MODE.SCENE: {
+        GameConstructor = OnlineGame;
+        break;
+      }
       default:
-        throw new Error(`Invalid game mode ${mode}`);
+        throw new Error(`Invalid game mode ${gameInfo.mode}`);
     }
 
-    const cellWidth = gameInitData.DOMRect.width;
-    const cellHeight = gameInitData.DOMRect.height;
+    const cellWidth = Math.floor(Math.min(gameInitData.windowWidth / gameInitData.widthCellCount,
+      gameInitData.windowHeight / gameInitData.heightCellCount));
 
     // реальные размеры одной ячейки
-    this.cellSize = new Size(cellWidth, cellHeight);
+    this.cellSize = new Size(cellWidth, cellWidth);
 
-    const { windowWidth } = gameInitData;
-    const { windowHeight } = gameInitData;
+    const windowWidth = cellWidth * gameInitData.widthCellCount;
+    const windowHeight = cellWidth * gameInitData.heightCellCount;
 
     // реальные размеры окна для игры
     this.windowSize = new Size(windowWidth, windowHeight);
 
-    const widthCellCount = Math.floor(windowWidth / cellWidth);
-    const heightCellCount = Math.floor(windowHeight / cellHeight);
-
     // размерность поля игры
-    gameInitData.cellCount = new Size(widthCellCount, heightCellCount);
+    gameInitData.cellCount = new Size(gameInitData.widthCellCount,
+      gameInitData.heightCellCount);
 
     console.log('this.cellSize', this.cellSize);
     console.log('this.windowSize', this.windowSize);

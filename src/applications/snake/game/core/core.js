@@ -16,7 +16,6 @@ export default class GameCore {
   }
 
   destroy() {
-    this.keyboardController.stop();
     this.scene.destroy();
   }
 }

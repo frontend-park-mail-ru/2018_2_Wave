@@ -9,7 +9,7 @@ class KeyboardController {
       13, // enter
       // 27, // esc
       // 16, // shift
-      32, // space
+      // 32, // space
     ];
 
     this.snakeControls = [
@@ -27,6 +27,7 @@ class KeyboardController {
     ];
 
     this.swipeDetector = swipeDetector;
+    this.isSpace = false;
   }
 
   start() {
@@ -58,6 +59,14 @@ class KeyboardController {
       return this.swipeDetector.getLastCommand();
     }
     return undefined;
+  }
+
+  getSpace() {
+    if (this.isSpace) {
+      this.isSpace = false;
+      return true;
+    }
+    return false;
   }
 
   isSnakeControls(keyCode) {
@@ -104,6 +113,10 @@ class KeyboardController {
     } else if (this.isSnakeControls(keyCode)) {
       bus.emit(e.code);
       this.lastCommand = e.key;
+    }
+
+    if (e.code === 'Space') {
+      this.isSpace = true;
     }
   }
 }

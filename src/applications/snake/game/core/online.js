@@ -7,6 +7,7 @@ import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
 import FoodsController from '../controllers/foodsController';
 import AudioController from '../controllers/audioController';
+import keyboardController from '../../modules/keyboardController';
 
 import LevelView from '../views/levelView';
 import SnakeView from '../views/snakeView';
@@ -18,16 +19,18 @@ import SnakeModel from '../models/snakeModel';
 import FoodsModel from '../models/foodsModel';
 import EnemyModel from '../models/enemyModel';
 
-import wsMessgase from '../../modules/wsMessage';
+import WsPostman from '../../modules/wsPostman';
 
-import wsMessageParser from '../../modules/wsMessageParser';
+import WsMessageParser from '../../modules/wsMessageParser';
 
 
 export default class OnlineGame extends GameCore {
   constructor(scene, gameInitData) {
     super(scene);
 
-    this.wsMessageParser = wsMessageParser;
+    this.wsMessageParser = new WsMessageParser();
+    this.wsPostman = new WsPostman();
+    this.wsPostman.addToRoom();
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
@@ -42,7 +45,7 @@ export default class OnlineGame extends GameCore {
     this.cellCount = gameInitData.cellCount;
 
     this.scene = scene;
-    this.keyboardController = controller;
+    this.keyboardController = keyboardController;
     this.busController = busController;
 
     this.controllers = [];
@@ -77,6 +80,7 @@ export default class OnlineGame extends GameCore {
 
   start() {
     // this.controllers.forEach(controller => controller.init());
+    this.wsPostman.startGame();
     super.start();
 
     // this.audioController.start();
@@ -94,7 +98,7 @@ export default class OnlineGame extends GameCore {
       this.lastFrame = now;
 
       if (this.keyboardController.isCommand()) {
-        wsMessgase.sendDirection(this.keyboardController.getLastCommand());
+        this.wsPostman.sendDirection(this.keyboardController.getLastCommand());
         // this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 

@@ -1,30 +1,44 @@
 import BaseMenu from '../utils/base_menu';
-import busController from '../../modules/busController';
-
 import MultiplayerTemplate from './multiplayer.pug';
 
+import GAME_MODE from '../../game/core/modes';
+
+const buttons = {
+  SCENE: {
+    href: '/game',
+    params: `mode=${GAME_MODE.SCENE}&type=${GAME_MODE.MULTIPLAYER}`,
+  },
+  'CREATE ROOM': {
+    href: '/create_room',
+    // params: `mode=${GAME_MODE.ARCADE}&type=${GAME_MODE.SINGLPLAYER}`,
+  },
+  'ROOMS LIST': {
+    href: '/rooms_list',
+  },
+  BACK: {
+    href: '/mainmenu',
+  },
+};
+
 export default class MultiplayerMenu extends BaseMenu {
-  constructor(parent, appUrl) {
-    super(parent, MultiplayerTemplate, 'multiplayer-menu');
-    super.render();
-    this.setBusListener();
-  }
-
-  setBusListener() {
-    busController.setBusListeners({ MENU_SINGLPLAYER: this.start.bind(this) });
-  }
-
-  removeBusListeners() {
-    busController.setBusListeners({ SINGLPLAYER: this.start.bind(this) });
+  constructor(parent) {
+    super(MultiplayerTemplate, parent, 'multiplayer-menu');
+    this.render();
   }
 
   start() {
-    super.show();
     super.start();
   }
 
   stop() {
-    this.removeBusListeners();
     super.stop();
+  }
+
+  show() {
+    super.show();
+  }
+
+  render() {
+    super.render({ buttons });
   }
 }

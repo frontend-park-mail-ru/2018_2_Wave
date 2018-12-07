@@ -1,8 +1,14 @@
 import config from './wsConfig';
 
-export default class WsMessage {
+let instance;
+
+export default class WsPostman {
   constructor(webSocket) {
-    this.ws = webSocket;
+    if (!instance) {
+      this.ws = webSocket;
+      instance = this;
+    }
+    return instance;
   }
 
   addToRoom(room_token = config.DEFAULT_ROOM_TOKEN) {

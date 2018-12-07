@@ -1,15 +1,36 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url("../../../public/fonts/led_display-7.ttf") format('truetype'),;
+}
+
+@font-face {
+  font-family: font35;
+  src: url("../../../public/fonts/3X5_____.ttf");
+}
+
+@font-face {
+  font-family: trsMillion;
+  src: url("../../../public/fonts/trs-million rg.ttf");
+}
+
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 .game-container {
   height: 100%;
 }
 
-.main-menu, .singlpayer-menu {
+.main-menu, .singlpayer-menu, .multiplayer-menu {
 
-  font-family: 'Roboto Mono', monospace;
+  max-width: 400px;
+
+  /* font-family: 'Roboto Mono', monospace; */
+  font-family: 'Press Start 2P', cursive;
   font-size: 14px;
 
   padding: 0px 10px;
 
   width: 70vw;
+  height: 50vh;
 
   display: flex;
   justify-content: center;
@@ -18,10 +39,13 @@
 
 
   border-style: solid;
-  border-width: 1px;
-  border-color: greenyellow;
-  flex-direction: column;
+  border-width: 2px;
+  /* border-color: greenyellow; */
+  border-color: #3F0070;
 
+
+
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +59,7 @@
 }
 
 .snakemenu-button {
-  color: white;
+  color: #ffffff;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
@@ -46,20 +70,61 @@
 }
 
 .snakemenu-button_focus {
-  color: #fd00f1;
+  color: rgb(138, 4, 165);
+  font-size: 18px;
+  /* font-weight: bold; */
+}
+
+.snakemenu-button_focus::before {
+  content: "> ";
 }
 
 .snakegame-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: -webkit-fill-available;
+    
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 15% auto;
+    grid-template-areas: 
+      ". . score . ."
+      "game game game game game"
+      "game game game game game";
+      
+    /* position: relative; */
   }
 
 .snakegame-container_hidden {
     display: none;
   }
+
+.snakegame-canvas {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #3F0070;
+  justify-self: center;
+}
+
+.score {
+  /* font-family: myFirstFont, font35, trsMillion; */
+  font-family: 'Press Start 2P', cursive;
+  font-size : 20px;
+  color: #A757BD;
+
+  justify-self: center;
+  align-self: center;
+
+  grid-area: score;
+}
+
+.canvas-wrapper {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  justify-self: center;
+  align-self: center;
+  /* background-color: green; */
+  grid-area: game;
+}
 

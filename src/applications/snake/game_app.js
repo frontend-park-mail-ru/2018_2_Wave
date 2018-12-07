@@ -1,24 +1,27 @@
 import SnakeGameView from './game/utils/game_view';
 import GameEnv from './views/game_env';
 
-import WsMessage from './modules/wsMessage';
+import WsPostman from './modules/wsPostman';
 import WsMessageParser from './modules/wsMessageParser';
 import WebSocket from '../../modules/webSocket';
 import keyboardController from './modules/keyboardController';
 
 import BaseApp from '../base_app';
 
-import './style.css';
 import MainMenuView from './game_menu/main_menu/main_menu_view';
 import SinglplayerView from './game_menu/singlplayer/singlplayer_menu';
+import MultiplayerMenu from './game_menu/multiplayer/multiplayer_menu';
+
+import './style.css';
 
 export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new GameEnv(parent);
     const Views = {
       game: SnakeGameView,
-      singlplayer: SinglplayerView,
       mainmenu: MainMenuView,
+      singlplayer: SinglplayerView,
+      multiplayer: MultiplayerMenu,
     };
 
     super(appUrl, env.getContainer(), MainMenuView, Views);
@@ -26,7 +29,7 @@ export default class GameApp extends BaseApp {
     this.env = env;
     this.wsMessageParser = new WsMessageParser(this);
     this.webSocket = new WebSocket(this.wsMessageParser);
-    this.wsMessage = new WsMessage(this.webSocket);
+    this.wsPostman = new WsPostman(this.webSocket);
     this.keyboardController = keyboardController;
   }
 

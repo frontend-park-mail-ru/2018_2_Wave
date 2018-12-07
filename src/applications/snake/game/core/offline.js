@@ -39,7 +39,6 @@ export default class OfflineGame extends GameCore {
 
     this.controllers = [];
 
-
     this.level = new LevelModel(this.cellCount);
     
     this.player = new PlayerModel();
@@ -60,19 +59,13 @@ export default class OfflineGame extends GameCore {
     this.scene.push(new FoodView(this.food));
 
     this.audioController = new AudioController();
+  }
 
-    this.resume =  this.resume.bind(this);
-    this.resumeEvents = {
-      Space: this.resume,
-    };
-
-    this.pause = this.pause.bind(this);
-    this.stopEvents = {
-      Space: this.pause,
-    };
-
+  setBusListeners() {
     busController.setBusListeners(this.stopEvents);
   }
+
+  
 
   start() {
     this.controllers.forEach(controller => controller.init());
@@ -96,6 +89,10 @@ export default class OfflineGame extends GameCore {
         this.snakeController.setDirection(keyboardController.getLastCommand());
       }
 
+      if (keyboardController.getSpace()) {
+        this.pause();
+      }
+
       if (!this.paused) {
         this.update();
       }
@@ -106,16 +103,16 @@ export default class OfflineGame extends GameCore {
   }
 
   pause() {
-    this.paused = true;
-    busController.removeBusListeners(this.stopEvents);
-    busController.setBusListeners(this.resumeEvents);
-    super.pause();
-    this.audioController.pause();
+    if (this.paused) {
+      this.resume();
+    } else {
+      this.paused = true;
+      super.pause();
+      this.audioController.pause();
+    }
   }
 
   resume() {
-    busController.removeBusListeners(this.resumeEvents);
-    busController.setBusListeners(this.stopEvents);
     super.resume();
     this.audioController.resume();
     this.paused = false;

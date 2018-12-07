@@ -11,12 +11,17 @@ export default class LevelView {
       this.levelModel.size.height);
 
     this.levelModel.walls.forEach((wall) => {
-      const color = '#330000';
-      const strokeStyle = '#ff0000';
+      // rer and black
+      // const color = '#330000';
+      // const strokeStyle = '#ff0000';
+
+      const fillStyle = '#000761';
+      const strokeStyle = '#000761';
       const size  = 1;
+
       if (this.letters) {
         canvas.drawLetter({
-          // fillStyle: color,
+          fillStyle,
           font: 'Arial',
           strokeStyle,
           size,
@@ -26,7 +31,7 @@ export default class LevelView {
         });
       } else {
         canvas.drawRect({
-          // fillStyle: color,
+          fillStyle,
           strokeStyle,
           x: wall.x,
           y: wall.y,

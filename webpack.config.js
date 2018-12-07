@@ -28,10 +28,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         loaders: [
           'style-loader',
           'css-loader',
+          'sass-loader',
         ],
       },
 
@@ -40,7 +41,7 @@ module.exports = {
         loader: 'pug-loader',
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|ttf)$/,
         loader: 'file-loader',
       },
     ],

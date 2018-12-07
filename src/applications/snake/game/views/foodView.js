@@ -7,7 +7,9 @@ export default class FoodView {
   render(canvas) {
     const font = 'Arial';
     const size = 15;
-    const fillStyle = '#99ff00';
+    const fillStyle = '#FE00DD';
+    const strokeStyle = '#FE00DD';
+
     if (this.foodModel.position) {
       if (this.letters.letters) {
         canvas.drawLetter({
@@ -20,8 +22,8 @@ export default class FoodView {
         });
       } else {
         canvas.drawRect({
-          fillStyle: '#003300',
-          strokeStyle: '#009900',
+          fillStyle,
+          strokeStyle,
           x: this.foodModel.position.x,
           y: this.foodModel.position.y,
           width: 1,

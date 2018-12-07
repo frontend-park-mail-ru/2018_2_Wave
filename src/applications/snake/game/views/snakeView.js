@@ -6,7 +6,13 @@ export default class SnakeView {
   render(canvas) {
     const font = 'Arial';
     const size = 15;
-    const fillStyle = '#99ff00';
+    // const fillStyle = '#99ff00';
+    // green
+    // const fillStyle = '#003300',
+    // const strokeStyle = 'greenyellow';
+
+    const fillStyle = '#00FFFF';
+    const strokeStyle = '#00FFFF';
 
     this.snake.getSegments().forEach((segment) => {
       if (this.snake.letters) {
@@ -20,9 +26,8 @@ export default class SnakeView {
         });
       } else {
         canvas.drawRect({
-          // fillStyle: '#003300',
-          fillStyle: 'black',
-          // strokeStyle: 'greenyellow',
+          fillStyle,
+          strokeStyle,
           x: segment.x,
           y: segment.y,
           width: 1,
