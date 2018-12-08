@@ -5,8 +5,6 @@ import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
 import Size from './models/size';
 
-import BaseApp from '../../base_app';
-
 
 export default class Game {
   constructor(gameInfo, canvas, gameInitData) {

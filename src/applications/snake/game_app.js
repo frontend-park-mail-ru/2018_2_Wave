@@ -12,6 +12,8 @@ import MainMenuView from './game_menu/main_menu/main_menu_view';
 import SinglplayerView from './game_menu/singlplayer/singlplayer_menu';
 import MultiplayerMenu from './game_menu/multiplayer/multiplayer_menu';
 
+import ErrorMessage from './error_message/errorMessage';
+
 import './style.css';
 
 export default class GameApp extends BaseApp {
@@ -30,6 +32,8 @@ export default class GameApp extends BaseApp {
     this.wsMessageParser = new WsMessageParser(this);
     this.webSocket = new WebSocket(this.wsMessageParser);
     this.wsPostman = new WsPostman(this.webSocket);
+    this.errorMessage = new ErrorMessage();
+
     this.keyboardController = keyboardController;
   }
 
