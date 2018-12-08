@@ -29,14 +29,10 @@
 
   padding: 0px 10px;
 
-  width: 70vw;
+  width: 80vw;
   height: 50vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
+  display: grid;
 
   border-style: solid;
   border-width: 2px;
@@ -45,10 +41,10 @@
 
 
 
-  flex-direction: column;
+  /* flex-direction: column;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 
   flex-wrap: wrap;
 }
@@ -58,14 +54,18 @@
   display: none !important;
 }
 
+.main-menu {
+  grid-template-rows: repeat(5, 1fr);
+}
+
 .snakemenu-button {
   color: #ffffff;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px;
-  margin: 15px 0;
-  display: block;
+  /* padding: 15px;
+  margin: 15px 0; */
+  place-self: center;
   cursor: pointer;
 }
 

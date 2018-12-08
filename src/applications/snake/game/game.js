@@ -27,7 +27,7 @@ export default class Game {
         break;
       }
 
-      case GAME_MODE.SCENE: {
+      case GAME_MODE.MULTIPLAYER: {
         GameConstructor = OnlineGame;
         break;
       }

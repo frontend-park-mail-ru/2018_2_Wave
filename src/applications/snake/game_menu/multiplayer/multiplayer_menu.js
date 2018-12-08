@@ -4,16 +4,17 @@ import MultiplayerTemplate from './multiplayer.pug';
 import GAME_MODE from '../../game/core/modes';
 
 const buttons = {
-  SCENE: {
+  '2 PLAYERS': {
     href: '/game',
-    params: `mode=${GAME_MODE.SCENE}&type=${GAME_MODE.MULTIPLAYER}`,
+    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.TWO_PLAYERS}`,
   },
-  'CREATE ROOM': {
-    href: '/create_room',
-    // params: `mode=${GAME_MODE.ARCADE}&type=${GAME_MODE.SINGLPLAYER}`,
+  '3 PLAYERS': {
+    href: '/game',
+    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.THREE_PLAYERS}`,
   },
-  'ROOMS LIST': {
-    href: '/rooms_list',
+  '4 PLAYERS': {
+    href: '/game',
+    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`,
   },
   BACK: {
     href: '/mainmenu',

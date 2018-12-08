@@ -19,9 +19,8 @@ import SnakeModel from '../models/snakeModel';
 import FoodsModel from '../models/foodsModel';
 import EnemyModel from '../models/enemyModel';
 
-import WsPostman from '../../modules/wsPostman';
-
 import WsMessageParser from '../../modules/wsMessageParser';
+import WsPostman from '../../modules/wsPostman';
 
 
 export default class OnlineGame extends GameCore {
@@ -30,17 +29,11 @@ export default class OnlineGame extends GameCore {
 
     this.wsMessageParser = new WsMessageParser();
     this.wsPostman = new WsPostman();
-    this.wsPostman.addToRoom();
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.lastFrame = 0;
     this.framesPerSecond = 30;
-
-    this.snakeText = gameInitData.snakeText;
-    // this.DOMRect = gameInitData.DOMRect;
-    this.startX = gameInitData.DOMRect.x;
-    this.startY = gameInitData.DOMRect.y;
 
     this.cellCount = gameInitData.cellCount;
 
@@ -56,7 +49,7 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY, gameInitData.userToken);
+    this.snake = new SnakeModel('this.snakeText', 0, 0, gameInitData.userToken);
     this.snakeController = new SnakeController(this.snake, this.level);
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
