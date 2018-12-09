@@ -10,6 +10,7 @@ class KeyboardController {
       // 27, // esc
       // 16, // shift
       // 32, // space
+      84, // t(change theme)
     ];
 
     this.snakeControls = [

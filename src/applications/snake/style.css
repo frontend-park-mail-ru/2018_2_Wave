@@ -17,6 +17,7 @@
 
 .game-container {
   height: 100%;
+  cursor: none;
 }
 
 .main-menu, .singlpayer-menu, .multiplayer-menu {
