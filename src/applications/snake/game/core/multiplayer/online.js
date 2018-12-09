@@ -1,26 +1,26 @@
-import GameCore from './core';
-import events from './events';
-import busController from '../../modules/busController';
-import Size from '../models/size';
+import GameCore from '../core';
+import events from '../events';
+import busController from '../../../modules/busController';
+import Size from '../../models/size';
 
-import LevelController from '../controllers/levelController';
-import SnakeController from '../controllers/snackeController';
-import FoodsController from '../controllers/foodsController';
-import AudioController from '../controllers/audioController';
-import keyboardController from '../../modules/keyboardController';
+import LevelController from '../../controllers/levelController';
+import SnakeController from '../../controllers/snackeController';
+import FoodsController from '../../controllers/foodsController';
+import AudioController from '../../controllers/audioController';
+import keyboardController from '../../../modules/keyboardController';
 
-import LevelView from '../views/levelView';
-import SnakeView from '../views/snakeView';
-import FoodsView from '../views/foodsView';
-import EnemyView from '../views/enemyView';
+import LevelView from '../../views/levelView';
+import SnakeView from '../../views/snakeView';
+import FoodsView from '../../views/foodsView';
+import EnemyView from '../../views/enemyView';
 
-import LevelModel from '../models/levelModel';
-import SnakeModel from '../models/snakeModel';
-import FoodsModel from '../models/foodsModel';
-import EnemyModel from '../models/enemyModel';
+import LevelModel from '../../models/levelModel';
+import SnakeModel from '../../models/snakeModel';
+import FoodsModel from '../../models/foodsModel';
+import EnemyModel from '../../models/enemyModel';
 
-import WsMessageParser from '../../modules/wsMessageParser';
-import WsPostman from '../../modules/wsPostman';
+import WsMessageParser from '../../../modules/wsMessageParser';
+import WsPostman from '../../../modules/wsPostman';
 
 
 export default class OnlineGame extends GameCore {

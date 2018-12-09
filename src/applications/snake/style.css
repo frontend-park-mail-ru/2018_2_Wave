@@ -78,7 +78,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 15% auto;
     grid-template-areas: 
-      ". . score . ."
+      "mode . score . ."
       "game game game game game"
       "game game game game game";
       
@@ -116,5 +116,15 @@
   align-self: center;
   /* background-color: green; */
   grid-area: game;
+}
+
+.game_mode {
+  grid-area: mode;
+  font-family: 'Press Start 2P', cursive;
+  font-size : 30px;
+  color: rgb(255, 255, 255);
+
+  justify-self: center;
+  align-self: center;
 }
 

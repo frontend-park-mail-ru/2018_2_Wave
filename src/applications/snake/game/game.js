@@ -1,6 +1,6 @@
 import GAME_MODE from './core/modes';
 import OfflineGame from './core/offline/offline';
-import OnlineGame from './core/online';
+import OnlineGame from './core/multiplayer/online';
 import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
 import Size from './models/size';

@@ -14,6 +14,7 @@ import PlayerController from '../../controllers/playerController';
 import LevelView from '../../views/levelView';
 import SnakeView from '../../views/snakeView';
 import FoodView from '../../views/foodView';
+import PlayerView from '../../views/playerView';
 
 import LevelModel from '../../models/levelModel';
 import SnakeModel from '../../models/snakeModel';
@@ -47,8 +48,9 @@ export default class OfflineGame extends GameCore {
 
     this.level = new LevelModel(this.cellCount);
 
-    this.player = new PlayerModel();
-    this.playerController = new PlayerController(this.player);
+    this.player = new PlayerModel(gameInitData.userToken);
+    this.playerView = new PlayerView();
+    this.playerController = new PlayerController(this.player, this.playerView);
 
     this.levelController = new LevelController(this.level);
     this.controllers.push(this.levelController);
@@ -81,6 +83,7 @@ export default class OfflineGame extends GameCore {
 
   start() {
     this.controllers.forEach(controller => controller.init());
+    this.playerController.init();
     super.start();
 
     this.setBusListeners();
@@ -127,7 +130,7 @@ export default class OfflineGame extends GameCore {
       },
     };
 
-    this.deadMessage.show(DeadMenuTemplate({ deadButtons }), 256);
+    this.deadMessage.show(DeadMenuTemplate({ deadButtons }), this.player.score);
   }
 
   pause() {
