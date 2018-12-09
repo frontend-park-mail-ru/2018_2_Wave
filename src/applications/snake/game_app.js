@@ -12,6 +12,8 @@ import MainMenuView from './game_menu/main_menu/main_menu_view';
 import SinglplayerView from './game_menu/singlplayer/singlplayer_menu';
 import MultiplayerMenu from './game_menu/multiplayer/multiplayer_menu';
 
+import globalUser from './globalUser';
+
 import ErrorMessage from './error_message/errorMessage';
 
 import './style.css';
@@ -30,6 +32,7 @@ export default class GameApp extends BaseApp {
 
     this.env = env;
     this.wsMessageParser = new WsMessageParser(this);
+    this.wsMessageParser.setModel('user_token', globalUser);
     this.webSocket = new WebSocket(this.wsMessageParser);
     this.wsPostman = new WsPostman(this.webSocket);
     this.errorMessage = new ErrorMessage();
@@ -56,10 +59,5 @@ export default class GameApp extends BaseApp {
 
   stop() {
     this.webSocket.close();
-  }
-
-  setUserToken(userToken) {
-    console.log('set user token', userToken);
-    this.userToken = userToken;
   }
 }

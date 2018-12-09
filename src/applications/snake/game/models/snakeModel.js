@@ -1,11 +1,14 @@
-import Position from './position';
+import globalUser from '../../globalUser';
 
 export default class SnakeModel {
-  constructor(snakeText, startX, startY, snakeId) {
+  constructor() {
     this.segments  = [];
-    this.snakeId = snakeId;
-    this.snakeText = snakeText;
-    this.startPosition = new Position(startX, startY);
+    this.userToken = globalUser.userToken;
+    this.defaultSize = 3;
+    this.startPosition = {
+      x: 15,
+      y: 20,
+    };
 
     this.directions = {
       Up: 'UP',
@@ -28,12 +31,10 @@ export default class SnakeModel {
 
   init({
     segments = [],
-    snakeText,
     startPosition,
     destroyed,
   }) {
     this.segments = segments;
-    this.snakeText = snakeText;
     this.startPosition = startPosition;
     this.destroyed = destroyed;
   }
@@ -81,16 +82,19 @@ export default class SnakeModel {
 
   setState(snakes) {
     this.segments  = [];
-    snakes.forEach((snake) => {
-      if (snake.user_id === this.snakeId) {
-        snake.body.forEach((segment) => {
-          this.segments.push({
-            x: segment.position.X,
-            y: segment.position.Y,
-            letter: segment.letter,
+    if (snakes) {
+      snakes.forEach((snake) => {
+        console.log(snake.user_id, this.userToken);
+        if (snake.user_id === this.userToken) {
+          console.log(snake.body);
+          snake.body.forEach((segment) => {
+            this.segments.push({
+              x: segment.position.X,
+              y: segment.position.Y,
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    }
   }
 }

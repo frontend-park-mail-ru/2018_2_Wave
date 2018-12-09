@@ -18,19 +18,14 @@ export default class WsMessageParser {
    */
   parse(message) {
     console.log('ws_message', message);
-    if (message.status === config.STATUS_TOKEN) {
-      this.owner.setUserToken(message.payload.user_token);
-    }
-    if (message.user_token) {
-      this.owner.setUserToken(message.user_token);
-    }
 
     if (message.status === 'STATUS_OK') {
       busController.emit('STATUS_OK', message);
     }
     if (typeof message === 'string') {
       busController.emit('data', message);
-    } else if (message.status === 'STATUS_TICK') {
+    // } else if (message.status === 'STATUS_TICK') {
+    } else {
       busController.emit('STATUS_TICK', message.payload);
       const a = Object.keys(message.payload);
 

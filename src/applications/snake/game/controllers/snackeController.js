@@ -35,12 +35,10 @@ export default class SnakeController {
   }
 
   init() {
-    const snakeText = this.snake.getSnakeText();
-    for (let i = 0; i < snakeText.length; i += 1) {
+    for (let i = 0; i < this.snake.defaultSize; i += 1) {
       this.snake.unshiftSegment({
         x: this.snake.getStartPosition().x + i,
         y: this.snake.getStartPosition().y,
-        letter: snakeText[i],
       });
     }
     console.log('head init', this.snake.getSegments()[0]);

@@ -1,5 +1,4 @@
 import GameCore from '../core';
-import events from '../events';
 import busController from '../../../modules/busController';
 import Size from '../../models/size';
 
@@ -49,7 +48,7 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel('this.snakeText', 0, 0, gameInitData.userToken);
+    this.snake = new SnakeModel();
     this.snakeController = new SnakeController(this.snake, this.level);
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));
