@@ -16,6 +16,6 @@ export default class GameCore {
   }
 
   destroy() {
-    this.scene.destroy();
+    // this.scene.destroy();
   }
 }

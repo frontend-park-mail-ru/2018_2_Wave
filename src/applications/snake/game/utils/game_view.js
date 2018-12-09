@@ -86,5 +86,6 @@ export default class GameView extends Element {
 
   hide() {
     super.hide();
+    this.game.destroy();
   }
 }

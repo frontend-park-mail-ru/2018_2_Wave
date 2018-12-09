@@ -1,5 +1,5 @@
 import GAME_MODE from './core/modes';
-import OfflineGame from './core/offline';
+import OfflineGame from './core/offline/offline';
 import OnlineGame from './core/online';
 import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';

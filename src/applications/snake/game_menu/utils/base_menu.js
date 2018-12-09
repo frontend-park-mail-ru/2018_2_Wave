@@ -1,20 +1,28 @@
 import busController from '../../modules/busController';
 import Element from '../../../element';
-import levelModel from '../../game/models/levelModel';
 
 export default class BaseMenu extends Element {
-  constructor(template, parent, wrapper) {
+  constructor(template, parent, wrapper, isHorizontal) {
     super(template, parent, wrapper);
     this.firstFocus = undefined;
     this.busController = busController;
     this.focusClass = 'snakemenu-button_focus';
 
-    this.eventsMethods = {
-      Tab: this.toggleMenuDown.bind(this),
-      Enter: this.processLine.bind(this),
-      ArrowUp: this.toggleMenuUp.bind(this),
-      ArrowDown: this.toggleMenuDown.bind(this),
-    };
+    if (isHorizontal) {
+      this.eventsMethods = {
+        Tab: this.toggleMenuDown.bind(this),
+        Enter: this.processLine.bind(this),
+        ArrowLeft: this.toggleMenuUp.bind(this),
+        ArrowRight: this.toggleMenuDown.bind(this),
+      };
+    } else {
+      this.eventsMethods = {
+        Tab: this.toggleMenuDown.bind(this),
+        Enter: this.processLine.bind(this),
+        ArrowUp: this.toggleMenuUp.bind(this),
+        ArrowDown: this.toggleMenuDown.bind(this),
+      };
+    }
   }
 
   show() {
