@@ -1,6 +1,6 @@
 import GameCore from '../core';
 import busController from '../../../modules/busController';
-import Size from '../../models/size';
+import GAME_MODE from '../modes';
 
 import LevelController from '../../controllers/levelController';
 import SnakeController from '../../controllers/snackeController';
@@ -21,6 +21,8 @@ import EnemyModel from '../../models/enemyModel';
 import WsMessageParser from '../../../modules/wsMessageParser';
 import WsPostman from '../../../modules/wsPostman';
 
+import DeadMessage from '../../dead_message/dead_message';
+import DeadMenuTemplate from './dead_menu.pug';
 
 export default class OnlineGame extends GameCore {
   constructor(scene, gameInitData) {
@@ -66,16 +68,29 @@ export default class OnlineGame extends GameCore {
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
 
+    this.deadMessage  = new DeadMessage();
     // this.audioController = new AudioController();
+
+    this.events = {
+      STATUS_DEAD: this.dead.bind(this),
+    };
+  }
+
+  setBusListeners() {
+    busController.setBusListeners(this.events);
+  }
+
+  removeBusListeners() {
+    busController.removeBusListeners(this.events);
   }
 
 
   start() {
-    // this.controllers.forEach(controller => controller.init());
     this.wsPostman.startGame();
     super.start();
 
     // this.audioController.start();
+    this.setBusListeners();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
   }
@@ -115,17 +130,27 @@ export default class OnlineGame extends GameCore {
     this.paused = false;
   }
 
-  destroy() {
-    super.destroy();
-    // this.audioController.destroy();
-    cancelAnimationFrame(this.gameloopRequestId);
+  dead() {
+    this.isDead = true;
+    const deadButtons = {
+      'PLAY AGAIN': {
+        href: '/game',
+        params: `mode=${GAME_MODE.MULTIPLYER}&type=${GAME_MODE.SINGLPLAYER}`,
+      },
+      MENU: {
+        href: '/mainmenu',
+        params: 'menu',
+      },
+    };
+    const template = DeadMenuTemplate({ deadButtons });
+    this.deadMessage.show(template, 25);
   }
 
-
-  onGameStarted(evt) {
-    this.scene.start();
-
-    this.lastFrame = performance.now();
-    this.gameloop();
+  destroy() {
+    super.destroy();
+    this.deadMessage.hide();
+    this.removeBusListeners();
+    // this.audioController.destroy();
+    cancelAnimationFrame(this.gameloopRequestId);
   }
 }

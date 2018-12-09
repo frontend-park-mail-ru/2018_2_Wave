@@ -1,7 +1,5 @@
 import GameCore from '../core';
-import events from '../events';
 import busController from '../../../modules/busController';
-import Size from '../../models/size';
 import keyboardController from '../../../modules/keyboardController';
 import GAME_MODE from '../modes';
 
