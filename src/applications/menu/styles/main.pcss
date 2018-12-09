@@ -8,18 +8,18 @@ body {
 
 .grid-body {
   display: grid;
-  /* box-sizing: border-box; */
   overflow: hidden;
 
+  --padding-x: 80px;
   height: calc(100vh);
-  width:  calc(100vw - 160px);
+  width:  calc(100vw - 2 * var(--padding-x));
   /* max-width: 1400px; */
-  padding: 0 80px;
+  padding: 0 var(--padding-x);
 
 
   grid-template-rows: 14% 19% 1fr 27%;
   grid-template-columns: 40% 1fr 20%;
-  row-gap: 10px;
+  grid-row-gap: 10px;
 
   grid-template-areas:
     "userblock . icon-set"
