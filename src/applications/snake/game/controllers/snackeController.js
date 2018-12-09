@@ -66,6 +66,12 @@ export default class SnakeController {
     return this.level.isWall(position);
   }
 
+  isColisionWithSelf(position) {
+    return this.snake.getSegments().some((segment) => {
+      return segment.x === position.x && segment.y === position.y;
+    });
+  }
+
   snakeAppendLetter(letter, position) {
     busController.removeBusListeners(this.events);
     this.snake.segments.unshift({
@@ -115,6 +121,8 @@ export default class SnakeController {
     } else if (this.isColisionWithFood(position)) {
       busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
+    } else if (this.isColisionWithSelf(position)) {
+      busController.emit('DEAD', 'SELF_COLLISION');
     } else {
       this.snake.segments.unshift({
         x: newX,

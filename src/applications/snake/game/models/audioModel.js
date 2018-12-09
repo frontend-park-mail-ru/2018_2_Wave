@@ -22,15 +22,17 @@ export default class AudioModel {
       this.audio.currentTime = 0;
     }
     const playPromise = this.audio.play();
-    
+
     if (playPromise !== undefined) {
-      playPromise.then(_ => {
+      playPromise.then((_) => {
         // Automatic playback started!
         // Show playing UI.
       })
-      .catch(error => {
+        .catch((error) => {
+          console.log(error);
         // Auto-play was prevented
         // Show paused UI.
-      });
+        });
+    }
   }
 }
