@@ -10,19 +10,9 @@
     align-items: center;
   }
 
-  &__card {
-    background-color: rgba(100%, 100%, 100%,0.1);
-
-    &:after {
-      bottom: -4px;
-      transition: all 0.4s ease-out;
-    }
-  }
-
   &__tile {
     justify-content: flex-end;
     width: 25vh;
-
 
     &:hover > .tile__card {
       transform: translateY(-10px);
@@ -34,9 +24,29 @@
       box-shadow: 0px 0px 30px 2px #4462C4;
     }
 
-    &:hover .tile__name {
+    &:hover .tile__name, &:hover .menu__icon {
       color: white;
       transform: scale(1.2);
     }
+  }
+
+  &__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(100%, 100%, 100%,0.1);
+
+    &:after {
+      bottom: -4px;
+      transition: all 0.4s ease-out;
+    }
+  }
+
+  &__icon {
+    color: rgb(100%, 100%, 100%, 0.6);
+    font-size: 56px;
+
+    transition: all 0.3s ease-out;
   }
 }
