@@ -2,9 +2,10 @@ import busController from '../../modules/busController';
 import Element from '../../../element';
 
 export default class BaseMenu extends Element {
-  constructor(template, parent, wrapper, isHorizontal) {
+  constructor(template, parent, wrapper, isHorizontal, menuClass) {
     super(template, parent, wrapper);
     this.firstFocus = undefined;
+    this.menuClass = menuClass;
     this.busController = busController;
     this.focusClass = 'snakemenu-button_focus';
 
@@ -26,13 +27,14 @@ export default class BaseMenu extends Element {
   }
 
   show() {
+    if (this.menuClass) {
+      [this.menu] = this.parent.getElementsByClassName(this.menuClass);
+    } else {
+      this.menu = this.wrapper;
+    }
     this.setFirstFosus();
     this.busController.setBusListeners(this.eventsMethods);
     super.show();
-    if (!this.rendered) {
-      // render only one time, because menu is unchangeable
-      this.render();
-    }
   }
 
   hide() {
@@ -61,11 +63,11 @@ export default class BaseMenu extends Element {
   }
 
   getFocus() {
-    return (this.wrapper.getElementsByClassName(this.focusClass));
+    return (this.menu.getElementsByClassName(this.focusClass));
   }
 
   setFirstFosus() {
-    this.focus = this.wrapper.firstChild;
+    this.focus = this.menu.firstChild;
     this.focusElement(this.focus);
   }
 
@@ -73,14 +75,14 @@ export default class BaseMenu extends Element {
     const [focus] = this.getFocus();
     focus.classList.remove(this.focusClass);
     const previousSibling = focus.previousElementSibling;
-    this.focusElement(previousSibling || this.wrapper.lastElementChild);
+    this.focusElement(previousSibling || this.menu.lastElementChild);
   }
 
   toggleMenuDown() {
     const [focus] = this.getFocus();
     focus.classList.remove(this.focusClass);
     const nextSibling = focus.nextElementSibling;
-    this.focusElement(nextSibling || this.wrapper.firstElementChild);
+    this.focusElement(nextSibling || this.menu.firstElementChild);
   }
 
   focusElement(element) {

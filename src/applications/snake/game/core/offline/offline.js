@@ -127,7 +127,7 @@ export default class OfflineGame extends GameCore {
       },
     };
 
-    this.deadMessage.show(DeadMenuTemplate({ deadButtons }));
+    this.deadMessage.show(DeadMenuTemplate({ deadButtons }), 256);
   }
 
   pause() {
