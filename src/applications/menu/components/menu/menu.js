@@ -1,10 +1,10 @@
 import Element from '../../../element';
 
-import '../../styles/tile-panel.pcss';
-import '../../styles/tile.pcss';
+import '../tile-panel/tile-panel.pcss';
+import '../tile/tile.pcss';
 import './menu.pcss';
 
-const template = require('./menu.pug');
+import template from './menu.pug';
 
 const tiles = [
   {
