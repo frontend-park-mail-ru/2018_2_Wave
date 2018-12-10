@@ -1,4 +1,5 @@
 import BaseApp from '../base_app';
+import './styles/fonts.pcss';
 
 import Enviroment from './views/env';
 import MenuView from './views/menu';
@@ -25,7 +26,8 @@ export default class MenuApp extends BaseApp {
     super(appUrl, parent, MenuView);
 
     this.env = env;
-    // this.content = this.env.getContainer();
+    this.content = this.env.content;
+    this.menu = this.env.menu;
 
     // this.appWrapper = ???
     // hmmm let me think what kind of shit it should be
