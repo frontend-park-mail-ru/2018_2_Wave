@@ -40,13 +40,13 @@ export default class MenuApp extends BaseApp {
     super.start();
   }
 
-  // pause() {
-  //   this.env.hide();
-  //   super.pause();
-  // }
+  pause() {
+    this.env.hide();
+    super.pause();
+  }
 
-  // resume() {
-  //   this.env.show();
-  //   super.resume();
-  // }
+  resume() {
+    this.env.show();
+    super.resume();
+  }
 }
