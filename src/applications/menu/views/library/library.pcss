@@ -1,0 +1,20 @@
+.library {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+
+  &__tile-panel {
+    height: 80%;
+    max-height: 400px;
+    width: calc(100vw - 80px);
+
+    scroll-snap-type: x mandatory;
+    // scroll-snap-stop: always;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
