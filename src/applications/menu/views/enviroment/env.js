@@ -1,9 +1,10 @@
+import './env.pcss';
+
 import Element from '../../../element';
 import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
 
 import template from './env.pug';
-import './env.pcss';
 
 import '../../../../../static/fonts/Gilroy-ExtraBold.otf';
 import '../../../../../static/fonts/Gilroy-Light.otf';

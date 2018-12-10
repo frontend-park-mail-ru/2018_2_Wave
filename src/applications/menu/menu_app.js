@@ -1,3 +1,5 @@
+import './styles/fonts.pcss';
+
 import BaseApp from '../base_app';
 
 import Enviroment from './views/enviroment/env';
