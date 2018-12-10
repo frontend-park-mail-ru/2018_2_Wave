@@ -1,8 +1,7 @@
 import BaseApp from '../base_app';
-import './styles/fonts.pcss';
 
-import Enviroment from './views/env';
-import MenuView from './views/menu';
+import Enviroment from './views/enviroment/env';
+import LibraryView from './views/library/library';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
 // import LeaderboardView from './views/leaderboard';
@@ -22,8 +21,8 @@ export default class MenuApp extends BaseApp {
     //   'profile/edit': ProfileEditView,
     // };
 
-    // super(appUrl, env.getContainer(), MenuView, Views);
-    super(appUrl, parent, MenuView);
+    super(appUrl, env.contentPlace, LibraryView);
+    // super(appUrl, parent, LibraryView);
 
     this.env = env;
     this.content = this.env.content;
@@ -36,7 +35,7 @@ export default class MenuApp extends BaseApp {
 
   start() {
     this.env.show();
-    // super.start();
+    super.start();
   }
 
   // pause() {
