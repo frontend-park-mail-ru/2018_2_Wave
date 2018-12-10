@@ -28,7 +28,6 @@ body {
     "menu menu menu"
 }
 
-
 @media (max-width: 640px) {
   .grid-body {
     grid-template-columns: 1fr;
@@ -38,4 +37,17 @@ body {
       "content"
       "menu";
   }
+}
+
+
+.title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  font: calc(100vh / 10) Gilroy-ExtraBold;
+  color: white;
+
+  margin: 0 10px;
 }
