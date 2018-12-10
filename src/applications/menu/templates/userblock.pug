@@ -1,7 +1,0 @@
-.userblock
-  .userblock__name.flex-container= user.username
-  .icon.userblock__icon
-    if !authorized
-      a.icon__button(href='/login') login
-    else
-      img.icon__img(src= "https://static.rasseki.com" + user.avatar)
