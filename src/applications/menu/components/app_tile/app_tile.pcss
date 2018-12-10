@@ -1,0 +1,30 @@
+.app {
+  &__tile {
+    flex: 0 0 auto;
+
+    scroll-margin: 10px;
+    scroll-snap-align: start;
+
+    justify-content: center;
+    width: 40vh;
+  }
+
+  &__card {
+    display: flex;
+    justify-content: center;
+
+    background-color: black;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    &:after {
+      width: 70%;
+      height: 20px;
+      background: none;
+      bottom: 5px;
+
+      border-radius: 100px;
+      box-shadow: 0px 0px 60px 3px black;
+    }
+  }
+}
