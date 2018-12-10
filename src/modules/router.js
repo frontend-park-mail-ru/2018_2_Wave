@@ -82,6 +82,7 @@ export default class Router {
       app.changeView(path, params);
     } else {
       this.open('/');
+      return;
     }
 
     this.currentApp = app;
@@ -109,10 +110,14 @@ export default class Router {
   }
 
   openClickedLink(event) {
-    if ((event.target instanceof HTMLAnchorElement)
-    && (event.target.getAttribute('type') !== 'submit')) {
+    const target = event.target instanceof HTMLAnchorElement
+      ? event.target
+      : event.target.parentElement;
+
+    if (target instanceof HTMLAnchorElement
+    && (target.getAttribute('type') !== 'submit')) {
       event.preventDefault();
-      this.open(event.target.pathname, event.target.search);
+      this.open(target.pathname, target.search);
     }
   }
 }
