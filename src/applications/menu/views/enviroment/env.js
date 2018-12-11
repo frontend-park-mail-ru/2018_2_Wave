@@ -11,8 +11,8 @@ import '../../../../../static/fonts/Gilroy-Light.otf';
 
 
 export default class Enviroment extends Element {
-  constructor(parent) {
-    super(template, parent);
+  constructor(parent, wrapper) {
+    super(template, parent, wrapper);
     super.render();
 
     [this.contentPlace] = this.wrapper.getElementsByClassName('content');
