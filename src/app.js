@@ -1,11 +1,16 @@
-// import Router from './modules/router';
+import Router from './modules/router';
 // import Terminal from './applications/terminal/terminal_app';
 // import Menu from './applications/menu/menu_app';
 // import Snake from './applications/snake/game_app';
+import Game from './applications/game/game_app';
+
+const game = new Game(document.body, 'https://kekmate.now.sh');
 
 // import '../static/favicon.ico';
 
-// new Router(document.body)
+new Router(document.body)
+  .registerApp('/game', game)
+  .start();
 //   .registerApp('/', Menu)
 //   .registerApp('terminal', Terminal)
 //   .registerApp('snake', Snake)
@@ -18,8 +23,6 @@
 //     .catch(err => console.log({ err }));
 // }
 
-import Frame from './applications/frame/frame_view';
+// import Frame from './applications/frame/frame_view';
 
-const frame = new Frame(document.body);
-frame.render();
-frame.show();
+// const frame = new Frame(document.body, '');
