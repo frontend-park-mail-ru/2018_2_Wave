@@ -13,7 +13,7 @@ import LibraryView from './views/library/library';
 
 export default class MenuApp extends BaseApp {
   constructor(appUrl, parent) {
-    const env = new Enviroment(parent);
+    const env = new Enviroment(parent, parent);
     // const Views = {
     //   login: LoginView,
     //   register: RegisterView,
