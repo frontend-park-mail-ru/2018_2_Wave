@@ -1,3 +1,5 @@
+@import '../../../../config.pcss';
+
 .app {
   &__tile {
     flex: 0 0 auto;
@@ -24,6 +26,14 @@
 
       border-radius: 100px;
       box-shadow: 0px 0px 60px 3px black;
+    }
+  }
+}
+
+@media (--small-viewport) {
+  .app {
+    &__tile {
+      width: calc(100vw - 2 * var(--small-grid-padding-x) - 20px);
     }
   }
 }
