@@ -2,7 +2,7 @@ import Element from '../element';
 
 import frameTemplate from './templates/frame.pug';
 
-import './styles/frame.css';
+// import './styles/frame.css';
 
 export default class FrameView extends Element {
   constructor(parent) {

@@ -1,9 +1,12 @@
 export default class Element {
-  constructor(template, parent) {
+  constructor(template, parent, wrapper) {
     this.template = template;
     this.parent   = parent;
-    this.wrapper  = document.createElement('div');
+    this.wrapper = wrapper || document.createElement('div');
     this.wrapper.hidden = true;
+    if (parent !== wrapper) {
+      this.parent.appendChild(this.wrapper);
+    }
   }
 
 
@@ -28,6 +31,5 @@ export default class Element {
 
   render(data) {
     this.wrapper.innerHTML = this.template(data || null);
-    this.parent.appendChild(this.wrapper);
   }
 }

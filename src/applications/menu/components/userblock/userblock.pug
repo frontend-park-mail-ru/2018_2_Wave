@@ -1,0 +1,10 @@
+.userblock__avatar-wrapper
+  //- if !authorized
+  //-   a.userblock__button(href='/login') login
+  //- else
+    //- img.icon__img(src= "https://static.rasseki.com" + user.avatar)
+  img.userblock__avatar(
+    src='img/triss.jpg'
+  )
+.userblock__name Triss Merigold
+  //- .userblock__name= user.username

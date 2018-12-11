@@ -1,0 +1,28 @@
+@import '../../../../config.pcss';
+
+.library {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+
+  &__tile-panel {
+    height: 80%;
+    max-height: 400px;
+    width: calc(100vw - 2 * var(--grid-padding-x));
+
+    scroll-snap-type: x mandatory;
+    // scroll-snap-stop: always;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media (--small-viewport) {
+  .library__tile-panel {
+    width: calc(100vw - 2 * var(--small-grid-padding-x));
+  }
+}

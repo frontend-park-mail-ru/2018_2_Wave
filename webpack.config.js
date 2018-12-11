@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 
@@ -27,17 +26,18 @@ module.exports = {
     }),
   ],
 
-  optimization: {
-    minimizer: [new UglifyJsPlugin()],
-  },
-
   module: {
     rules: [
       {
-        test: /\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader',
+        test: /\.pcss$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              singleton: true,
+            },
+          },
+          'postcss-loader',
         ],
       },
       {
@@ -49,8 +49,16 @@ module.exports = {
         loader: 'file-loader?name=music/[hash].[ext]',
       },
       {
+        test: /\.(img|jpeg|jpg|png)$/,
+        loader: 'file-loader?name=img/[name].[ext]',
+      },
+      {
         test: /\.ico$/,
         loader: 'file-loader?name=favicon.ico',
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|otf)$/,
+        loader: 'url-loader?limit=30000&name=fonts/[name].[ext]',
       },
     ],
   },

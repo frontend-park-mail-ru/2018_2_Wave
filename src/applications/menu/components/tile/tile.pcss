@@ -1,0 +1,41 @@
+.tile {
+  margin: 0 10px;
+
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+
+  &__card {
+    border-radius: 5px;
+    display: flex;
+    height: 90%;
+    width: inherit;
+    transition: all 0.3s ease-out;
+
+    &:after {
+      content:"";
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  &__background {
+    border-radius: 5px;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  &__name {
+    display: inline-block;
+    margin: 3px 5px;
+
+    font: 100% Roboto;
+    color: rgb(100%, 100%, 100%, 0.6);
+
+    transition: all 0.3s ease-out;
+  }
+}
