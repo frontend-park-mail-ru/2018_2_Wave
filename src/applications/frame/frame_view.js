@@ -5,10 +5,12 @@ import frameTemplate from './templates/frame.pug';
 import './styles/frame.css';
 
 export default class FrameView extends Element {
-  constructor(parent, source) {
+  constructor(parent) {
     super(frameTemplate, parent);
+  }
+
+  draw(source) {
     this.render(source);
-    [this.frame] = this.wrapper.getElementsByClassName('frame');
     this.show();
   }
 
@@ -16,7 +18,12 @@ export default class FrameView extends Element {
     super.render({ source });
   }
 
+  show() {
+    super.show();
+  }
+
   clear() {
+    [this.frame] = this.wrapper.getElementsByClassName('frame');
     this.frame.innerHTML = '';
   }
 }
