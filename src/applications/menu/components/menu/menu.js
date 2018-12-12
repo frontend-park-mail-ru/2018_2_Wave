@@ -22,11 +22,11 @@ const tiles = [
     name: 'Settings',
     icon: 'settings',
   },
-  // {
-  //   link: '/about',
-  //   name: 'About us',
-  //   icon: 'accessible_forward',
-  // },
+  {
+    link: '/about',
+    name: 'About us',
+    icon: 'accessible_forward',
+  },
 ];
 
 
