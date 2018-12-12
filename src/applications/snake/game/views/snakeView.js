@@ -1,4 +1,4 @@
-import config from './view_config';
+import config from '../../modules/view_config';
 
 export default class SnakeView {
   constructor(snake) {

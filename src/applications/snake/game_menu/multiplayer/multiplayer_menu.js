@@ -1,4 +1,4 @@
-import BaseMenu from '../utils/base_menu';
+import BaseMenu from '../base_menu/base_menu';
 import MultiplayerTemplate from './multiplayer.pug';
 
 import GAME_MODE from '../../game/core/modes';
@@ -23,7 +23,7 @@ const buttons = {
 
 export default class MultiplayerMenu extends BaseMenu {
   constructor(parent) {
-    super(MultiplayerTemplate, parent, 'multiplayer-menu');
+    super(MultiplayerTemplate, parent, 'snakemenu-multiplayer');
     this.render();
   }
 

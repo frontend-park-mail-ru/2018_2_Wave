@@ -1,4 +1,4 @@
-import BaseMenu from '../utils/base_menu';
+import BaseMenu from '../base_menu/base_menu';
 import SinglplayerTemplate from './singlplayer.pug';
 
 import GAME_MODE from '../../game/core/modes';
@@ -19,7 +19,7 @@ const buttons = {
 
 export default class SinglplayerMenu extends BaseMenu {
   constructor(parent) {
-    super(SinglplayerTemplate, parent, 'singlpayer-menu');
+    super(SinglplayerTemplate, parent, 'snakemenu-singlpayer');
     this.render();
   }
 

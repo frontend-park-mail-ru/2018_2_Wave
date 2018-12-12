@@ -23,55 +23,11 @@
   align-items: center;
 }
 
-.main-menu, .singlpayer-menu, .multiplayer-menu {
-
-  max-width: 400px;
-
-  font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
-
-  padding: 0px 10px;
-
-  width: 80vw;
-  height: 50vh;
-
-  display: grid;
-
-  border-style: solid;
-  border-width: 2px;
-  border-color: #3F0070;
-
-  flex-wrap: wrap;
-}
-
 /* cause 'hidden' property does not work with flex-box */
 [hidden] {
   display: none !important;
 }
 
-.main-menu {
-  grid-template-rows: repeat(5, 1fr);
-}
-
-.snakemenu-button {
-  color: #ffffff;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin: 0 15px;
-  place-self: center;
-  cursor: pointer;
-}
-
-.snakemenu-button_focus {
-  color: rgb(138, 4, 165);
-  font-size: 18px;
-  /* font-weight: bold; */
-}
-
-.snakemenu-button_focus::before {
-  content: "> ";
-}
 
 .snakegame-container {
     

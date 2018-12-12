@@ -1,4 +1,4 @@
-import BaseMenu from '../utils/base_menu';
+import BaseMenu from '../base_menu/base_menu';
 
 import MainMenuTemplate from './main_menu.pug';
 import style from './main_menu.css';
@@ -13,7 +13,7 @@ const buttons = {
 
 export default class MainMenuView extends BaseMenu {
   constructor(parent) {
-    super(MainMenuTemplate, parent, ['main-menu', 'main-menu__purple'],  false);
+    super(MainMenuTemplate, parent, 'snakemenu-main',  false);
     this.render();
   }
 

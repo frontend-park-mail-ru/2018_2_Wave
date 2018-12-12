@@ -1,7 +1,14 @@
 class Config {
-  constructor() {
-    this.enemyCollors = [];
-    this.setGreenCollors();
+  setColors(colorsConfig) {
+    const {
+      wallColor,
+      snakeColor,
+      foodColor,
+    } = colorsConfig;
+
+    this.wallColor = wallColor;
+    this.snakeCollor = snakeColor;
+    this.foodCollor = foodColor;
   }
 
   setDefaultCollors() {

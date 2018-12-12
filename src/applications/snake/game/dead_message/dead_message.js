@@ -1,4 +1,4 @@
-import BaseMenu from '../../game_menu/utils/base_menu';
+import BaseMenu from '../../game_menu/base_menu/base_menu';
 import DeadMessageTemplate from './dead_message.pug';
 import style from './dead_message.css';
 

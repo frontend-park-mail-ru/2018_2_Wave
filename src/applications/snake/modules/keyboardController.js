@@ -110,6 +110,7 @@ class KeyboardController {
     */
 
     if (this.isControlKey(keyCode)) {
+      console.log('emit', e.code);
       bus.emit(e.code);
     } else if (this.isSnakeControls(keyCode)) {
       bus.emit(e.code);
