@@ -66,6 +66,10 @@ class TerminalView extends Element {
     if (!this.rendered) this.render();
 
     this.terminal.innerHTML += inputTemplate({ intro });
+    this.focusInput();
+  }
+
+  focusInput() {
     [this.input] = this.terminal.getElementsByClassName('terminal__input');
     this.input.focus();
   }

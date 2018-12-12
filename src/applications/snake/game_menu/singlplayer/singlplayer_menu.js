@@ -23,16 +23,12 @@ export default class SinglplayerMenu extends BaseMenu {
     this.render();
   }
 
-  start() {
-    super.start();
-  }
-
-  stop() {
-    super.stop();
-  }
-
   show() {
     super.show();
+  }
+
+  hide() {
+    super.hide();
   }
 
   render() {

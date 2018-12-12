@@ -57,6 +57,7 @@ class TerminalApp extends BaseApp {
 
   resume() {
     super.resume();
+    this.view.focusInput();
     this.addListeners();
   }
 

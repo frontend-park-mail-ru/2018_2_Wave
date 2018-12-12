@@ -51,11 +51,13 @@ export default class GameApp extends BaseApp {
   }
 
   pause() {
+    this.styleChanger.stop();
     this.env.hide();
     super.pause();
   }
 
   resume() {
+    this.styleChanger.start();
     this.env.show();
     super.resume();
   }

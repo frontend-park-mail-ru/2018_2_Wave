@@ -12,9 +12,16 @@ export default class LevelController {
       pickFood: this.removeFoodFromMap.bind(this),
     };
 
-    this.busController.setBusListeners(this.eventsMethosds);
-
+    this.setBusListeners();
     this.generateLevel();
+  }
+
+  setBusListeners() {
+    this.busController.setBusListeners(this.eventsMethosds);
+  }
+
+  removeBusListeners() {
+    this.busController.removeBusListeners(this.eventsMethosds);
   }
 
   removeFoodFromMap(position) {
@@ -67,5 +74,9 @@ export default class LevelController {
   }
 
   update() {
+  }
+
+  stop() {
+    this.removeBusListeners();
   }
 }

@@ -19,15 +19,6 @@ export default class SnakeController {
       ArrowLeft: 'LEFT',
       ArrowRight: 'RIGHT',
     };
-
-    this.events = {
-      food: this.snakeAppendLetter.bind(this),
-    };
-  }
-
-
-  setEventListeners() {
-    this.busController.setBusListeners(this.eventsMethods);
   }
 
   setDirection(keyboardDirection) {
@@ -70,16 +61,6 @@ export default class SnakeController {
     });
   }
 
-  snakeAppendLetter(letter, position) {
-    busController.removeBusListeners(this.events);
-    this.snake.segments.unshift({
-      x: position.x,
-      y: position.y,
-      letter,
-    });
-  }
-
-
   move() {
     const [head] = this.snake.segments;
     let newX = head.x;
@@ -117,7 +98,6 @@ export default class SnakeController {
     } else if (this.snake.isReverse()) {
       busController.emit('DEAD', 'REVERSE');
     } else if (this.isColisionWithFood(position)) {
-      busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
     } else if (this.isColisionWithSelf(position)) {
       busController.emit('DEAD', 'SELF_COLLISION');

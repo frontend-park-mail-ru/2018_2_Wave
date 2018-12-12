@@ -4,6 +4,7 @@ import Element from '../../../element';
 import config from '../../modules/view_config';
 
 import style from './base_menu.css';
+import { isTSThisType } from 'babel-types';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper, isHorizontal, menuClass) {
@@ -37,15 +38,24 @@ export default class BaseMenu extends Element {
     }
     super.show();
     this.setFirstFosus();
-    this.busController.setBusListeners(this.eventsMethods);
+    this.setBusListeners();
   }
 
   hide() {
+    this.removeBusListeners();
     super.hide();
   }
 
-  start() {
+  setBusListeners() {
     this.busController.setBusListeners(this.eventsMethods);
+  }
+
+  removeBusListeners() {
+    this.busController.removeBusListeners(this.eventsMethods);
+  }
+
+  start() {
+    this.setBusListeners();
   }
 
   processLine() {
@@ -71,24 +81,32 @@ export default class BaseMenu extends Element {
 
   setFirstFosus() {
     this.focus = this.menu.firstChild;
-    BaseMenu.focusElement(this.focus);
+    this.focusElement(this.focus);
   }
 
   toggleMenuUp() {
     const [focus] = this.getFocus();
     focus.classList.remove(config.snakemenuButtonFocus);
     const previousSibling = focus.previousElementSibling;
-    BaseMenu.focusElement(previousSibling || this.menu.lastElementChild);
+    this.focusElement(previousSibling || this.menu.lastElementChild);
   }
 
   toggleMenuDown() {
     const [focus] = this.getFocus();
     focus.classList.remove(config.snakemenuButtonFocus);
     const nextSibling = focus.nextElementSibling;
-    BaseMenu.focusElement(nextSibling || this.menu.firstElementChild);
+    this.focusElement(nextSibling || this.menu.firstElementChild);
   }
 
-  static focusElement(element) {
+  removeFocusElements() {
+    const focus = this.menu.getElementsByClassName(config.snakemenuButtonFocus);
+    for (let i = focus.length - 1; i >= 0; i -= 1) {
+      focus[i].classList.remove(config.snakemenuButtonFocus);
+    }
+  }
+
+  focusElement(element) {
+    this.removeFocusElements();
     element.classList.add(config.snakemenuButtonFocus);
   }
 }

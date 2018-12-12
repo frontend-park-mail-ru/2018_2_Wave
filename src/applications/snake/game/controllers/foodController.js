@@ -6,9 +6,8 @@ export default class FoodController {
     this.level = level;
     this.busController = busController;
 
-    busController.setBusListeners({
-      pickFood: this.pickFood.bind(this),
-    });
+    this.pickFood = this.pickFood.bind(this);
+    this.setBusListeners();
   }
 
   init() {
@@ -37,5 +36,17 @@ export default class FoodController {
     if ((Date.now() - this.food.birth) >= this.food.life) {
       this.setNewPlace();
     }
+  }
+
+  setBusListeners() {
+    busController.setBusListeners({ pickFood: this.pickFood });
+  }
+
+  removeBusListeners() {
+    busController.removeBusListeners({ pickFood: this.pickFood });
+  }
+
+  stop() {
+    this.removeBusListeners();
   }
 }

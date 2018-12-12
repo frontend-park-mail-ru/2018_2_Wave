@@ -28,7 +28,6 @@ export default class Element {
     if (!this.rendered) this.render();
   }
 
-
   render(data) {
     this.wrapper.innerHTML = this.template(data || null);
     this.parent.appendChild(this.wrapper);

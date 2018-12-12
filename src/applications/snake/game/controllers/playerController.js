@@ -36,4 +36,8 @@ export default class PlayerController {
     this.player.addToScore(value);
     this.view.setScore(this.player.score);
   }
+
+  stop() {
+    this.removeBusListeners();
+  }
 }

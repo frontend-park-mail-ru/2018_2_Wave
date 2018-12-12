@@ -131,6 +131,8 @@ export default class ArcadeMode extends GameCore {
 
   destroy() {
     super.destroy();
+    busController.removeBusListeners(this.stopEvents);
+    busController.removeBusListeners(this.resumeEvents);
     this.audioController.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
   }
