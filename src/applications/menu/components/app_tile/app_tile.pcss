@@ -4,7 +4,9 @@
   &__tile {
     flex: 0 0 auto;
     justify-content: center;
-    width: 40vh;
+
+    width: calc((100vw - 2*var(--grid-padding-x)) / 3 - 20px);
+    margin: 0 10px;
 
     scroll-margin: 10px;
     scroll-snap-align: start;
@@ -30,10 +32,28 @@
   }
 }
 
-@media (--small-viewport) {
-  .app {
-    &__tile {
-      width: calc(100vw - 2 * var(--small-grid-padding-x) - 20px);
-    }
+@media (--mobile) {
+  .app__tile {
+    width: calc(100vw - 2*var(--minimal-grid-padding-x) - 20px);
+  }
+}
+
+@media (--tablet) {
+  .app__tile {
+    width: calc(100vw - 2*var(--minimal-grid-padding-x) / 2 - 20px);
+  }
+}
+
+@media (--small) {
+  .app__tile {
+    width: calc((100vw - 2*var(--small-grid-padding-x)) / 2 - 40px);
+    margin-right: 30px;
+    scroll-margin: 10px;
+  }
+}
+
+@media (--large) {
+  .app__tile {
+    width: calc((100vw - 2*var(--grid-padding-x)) / 4 - 20px);
   }
 }
