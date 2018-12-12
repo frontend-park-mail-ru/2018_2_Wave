@@ -19,7 +19,7 @@ const buttons = {
 
 export default class SinglplayerMenu extends BaseMenu {
   constructor(parent) {
-    super(SinglplayerTemplate, parent, ['snakemenu__purple-border', 'snakemenu-singlpayer']);
+    super(SinglplayerTemplate, parent, ['snakepage-singlplayer'], false, 'snakemenu-singlplayer');
     this.render();
   }
 

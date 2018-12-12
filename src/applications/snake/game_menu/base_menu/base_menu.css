@@ -13,15 +13,16 @@
   grid-template-rows: 30% 70%;
   display: grid;
 
+  font-family: 'Press Start 2P', cursive;
+
   grid-template-areas: 
     "gamename"
     "menu";
 }
 
-.snakemenu-main, .snakemenu-singlpayer, .snakemenu-multiplayer {
+.snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer {
   max-width: 400px;
 
-  font-family: 'Press Start 2P', cursive;
   font-size: 14px;
 
   padding: 0px 10px;
