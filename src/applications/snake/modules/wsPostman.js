@@ -11,6 +11,31 @@ export default class WsPostman {
     return instance;
   }
 
+  addToQuickSearchRoom(playerCount) {
+    this.ws.send({
+      signal: 'quick_search',
+      payload: {
+        player_count: playerCount,
+        room_type: '',
+      },
+    });
+  }
+
+  quickSearchAbort() {
+    this.ws.send({
+      signal: 'quick_search_abort',
+    });
+  }
+
+  quickSearchAccept() {
+    this.ws.send({
+      signal: 'quick_search_accept',
+      payload: {
+        status: true,
+      },
+    });
+  }
+
   addToRoom(room_token = config.DEFAULT_ROOM_TOKEN) {
     this.ws.send({
       signal: 'add_to_room',

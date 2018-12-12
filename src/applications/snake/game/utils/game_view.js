@@ -24,13 +24,21 @@ export default class GameView extends Element {
 
   sendAddToRoom() {
     this.wsPostman = new WsPostman();
-    this.wsPostman.addToRoom();
-    this.startMultiplayer = this.startMultiplayer.bind(this);
-    busController.setBusListeners({ STATUS_TICK: this.startMultiplayer });
+    switch (this.gameParams.type) {
+      case GAME_MODE.THREE_PLAYERS:
+        this.wsPostman.addToQuickSearchRoom(3);
+        break;
+      default:
+        this.wsPostman.addToRoom();
+        this.startMultiplayer = this.startMultiplayer.bind(this);
+        busController.setBusListeners({ STATUS_TICK: this.startMultiplayer });
+        break;
+    }
   }
 
   startMultiplayer(payload) {
     busController.removeBusListeners({ STATUS_TICK: this.startMultiplayer });
+    this.setMultiplayerEnviroment();
     const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
       userToken: this.userToken,
@@ -41,6 +49,20 @@ export default class GameView extends Element {
     };
 
     this.startGame();
+  }
+
+  setMultiplayerEnviroment() {
+    [this.snakegameContainer] = document.getElementsByClassName('snakegame-container');
+    this.snakegameContainer.classList.add('snakegame-container__multiplayer');
+
+    [this.gameBoard] = document.getElementsByClassName('game-board-wrapper');
+    this.gameBoard.hidden = false;
+  }
+
+
+  removeMultiplayerEnviroment() {
+    this.snakegameContainer.classList.remove('snakegame-container__multiplayer');
+    this.gameBoard.hidden = true;
   }
 
   setGameParams() {
@@ -86,6 +108,9 @@ export default class GameView extends Element {
 
   hide() {
     super.hide();
+    if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
+      this.removeMultiplayerEnviroment();
+    }
     this.game.destroy();
   }
 }

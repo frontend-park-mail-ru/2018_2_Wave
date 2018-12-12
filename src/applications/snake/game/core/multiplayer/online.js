@@ -114,22 +114,6 @@ export default class OnlineGame extends GameCore {
     }, 1000 / this.framesPerSecond);
   }
 
-  pause() {
-    this.paused = true;
-    busController.removeBusListeners(this.stopEvents);
-    busController.setBusListeners(this.resumeEvents);
-    super.pause();
-    // this.audioController.pause();
-  }
-
-  resume() {
-    busController.removeBusListeners(this.resumeEvents);
-    busController.setBusListeners(this.stopEvents);
-    super.resume();
-    // this.audioController.resume();
-    this.paused = false;
-  }
-
   dead() {
     this.isDead = true;
     const deadButtons = {

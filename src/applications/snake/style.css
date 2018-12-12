@@ -18,6 +18,9 @@
 .game-container {
   height: 100%;
   cursor: none;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .main-menu, .singlpayer-menu, .multiplayer-menu {
@@ -94,7 +97,9 @@
   border-style: solid;
   border-width: 2px;
   border-color: #3F0070;
+  
   justify-self: center;
+  align-self: center;
 }
 
 .score {
@@ -110,10 +115,14 @@
 }
 
 .canvas-wrapper {
-  display: grid;
   width: 100%;
   height: 100%;
-  justify-self: center;
+
+  margin-left: 10px;
+  margin-right: 10px;
+
+  display: grid;
+  justify-self: end;
   align-self: center;
   /* background-color: green; */
   grid-area: game;
@@ -128,4 +137,44 @@
   justify-self: center;
   align-self: center;
 }
+
+.snakegame-container__multiplayer {
+    
+  grid-template-areas: 
+    "mode . score . ."
+    "game game game game board"
+    "game game game game board";
+    
+  /* position: relative; */
+}
+
+.game-board-wrapper {
+  font-family: 'Press Start 2P', cursive;
+  font-size : 30px;
+
+  /* background-color: rgb(255, 255, 255); */
+
+  width: 90%;
+  height: 60%;
+
+  justify-self: center;
+  align-self: center;
+  
+  grid-area: board;
+
+  margin-left: 10px;
+  margin-right: 10px
+}
+
+.game-board__purple {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #3F0070;
+}
+
+.game-board-name {
+  text-align: center;
+}
+
+
 
