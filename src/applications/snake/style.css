@@ -50,9 +50,8 @@
   }
 
 .snakegame-canvas {
-  border-style: solid;
-  border-width: 2px;
-  border-color: #3F0070;
+
+  position: relative;
   
   justify-self: center;
   align-self: center;
@@ -125,6 +124,18 @@
   border-style: solid;
   border-width: 2px;
   border-color: #3F0070;
+}
+
+.game-board__greenyellow {
+  border-style: solid;
+  border-width: 2px;
+  border-color: greenyellow;
+}
+
+.game-board__pink {
+  border-style: solid;
+  border-width: 2px;
+  border-color: pink;
 }
 
 .game-board-name {

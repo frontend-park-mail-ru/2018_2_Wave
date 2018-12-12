@@ -4,7 +4,8 @@ import style from './dead_message.css';
 
 export default class DeadMessage extends BaseMenu {
   constructor() {
-    const [parent] = document.getElementsByClassName('snakegame-container');
+    // const [parent] = document.getElementsByClassName('snakegame-container');
+    const [parent] = document.getElementsByClassName('canvas-wrapper');
     super(DeadMessageTemplate, parent, ['dead-message-wrapper'], true, 'dead-menu');
     super.render();
     [this.message] = parent.getElementsByClassName('error-message-text');

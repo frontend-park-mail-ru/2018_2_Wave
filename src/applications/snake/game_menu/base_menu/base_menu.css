@@ -78,7 +78,7 @@
 }
 
 .snakemenu-button__focus-pink {
-  color: pink;
+  color: red;
   font-size: 18px;
 }
 
@@ -88,9 +88,20 @@
 }
 
 .gamename {
-  color: rgb(138, 4, 165);
   font-size: 50px;
   margin: 30px;
   grid-area: gamename;
   place-self: center;
+}
+
+.gamename_purple {
+  color: rgb(138, 4, 165);
+}
+
+.gamename_greenyellow {
+  color:greenyellow;
+}
+
+.gamename_pink {
+  color: red;
 }

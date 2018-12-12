@@ -5,6 +5,8 @@ const defaultStyle = {
   snakemenu_main_border: 'snakemenu__purple-border',
   mainScoreColor: 'main-score__purple',
   snakemenuButtonFocus: 'snakemenu-button__focus-purple',
+  gameBoardBorder: 'game-board__purple',
+  gameName: 'gamename_purple',
   config_colors: {
     wallColor: '#FF40FF',
     snakeColor: '#00FFFF',
@@ -17,6 +19,8 @@ const yellowgreenStyle = {
   snakemenu_main_border: 'snakemenu__yellowgreen-border',
   mainScoreColor: 'main-score__greenyellow',
   snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
+  gameBoardBorder: 'game-board__greenyellow',
+  gameName: 'gamename_greenyellow',
   config_colors: {
     wallColor: '#FF0000',
     snakeColor: '#00FF00',
@@ -29,6 +33,8 @@ const pinkStyle = {
   snakemenu_main_border: 'snakemenu__pink-border',
   mainScoreColor: 'main-score__pink',
   snakemenuButtonFocus: 'snakemenu-button__focus-pink',
+  gameBoardBorder: 'game-board__pink',
+  gameName: 'gamename_pink',
   config_colors: {
     wallColor: '#000761',
     snakeColor: '#00FFFF',

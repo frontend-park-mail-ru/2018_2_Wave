@@ -1,12 +1,14 @@
 .dead-message-wrapper {
-    position:absolute;
-    display:grid;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 20%;
 }
 
 .dead-message_block {
-    place-self: center;
+    justify-self: center;
+    align-self: center;
 
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;

@@ -4,7 +4,6 @@ import Element from '../../../element';
 import config from '../../modules/view_config';
 
 import style from './base_menu.css';
-import { isTSThisType } from 'babel-types';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper, isHorizontal, menuClass) {
@@ -70,6 +69,7 @@ export default class BaseMenu extends Element {
   }
 
   render(data) {
+    if (this.rendered) return;
     super.render(data);
   }
 

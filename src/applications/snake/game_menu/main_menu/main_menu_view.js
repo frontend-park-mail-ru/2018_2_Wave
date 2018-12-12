@@ -33,7 +33,6 @@ export default class MainMenuView extends BaseMenu {
   }
 
   render() {
-    // if (this.render) return;
     super.render({ buttons });
   }
 }
