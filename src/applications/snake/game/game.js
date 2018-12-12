@@ -5,6 +5,7 @@ import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
 import Size from './models/size';
 
+import style from './game.css';
 
 export default class Game {
   constructor(gameInfo, canvas, gameInitData) {

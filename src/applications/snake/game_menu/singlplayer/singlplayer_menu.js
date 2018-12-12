@@ -13,13 +13,13 @@ const buttons = {
     params: `mode=${GAME_MODE.ARCADE}&type=${GAME_MODE.SINGLPLAYER}`,
   },
   BACK: {
-    href: '/mainmenu',
+    href: '/snake',
   },
 };
 
 export default class SinglplayerMenu extends BaseMenu {
   constructor(parent) {
-    super(SinglplayerTemplate, parent, 'snakemenu-singlpayer');
+    super(SinglplayerTemplate, parent, ['snakemenu__purple-border', 'snakemenu-singlpayer']);
     this.render();
   }
 

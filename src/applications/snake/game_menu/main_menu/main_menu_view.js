@@ -13,7 +13,7 @@ const buttons = {
 
 export default class MainMenuView extends BaseMenu {
   constructor(parent) {
-    super(MainMenuTemplate, parent, 'snakemenu-main',  false);
+    super(MainMenuTemplate, parent, ['snakepage-main'], false, 'snakemenu-main');
     this.render();
   }
 

@@ -10,8 +10,8 @@ export default class FoodView {
       this.foodModel = foodModel;
     }
 
-    const fillStyle = config.foodCollor;
-    const strokeStyle = config.foodCollor;
+    const fillStyle = config.foodColor;
+    const strokeStyle = config.foodColor;
 
     if (this.foodModel.position) {
       canvas.drawRect({

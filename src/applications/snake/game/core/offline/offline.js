@@ -123,7 +123,7 @@ export default class OfflineGame extends GameCore {
         params: `mode=${GAME_MODE.CLASSIC}&type=${GAME_MODE.SINGLPLAYER}`,
       },
       MENU: {
-        href: '/mainmenu',
+        href: '/snake',
         params: 'menu',
       },
     };

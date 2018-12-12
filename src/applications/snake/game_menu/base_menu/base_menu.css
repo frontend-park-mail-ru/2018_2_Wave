@@ -1,19 +1,18 @@
 .snakemenu-main, .snakemenu-singlpayer, .snakemenu-multiplayer {
+  max-width: 400px;
 
-    max-width: 400px;
-  
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
-  
-    padding: 0px 10px;
-  
-    width: 80vw;
-    height: 50vh;
-  
-    display: grid;
-  
-    flex-wrap: wrap;
-  }
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+
+  padding: 0px 10px;
+
+  width: 80vw;
+  height: 50vh;
+
+  display: grid;
+
+  flex-wrap: wrap;
+}
 
 .snakemenu__purple-border {
     border-style: solid;
@@ -34,21 +33,30 @@
 }
 
 .snakemenu-button {
-    color: #ffffff;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    margin: 0 15px;
-    place-self: center;
-    cursor: pointer;
-  }
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 0 15px;
+  place-self: center;
+  cursor: pointer;
+}
   
-  .snakemenu-button_focus {
-    color: rgb(138, 4, 165);
-    font-size: 18px;
-    /* font-weight: bold; */
-  }
-  
-  .snakemenu-button_focus::before {
-    content: "> ";
-  }
+.snakemenu-button_focus::before {
+  content: "> ";
+}
+
+.snakemenu-button__focus-purple {
+  color: rgb(138, 4, 165);
+  font-size: 18px;
+}
+
+.snakemenu-button__focus-pink {
+  color: pink;
+  font-size: 18px;
+}
+
+.snakemenu-button__focus-greenyellow {
+  color: greenyellow;
+  font-size: 18px;
+}

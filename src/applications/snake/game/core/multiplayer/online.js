@@ -122,7 +122,7 @@ export default class OnlineGame extends GameCore {
         params: `mode=${GAME_MODE.MULTIPLYER}&type=${GAME_MODE.SINGLPLAYER}`,
       },
       MENU: {
-        href: '/mainmenu',
+        href: '/snake',
         params: 'menu',
       },
     };

@@ -1,5 +1,5 @@
 export default class Element {
-  constructor(template, parent, ...wrapperClass) {
+  constructor(template, parent, wrapperClass) {
     this.template = template;
     this.parent   = parent;
     this.wrapper  = document.createElement('div');

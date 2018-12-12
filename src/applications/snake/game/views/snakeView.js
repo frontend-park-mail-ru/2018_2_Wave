@@ -6,9 +6,8 @@ export default class SnakeView {
   }
 
   render(canvas) {
-    const fillStyle = config.snakeCollor;
-    const strokeStyle = config.snakeCollor;
-    // console.log(this.snake.segments);
+    const fillStyle = config.snakeColor;
+    const strokeStyle = config.snakeColor;
     if (this.snake.segments) {
       this.snake.getSegments().forEach((segment) => {
         canvas.drawRect({

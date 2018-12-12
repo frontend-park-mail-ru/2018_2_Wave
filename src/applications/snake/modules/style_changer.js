@@ -3,28 +3,37 @@ import viewConfig from './view_config';
 
 const defaultStyle = {
   snakemenu_main_border: 'snakemenu__purple-border',
+  mainScoreColor: 'main-score__purple',
+  snakemenuButtonFocus: 'snakemenu-button__focus-purple',
   config_colors: {
     wallColor: '#FF40FF',
-    snakeCollor: '#00FFFF',
-    foodCollor: '#40FF00',
+    snakeColor: '#00FFFF',
+    foodColor: '#40FF00',
+    snakemenuButtonFocus: 'snakemenu-button__focus-purple',
   },
 };
 
 const yellowgreenStyle = {
   snakemenu_main_border: 'snakemenu__yellowgreen-border',
+  mainScoreColor: 'main-score__greenyellow',
+  snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
   config_colors: {
     wallColor: '#FF0000',
-    snakeCollor: '#00FF00',
-    foodCollor: '#C0FF00',
+    snakeColor: '#00FF00',
+    foodColor: '#C0FF00',
+    snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
   },
 };
 
 const pinkStyle = {
   snakemenu_main_border: 'snakemenu__pink-border',
+  mainScoreColor: 'main-score__pink',
+  snakemenuButtonFocus: 'snakemenu-button__focus-pink',
   config_colors: {
     wallColor: '#000761',
-    snakeCollor: '#00FFFF',
-    foodCollor: '#FE00DD',
+    snakeColor: '#00FFFF',
+    foodColor: '#FE00DD',
+    snakemenuButtonFocus: 'snakemenu-button__focus-pink',
   },
 };
 

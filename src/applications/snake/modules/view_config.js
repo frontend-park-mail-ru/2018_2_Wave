@@ -1,34 +1,41 @@
 class Config {
+  constructor() {
+    this.setDefaultColors();
+  }
+
   setColors(colorsConfig) {
     const {
       wallColor,
       snakeColor,
       foodColor,
+      snakemenuButtonFocus,
     } = colorsConfig;
 
     this.wallColor = wallColor;
-    this.snakeCollor = snakeColor;
-    this.foodCollor = foodColor;
+    this.snakeColor = snakeColor;
+    this.foodColor = foodColor;
+    this.snakemenuButtonFocus = snakemenuButtonFocus;
   }
 
-  setDefaultCollors() {
+  setDefaultColors() {
     // розовые стены голубая змея зеленая еда
     this.wallColor = '#FF40FF';
-    this.snakeCollor = '#00FFFF';
-    this.foodCollor = '#40FF00';
+    this.snakeColor = '#00FFFF';
+    this.foodColor = '#40FF00';
+    this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
   }
 
-  setGreenCollors() {
+  setGreenColors() {
     this.wallColor = '#FF0000';
-    this.snakeCollor = '#00FF00';
-    this.foodCollor = '#C0FF00';
+    this.snakeColor = '#00FF00';
+    this.foodColor = '#C0FF00';
   }
 
-  setPurpleCollors() {
+  setPurpleColors() {
     // фиолетовые стены розовая еда
     this.wallColor = '#000761';
-    this.snakeCollor = '#00FFFF';
-    this.foodCollor = '#FE00DD';
+    this.snakeColor = '#00FFFF';
+    this.foodColor = '#FE00DD';
   }
 }
 

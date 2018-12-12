@@ -1,15 +1,16 @@
 import busController from '../../modules/busController';
 import Element from '../../../element';
 
+import config from '../../modules/view_config';
+
 import style from './base_menu.css';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper, isHorizontal, menuClass) {
-    super(template, parent, wrapper, 'snakemenu__purple-border');
+    super(template, parent, wrapper);
     this.firstFocus = undefined;
     this.menuClass = menuClass;
     this.busController = busController;
-    this.focusClass = 'snakemenu-button_focus';
 
     if (isHorizontal) {
       this.eventsMethods = {
@@ -34,9 +35,9 @@ export default class BaseMenu extends Element {
     } else {
       this.menu = this.wrapper;
     }
+    super.show();
     this.setFirstFosus();
     this.busController.setBusListeners(this.eventsMethods);
-    super.show();
   }
 
   hide() {
@@ -65,29 +66,29 @@ export default class BaseMenu extends Element {
   }
 
   getFocus() {
-    return (this.menu.getElementsByClassName(this.focusClass));
+    return (this.menu.getElementsByClassName(config.snakemenuButtonFocus));
   }
 
   setFirstFosus() {
     this.focus = this.menu.firstChild;
-    this.focusElement(this.focus);
+    BaseMenu.focusElement(this.focus);
   }
 
   toggleMenuUp() {
     const [focus] = this.getFocus();
-    focus.classList.remove(this.focusClass);
+    focus.classList.remove(config.snakemenuButtonFocus);
     const previousSibling = focus.previousElementSibling;
-    this.focusElement(previousSibling || this.menu.lastElementChild);
+    BaseMenu.focusElement(previousSibling || this.menu.lastElementChild);
   }
 
   toggleMenuDown() {
     const [focus] = this.getFocus();
-    focus.classList.remove(this.focusClass);
+    focus.classList.remove(config.snakemenuButtonFocus);
     const nextSibling = focus.nextElementSibling;
-    this.focusElement(nextSibling || this.menu.firstElementChild);
+    BaseMenu.focusElement(nextSibling || this.menu.firstElementChild);
   }
 
-  focusElement(element) {
-    element.classList.add(this.focusClass);
+  static focusElement(element) {
+    element.classList.add(config.snakemenuButtonFocus);
   }
 }
