@@ -1,3 +1,23 @@
+.snakepage-main {
+  display: grid;
+  font-family: 'Press Start 2P', cursive;
+
+  width: 100vw;
+  height: 100vh;
+
+  justify-content: center;
+  align-content: center;
+}
+
+.main-content {
+  grid-template-rows: 30% 70%;
+  display: grid;
+
+  grid-template-areas: 
+    "gamename"
+    "menu";
+}
+
 .snakemenu-main, .snakemenu-singlpayer, .snakemenu-multiplayer {
   max-width: 400px;
 
@@ -6,18 +26,23 @@
 
   padding: 0px 10px;
 
-  width: 80vw;
-  height: 50vh;
+  /* width: 80vw;
+  height: 50vh; */
+
+  width: 424px;
+  height: 323px;
 
   display: grid;
 
   flex-wrap: wrap;
+
+  grid-area: menu;
 }
 
 .snakemenu__purple-border {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #3F0070;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #3F0070;
 }
 
 .snakemenu__yellowgreen-border {
@@ -59,4 +84,12 @@
 .snakemenu-button__focus-greenyellow {
   color: greenyellow;
   font-size: 18px;
+}
+
+.gamename {
+  color: rgb(138, 4, 165);
+  font-size: 50px;
+  margin: 30px;
+  grid-area: gamename;
+  place-self: center;
 }

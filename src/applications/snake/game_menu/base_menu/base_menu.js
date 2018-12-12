@@ -19,6 +19,7 @@ export default class BaseMenu extends Element {
         Enter: this.processLine.bind(this),
         ArrowLeft: this.toggleMenuUp.bind(this),
         ArrowRight: this.toggleMenuDown.bind(this),
+        Backspace: this.goBack,
       };
     } else {
       this.eventsMethods = {
@@ -26,6 +27,7 @@ export default class BaseMenu extends Element {
         Enter: this.processLine.bind(this),
         ArrowUp: this.toggleMenuUp.bind(this),
         ArrowDown: this.toggleMenuDown.bind(this),
+        Backspace: this.goBack,
       };
     }
   }
@@ -108,5 +110,10 @@ export default class BaseMenu extends Element {
   focusElement(element) {
     this.removeFocusElements();
     element.classList.add(config.snakemenuButtonFocus);
+  }
+
+
+  goBack(link) {
+    busController.emit('link', link);
   }
 }

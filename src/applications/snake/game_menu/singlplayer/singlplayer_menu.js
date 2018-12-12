@@ -34,4 +34,8 @@ export default class SinglplayerMenu extends BaseMenu {
   render() {
     super.render({ buttons });
   }
+
+  goBack() {
+    super.goBack('/snake');
+  }
 }

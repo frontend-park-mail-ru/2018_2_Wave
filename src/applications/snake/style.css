@@ -17,7 +17,7 @@
 
 .game-container {
   height: 100%;
-  cursor: none;
+  /* cursor: none; */
   display: grid;
   justify-items: center;
   align-items: center;
@@ -96,7 +96,7 @@
 .snakegame-container__multiplayer {
     
   grid-template-areas: 
-    "mode . score . ."
+    "mode . score . board"
     "game game game game board"
     "game game game game board";
     
@@ -109,8 +109,8 @@
 
   /* background-color: rgb(255, 255, 255); */
 
-  width: 90%;
-  height: 60%;
+  /* width: 90%;
+  height: 60%; */
 
   justify-self: center;
   align-self: center;
@@ -129,6 +129,7 @@
 
 .game-board-name {
   text-align: center;
+  margin: 10px;
 }
 
 

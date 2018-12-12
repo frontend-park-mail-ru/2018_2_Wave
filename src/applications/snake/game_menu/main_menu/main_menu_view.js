@@ -20,22 +20,15 @@ export default class MainMenuView extends BaseMenu {
     this.noRender = true;
   }
 
-  show() {
-    busController.setBusListeners({ Backspace: this.goBack });
-    super.show();
-  }
-
-  hide() {
-    busController.removeBusListeners({ Backspace: this.goBack });
-    super.hide();
-  }
+  // goBack() {
+  //   busController.emit('link', '/terminal');
+  // }
 
   goBack() {
-    busController.emit('link', '/terminal');
+    super.goBack('/terminal');
   }
 
   pause() {
-    console.log(pause);
     super.pause();
   }
 

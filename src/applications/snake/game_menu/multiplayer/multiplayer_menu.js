@@ -38,4 +38,8 @@ export default class MultiplayerMenu extends BaseMenu {
   render() {
     super.render({ buttons });
   }
+
+  goBack() {
+    super.goBack('/snake');
+  }
 }

@@ -24,6 +24,8 @@ import WsPostman from '../../../modules/wsPostman';
 import DeadMessage from '../../dead_message/dead_message';
 import DeadMenuTemplate from './dead_menu.pug';
 
+import style from './multiplayer.css';
+
 export default class OnlineGame extends GameCore {
   constructor(scene, gameInitData) {
     super(scene);

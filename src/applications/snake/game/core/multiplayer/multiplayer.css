@@ -1,0 +1,21 @@
+.game-board {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.players {
+    height: 100%;
+    margin: 2px;
+}
+
+.scores {
+    height: 100%;
+    margin: 2px;
+}
+
+.player, .score {
+    margin: 5px;
+    font-size: 14px;
+}
