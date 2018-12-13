@@ -5,6 +5,7 @@ export default class SnakeModel {
     this.segments  = [];
     this.userToken = globalUser.userToken;
     this.defaultSize = 3;
+    this.playerId = 2;
     this.startPosition = {
       x: 15,
       y: 20,
@@ -84,9 +85,8 @@ export default class SnakeModel {
     this.segments  = [];
     if (snakes) {
       snakes.forEach((snake) => {
-        console.log(snake.user_id, this.userToken);
         if (snake.user_id === this.userToken) {
-          console.log(snake.body);
+          // this.playerId = snake.playerId
           snake.body.forEach((segment) => {
             this.segments.push({
               x: segment.position.X,
