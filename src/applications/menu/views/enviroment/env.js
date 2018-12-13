@@ -12,16 +12,18 @@ import '../../../../../static/fonts/Gilroy-Light.otf';
 
 export default class Enviroment extends Element {
   constructor(parent, wrapper) {
-    super(template, parent, wrapper);
+    super(template, parent, wrapper || parent);
     super.render();
 
     [this.contentPlace] = this.wrapper.getElementsByClassName('content');
     [this.title] = this.wrapper.getElementsByClassName('title__text');
-
+    [this.mainContainer] = this.wrapper.getElementsByClassName('grid-body');
     const [userblockPlace] = this.wrapper.getElementsByClassName('userblock');
     const [menuPlace] = this.wrapper.getElementsByClassName('menu');
     this.userblock = new UserBlock(userblockPlace, userblockPlace);
     this.menu = new Menu(menuPlace, menuPlace);
+
+    [this.appContainerPlace] = this.wrapper.getElementsByClassName('application');
   }
 
   setTitle(text) {
