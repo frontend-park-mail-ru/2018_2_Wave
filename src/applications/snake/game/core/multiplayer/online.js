@@ -11,12 +11,12 @@ import keyboardController from '../../../modules/keyboardController';
 import LevelView from '../../views/levelView';
 import SnakeView from '../../views/snakeView';
 import FoodsView from '../../views/foodsView';
-import EnemyView from '../../views/enemyView';
+import EnemiesView from '../../views/enemiesView';
 
 import LevelModel from '../../models/levelModel';
 import SnakeModel from '../../models/snakeModel';
 import FoodsModel from '../../models/foodsModel';
-import EnemyModel from '../../models/enemyModel';
+import EnemiesModel from '../../models/enemiesModel';
 
 import WsMessageParser from '../../../modules/wsMessageParser';
 import WsPostman from '../../../modules/wsPostman';
@@ -62,8 +62,8 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
 
-    this.enemie = new EnemyModel(gameInitData.userToken);
-    this.scene.push(new EnemyView(this.enemie));
+    this.enemies = new EnemiesModel(gameInitData.userToken);
+    this.scene.push(new EnemiesView(this.enemies));
 
     this.wsMessageParser.setModel('snakes', this.snake);
     this.wsMessageParser.setModel('snakes', this.enemie);

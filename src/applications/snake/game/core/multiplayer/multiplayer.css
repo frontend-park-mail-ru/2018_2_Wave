@@ -1,37 +1,42 @@
 .game-board {
     display:flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 .players {
     height: 100%;
     margin: 2px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.scores {
-    height: 100%;
-    margin: 2px;
-}
 
 .player, .score {
     margin: 5px;
     font-size: 14px;
 }
 
-.first_player_color {
+.player_greenyellow {
     color: greenyellow;
 }
 
-.second_player_color {
+.player_yellow {
     color: yellow;
 }
 
-.third_player_color{
+.player_red{
     color: red;
 }
 
-.fourth_player_color {
+.player_blue {
     color: blue;
+}
+
+.player_green {
+    color: green;
+}
+
+.player_white {
+    color: white;
 }

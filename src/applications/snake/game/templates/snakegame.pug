@@ -7,13 +7,15 @@
 .game-board-wrapper(hidden)
     .game-board-name Players
     .game-board.game-board__purple
-        .players
-            .player.first_player_color  dlipko 
-            .player.second_player_color dpaliy
-            .player.third_player_color  bomkvilt
-            .player.fourth_player_color xenijja
-        .scores
-            .score.first_player_color   0
-            .score.second_player_color  0
-            .score.third_player_color   0
-            .score.fourth_player_color  0
+        .players.scores(user_serial=0)
+            .player.player_greenyellow 
+            .score.player_greenyellow
+        .players.scores(user_serial=1)
+            .player.player_yellow
+            .score.player_yellow
+        .players.scores(user_serial=2)
+            .player.player_green
+            .score.player_green
+        .players.scores(user_serial=3)
+            .player.player_blue
+            .score.player_blue

@@ -38,7 +38,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 15% auto;
     grid-template-areas: 
-      "mode . score . ."
+      ". . mode . score"
       "game game game game game"
       "game game game game game";
       
@@ -95,7 +95,7 @@
 .snakegame-container__multiplayer {
     
   grid-template-areas: 
-    "mode . score . board"
+    ". mode mode mode score"
     "game game game game board"
     "game game game game board";
     

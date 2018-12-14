@@ -27,7 +27,7 @@ export default class Canvas {
     };
 
     this.canvas.width = size.width;
-    this.context.canvas.height = size.height;
+    this.canvas.height = size.height;
   }
 
   drawLetter({

@@ -22,30 +22,16 @@ export default class GameView extends Element {
     super.render();
   }
 
-  sendAddToRoom() {
-    this.wsPostman = new WsPostman();
-    switch (this.gameParams.type) {
-      case GAME_MODE.THREE_PLAYERS:
-        this.wsPostman.addToQuickSearchRoom(3);
-        break;
-      default:
-        this.wsPostman.addToRoom();
-        this.startMultiplayer = this.startMultiplayer.bind(this);
-        busController.setBusListeners({ STATUS_TICK: this.startMultiplayer });
-        break;
-    }
-  }
-
-  startMultiplayer(payload) {
-    busController.removeBusListeners({ STATUS_TICK: this.startMultiplayer });
+  startMultiplayer() {
+    // busController.removeBusListeners({ STATUS_TICK: this.startMultiplayer });
     this.setMultiplayerEnviroment();
     const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
       userToken: this.userToken,
       windowWidth: canvasWrapper.clientWidth,
       windowHeight: canvasWrapper.clientHeight,
-      widthCellCount: payload.scene_size.X,
-      heightCellCount: payload.scene_size.Y,
+      widthCellCount: 90,
+      heightCellCount: 60,
     };
 
     this.startGame();
@@ -74,7 +60,7 @@ export default class GameView extends Element {
     }
 
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
-      this.sendAddToRoom();
+      this.startMultiplayer();
       return;
     }
 
@@ -92,8 +78,8 @@ export default class GameView extends Element {
       userToken: this.userToken,
       windowWidth: canvasWrapper.clientWidth,
       windowHeight: canvasWrapper.clientHeight,
-      widthCellCount: 60,
-      heightCellCount: 40,
+      widthCellCount: 90,
+      heightCellCount: 60,
     };
 
     this.startGame();
@@ -103,7 +89,7 @@ export default class GameView extends Element {
     console.log('game init data', this.gameInitData);
     const [canvas] = this.wrapper.getElementsByClassName('snakegame-canvas');
     this.game = new Game(this.gameParams, canvas, this.gameInitData);
-    this.game.start();
+    // this.game.start();
   }
 
   hide() {

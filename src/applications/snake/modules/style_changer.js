@@ -7,11 +7,16 @@ const defaultStyle = {
   snakemenuButtonFocus: 'snakemenu-button__focus-purple',
   gameBoardBorder: 'game-board__purple',
   gameName: 'gamename_purple',
+  first_player: 'player_greenyellow',
+  second_player: 'player_yellow',
+  third_player: 'player_green',
+  fourth_player: 'player_blue',
   config_colors: {
     wallColor: '#FF40FF',
     snakeColor: '#00FFFF',
     foodColor: '#40FF00',
     snakemenuButtonFocus: 'snakemenu-button__focus-purple',
+    enemiesColors: ['greenyellow', 'yellow', 'red', 'blue'],
   },
 };
 
@@ -21,11 +26,16 @@ const yellowgreenStyle = {
   snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
   gameBoardBorder: 'game-board__greenyellow',
   gameName: 'gamename_greenyellow',
+  first_player: 'player_white',
+  second_player: 'player_yellow',
+  third_player: 'player_red',
+  fourth_player: 'player_green',
   config_colors: {
     wallColor: '#FF0000',
     snakeColor: '#00FF00',
     foodColor: '#C0FF00',
     snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
+    enemiesColors: ['white', 'yellow', 'red', 'green'],
   },
 };
 
@@ -35,11 +45,16 @@ const pinkStyle = {
   snakemenuButtonFocus: 'snakemenu-button__focus-pink',
   gameBoardBorder: 'game-board__pink',
   gameName: 'gamename_pink',
+  first_player: 'player_greenyellow',
+  second_player: 'player_pink',
+  third_player: 'player_red',
+  fourth_player: 'player_blue',
   config_colors: {
     wallColor: '#000761',
     snakeColor: '#00FFFF',
     foodColor: '#FE00DD',
     snakemenuButtonFocus: 'snakemenu-button__focus-pink',
+    enemiesColors: ['greenyellow', 'pink', 'red', 'blue'],
   },
 };
 
@@ -49,6 +64,7 @@ export default class StyleChanger {
     this.currentStyle = defaultStyle;
     this.currentStyleIndex = 0;
     this.changeStyle = this.changeStyle.bind(this);
+    viewConfig.setColors(defaultStyle);
   }
 
   start() {

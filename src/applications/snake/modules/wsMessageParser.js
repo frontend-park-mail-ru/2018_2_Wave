@@ -19,7 +19,10 @@ export default class WsMessageParser {
   parse(message) {
     console.log('ws_message', message);
 
-    if (message.status === 'STATUS_OK' || message.status === 'STATUS_DEAD') {
+    if (message.status === 'STATUS_OK'
+    || message.status === 'STATUS_DEAD'
+    || message.status === 'quick_search_status'
+    || message.status === 'quick_search_ready') {
       busController.emit(message.status, message);
     }
     if (typeof message === 'string') {

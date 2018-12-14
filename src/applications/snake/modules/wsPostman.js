@@ -16,7 +16,7 @@ export default class WsPostman {
       signal: 'quick_search',
       payload: {
         player_count: playerCount,
-        room_type: '',
+        room_type: 'snake',
       },
     });
   }
