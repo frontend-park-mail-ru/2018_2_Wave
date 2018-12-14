@@ -7,7 +7,7 @@ import './store.pcss';
 
 import '../../../../../static/img/terminal.jpg';
 
-const apps = [
+const storeApps = [
   {
     link: '/terminal',
     image: 'img/terminal.jpg',
@@ -38,7 +38,7 @@ export default class StoreView extends Element {
 
   render() {
     if (this.panel.innerHTML !== '') return;
-    apps.forEach((app) => {
+    storeApps.forEach((app) => {
       const tile = new AppTile(this.panel, app);
       tile.show();
     });
