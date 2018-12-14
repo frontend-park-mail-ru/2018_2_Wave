@@ -6,17 +6,23 @@ export default class EnemiesView {
   }
 
   render(canvas) {
-    this.enemies.snakes.forEach((snake) => {
-      snake.segments.forEach((segment) => {
-        canvas.drawRect({
-          fillStyle: '#cc0000',
-          strokeStyle: '#fc7874',
-          x: segment.x,
-          y: segment.y,
-          width: 1,
-          height: 1,
+    if (this.enemies.enemySnakes) {
+      this.enemies.enemySnakes.forEach((snake) => {
+        // const fillStyle = config.enemiesColors[snake.user_serial];
+        // const strokeStyle = config.enemiesColors[snake.user_serial];
+        const fillStyle = 'red';
+        const strokeStyle = 'red';
+        snake.segments.forEach((segment) => {
+          canvas.drawRect({
+            fillStyle,
+            strokeStyle,
+            x: segment.x,
+            y: segment.y,
+            width: 1,
+            height: 1,
+          });
         });
       });
-    });
+    }
   }
 }

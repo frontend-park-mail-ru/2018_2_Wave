@@ -40,23 +40,23 @@ export default class WsPostman {
     });
   }
 
-  addToRoom(room_token = config.DEFAULT_ROOM_TOKEN) {
-    this.ws.send({
-      signal: 'add_to_room',
-      payload: {
-        room_token,
-      },
-    });
-  }
+  // addToRoom(room_token = config.DEFAULT_ROOM_TOKEN) {
+  //   this.ws.send({
+  //     signal: 'add_to_room',
+  //     payload: {
+  //       room_token,
+  //     },
+  //   });
+  // }
 
-  startGame(roomToken = this.roomToken) {
+  startGame(room_token = this.roomToken) {
     this.ws.send({
-      room_token: roomToken,
+      room_token,
       signal: 'game_play',
     });
   }
 
-  sendAction(direction, room_token = config.DEFAULT_ROOM_TOKEN) {
+  sendAction(direction, room_token = this.roomToken) {
     this.ws.send({
       room_token,
       signal: 'game_action',
@@ -66,7 +66,7 @@ export default class WsPostman {
     });
   }
 
-  sendGameExit(room_token = config.DEFAULT_ROOM_TOKEN) {
+  sendGameExit(room_token = this.roomToken) {
     this.ws.send({
       room_token,
       signal: 'game_exit',

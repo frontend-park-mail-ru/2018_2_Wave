@@ -21,9 +21,9 @@ class Config {
 
   setDefaultColors() {
     // розовые стены голубая змея зеленая еда
-    this.wallColor = '#FF40FF';
+    this.wallColor = 'blue';
     this.snakeColor = '#00FFFF';
-    this.foodColor = '#40FF00';
+    this.foodColor = 'white';
     this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
     this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
   }

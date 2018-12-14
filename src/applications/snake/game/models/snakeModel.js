@@ -85,7 +85,7 @@ export default class SnakeModel {
     this.segments  = [];
     if (snakes) {
       snakes.forEach((snake) => {
-        if (snake.user_id === this.userToken) {
+        if (snake.user_token === this.userToken) {
           // this.playerId = snake.playerId
           snake.body.forEach((segment) => {
             this.segments.push({
