@@ -11,8 +11,8 @@ export default class AppContainer extends Element {
   }
 
   hide() {
-    super.hide();
     this.wrapper.style['z-index'] = -5;
+    super.hide();
   }
 
   show() {
