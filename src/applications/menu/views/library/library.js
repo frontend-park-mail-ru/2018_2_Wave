@@ -32,14 +32,17 @@ const apps = [
 
 
 export default class LibraryView extends Element {
-  constructor(parent) {
-    super(template, parent, parent);
+  constructor(parent, wrapper) {
+    super(template, parent, wrapper);
     super.render();
+
+    this.title = 'Library';
 
     [this.panel] = this.wrapper.getElementsByClassName('library__tile-panel');
   }
 
   render() {
+    console.log(this.panel);
     if (this.panel.innerHTML !== '') return;
     apps.forEach((app) => {
       const tile = new AppTile(this.panel, app);
