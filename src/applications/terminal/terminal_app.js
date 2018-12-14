@@ -19,6 +19,7 @@ class TerminalApp extends BaseApp {
       history: this.history,
       clear: this.clear,
       snake: () => bus.emit('link', '/snake'),
+      exit: () => bus.emit('link', '/'),
     };
 
     this.commandHistory = [];
