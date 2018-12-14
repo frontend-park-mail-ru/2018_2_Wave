@@ -39,8 +39,8 @@ class TerminalApp extends BaseApp {
   /*   service methods   */
   start() {
     this.parent.style.background = 'black';
-    this.addListeners();
     super.start();
+    this.addListeners();
     this.view.printBlock(messages.hello);
     this.view.addInput(this.intro);
   }
@@ -123,14 +123,14 @@ class TerminalApp extends BaseApp {
   addListeners() {
     Object.keys(this.listeners).forEach((key) => {
       // FIXME:
-      document./*this.terminal.*/addEventListener(key, this.listeners[key]);
+      this.terminal.addEventListener(key, this.listeners[key]);
     });
   }
 
   removeListeners() {
     Object.keys(this.listeners).forEach((key) => {
       // FIXME:
-      document./*this.terminal.*/removeEventListener(key, this.listeners[key]);
+      this.terminal.removeEventListener(key, this.listeners[key]);
     });
   }
 }
