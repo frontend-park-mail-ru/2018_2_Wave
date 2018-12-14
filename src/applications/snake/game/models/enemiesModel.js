@@ -14,11 +14,11 @@ export default class EnemiesModel {
     this.segments  = [];
     if (snakes) {
       snakes.forEach((snake) => {
-        if (snake.user_token !== this.userToken) {
-          const enemy = new EnemyModel();
-          enemy.setState(snake);
-          this.push(enemy);
-        }
+        // if (snake.user_token !== this.userToken) {
+        const enemy = new EnemyModel();
+        enemy.setState(snake);
+        this.push(enemy);
+        // }
       });
     }
   }

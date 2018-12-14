@@ -8,10 +8,8 @@ export default class EnemiesView {
   render(canvas) {
     if (this.enemies.enemySnakes) {
       this.enemies.enemySnakes.forEach((snake) => {
-        // const fillStyle = config.enemiesColors[snake.user_serial];
-        // const strokeStyle = config.enemiesColors[snake.user_serial];
-        const fillStyle = 'red';
-        const strokeStyle = 'red';
+        const fillStyle = config.enemiesColors[snake.user_serial];
+        const strokeStyle = config.enemiesColors[snake.user_serial];
         snake.segments.forEach((segment) => {
           canvas.drawRect({
             fillStyle,
