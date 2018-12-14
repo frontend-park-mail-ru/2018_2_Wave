@@ -8,6 +8,7 @@ import WaitingPlayers from './core/multiplayer/waitingPlayers';
 import busController from '../modules/busController';
 
 import style from './game.css';
+import WsPostman from '../modules/wsPostman';
 
 let GameConstructor;
 export default class Game {
@@ -71,9 +72,11 @@ export default class Game {
       this.gameInitData.heightCellCount);
   }
 
-  start() {
+  start(message) {
     console.log('start quick search');
     if (this.events) {
+      this.wsPostman = new WsPostman();
+      this.wsPostman.setRoomToken(message.payload.room_token);
       busController.removeBusListeners(this.events);
       this.waitingPlayers.stop();
     }
