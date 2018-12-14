@@ -27,15 +27,13 @@ export default class Element {
 
   hide() {
     this.wrapper.hidden = true;
-    this.wrapper.style.setProperty('display', 'none', '!important');
-    // this.wrapper.style.visibility = 'hidden';
+    this.wrapper.style.setProperty('display', 'none', 'important');
   }
 
   show() {
     if (!this.rendered) this.render();
     this.wrapper.hidden = false;
-    // this.wrapper.style.display = '';
-    // this.wrapper.style.visibility = 'visible';
+    this.wrapper.style.display = null;
   }
 
 
