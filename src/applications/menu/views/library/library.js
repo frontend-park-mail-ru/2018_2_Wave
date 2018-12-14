@@ -28,6 +28,11 @@ const apps = [
     image: 'img/terminal.jpg',
     name: 'Terminal',
   },
+  {
+    link: '/terminal',
+    image: 'img/terminal.jpg',
+    name: 'Terminal',
+  },
 ];
 
 
