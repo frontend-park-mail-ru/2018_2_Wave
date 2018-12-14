@@ -69,9 +69,9 @@ export default class MenuApp extends BaseApp {
   }
 
   changeView(...args) {
+    if (this.currentView === this.views.store) this.menu.show();
     super.changeView(...args);
     this.env.setTitle(this.currentView.title);
     if (this.currentView === this.views.store) this.menu.hide();
-    else this.menu.show();
   }
 }
