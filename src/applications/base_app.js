@@ -74,12 +74,15 @@ export default class BaseApp {
       fill: 'forwards',
       easing: 'cubic-bezier(.36,1.08,.55,.93)',
     });
+    launchAnimation.pause();
 
     launchAnimation.onfinish = () => {
       element.remove();
       if (this.started) this.resume();
       else this.start();
     };
+
+    launchAnimation.play();
   }
 
   start() {
