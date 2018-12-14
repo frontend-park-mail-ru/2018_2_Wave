@@ -31,7 +31,7 @@ export default class Loader {
   }
 
   gameloop() {
-    setTimeout((_) => {
+    this.timerId = setTimeout((_) => {
 
       this.setBlackBackground();
       this.controllers.forEach((controller) => {
@@ -47,6 +47,7 @@ export default class Loader {
   }
 
   stop() {
+    clearInterval(this.timerId);
     cancelAnimationFrame(this.gameloopRequestId);
   }
 

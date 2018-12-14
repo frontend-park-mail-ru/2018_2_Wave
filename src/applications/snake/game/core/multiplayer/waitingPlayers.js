@@ -89,6 +89,7 @@ export default class WaitingPlayers {
 
   stop() {
     this.loader.stop();
+    this.readyMessage.close();
     this.removeBusListeners();
   }
 }

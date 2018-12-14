@@ -62,11 +62,11 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
 
-    this.enemies = new EnemiesModel(gameInitData.userToken);
-    this.scene.push(new EnemiesView(this.enemies));
+    // this.enemies = new EnemiesModel(gameInitData.userToken);
+    // this.scene.push(new EnemiesView(this.enemies));
 
     this.wsMessageParser.setModel('snakes', this.snake);
-    this.wsMessageParser.setModel('snakes', this.enemie);
+    // this.wsMessageParser.setModel('snakes', this.enemie);
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
 

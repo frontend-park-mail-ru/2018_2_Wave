@@ -22,7 +22,6 @@ export default class Ws {
 
   handleMessage(event) {
     try {
-      console.log('ws', event);
       const message = JSON.parse(event.data);
       this.mesageParser.parse(message);
     } catch (err) {

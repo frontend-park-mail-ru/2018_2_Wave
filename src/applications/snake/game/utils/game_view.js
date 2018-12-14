@@ -30,8 +30,8 @@ export default class GameView extends Element {
       userToken: this.userToken,
       windowWidth: canvasWrapper.clientWidth,
       windowHeight: canvasWrapper.clientHeight,
-      widthCellCount: 90,
-      heightCellCount: 60,
+      widthCellCount: 60,
+      heightCellCount: 40,
     };
 
     this.startGame();
@@ -78,8 +78,8 @@ export default class GameView extends Element {
       userToken: this.userToken,
       windowWidth: canvasWrapper.clientWidth,
       windowHeight: canvasWrapper.clientHeight,
-      widthCellCount: 90,
-      heightCellCount: 60,
+      widthCellCount: 60,
+      heightCellCount: 40,
     };
 
     this.startGame();

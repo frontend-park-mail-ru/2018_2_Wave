@@ -5,6 +5,7 @@ import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
 import Size from './models/size';
 import WaitingPlayers from './core/multiplayer/waitingPlayers';
+import busController from '../modules/busController';
 
 import style from './game.css';
 
@@ -14,6 +15,7 @@ export default class Game {
     this.gameInitData = gameInitData;
     this.canvas = canvas;
     this.countGameParams();
+
     switch (gameInfo.mode) {
       case GAME_MODE.CLASSIC: {
         if (gameInfo.type === GAME_MODE.SINGLPLAYER) {
@@ -36,6 +38,8 @@ export default class Game {
         GameConstructor = OnlineGame;
         this.waitingPlayers = new WaitingPlayers(this.canvas, this.gameInitData, gameInfo);
         this.waitingPlayers.start();
+        this.events = { quick_search_done: this.start.bind(this) };
+        busController.setBusListeners(this.events);
         break;
       }
       default:
@@ -68,6 +72,11 @@ export default class Game {
   }
 
   start() {
+    console.log('start quick search');
+    if (this.events) {
+      busController.removeBusListeners(this.events);
+      this.waitingPlayers.stop();
+    }
     this.initGame();
     this.gameCore.start();
   }

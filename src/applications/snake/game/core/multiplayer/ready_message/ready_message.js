@@ -28,14 +28,16 @@ export default class ReadyMessage extends BaseMenu {
   }
 
   removeListeners() {
-    busController.removeBusListeners(this.events);
+    busController.removeBusListeners(this.events); 
   }
 
   quickSearchStart() {
+    console.log('quickSearchStart');
     this.wsPostman.quickSearchAccept();
   }
 
   quickSearchQuit() {
+    console.log('quickSearchQuit');
     this.wsPostman.quickSearchAbort();
   }
 
@@ -72,9 +74,12 @@ export default class ReadyMessage extends BaseMenu {
   }
 
   hide() {
-    if (this.fullClose) {
-      this.removeListeners();
-    }
+    super.hide();
+    this.stopTimer();
+  }
+
+  close() {
+    this.removeListeners();
     super.hide();
     this.stopTimer();
   }
