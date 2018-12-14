@@ -38,8 +38,9 @@ class TerminalApp extends BaseApp {
 
   /*   service methods   */
   start() {
-    super.start();
+    this.parent.style.background = 'black';
     this.addListeners();
+    super.start();
     this.view.printBlock(messages.hello);
     this.view.addInput(this.intro);
   }
@@ -56,6 +57,7 @@ class TerminalApp extends BaseApp {
   }
 
   resume() {
+    this.parent.style.background = 'black';
     super.resume();
     this.addListeners();
   }
