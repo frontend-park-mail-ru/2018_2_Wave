@@ -102,8 +102,7 @@ export default class Router {
         // TODO: stop old apps
         if (knownApp.active) knownApp.pause();
       });
-      if (!app.started) app.start(target);
-      else app.resume(target);
+      app.launch(target);
     }
 
     if (window.location.pathname !== fullPath) {
