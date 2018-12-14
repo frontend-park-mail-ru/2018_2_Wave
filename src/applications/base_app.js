@@ -66,9 +66,13 @@ export default class BaseApp {
         'scale(1, 1) translate(0px, 0px)',
         `scale(${widthScale}, ${heightScale}) translate(${translateX}px, ${translateY}px)`,
       ],
+      'border-radius': [
+        '20px', '0px',
+      ],
     }, {
       duration: 300,
       fill: 'forwards',
+      easing: 'cubic-bezier(.36,1.08,.55,.93)',
     });
 
     launchAnimation.onfinish = () => {
