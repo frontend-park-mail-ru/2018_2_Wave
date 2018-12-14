@@ -5,7 +5,7 @@ import WsPostman from './modules/wsPostman';
 import WsMessageParser from './modules/wsMessageParser';
 import WebSocket from '../../modules/webSocket';
 import keyboardController from './modules/keyboardController';
-import StyleChanger from './modules/style_changer';
+import styleChanger from './modules/style_changer';
 
 import BaseApp from '../base_app';
 
@@ -37,7 +37,7 @@ export default class GameApp extends BaseApp {
     this.webSocket = new WebSocket(this.wsMessageParser);
     this.wsPostman = new WsPostman(this.webSocket);
     this.errorMessage = new ErrorMessage();
-    this.styleChanger = new StyleChanger();
+    this.styleChanger = styleChanger;
 
     this.keyboardController = keyboardController;
   }

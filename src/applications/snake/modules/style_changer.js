@@ -58,13 +58,13 @@ const pinkStyle = {
   },
 };
 
-export default class StyleChanger {
+class StyleChanger {
   constructor() {
     this.styles = [defaultStyle, yellowgreenStyle, pinkStyle];
     this.currentStyle = defaultStyle;
     this.currentStyleIndex = 0;
     this.changeStyle = this.changeStyle.bind(this);
-    viewConfig.setColors(defaultStyle);
+    this.changeStyle();
   }
 
   start() {
@@ -104,3 +104,5 @@ export default class StyleChanger {
     busController.removeBusListeners({ KeyT: this.changeStyle });
   }
 }
+
+export default new StyleChanger();

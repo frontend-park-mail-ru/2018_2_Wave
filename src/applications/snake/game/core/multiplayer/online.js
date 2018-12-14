@@ -91,7 +91,6 @@ export default class OnlineGame extends GameCore {
     this.wsPostman.startGame();
     super.start();
 
-    // this.audioController.start();
     this.setBusListeners();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
@@ -99,7 +98,6 @@ export default class OnlineGame extends GameCore {
 
 
   update() {
-    // this.controllers.forEach(controller => controller.update());
   }
 
   gameloop(now) {
@@ -108,7 +106,6 @@ export default class OnlineGame extends GameCore {
 
       if (this.keyboardController.isCommand()) {
         this.wsPostman.sendDirection(this.keyboardController.getLastCommand());
-        // this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
       this.scene.renderScene();
