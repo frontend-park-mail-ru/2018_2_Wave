@@ -4,6 +4,7 @@ import BaseApp from '../base_app';
 
 import Enviroment from './views/enviroment/env';
 import LibraryView from './views/library/library';
+import StoreView from './views/store/store';
 import AppContainer from './views/app_container/app_container';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
@@ -18,19 +19,16 @@ export default class MenuApp extends BaseApp {
     // envWrapper.classList.add('envWrapper');
     // const env = new Enviroment(parent, envWrapper);
     const env = new Enviroment(parent, parent);
-    // const Views = {
-    //   login: LoginView,
-    //   register: RegisterView,
-    //   leaderboard: LeaderboardView,
-    //   profile: ProfileView,
-    //   settings: SettingsView,
-    //   'profile/edit': ProfileEditView,
-    // };
+    super(appUrl, env.contentPlace);
 
-    super(appUrl, env.contentPlace, LibraryView);
+    const [libraryPlace] = env.wrapper.getElementsByClassName('library');
+    this.views.main = new LibraryView(libraryPlace, libraryPlace);
+    this.currentView = this.views.main;
+
+    const [storePlace] = env.wrapper.getElementsByClassName('store');
+    this.views.store = new StoreView(storePlace, storePlace);
 
     this.env = env;
-    this.content = this.env.content;
     this.menu = this.env.menu;
 
     this.appContainer = new AppContainer(
@@ -68,5 +66,10 @@ export default class MenuApp extends BaseApp {
       mainContainer.classList.remove('unblurred');
       this.appContainer.hide();
     }, { once: true });
+  }
+
+  changeView(...args) {
+    super.changeView(...args);
+    this.env.setTitle(this.currentView.title);
   }
 }

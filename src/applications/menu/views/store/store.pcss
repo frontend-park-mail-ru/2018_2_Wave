@@ -1,6 +1,6 @@
 @import '../../../../config.pcss';
 
-.library {
+.store {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +15,7 @@
     scroll-snap-type: x mandatory;
     // scroll-snap-stop: always;
     overflow-x: auto;
+    overflow-y: visible;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -22,13 +23,13 @@
 }
 
 @media (--small) {
-  .library__tile-panel {
+  .store__tile-panel {
     width: calc(100vw - 2 * var(--small-grid-padding-x));
   }
 }
 
 @media (--minimal) {
-  .library__tile-panel {
+  .store__tile-panel {
     width: calc(100vw - 2 * var(--minimal-grid-padding-x));
   }
 }

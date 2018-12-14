@@ -2,7 +2,13 @@ export default class Element {
   constructor(template, parent, wrapper) {
     this.template = template;
     this.parent   = parent;
-    this.wrapper = wrapper || document.createElement('div');
+    if (!wrapper) {
+      this.wrapper = document.createElement('div');
+      this.wrapper.classList.add('wrapper');
+    } else {
+      this.wrapper = wrapper;
+    }
+    // this.wrapper = wrapper || document.createElement('div');
     this.wrapper.hidden = true;
     if (parent !== wrapper) {
       this.parent.appendChild(this.wrapper);
@@ -21,11 +27,13 @@ export default class Element {
 
   hide() {
     this.wrapper.hidden = true;
+    // this.wrapper.style.visibility = 'hidden';
   }
 
   show() {
-    this.wrapper.hidden = false;
     if (!this.rendered) this.render();
+    this.wrapper.hidden = false;
+    // this.wrapper.style.visibility = 'visible';
   }
 
 

@@ -2,8 +2,11 @@ export default class BaseApp {
   constructor(appURL, parent, MainView, Views) {
     this.url = appURL;
     this.parent = parent;
-    this.views = { main: new MainView(parent) };
-    this.currentView = this.views.main;
+
+    if (MainView) {
+      this.views = { main: new MainView(parent) };
+      this.currentView = this.views.main;
+    } else this.views = {};
 
     if (Views) {
       Object.keys(Views).forEach((key) => {

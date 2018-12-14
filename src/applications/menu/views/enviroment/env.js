@@ -15,7 +15,6 @@ export default class Enviroment extends Element {
     super(template, parent, wrapper || parent);
     super.render();
 
-    [this.contentPlace] = this.wrapper.getElementsByClassName('content');
     [this.title] = this.wrapper.getElementsByClassName('title__text');
     [this.mainContainer] = this.wrapper.getElementsByClassName('grid-body');
     const [userblockPlace] = this.wrapper.getElementsByClassName('userblock');
