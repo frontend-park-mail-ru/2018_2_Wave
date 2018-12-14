@@ -37,7 +37,7 @@ export default class Enviroment extends Element {
     this.menu.show();
   }
 
-  async render() {
+  render() {
     this.userblock.render();
     this.menu.render();
   }

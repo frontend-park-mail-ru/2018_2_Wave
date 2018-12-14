@@ -40,6 +40,7 @@ export default class LibraryView extends Element {
   }
 
   render() {
+    if (this.panel.innerHTML !== '') return;
     apps.forEach((app) => {
       const tile = new AppTile(this.panel, app);
       tile.show();
