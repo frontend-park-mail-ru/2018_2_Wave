@@ -37,14 +37,6 @@ export default class MenuApp extends BaseApp {
   start() {
     this.env.show();
     super.start();
-
-    if (document.requestFullscreen) {
-      document.requestFullscreen();
-    } else if (document.mozRequestFullScreen) {
-      document.mozRequestFullScreen();
-    } else if (document.webkitRequestFullscreen) {
-      document.webkitRequestFullscreen();
-    }
   }
 
   // stop() {

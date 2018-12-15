@@ -32,6 +32,7 @@ export default class GameApp extends BaseApp {
     super(appUrl, env.getContainer(), MainMenuView, Views);
 
     this.env = env;
+    this.parent = parent;
     this.wsMessageParser = new WsMessageParser(this);
     this.wsMessageParser.setModel('user_token', globalUser);
     this.webSocket = new WebSocket(this.wsMessageParser);
@@ -43,6 +44,14 @@ export default class GameApp extends BaseApp {
   }
 
   start() {
+    if (this.parent.requestFullscreen) {
+      this.parent.requestFullscreen();
+    } else if (this.parent.mozRequestFullScreen) {
+      this.parent.mozRequestFullScreen();
+    } else if (this.parent.webkitRequestFullscreen) {
+      this.parent.webkitRequestFullscreen();
+    }
+
     this.styleChanger.start();
     this.env.show();
     super.start();

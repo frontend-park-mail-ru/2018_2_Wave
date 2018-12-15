@@ -69,6 +69,7 @@
   justify-self: center;
   align-self: center;
   cursor: pointer;
+  margin: 0 10px;
 }
   
 .snakemenu-button_focus::before {
@@ -88,6 +89,15 @@
 .snakemenu-button__focus-greenyellow {
   color: greenyellow;
   font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .snakemenu-button__focus-purple,
+  .snakemenu-button__focus-pink,
+  .snakemenu-button__focus-greenyellow {
+    color: white;
+    font-size: 14px;
+  }
 }
 
 .gamename {
