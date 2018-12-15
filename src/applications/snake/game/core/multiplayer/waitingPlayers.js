@@ -89,7 +89,10 @@ export default class WaitingPlayers {
 
   stop() {
     this.loader.stop();
-    this.readyMessage.close();
+    this.wsPostman.quickSearchAbort();
+    if (this.readyMessage) {
+      this.readyMessage.close();
+    }
     this.removeBusListeners();
   }
 }

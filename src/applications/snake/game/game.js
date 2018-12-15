@@ -93,6 +93,11 @@ export default class Game {
   }
 
   destroy() {
-    this.gameCore.destroy();
+    if (this.gameCore) {
+      this.gameCore.destroy();
+    }
+    if (this.waitingPlayers) {
+      this.waitingPlayers.stop();
+    }
   }
 }

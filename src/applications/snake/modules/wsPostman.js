@@ -73,6 +73,15 @@ export default class WsPostman {
     });
   }
 
+  sendRemoveFromRoom(room_token = this.roomToken) {
+    this.ws.send({
+      signal: 'remove_from_room',
+      payload: {
+        room_token,
+      },
+    });
+  }
+
   sendDirection(keyboardDirection) {
     let direction;
     switch (keyboardDirection) {

@@ -101,7 +101,7 @@ export default class OnlineGame extends GameCore {
   }
 
   gameloop(now) {
-    setTimeout((_) => {
+    this.timerId = setTimeout((_) => {
       this.lastFrame = now;
 
       if (this.keyboardController.isCommand()) {
@@ -130,10 +130,13 @@ export default class OnlineGame extends GameCore {
   }
 
   destroy() {
+    this.wsPostman.sendGameExit();
+    this.wsPostman.sendRemoveFromRoom();
     super.destroy();
     this.deadMessage.hide();
     this.removeBusListeners();
     // this.audioController.destroy();
+    clearTimeout(this.timerId);
     cancelAnimationFrame(this.gameloopRequestId);
   }
 }
