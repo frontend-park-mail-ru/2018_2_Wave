@@ -64,7 +64,6 @@ class StyleChanger {
     this.currentStyle = defaultStyle;
     this.currentStyleIndex = 0;
     this.changeStyle = this.changeStyle.bind(this);
-    this.changeStyle();
   }
 
   start() {

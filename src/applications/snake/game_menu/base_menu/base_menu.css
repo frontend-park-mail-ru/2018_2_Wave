@@ -69,7 +69,7 @@
   justify-self: center;
   align-self: center;
   cursor: pointer;
-  margin: 0 10px;
+  margin: 0 20px;
 }
   
 .snakemenu-button_focus::before {
@@ -97,6 +97,11 @@
   .snakemenu-button__focus-greenyellow {
     color: white;
     font-size: 14px;
+  }
+
+  .snakemenu-button:hover {
+    color: greenyellow;
+    font-size: 18px;
   }
 }
 

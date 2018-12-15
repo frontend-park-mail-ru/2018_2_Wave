@@ -3,7 +3,6 @@ import Game from '../game';
 import GAME_MODE from '../core/modes';
 
 import SnakeGameTemplate from '../templates/snakegame.pug';
-import WsPostman from '../../modules/wsPostman';
 
 import Element from '../../../element';
 

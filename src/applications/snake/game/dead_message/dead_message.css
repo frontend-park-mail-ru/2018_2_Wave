@@ -16,7 +16,9 @@
 }
 
 
-.dead-message__text,
+.dead-message__text {
+    margin-bottom: 10px
+}
 .dead-menu {
-    margin: 15px;
+    margin-top: 30px;
 }
