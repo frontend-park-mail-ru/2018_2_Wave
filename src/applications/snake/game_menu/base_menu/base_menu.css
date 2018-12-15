@@ -20,12 +20,14 @@
     "menu";
 }
 
-.snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer {
+.snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer, .hotkeys-block {
   font-size: 14px;
   padding: 0px 10px;
 
   justify-self: center;
   align-self: center;
+
+  justify-content: center;
 
   width: 323px;
   height: 323px;
@@ -38,7 +40,7 @@
 }
 
 @media (max-width: 410px) {
-  .snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer {
+  .snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer, .hotkeys-block {
     width: 260px;
   }
 }

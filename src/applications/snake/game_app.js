@@ -12,6 +12,7 @@ import BaseApp from '../base_app';
 import MainMenuView from './game_menu/main_menu/main_menu_view';
 import SinglplayerView from './game_menu/singlplayer/singlplayer_menu';
 import MultiplayerMenu from './game_menu/multiplayer/multiplayer_menu';
+import HotKeys from './game_menu/hotkeys/hotkeys';
 
 import globalUser from './globalUser';
 
@@ -27,6 +28,7 @@ export default class GameApp extends BaseApp {
       // mainmenu: MainMenuView,
       singlplayer: SinglplayerView,
       multiplayer: MultiplayerMenu,
+      hotkeys: HotKeys,
     };
 
     super(appUrl, env.getContainer(), MainMenuView, Views);
