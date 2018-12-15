@@ -1,11 +1,12 @@
 import Size from '../models/size';
+import config from './game_config';
 
 export default class Canvas {
-  constructor(canvas, cellSize) {
+  constructor(canvas, cellSize, orientation) {
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
     this.cellSize = cellSize;
-    // this.cellSize = new Size(9, 9);
+    this.orientation = orientation;
   }
 
   getSize() {
@@ -21,13 +22,14 @@ export default class Canvas {
       throw new TypeError('Invalid size instance');
     }
 
-    this.size = {
-      width: this.canvas.width,
-      height: this.canvas.height,
-    };
-
-    this.canvas.width = size.width;
-    this.canvas.height = size.height;
+    this.size = size;
+    if (this.orientation === config.HORIZONTAL) {
+      this.canvas.width = size.width;
+      this.canvas.height = size.height;
+    } else {
+      this.canvas.width = size.height;
+      this.canvas.height = size.width;
+    }
   }
 
   drawLetter({
@@ -70,8 +72,13 @@ export default class Canvas {
 
     this.context.lineCap = lineCap;
     this.context.beginPath();
-    this.context.rect(x * this.cellSize.width + space, y * this.cellSize.height + space,
-      width * this.cellSize.width - space, height * this.cellSize.height - space);
+    if (this.orientation === config.HORIZONTAL) {
+      this.context.rect(x * this.cellSize.width + space, y * this.cellSize.height + space,
+        width * this.cellSize.width - space, height * this.cellSize.height - space);
+    } else {
+      this.context.rect(y * this.cellSize.height + space, x * this.cellSize.width + space,
+        height * this.cellSize.height - space, width * this.cellSize.width - space);
+    }
     this.context.fill();
     this.context.stroke();
     this.context.closePath();

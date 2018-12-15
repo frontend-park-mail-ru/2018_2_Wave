@@ -6,6 +6,7 @@ import GameScene from './core/gameScene';
 import Size from './models/size';
 import WaitingPlayers from './core/multiplayer/waitingPlayers';
 import busController from '../modules/busController';
+import config from './utils/game_config';
 
 import style from './game.css';
 import WsPostman from '../modules/wsPostman';
@@ -49,13 +50,21 @@ export default class Game {
   }
 
   initGame() {
-    this.gameScene = new GameScene(this.canvas, this.windowSize, this.cellSize);
+    this.gameScene = new GameScene(this.canvas, this.windowSize, this.cellSize, this.gameInitData.otientation);
     this.gameCore = new GameConstructor(this.gameScene, this.gameInitData);
   }
 
   countGameParams() {
-    const cellWidth = Math.floor(Math.min(this.gameInitData.windowWidth / this.gameInitData.widthCellCount,
-      this.gameInitData.windowHeight / this.gameInitData.heightCellCount));
+    let cellWidth;
+    if (this.gameInitData.windowWidth > this.gameInitData.windowHeight) {
+      cellWidth = Math.floor(Math.min(this.gameInitData.windowWidth / this.gameInitData.widthCellCount,
+        this.gameInitData.windowHeight / this.gameInitData.heightCellCount));
+      this.gameInitData.otientation = config.HORIZONTAL;
+    } else {
+      cellWidth = Math.floor(Math.min(this.gameInitData.windowWidth / this.gameInitData.heightCellCount,
+        this.gameInitData.windowHeight / this.gameInitData.widthCellCount));
+      this.gameInitData.otientation = config.VERTICAL;
+    }
 
     // реальные размеры одной ячейки
     this.cellSize = new Size(cellWidth, cellWidth);

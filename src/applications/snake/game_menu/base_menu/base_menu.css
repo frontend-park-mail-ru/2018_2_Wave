@@ -21,16 +21,13 @@
 }
 
 .snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer {
-  max-width: 400px;
-
   font-size: 14px;
-
   padding: 0px 10px;
 
-  /* width: 80vw;
-  height: 50vh; */
+  justify-self: center;
+  align-self: center;
 
-  width: 424px;
+  width: 323px;
   height: 323px;
 
   display: grid;
@@ -38,6 +35,12 @@
   flex-wrap: wrap;
 
   grid-area: menu;
+}
+
+@media (max-width: 410px) {
+  .snakemenu-main, .snakemenu-singlplayer, .snakemenu-multiplayer {
+    width: 260px;
+  }
 }
 
 .snakemenu__purple-border {
@@ -63,8 +66,8 @@
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  margin: 0 15px;
-  place-self: center;
+  justify-self: center;
+  align-self: center;
   cursor: pointer;
 }
   
@@ -89,9 +92,17 @@
 
 .gamename {
   font-size: 50px;
-  margin: 30px;
+  margin-bottom: 30px;
   grid-area: gamename;
-  place-self: center;
+  justify-self: center;
+  align-self: center;
+}
+
+@media (max-width: 410px) {
+  .gamename {
+    font-size: 30px;
+    /* margin-bottom: 30px; */
+  }
 }
 
 .gamename_purple {

@@ -3,8 +3,8 @@ import Canvas from '../utils/canvas';
 
 // Отделить GameScene от gameloop
 export default class GameScene {
-  constructor(canvas, windowSize, cellSize) {
-    this.canvas = new Canvas(canvas, cellSize);
+  constructor(canvas, windowSize, cellSize, orientation) {
+    this.canvas = new Canvas(canvas, cellSize, orientation);
     this.canvas.setSize(windowSize);
 
     this.id = 0;

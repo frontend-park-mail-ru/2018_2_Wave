@@ -1,9 +1,14 @@
-import busController from './busController';
+import config from '../game/utils/game_config';
 import bus from '../../../modules/bus';
 
 class SwipeDetector {
-  constructor(root = document) {
-    this.root = root;
+  constructor() {
+    this.root = document;
+    if (window.innerWidth > window.innerHeight) {
+      this.otientation = config.HORIZONTAL;
+    } else {
+      this.otientation = config.VERTICAL;
+    }
     this.allowedTime = 3000;
     this.threshold = 150; // required min distance traveled to be considered swipe
     this.restraint = 100;
@@ -67,9 +72,15 @@ class SwipeDetector {
 
     if (this.dtime <= this.allowedTime) {
       if (Math.abs(this.dx) > Math.abs(this.dy)) {
-        this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
-      } else {
+        if (this.orientation === config.HORIZONTAL) {
+          this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
+        } else {
+          this.swipeDir = (this.dx < 0) ? 'ArrowUp' : 'ArrowDown';
+        }
+      } else  if (this.orientation === config.HORIZONTAL) {
         this.swipeDir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown';
+      } else {
+        this.swipeDir = (this.dy < 0) ? 'ArrowLeft' : 'ArrowRight';
       }
     }
 

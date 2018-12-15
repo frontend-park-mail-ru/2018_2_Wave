@@ -35,15 +35,27 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 15% auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 4fr;
     grid-template-areas: 
-      ". . mode . score"
-      "game game game game game"
-      "game game game game game";
+      ". mode score"
+      "game game game";
       
     /* position: relative; */
-  }
+}
+
+@media screen and (max-width: 768px) {
+  .snakegame-container {
+    
+    grid-template-rows: 1fr 1fr 10fr;
+    grid-template-areas: 
+      ". mode ."
+      ". score ."
+      "game game game";
+      
+    /* position: relative; */
+}
+}
 
 .snakegame-container_hidden {
     display: none;
@@ -71,9 +83,6 @@
 .canvas-wrapper {
   width: 100%;
   height: 100%;
-
-  margin-left: 10px;
-  margin-right: 10px;
 
   display: grid;
   justify-self: end;
@@ -105,11 +114,6 @@
 .game-board-wrapper {
   font-family: 'Press Start 2P', cursive;
   font-size : 30px;
-
-  /* background-color: rgb(255, 255, 255); */
-
-  /* width: 90%;
-  height: 60%; */
 
   justify-self: center;
   align-self: center;

@@ -29,7 +29,6 @@ export default class MenuApp extends BaseApp {
     this.env = env;
     this.content = this.env.getContainer();
 
-
     // this.appWrapper = ???
     // hmmm let me think what kind of shit it should be
   }
@@ -38,6 +37,14 @@ export default class MenuApp extends BaseApp {
   start() {
     this.env.show();
     super.start();
+
+    if (document.requestFullscreen) {
+      document.requestFullscreen();
+    } else if (document.mozRequestFullScreen) {
+      document.mozRequestFullScreen();
+    } else if (document.webkitRequestFullscreen) {
+      document.webkitRequestFullscreen();
+    }
   }
 
   // stop() {
