@@ -7,7 +7,7 @@ export default class ErrorMessage extends Element {
   constructor() {
     if (!instance) {
       const [parent] = document.getElementsByClassName('game-container');
-      super(ErrorMessageTemplate, parent, ['error-message-wrapper']);
+      super(ErrorMessageTemplate, parent, false, ['error-message-wrapper']);
       super.show();
       [this.message] = parent.getElementsByClassName('error-message-text');
       instance = this;

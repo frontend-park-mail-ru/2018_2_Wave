@@ -7,7 +7,7 @@ import Element from '../../../element';
 
 export default class GameView extends Element {
   constructor(parent) {
-    super(SnakeGameTemplate, parent, ['snakegame-container']);
+    super(SnakeGameTemplate, parent, false, ['snakegame-container']);
     this.parent = parent;
   }
 

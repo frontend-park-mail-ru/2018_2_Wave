@@ -7,7 +7,7 @@ import style from './base_menu.css';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper, isHorizontal, menuClass) {
-    super(template, parent, wrapper);
+    super(template, parent, false, wrapper);
     this.firstFocus = undefined;
     this.menuClass = menuClass;
     this.busController = busController;

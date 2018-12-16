@@ -1,11 +1,20 @@
 export default class Element {
-  constructor(template, parent, wrapperClass) {
+  constructor(template, parent, wrapper, wrapperClass) {
     this.template = template;
     this.parent   = parent;
-    this.wrapper  = document.createElement('div');
+
+    if (!wrapper) {
+      this.wrapper = document.createElement('div');
+    } else {
+      this.wrapper = wrapper;
+    }
+    
     if (wrapperClass) {
       this.wrapper.classList.add(...wrapperClass);
+    } else {
+      this.wrapper.classList.add('wrapper');
     }
+
     this.wrapper.hidden = true;
     if (parent !== wrapper) {
       this.parent.appendChild(this.wrapper);
