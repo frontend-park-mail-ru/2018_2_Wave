@@ -1,14 +1,22 @@
 export default class Element {
-  constructor(template, parent, wrapper) {
+  constructor(template, parent, wrapper, wrapperClass) {
     this.template = template;
     this.parent   = parent;
+
     if (!wrapper) {
       this.wrapper = document.createElement('div');
-      this.wrapper.classList.add('wrapper');
     } else {
       this.wrapper = wrapper;
     }
-    // this.wrapper = wrapper || document.createElement('div');
+
+    // sure?
+    if (wrapperClass) {
+      this.wrapper.classList.add(...wrapperClass);
+    } else {
+      this.wrapper.classList.add('wrapper');
+    }
+    // sure?
+
     this.wrapper.hidden = true;
     if (parent !== wrapper) {
       this.parent.appendChild(this.wrapper);
@@ -35,7 +43,6 @@ export default class Element {
     this.wrapper.hidden = false;
     this.wrapper.style.display = null;
   }
-
 
   render(data) {
     this.wrapper.innerHTML = this.template(data || null);

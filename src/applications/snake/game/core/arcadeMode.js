@@ -1,7 +1,9 @@
 import GameCore from './core';
 import events from './events';
+import keyboardController from '../../modules/keyboardController';
 import busController from '../../modules/busController';
 import Size from '../models/size';
+
 
 import LevelController from '../controllers/levelController';
 import SnakeController from '../controllers/snackeController';
@@ -21,8 +23,8 @@ import PlayerModel from '../models/playerModel';
 import FrameSpeedModel from '../models/frameSpeedModel';
 
 export default class ArcadeMode extends GameCore {
-  constructor(controller, scene, gameInitData) {
-    super(controller, scene);
+  constructor(scene, gameInitData) {
+    super(scene);
 
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
@@ -35,7 +37,7 @@ export default class ArcadeMode extends GameCore {
     this.cellCount = gameInitData.cellCount;
 
     this.scene = scene;
-    this.keyboardController = controller;
+    this.keyboardController = keyboardController;
     this.busController = busController;
 
     this.controllers = [];
@@ -97,7 +99,7 @@ export default class ArcadeMode extends GameCore {
     setTimeout((_) => {
       this.lastFrame = now;
 
-      if (this.keyboardController.lastCommand) {
+      if (this.keyboardController.isCommand()) {
         this.snakeController.setDirection(this.keyboardController.getLastCommand());
       }
 
@@ -129,6 +131,8 @@ export default class ArcadeMode extends GameCore {
 
   destroy() {
     super.destroy();
+    busController.removeBusListeners(this.stopEvents);
+    busController.removeBusListeners(this.resumeEvents);
     this.audioController.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
   }

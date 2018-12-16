@@ -12,9 +12,16 @@ export default class LevelController {
       pickFood: this.removeFoodFromMap.bind(this),
     };
 
-    this.busController.setBusListeners(this.eventsMethosds);
-
+    this.setBusListeners();
     this.generateLevel();
+  }
+
+  setBusListeners() {
+    this.busController.setBusListeners(this.eventsMethosds);
+  }
+
+  removeBusListeners() {
+    this.busController.removeBusListeners(this.eventsMethosds);
   }
 
   removeFoodFromMap(position) {
@@ -43,7 +50,6 @@ export default class LevelController {
         }
         wallLength -= 1;
       } else {
-        console.log('wallType', wallType);
         wallLength = Math.floor(Math.random() * this.maxWallLength) + 3;
         if (wallType) {
           wallType = 0;
@@ -65,9 +71,12 @@ export default class LevelController {
       }
     }
 
-    return this.level.getMap();
   }
 
   update() {
+  }
+
+  stop() {
+    this.removeBusListeners();
   }
 }

@@ -1,10 +1,15 @@
-import Position from './position';
+import globalUser from '../../globalUser';
 
 export default class SnakeModel {
-  constructor(snakeText, startX, startY) {
+  constructor() {
     this.segments  = [];
-    this.snakeText = snakeText;
-    this.startPosition = new Position(startX, startY);
+    this.userToken = globalUser.userToken;
+    this.defaultSize = 3;
+    this.playerId = 2;
+    this.startPosition = {
+      x: 15,
+      y: 20,
+    };
 
     this.directions = {
       Up: 'UP',
@@ -27,12 +32,10 @@ export default class SnakeModel {
 
   init({
     segments = [],
-    snakeText,
     startPosition,
     destroyed,
   }) {
     this.segments = segments;
-    this.snakeText = snakeText;
     this.startPosition = startPosition;
     this.destroyed = destroyed;
   }
@@ -76,5 +79,22 @@ export default class SnakeModel {
 
   getDirection() {
     return this.direction;
+  }
+
+  setState(snakes) {
+    this.segments  = [];
+    if (snakes) {
+      snakes.forEach((snake) => {
+        if (snake.user_token === this.userToken) {
+          // this.playerId = snake.playerId
+          snake.body.forEach((segment) => {
+            this.segments.push({
+              x: segment.position.X,
+              y: segment.position.Y,
+            });
+          });
+        }
+      });
+    }
   }
 }

@@ -19,15 +19,6 @@ export default class SnakeController {
       ArrowLeft: 'LEFT',
       ArrowRight: 'RIGHT',
     };
-
-    this.events = {
-      food: this.snakeAppendLetter.bind(this),
-    };
-  }
-
-
-  setEventListeners() {
-    this.busController.setBusListeners(this.eventsMethods);
   }
 
   setDirection(keyboardDirection) {
@@ -35,12 +26,10 @@ export default class SnakeController {
   }
 
   init() {
-    const snakeText = this.snake.getSnakeText();
-    for (let i = 0; i < snakeText.length; i += 1) {
+    for (let i = 0; i < this.snake.defaultSize; i += 1) {
       this.snake.unshiftSegment({
         x: this.snake.getStartPosition().x + i,
         y: this.snake.getStartPosition().y,
-        letter: snakeText[i],
       });
     }
     console.log('head init', this.snake.getSegments()[0]);
@@ -66,15 +55,11 @@ export default class SnakeController {
     return this.level.isWall(position);
   }
 
-  snakeAppendLetter(letter, position) {
-    busController.removeBusListeners(this.events);
-    this.snake.segments.unshift({
-      x: position.x,
-      y: position.y,
-      letter,
+  isColisionWithSelf(position) {
+    return this.snake.getSegments().some((segment) => {
+      return segment.x === position.x && segment.y === position.y;
     });
   }
-
 
   move() {
     const [head] = this.snake.segments;
@@ -113,8 +98,9 @@ export default class SnakeController {
     } else if (this.snake.isReverse()) {
       busController.emit('DEAD', 'REVERSE');
     } else if (this.isColisionWithFood(position)) {
-      busController.setBusListeners(this.events);
       busController.emit('pickFood', position);
+    } else if (this.isColisionWithSelf(position)) {
+      busController.emit('DEAD', 'SELF_COLLISION');
     } else {
       this.snake.segments.unshift({
         x: newX,

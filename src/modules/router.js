@@ -8,6 +8,7 @@ function splitParams(string) {
   if (!string) return null;
   const params = {};
   string
+    .slice(1)
     .split('&', 5)
     .forEach((item) => {
       const [key, val] = item.split('=');
@@ -83,13 +84,23 @@ export default class Router {
     const params = splitParams(paramString);
 
     let app;
+
     if (this.routes.hasOwnProperty(path)) {
       app = this.routes[path];
-      if (app === this.mainApp) app.changeView('main', params);
-    } else if (this.mainApp.views.hasOwnProperty(path)) {
-      app = this.mainApp;
-      app.changeView(path, params);
+      // if (app === this.mainApp) app.changeView('main', params);
+      app.changeView('main', params);
     } else {
+      Object.values(this.routes).some((currentApp) => {
+        if (currentApp.views.hasOwnProperty(path)) {
+          app = currentApp;
+          app.changeView(path, params);
+          return true;
+        }
+        return false;
+      });
+    }
+
+    if (!app) {
       this.open('/');
       return;
     }

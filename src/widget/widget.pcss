@@ -1,0 +1,120 @@
+
+  /*--------------------
+  Body
+  --------------------*/
+
+  body {
+    background: black;
+    font-size: 12px;
+    margin: 0px;
+  }
+
+
+  /*--------------------
+  Chat
+  --------------------*/
+  .chat {
+    position: absolute;
+    /* @include center; */
+    width: 270px;
+    /* height: 80vh; */
+    height: 370px;
+    /* z-index: 2; */
+    /* overflow: hidden; */
+    /* border-radius: 5px; */
+    border-color: greenyellow;
+    border-width: 1px;
+    border-style: solid;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* flex-direction: column; */
+  }
+
+  .chat-move {
+    transition: left 1s cubic-bezier(0, 0, 1, 1);
+  }
+
+
+  /*--------------------
+  Chat Title
+  --------------------*/
+  .chat-title {
+    /* flex: 0 1 45px; */
+    /* position: relative; */
+    /* z-index: 2; */
+    /* height: 4px; */
+
+    border-style: hidden hidden solid hidden;
+    background: rgba(173, 255, 47, 0.3);
+    color: #fff;
+    border-color: greenyellow;
+    /* border-radius: 5px 5px 0px 0px; */
+    border-width: 1px;
+    /* text-transform: uppercase; */
+    /* text-align: left; */
+    padding: 5px;
+  }
+
+h1, h2 {
+    font-weight: normal;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chat-title h2 {
+    color: rgba(255, 255, 255, .5);
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+/*
+  .chat_tab_wrap {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 3px;
+    cursor: pointer;
+    padding: 6px;
+    color:  greenyellow;
+    text-decoration: none;
+    text-align: center;
+    background-color: rgba(153, 255, 0);
+    border-radius: 5px 5px 0px 0px;
+    margin-right: 5px;
+}
+*/
+
+.chat_tab_wrap {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 6px;
+    color:  greenyellow;
+    border-color: greenyellow;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+}
+
+.chat_iframe {
+  width: -webkit-fill-available;
+  height: 348px;
+  border-width: 0px;
+}
+
+.blank_iframe {
+  display:none;
+  position:absolute;
+  width: -webkit-fill-available;
+  height: 348px;
+}
+
+.chat_iframe_cover {
+  width: -webkit-fill-available;
+  position: inherit;
+}

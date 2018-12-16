@@ -30,7 +30,9 @@ export default class BaseApp {
       this.currentView = this.views[viewUrl];
     }
 
-    this.currentView.render(params);
+    if (!this.currentView.noRender) {  // sure?
+      this.currentView.render(params);
+    }                                  // sure?
     if (this.active) this.currentView.show();
   }
 

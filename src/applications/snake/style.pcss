@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+.game-container {
+  height: 100%;
+  /* cursor: none; */
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  color: white;
+}
+
+window {
+  overscroll-behavior: none;
+}
+
+/* cause 'hidden' property does not work with flex-box */
+[hidden] {
+  display: none !important;
+}
+
+.snakegame-container {
+
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas:
+    ". mode score"
+    "game game game";
+
+  /* position: relative; */
+}
+
+@media screen and (max-width: 768px) {
+  .snakegame-container {
+    grid-template-rows: 1fr 1fr 10fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+    grid-template-areas:
+      "mode mode mode mode mode"
+      ". home score . ."
+      "game game game game game";
+
+    /* position: relative; */
+  }
+}
+
+.snakegame-container_hidden {
+    display: none;
+  }
+
+.snakegame-canvas {
+
+  position: relative;
+  background:transparent;
+
+  justify-self: center;
+  align-self: center;
+}
+
+.main-score {
+  /* font-family: myFirstFont, font35, trsMillion; */
+  font-family: 'Press Start 2P', cursive;
+  font-size : 20px;
+
+  justify-self: center;
+  align-self: center;
+
+  grid-area: score;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  justify-self: end;
+  align-self: center;
+  /* background-color: green; */
+  grid-area: game;
+}
+
+.game_mode {
+  grid-area: mode;
+  font-family: 'Press Start 2P', cursive;
+  font-size : 30px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.snakegame-container__multiplayer {
+  grid-template-areas:
+    ". mode mode mode score"
+    "game game game game board"
+    "game game game game board";
+}
+
+.game-board-wrapper {
+  font-family: 'Press Start 2P', cursive;
+  font-size : 30px;
+
+  justify-self: center;
+  align-self: center;
+
+  grid-area: board;
+
+  margin-left: 10px;
+  margin-right: 10px
+}
+
+.game-board__purple {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #3F0070;
+}
+
+.game-board__greenyellow {
+  border-style: solid;
+  border-width: 2px;
+  border-color: greenyellow;
+}
+
+.game-board__pink {
+  border-style: solid;
+  border-width: 2px;
+  border-color: pink;
+}
+
+.game-board-name {
+  text-align: center;
+  margin: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .snakegame-container__multiplayer {
+    grid-template-columns: auto;
+    grid-template-rows: 2fr 1fr 10fr;
+    grid-template-areas:
+      "mode"
+      /* "score" */
+      "board"
+      "game";
+  }
+
+  .game-board-name {
+    display: none;
+  }
+
+  .game-board {
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .game-board__hidden-border {
+    border-width: 0px;
+  }
+}
+
+.home {
+  background: url('./static/images/home.svg');
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    display: grid;
+    grid-area: home;
+  }
+}

@@ -4,13 +4,10 @@ export default class FoodsView {
   constructor(foods) {
     this.foods = foods;
     this.letters = false;
-    this.foodsView = [];
-
-    foods.foods.forEach(food => this.foodsView.push(new FoodView(food)));
+    this.foodView = new FoodView();
   }
 
-
   render(canvas) {
-    this.foodsView.forEach(foodView => foodView.render(canvas));
+    this.foods.foods.forEach(food => this.foodView.render(canvas, food));
   }
 }

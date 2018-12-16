@@ -60,6 +60,7 @@ class TerminalApp extends BaseApp {
   resume() {
     this.parent.style.background = 'black';
     super.resume();
+    this.view.focusInput();
     this.addListeners();
     this.focusInput();
   }
