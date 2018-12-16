@@ -3,12 +3,12 @@ export default class FullScreen {
     if (!((window.fullScreen)
      || (window.innerWidth === screen.width && window.innerHeight === screen.height)
      || (!window.screenTop && !window.screenY))) {
-      if (window.requestFullscreen) {
-        window.requestFullscreen();
-      } else if (window.mozRequestFullScreen) {
-        window.mozRequestFullScreen();
-      } else if (window.webkitRequestFullscreen) {
-        window.webkitRequestFullscreen();
+      if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+      } else if (document.body.mozRequestFullScreen) {
+        document.body.mozRequestFullScreen();
+      } else if (document.body.webkitRequestFullscreen) {
+        document.body.webkitRequestFullscreen();
       }
     }
   }
