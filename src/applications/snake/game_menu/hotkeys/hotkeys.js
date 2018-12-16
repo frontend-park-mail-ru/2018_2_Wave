@@ -11,11 +11,11 @@ const buttons = {
 
 const hotkeys = [
   {
-    key: 't',
+    key: 'T',
     info: 'Change theme',
   },
   {
-    key: 'q',
+    key: 'Q',
     info: 'Quit the game',
   },
   {

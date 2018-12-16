@@ -1,18 +1,3 @@
-@font-face {
-  font-family: myFirstFont;
-  src: url("../../../public/fonts/led_display-7.ttf") format('truetype'),;
-}
-
-@font-face {
-  font-family: font35;
-  src: url("../../../public/fonts/3X5_____.ttf");
-}
-
-@font-face {
-  font-family: trsMillion;
-  src: url("../../../public/fonts/trs-million rg.ttf");
-}
-
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
 .game-container {
@@ -21,40 +6,41 @@
   display: grid;
   justify-items: center;
   align-items: center;
+  color: white;
 }
 
-/* window {
+window {
   overscroll-behavior: none;
-} */
+}
 
 /* cause 'hidden' property does not work with flex-box */
 [hidden] {
   display: none !important;
 }
 
-
 .snakegame-container {
-    
-    width: 100vw;
-    height: 100vh;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 4fr;
-    grid-template-areas: 
-      ". mode score"
-      "game game game";
+  
+  width: 100vw;
+  height: 100vh;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas: 
+    ". mode score"
+    "game game game";
       
-    /* position: relative; */
+  /* position: relative; */
 }
 
 @media screen and (max-width: 768px) {
   .snakegame-container {
     grid-template-rows: 1fr 1fr 10fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
     grid-template-areas: 
-      ". mode ."
-      ". score ."
-      "game game game";
+      "mode mode mode mode mode"
+      ". home score . ."
+      "game game game game game";
       
     /* position: relative; */
   }
@@ -67,6 +53,7 @@
 .snakegame-canvas {
 
   position: relative;
+  background:transparent;
   
   justify-self: center;
   align-self: center;
@@ -172,6 +159,18 @@
 
   .game-board__hidden-border {
     border-width: 0px;
+  }
+}
+
+.home {
+  background: url('./static/images/home.svg');
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    display: grid;
+    grid-area: home;
   }
 }
 

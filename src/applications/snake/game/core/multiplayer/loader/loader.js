@@ -33,7 +33,7 @@ export default class Loader {
   gameloop() {
     this.timerId = setTimeout((_) => {
 
-      this.setBlackBackground();
+      this.clearCanvas();
       this.controllers.forEach((controller) => {
         controller.update();
       });
@@ -51,11 +51,8 @@ export default class Loader {
     cancelAnimationFrame(this.gameloopRequestId);
   }
 
-  setBlackBackground() {
-    this.context.fillStyle = 'black';
-    this.context.beginPath();
-    this.context.rect(0, 0, this.loaderParams.windowWidth, this.loaderParams.windowHeight);
-    this.context.fill();
-    this.context.closePath();
+  clearCanvas() {
+    this.context.clearRect(0, 0,
+      this.canvas.width, this.canvas.height);
   }
 }

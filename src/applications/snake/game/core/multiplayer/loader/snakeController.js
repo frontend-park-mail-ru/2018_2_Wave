@@ -3,6 +3,7 @@ export default class SnakeController {
     this.snake = snake;
     this.loaderParams = loaderParams;
     this.lenght = 5;
+    this.step = 0;
 
     this.directions = {
       UP: 'UP',
@@ -26,7 +27,12 @@ export default class SnakeController {
     let newX = head.x;
     let newY = head.y;
 
-    switch (Math.floor(1 + (Date.now() + Math.random() * 1000) % 4)) {
+    if (this.step === 0) {
+      this.direction = Math.floor(1 + (Date.now() + Math.random() * 1000) % 4);
+      this.step = 5;
+    }
+    this.step -= 1;
+    switch (this.direction) {
       case 1:
         if (newX < this.loaderParams.widthCellCount) {
           newX += 1;

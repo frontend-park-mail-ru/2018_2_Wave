@@ -85,13 +85,7 @@ export default class Canvas {
   }
 
   setBlackBackground(width, height) {
-    this.drawRect({
-      x: 0,
-      y: 0,
-      strokeStyle: 'black',
-      width,
-      height,
-      space: 4,
-    });
+    this.context.clearRect(0, 0,
+      this.canvas.width * this.cellSize.width, this.canvas.height * this.cellSize.height);
   }
 }

@@ -5,16 +5,13 @@ import GAME_MODE from '../../game/core/modes';
 
 const buttons = {
   '2 PLAYERS': {
-    href: '/game',
-    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.TWO_PLAYERS}`,
+    href: `/game?mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.TWO_PLAYERS}`,
   },
   '3 PLAYERS': {
-    href: '/game',
-    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.THREE_PLAYERS}`,
+    href: `/game?mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.THREE_PLAYERS}`,
   },
   '4 PLAYERS': {
-    href: '/game',
-    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`,
+    href: `/game?mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`,
   },
   BACK: {
     href: '/snake',
