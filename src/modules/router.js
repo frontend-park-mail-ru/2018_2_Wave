@@ -96,10 +96,6 @@ export default class Router {
 
     this.currentApp = app;
 
-    if (window.location.pathname !== fullPath) {
-      window.history.pushState(null, '', fullPath);
-    }
-
     if (!app.active) {
       Object.values(this.routes).forEach((knownApp) => {
         // TODO: make array of started apps
@@ -107,6 +103,10 @@ export default class Router {
         if (knownApp.active) knownApp.pause();
       });
       app.launch(target);
+    }
+
+    if (window.location.pathname !== fullPath) {
+      window.history.pushState(null, '', fullPath);
     }
   }
 
