@@ -69,8 +69,15 @@ export default class WaitingPlayers {
     [this.score] = this.container.getElementsByClassName('main-score');
     this.score.hidden = true;
 
-    [this.name] = this.container.getElementsByClassName('game_mode');
-    this.name.innerHTML = 'WAITING FOR PLAYERS';
+    [this.game_mode] = this.container.getElementsByClassName('game_mode');
+    this.temp_mode = this.game_mode.innerHTML;
+    this.game_mode.innerHTML = 'WAITING FOR PLAYERS';
+  }
+
+  removeEnviroment() {
+    this.canvas.classList.add('game-board__purple');
+    this.score.hidden = false;
+    this.game_mode.innerHTML = this.temp_mode;
   }
 
   updateTable(message) {
@@ -88,6 +95,7 @@ export default class WaitingPlayers {
   }
 
   stop() {
+    this.removeEnviroment();
     this.loader.stop();
     this.wsPostman.quickSearchAbort();
     if (this.readyMessage) {

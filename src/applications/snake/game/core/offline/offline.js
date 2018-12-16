@@ -31,10 +31,6 @@ export default class OfflineGame extends GameCore {
     this.framesPerSecond = 10;
     this.paused = false;
 
-    this.snakeText = gameInitData.snakeText;
-    this.startX = gameInitData.DOMRect.x;
-    this.startY = gameInitData.DOMRect.y;
-
     this.cellCount = gameInitData.cellCount;
 
     this.scene = scene;
@@ -54,7 +50,7 @@ export default class OfflineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel(this.snakeText, this.startX, this.startY);
+    this.snake = new SnakeModel();
     this.snakeController = new SnakeController(this.snake, this.level);
     this.controllers.push(this.snakeController);
     this.scene.push(new SnakeView(this.snake));

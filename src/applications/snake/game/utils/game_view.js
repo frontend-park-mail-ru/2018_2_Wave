@@ -21,24 +21,14 @@ export default class GameView extends Element {
     super.render();
   }
 
-  startMultiplayer() {
-    // busController.removeBusListeners({ STATUS_TICK: this.startMultiplayer });
-    this.setMultiplayerEnviroment();
-    const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
-    this.gameInitData = {
-      userToken: this.userToken,
-      windowWidth: canvasWrapper.clientWidth,
-      windowHeight: canvasWrapper.clientHeight,
-      widthCellCount: 60,
-      heightCellCount: 40,
-    };
-
-    this.startGame();
-  }
-
   setMultiplayerEnviroment() {
     [this.snakegameContainer] = document.getElementsByClassName('snakegame-container');
     this.snakegameContainer.classList.add('snakegame-container__multiplayer');
+
+    if (!this.game_mode) {
+      [this.game_mode] = this.parent.getElementsByClassName('game_mode');
+    }
+    this.game_mode.innerHTML = 'MULTIPLAYER';
 
     [this.gameBoard] = document.getElementsByClassName('game-board-wrapper');
     this.gameBoard.hidden = false;
@@ -66,21 +56,14 @@ export default class GameView extends Element {
     }
 
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
-      this.startMultiplayer();
-      return;
+      this.setMultiplayerEnviroment();
+    } else {
+      this.setSinglplayerEnviroment();
     }
 
     this.gameParams.onLine = navigator.onLine;
-    this.setSinglplayerEnviroment();
     const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
-      snakeText: 'qwertyuiopqe',
-      DOMRect: {
-        x: 10,
-        y: 10,
-        width: 15,
-        height: 15,
-      },
       userToken: this.userToken,
       windowWidth: canvasWrapper.clientWidth,
       windowHeight: canvasWrapper.clientHeight,
