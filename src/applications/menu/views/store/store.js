@@ -10,17 +10,17 @@ import '../../../../../static/img/terminal.jpg';
 const storeApps = [
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Купи говно',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Купи говно',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Купи говно',
   },
 ];

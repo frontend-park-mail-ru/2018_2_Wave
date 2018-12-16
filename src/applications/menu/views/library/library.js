@@ -10,27 +10,27 @@ import '../../../../../static/img/terminal.jpg';
 const apps = [
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Terminal',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Terminal',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Terminal',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Terminal',
   },
   {
     link: '/terminal',
-    image: 'img/terminal.jpg',
+    image: '/img/terminal.jpg',
     name: 'Terminal',
   },
 ];
