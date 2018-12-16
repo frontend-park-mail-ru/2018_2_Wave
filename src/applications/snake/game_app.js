@@ -20,7 +20,7 @@ import ErrorMessage from './error_message/errorMessage';
 
 // import './styles/style.pcss';
 
-import './style.css';
+import './style.pcss';
 
 export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {

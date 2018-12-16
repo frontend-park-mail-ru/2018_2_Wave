@@ -3,8 +3,8 @@ import Element from '../../element';
 import chatTemplate from '../templates/chat.pug';
 import roomTemplate from '../templates/room.pug';
 
-import '../styles/chat.css';
-import '../styles/room.css';
+import '../styles/chat.pcss';
+import '../styles/room.pcss';
 
 import ws from '../../../modules/webSocket';
 import bus from '../../../modules/bus';

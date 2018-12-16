@@ -1,7 +1,7 @@
 import BaseMenu from '../base_menu/base_menu';
 
 import MainMenuTemplate from './hotkeys.pug';
-import style from './hotkeys.css';
+import style from './hotkeys.pcss';
 
 const buttons = {
   BACK: {

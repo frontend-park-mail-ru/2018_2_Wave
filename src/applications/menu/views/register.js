@@ -1,7 +1,7 @@
 import { register } from '../../../modules/network';
 import bus from '../../../modules/bus';
 import Element from '../../element';
-import '../styles/registration.css';
+import '../styles/registration.pcss';
 
 const template = require('../templates/register.pug');
 

@@ -1,4 +1,4 @@
-import css from './widget.css';
+import css from './widget.pcss';
 import widgetTemplate from './templates/widgetTemplate.pug';
 
 

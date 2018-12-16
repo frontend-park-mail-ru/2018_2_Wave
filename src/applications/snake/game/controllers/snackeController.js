@@ -97,8 +97,6 @@ export default class SnakeController {
       busController.emit('DEAD', 'WALL_COLLISION');
     } else if (this.snake.isReverse()) {
       busController.emit('DEAD', 'REVERSE');
-    } else if (this.isColisionWithFood(position)) {
-      busController.emit('pickFood', position);
     } else if (this.isColisionWithSelf(position)) {
       busController.emit('DEAD', 'SELF_COLLISION');
     } else {
@@ -116,8 +114,11 @@ export default class SnakeController {
         segments[i].letter = temp;
         temp = letter;
       }
-
-      this.snake.popSegment();
+      if (this.isColisionWithFood(position)) {
+        busController.emit('pickFood', position);
+      } else {
+        this.snake.popSegment();
+      }
     }
   }
 

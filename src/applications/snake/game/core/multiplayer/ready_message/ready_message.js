@@ -3,7 +3,7 @@ import readyMessageTemplate from './ready_message.pug';
 import busController from '../../../../modules/busController';
 import WsPostman from '../../../../modules/wsPostman';
 
-import style from './ready_message.css';
+import './ready_message.pcss';
 
 export default class ReadyMessage extends BaseMenu {
   constructor(time) {

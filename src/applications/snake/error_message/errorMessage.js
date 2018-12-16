@@ -1,6 +1,6 @@
 import Element from '../../element';
 import ErrorMessageTemplate from './errorMessage.pug';
-import style from './errorMessage.css';
+import style from './errorMessage.pcss';
 
 let instance;
 export default class ErrorMessage extends Element {

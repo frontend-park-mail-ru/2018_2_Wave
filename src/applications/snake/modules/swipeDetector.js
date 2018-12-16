@@ -5,9 +5,9 @@ class SwipeDetector {
   constructor() {
     this.root = document;
     if (window.innerWidth > window.innerHeight) {
-      this.otientation = config.HORIZONTAL;
+      this.orientation = config.HORIZONTAL;
     } else {
-      this.otientation = config.VERTICAL;
+      this.orientation = config.VERTICAL;
     }
     this.allowedTime = 3000;
     this.threshold = 150; // required min distance traveled to be considered swipe
@@ -72,15 +72,15 @@ class SwipeDetector {
 
     if (this.dtime <= this.allowedTime) {
       if (Math.abs(this.dx) > Math.abs(this.dy)) {
-        if (this.orientation === config.HORIZONTAL) {
-          this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
-        } else {
+        if (this.orientation === config.VERTICAL) {
           this.swipeDir = (this.dx < 0) ? 'ArrowUp' : 'ArrowDown';
+        } else {
+          this.swipeDir = (this.dx < 0) ? 'ArrowLeft' : 'ArrowRight';
         }
-      } else  if (this.orientation === config.HORIZONTAL) {
-        this.swipeDir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown';
-      } else {
+      } else  if (this.orientation === config.VERTICAL) {
         this.swipeDir = (this.dy < 0) ? 'ArrowLeft' : 'ArrowRight';
+      } else {
+        this.swipeDir = (this.dy < 0) ? 'ArrowUp' : 'ArrowDown';
       }
     }
 

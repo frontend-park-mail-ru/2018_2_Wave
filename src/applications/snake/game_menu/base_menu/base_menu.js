@@ -3,7 +3,7 @@ import Element from '../../../element';
 
 import config from '../../modules/view_config';
 
-import style from './base_menu.css';
+import style from './base_menu.pcss';
 
 export default class BaseMenu extends Element {
   constructor(template, parent, wrapper, isHorizontal, menuClass) {

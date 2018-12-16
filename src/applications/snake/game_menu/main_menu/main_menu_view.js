@@ -1,7 +1,7 @@
 import BaseMenu from '../base_menu/base_menu';
 
 import MainMenuTemplate from './main_menu.pug';
-import style from './main_menu.css';
+import style from './main_menu.pcss';
 
 const buttons = {
   '/singlplayer': 'Singlplayer',

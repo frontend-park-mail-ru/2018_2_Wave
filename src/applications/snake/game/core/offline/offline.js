@@ -22,6 +22,8 @@ import PlayerModel from '../../models/playerModel';
 import DeadMessage from '../../dead_message/dead_message';
 import DeadMenuTemplate from './dead_menu.pug';
 
+import ErrorMessage from '../../../error_message/errorMessage';
+
 export default class OfflineGame extends GameCore {
   constructor(scene, gameInitData) {
     super(scene);
@@ -61,6 +63,7 @@ export default class OfflineGame extends GameCore {
     this.scene.push(new FoodView(this.food));
 
     this.audioController = new AudioController();
+    this.errorMessage = new ErrorMessage();
 
     this.events = {
       DEAD: this.dead.bind(this),
@@ -76,6 +79,7 @@ export default class OfflineGame extends GameCore {
   }
 
   start() {
+    this.errorMessage.setErrorMessage('You are offline');
     this.controllers.forEach(controller => controller.init());
     this.playerController.init();
     super.start();

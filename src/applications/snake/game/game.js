@@ -8,7 +8,7 @@ import WaitingPlayers from './core/multiplayer/waitingPlayers';
 import busController from '../modules/busController';
 import config from './utils/game_config';
 
-import './game.css';
+import './game.pcss';
 import WsPostman from '../modules/wsPostman';
 
 let GameConstructor;

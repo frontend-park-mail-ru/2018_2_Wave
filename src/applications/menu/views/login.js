@@ -2,7 +2,7 @@ import bus from '../../../modules/bus';
 import Element from '../../element';
 import { login } from '../../../modules/network';
 
-import '../styles/login.css';
+import '../styles/login.pcss';
 
 const template = require('../templates/login.pug');
 
