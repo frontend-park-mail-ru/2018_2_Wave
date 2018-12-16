@@ -9,3 +9,17 @@
 .main-score__pink {
     color: pink;
 }
+
+.home {
+    background: url('../static/images/home.svg');
+    display: none;
+    width: 52px;
+
+}
+  
+  @media screen and (max-width: 555px) {
+    .home {
+      display: grid;
+      grid-area: home;
+    }
+  }
