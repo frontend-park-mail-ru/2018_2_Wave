@@ -26,8 +26,7 @@ export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new GameEnv(parent);
     const Views = {
-      game: SnakeGameView,
-      // mainmenu: MainMenuView,
+      // game: SnakeGameView,
       singlplayer: SinglplayerView,
       multiplayer: MultiplayerMenu,
       hotkeys: HotKeys,

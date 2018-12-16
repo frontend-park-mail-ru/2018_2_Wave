@@ -1,6 +1,5 @@
 .hotky-combination {
     margin: 10px;
-
     justify-self: center;
     align-self: center;
 }
@@ -13,4 +12,8 @@
 .hotkeysmenu {
     justify-self: center;
     align-self: center;
+}
+
+.hotkey-info {
+    color: white;
 }

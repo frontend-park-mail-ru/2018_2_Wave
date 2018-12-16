@@ -29,7 +29,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(pcss|css|scss)$/,
+        test: /\.pcss$/,
         use: [
           {
             loader: 'style-loader',
@@ -38,6 +38,14 @@ module.exports = {
             },
           },
           'postcss-loader',
+        ],
+      },
+      {
+        test: /\.(css|scss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
