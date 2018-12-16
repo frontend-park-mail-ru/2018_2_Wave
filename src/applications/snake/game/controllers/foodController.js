@@ -11,7 +11,7 @@ export default class FoodController {
   }
 
   init() {
-    this.food.init({ life: (Math.floor(Math.random() * 15000) + 4000)});
+    this.food.init({ life: (Math.floor(Math.random() * 15000) + 4000) });
     this.setNewPlace();
   }
 
