@@ -26,9 +26,11 @@ export default class MenuApp extends BaseApp {
     this.currentView = this.views.main;
 
     const [storePlace] = env.wrapper.getElementsByClassName('store');
-    this.views.store = new StoreView(storePlace, storePlace);
+    const storeView = new StoreView(storePlace, storePlace, this.views);
+    this.views.store = storeView;
 
     this.env = env;
+    this.views.env = this.env;
     this.menu = this.env.menu;
 
     this.appContainer = new AppContainer(
@@ -69,9 +71,7 @@ export default class MenuApp extends BaseApp {
   }
 
   changeView(...args) {
-    if (this.currentView === this.views.store) this.menu.show();
     super.changeView(...args);
     this.env.setTitle(this.currentView.title);
-    if (this.currentView === this.views.store) this.menu.hide();
   }
 }
