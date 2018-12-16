@@ -33,7 +33,8 @@ class KeyboardController {
   }
 
   start() {
-    document.addEventListener('keydown', this.acceptInput.bind(this));
+    // magic here
+    setTimeout(() => document.addEventListener('keydown', this.acceptInput.bind(this), 1));
     this.swipeDetector.start();
   }
 
