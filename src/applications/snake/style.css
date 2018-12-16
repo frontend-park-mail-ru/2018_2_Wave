@@ -107,30 +107,6 @@
     "game game game game board";
 }
 
-@media screen and (max-width: 768px) {
-  .snakegame-container__multiplayer {
-    grid-template-columns: auto;
-    grid-template-rows: 2fr 1fr 10fr;
-    grid-template-areas: 
-      "mode"
-      /* "score" */
-      "board"
-      "game";
-  }
-
-  .game-board-name {
-    display: none;
-  }
-
-  .game-board {
-    justify-content: center;
-    align-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-  }
-}
-
 .game-board-wrapper {
   font-family: 'Press Start 2P', cursive;
   font-size : 30px;
@@ -165,6 +141,34 @@
 .game-board-name {
   text-align: center;
   margin: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .snakegame-container__multiplayer {
+    grid-template-columns: auto;
+    grid-template-rows: 2fr 1fr 10fr;
+    grid-template-areas: 
+      "mode"
+      /* "score" */
+      "board"
+      "game";
+  }
+
+  .game-board-name {
+    display: none;
+  }
+
+  .game-board {
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .game-board__hidden-border {
+    border-width: 0px;
+  }
 }
 
 

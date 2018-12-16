@@ -3,19 +3,19 @@
     span.score__text Score:
         span.score__value 0
 .canvas-wrapper
-    canvas.snakegame-canvas.game-board__purple
+    canvas.snakegame-canvas.game-border__purple
 .game-board-wrapper(hidden)
     .game-board-name Players
-    .game-board.game-board__purple
+    .game-board.game-board__purple.game-board__hidden-border
         .players.scores(user_serial=0)
-            .player.player_greenyellow nePlayer
-            .score.player_greenyellow 0
+            .player.player_greenyellow
+            .score.player_greenyellow
         .players.scores(user_serial=1)
-            .player.player_yellow nePlayer
-            .score.player_yellow 0
+            .player.player_yellow
+            .score.player_yellow
         .players.scores(user_serial=2)
-            .player.player_green nePlayer
-            .score.player_green  0
+            .player.player_green
+            .score.player_green
         .players.scores(user_serial=3)
-            .player.player_blue nePlayer
-            .score.player_blue 0
+            .player.player_blue
+            .score.player_blue
