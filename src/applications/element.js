@@ -7,6 +7,9 @@ export default class Element {
       this.wrapper.classList.add(...wrapperClass);
     }
     this.wrapper.hidden = true;
+    if (parent !== wrapper) {
+      this.parent.appendChild(this.wrapper);
+    }
   }
 
 
@@ -21,15 +24,16 @@ export default class Element {
 
   hide() {
     this.wrapper.hidden = true;
+    this.wrapper.style.setProperty('display', 'none', 'important');
   }
 
   show() {
-    this.wrapper.hidden = false;
     if (!this.rendered) this.render();
+    this.wrapper.hidden = false;
+    this.wrapper.style.display = null;
   }
 
   render(data) {
     this.wrapper.innerHTML = this.template(data || null);
-    this.parent.appendChild(this.wrapper);
   }
 }

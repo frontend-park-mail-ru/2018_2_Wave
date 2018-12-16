@@ -5,7 +5,7 @@ import messageTemplate from './templates/message.pug';
 import textblockTemplate from './templates/textblock.pug';
 import inputTemplate from './templates/input.pug';
 
-import './styles/terminal.css';
+import './styles/terminal.pcss';
 
 
 class TerminalView extends Element {

@@ -1,8 +1,12 @@
 export default class BaseApp {
   constructor(appURL, parent, MainView, Views) {
     this.url = appURL;
-    this.views = { main: new MainView(parent) };
-    this.currentView = this.views.main;
+    this.parent = parent;
+
+    if (MainView) {
+      this.views = { main: new MainView(parent) };
+      this.currentView = this.views.main;
+    } else this.views = {};
 
     if (Views) {
       Object.keys(Views).forEach((key) => {
@@ -32,6 +36,59 @@ export default class BaseApp {
     if (this.active) this.currentView.show();
   }
 
+  launch(resource) {
+    if (resource) {
+      this.animateLaunch(resource);
+      return;
+    }
+    if (this.started) this.resume();
+    else this.start();
+  }
+
+  animateLaunch(resource) {
+    const {
+      width,
+      height,
+      left,
+      top,
+    } = resource.getBoundingClientRect();
+
+    const element = document.createElement('div');
+    element.classList.add('floating');
+    element.style.width = `${width}px`;
+    element.style.height = `${height}px`;
+    element.style.top = `${top}px`;
+    element.style.left = `${left}px`;
+
+    this.parent.appendChild(element);
+    const widthScale = window.innerWidth / width;
+    const heightScale = window.innerHeight / height;
+    const translateX = (window.innerWidth / 2 - left - width / 2) / widthScale;
+    const translateY = (window.innerHeight / 2 - top - height / 2) / heightScale;
+
+    const launchAnimation = element.animate({
+      transform: [
+        'scale(1, 1) translate(0px, 0px)',
+        `scale(${widthScale}, ${heightScale}) translate(${translateX}px, ${translateY}px)`,
+      ],
+      'border-radius': [
+        '20px', '0px',
+      ],
+    }, {
+      duration: 300,
+      fill: 'forwards',
+      easing: 'cubic-bezier(.36,1.08,.55,.93)',
+    });
+    launchAnimation.pause();
+
+    launchAnimation.onfinish = () => {
+      element.remove();
+      if (this.started) this.resume();
+      else this.start();
+    };
+
+    launchAnimation.play();
+  }
 
   start() {
     this.started = true;
@@ -47,6 +104,7 @@ export default class BaseApp {
   }
 
   pause() {
+    this.parent.style.background = 'none';
     this.active = false;
     this.currentView.hide();
   }

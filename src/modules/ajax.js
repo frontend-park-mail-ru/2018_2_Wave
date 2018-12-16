@@ -7,6 +7,7 @@ const URL = 'http://localhost:9600';
 const errorEvents = {
   401: 'unauthorized',
   500: 'serverError',
+  502: 'badGateway',
 };
 
 function getCodeType(statusCode) {

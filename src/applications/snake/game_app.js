@@ -18,6 +18,8 @@ import globalUser from './globalUser';
 
 import ErrorMessage from './error_message/errorMessage';
 
+import './styles/style.pcss';
+
 import './style.css';
 
 export default class GameApp extends BaseApp {

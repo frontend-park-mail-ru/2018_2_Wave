@@ -39,6 +39,7 @@ class UserService {
     if (action === 'logout') {
       this.loggedIn = false;
       this.user = {};
+      getProfile();
     } else {
       const { err, profile: user } = await getProfile();
       if (err) {

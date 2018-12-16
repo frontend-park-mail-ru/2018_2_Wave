@@ -36,6 +36,13 @@ body {
   overflow: -moz-scrollbars-none;
 }
 
+@media (--minimal) {
+  .terminal {
+    width: 95vw;
+  }
+}
+
+
 .terminal_line {
   display: flex;
   white-space: pre;
@@ -59,5 +66,5 @@ body {
 
   padding: 0;
   margin: 0;
-  width: 100%;
+  width: calc(100%);
 }

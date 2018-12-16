@@ -1,16 +1,20 @@
-import userService from '../../../modules/userservice';
-import bus from '../../../modules/bus';
-import Element from '../../element';
+import userService from '../../../../modules/userservice';
+import bus from '../../../../modules/bus';
+import Element from '../../../element';
 
-import '../styles/userblock.css';
+import './userblock.pcss';
 
-const template = require('../templates/userblock.pug');
+import '../../../../../static/img/triss.jpg';
+
+
+const template = require('./userblock.pug');
 
 
 export default class UserBlock extends Element {
-  constructor(parent) {
-    super(template, parent);
-    this.isPage = false;
+  constructor(parent, wrapper) {
+    super(template, parent, wrapper || parent);
+
+    bus.listen('userUpdated', this.update.bind(this));
   }
 
   update() {
@@ -31,7 +35,7 @@ export default class UserBlock extends Element {
     const { user } = userService.getUser();
     super.render({ user, authorized });
 
-    const [profileButton] = document.getElementsByClassName('userblock__avatar');
+    const [profileButton] = this.wrapper.getElementsByClassName('userblock__avatar');
     profileButton.addEventListener('click', () => bus.emit('link', '/profile'));
   }
 }

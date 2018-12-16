@@ -19,6 +19,7 @@ class TerminalApp extends BaseApp {
       history: this.history,
       clear: this.clear,
       snake: () => bus.emit('link', '/snake'),
+      exit: () => bus.emit('link', '/'),
     };
 
     this.commandHistory = [];
@@ -38,6 +39,7 @@ class TerminalApp extends BaseApp {
 
   /*   service methods   */
   start() {
+    this.parent.style.background = 'black';
     super.start();
     this.addListeners();
     this.view.printBlock(messages.hello);
@@ -56,9 +58,11 @@ class TerminalApp extends BaseApp {
   }
 
   resume() {
+    this.parent.style.background = 'black';
     super.resume();
     this.view.focusInput();
     this.addListeners();
+    this.focusInput();
   }
 
 
@@ -122,14 +126,14 @@ class TerminalApp extends BaseApp {
   addListeners() {
     Object.keys(this.listeners).forEach((key) => {
       // FIXME:
-      document./*this.terminal.*/addEventListener(key, this.listeners[key]);
+      this.terminal.addEventListener(key, this.listeners[key]);
     });
   }
 
   removeListeners() {
     Object.keys(this.listeners).forEach((key) => {
       // FIXME:
-      document./*this.terminal.*/removeEventListener(key, this.listeners[key]);
+      this.terminal.removeEventListener(key, this.listeners[key]);
     });
   }
 }
