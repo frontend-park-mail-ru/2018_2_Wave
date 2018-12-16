@@ -6,6 +6,7 @@ import '../../components/app_tile/app_tile.pcss';
 import './library.pcss';
 
 import '../../../../../static/img/terminal.jpg';
+import '../../../../../static/img/snake.jpg';
 
 const apps = [
   {
@@ -14,9 +15,9 @@ const apps = [
     name: 'Terminal',
   },
   {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
+    link: '/snake',
+    image: '/img/snake.jpg',
+    name: 'Snake',
   },
   {
     link: '/terminal',
@@ -24,14 +25,19 @@ const apps = [
     name: 'Terminal',
   },
   {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
+    link: '/snake',
+    image: '/img/snake.jpg',
+    name: 'Snake',
   },
   {
     link: '/terminal',
     image: '/img/terminal.jpg',
     name: 'Terminal',
+  },
+  {
+    link: '/snake',
+    image: '/img/snake.jpg',
+    name: 'Snake',
   },
 ];
 
