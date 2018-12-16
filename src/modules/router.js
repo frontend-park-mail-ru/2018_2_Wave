@@ -26,9 +26,13 @@ function clearPath(string) {
 
 
 export default class Router {
-  constructor(root) {
+  constructor(root, MainApp) {
     this.routes = {};
     this.root = root;
+
+    this.mainApp = new MainApp('/', this.root);
+    this.routes['/'] = this.mainApp;
+    this.appContainer = this.mainApp.appContainer.wrapper;
 
     this.listeners = [
       {
@@ -46,8 +50,11 @@ export default class Router {
 
 
   registerApp(url, App) {
-    const app = new App(url, this.root);
-    if (url === '/') this.mainApp = app;
+    const app = new App(url, this.appContainer);
+    if (url === '/') {
+      console.error('MainApp already registered');
+      return this;
+    }
     // TODO: create app object only when app opens
     this.routes[url] = app;
     return this;
@@ -59,6 +66,8 @@ export default class Router {
       throw new Error('No main app!');
     }
 
+    this.mainApp.start();
+
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
 
@@ -69,7 +78,7 @@ export default class Router {
   }
 
 
-  open(fullPath, paramString) {
+  open(fullPath, paramString, target) {
     const path = clearPath(fullPath);
     const params = splitParams(paramString);
 
@@ -82,19 +91,18 @@ export default class Router {
       app.changeView(path, params);
     } else {
       this.open('/');
+      return;
     }
 
     this.currentApp = app;
 
     if (!app.active) {
       Object.values(this.routes).forEach((knownApp) => {
-        // TODO: make array of active apps
-        // TODO: check for main app, never pause it
+        // TODO: make array of started apps
         // TODO: stop old apps
         if (knownApp.active) knownApp.pause();
       });
-      if (!app.started) app.start();
-      else app.resume();
+      app.launch(target);
     }
 
     if (window.location.pathname !== fullPath) {
@@ -109,10 +117,14 @@ export default class Router {
   }
 
   openClickedLink(event) {
-    if ((event.target instanceof HTMLAnchorElement)
-    && (event.target.getAttribute('type') !== 'submit')) {
+    const target = event.target instanceof HTMLAnchorElement
+      ? event.target
+      : event.target.parentElement;
+
+    if (target instanceof HTMLAnchorElement
+    && (target.getAttribute('type') !== 'submit')) {
       event.preventDefault();
-      this.open(event.target.pathname, event.target.search);
+      this.open(target.pathname, target.search, target);
     }
   }
 }

@@ -4,19 +4,21 @@
   "main": "public/app.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "build": "webpack -d --watch --info-verbosity verbose",
-    "watch": "webpack --watch --info-verbosity verbose",
+    "dev": "webpack -d --watch --info-verbosity verbose",
     "prod": "webpack -p"
   },
   "dependencies": {
     "express": "^4.16.3",
     "express-history-api-fallback": "^2.2.1",
-    "express-ws": "^4.0.0",
     "hard-source-webpack-plugin": "^0.12.0",
     "morgan": "^1.9.0",
-    "serve-favicon": "^2.5.0",
+    "postcss": "^7.0.6",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-google-font": "^0.1.1",
+    "postcss-import": "^12.0.1",
     "serviceworker-webpack-plugin": "^1.0.1",
-    "style-loader": "^0.23.0"
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.2"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
@@ -25,10 +27,13 @@
     "eslint-plugin-import": "^2.14.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-font-magician": "^2.2.1",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.16.4",
+    "stylelint": "^9.9.0",
+    "webpack": "^4.16.5",
     "webpack-cli": "^3.1.2"
   }
 }
