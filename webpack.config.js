@@ -4,15 +4,13 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const path = require('path');
 
 
-module.exports = {
+const config = {
   entry: './src/app.js',
 
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'app.bundle.js',
   },
-
-  watch: true,
 
   plugins: [
     new HtmlWebpackPlugin({
@@ -62,5 +60,15 @@ module.exports = {
       },
     ],
   },
+};
 
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.output.path = path.resolve(__dirname, 'public');
+  } else {
+    config.output.path = path.resolve(__dirname, '../public');
+  }
+
+  return config;
 };

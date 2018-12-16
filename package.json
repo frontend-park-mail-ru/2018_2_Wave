@@ -4,8 +4,7 @@
   "main": "public/app.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "build": "webpack -d --watch --info-verbosity verbose",
-    "watch": "webpack --watch --info-verbosity verbose",
+    "dev": "webpack -d --watch --info-verbosity verbose",
     "prod": "webpack -p"
   },
   "dependencies": {
