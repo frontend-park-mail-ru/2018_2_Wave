@@ -8,6 +8,7 @@ function splitParams(string) {
   if (!string) return null;
   const params = {};
   string
+    .slice(1)
     .split('&', 5)
     .forEach((item) => {
       const [key, val] = item.split('=');

@@ -12,7 +12,6 @@ export default class ErrorMessage extends Element {
       [this.message] = parent.getElementsByClassName('error-message-text');
       instance = this;
     }
-    this.setErrorMessage('You wasnt ready for game'); 
     return instance;
   }
 

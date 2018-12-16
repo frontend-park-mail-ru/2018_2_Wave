@@ -2,4 +2,5 @@
   .gamename.gamename_purple ОНАCONDA
   .snakemenu-multiplayer.snakemenu__purple-border
    each data, text in buttons
-     a.snakemenu-button(href=data.href, params=data.params, search=data.params)=text
+     - src = `${data.href}?${data.params}`;
+     a.snakemenu-button(href=src, params=data.params)=text

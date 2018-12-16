@@ -25,9 +25,7 @@ export default class GameView extends Element {
     [this.snakegameContainer] = document.getElementsByClassName('snakegame-container');
     this.snakegameContainer.classList.add('snakegame-container__multiplayer');
 
-    if (!this.game_mode) {
-      [this.game_mode] = this.parent.getElementsByClassName('game_mode');
-    }
+    [this.game_mode] = this.parent.getElementsByClassName('game_mode');
     this.game_mode.innerHTML = 'MULTIPLAYER';
 
     [this.gameBoard] = document.getElementsByClassName('game-board-wrapper');
@@ -41,9 +39,7 @@ export default class GameView extends Element {
   }
 
   setSinglplayerEnviroment() {
-    if (!this.game_mode) {
-      [this.game_mode] = this.parent.getElementsByClassName('game_mode');
-    }
+    [this.game_mode] = this.parent.getElementsByClassName('game_mode');
     this.game_mode.innerHTML = 'SINGLPLAYER';
   }
 
