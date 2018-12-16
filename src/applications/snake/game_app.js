@@ -18,7 +18,7 @@ import globalUser from './globalUser';
 
 import ErrorMessage from './error_message/errorMessage';
 
-import './styles/style.pcss';
+// import './styles/style.pcss';
 
 import './style.css';
 
