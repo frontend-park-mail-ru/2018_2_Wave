@@ -7,8 +7,8 @@
 ## Сборка
 
 ```
-npm install
-npm run start
+npm run-script prod
+npm run
 ```
 
 ## Ссылки
