@@ -8,6 +8,7 @@ const config = {
   entry: './src/app.js',
 
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'public'),
     filename: 'app.bundle.js',
   },
