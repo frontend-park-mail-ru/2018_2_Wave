@@ -40,6 +40,13 @@ const config = {
         ],
       },
       {
+        test: /\.svg/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {},
+        },
+      },
+      {
         test: /\.pug$/,
         loader: 'pug-loader',
       },
