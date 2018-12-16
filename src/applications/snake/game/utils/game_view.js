@@ -1,4 +1,3 @@
-import busController from '../../modules/busController';
 import Game from '../game';
 import GAME_MODE from '../core/modes';
 
@@ -9,6 +8,7 @@ import Element from '../../../element';
 export default class GameView extends Element {
   constructor(parent) {
     super(SnakeGameTemplate, parent, ['snakegame-container']);
+    this.parent = parent;
   }
 
   show() {
@@ -50,6 +50,13 @@ export default class GameView extends Element {
     this.gameBoard.hidden = true;
   }
 
+  setSinglplayerEnviroment() {
+    if (!this.game_mode) {
+      [this.game_mode] = this.parent.getElementsByClassName('game_mode');
+    }
+    this.game_mode.innerHTML = 'SINGLPLAYER';
+  }
+
   setGameParams() {
     if (!this.gameParams) {
       this.gameParams = {
@@ -64,7 +71,7 @@ export default class GameView extends Element {
     }
 
     this.gameParams.onLine = navigator.onLine;
-
+    this.setSinglplayerEnviroment();
     const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
       snakeText: 'qwertyuiopqe',
