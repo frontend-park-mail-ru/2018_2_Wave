@@ -1,68 +1,108 @@
-import GAME_MODES from './core/modes';
-import OfflineGame from './core/offline';
-import OnlineGame from './core/online';
+import GAME_MODE from './core/modes';
+import OfflineGame from './core/offline/offline';
+import OnlineGame from './core/multiplayer/online';
 import ArcadeGame from './core/arcadeMode';
 import GameScene from './core/gameScene';
-import keyboardController from '../modules/keyboardController';
 import Size from './models/size';
+import WaitingPlayers from './core/multiplayer/waitingPlayers';
+import busController from '../modules/busController';
+import config from './utils/game_config';
 
+import './game.pcss';
+import WsPostman from '../modules/wsPostman';
 
+let GameConstructor;
 export default class Game {
-  constructor(mode, canvas, gameInitData) {
-    let GameConstructor = null;
+  constructor(gameInfo, canvas, gameInitData) {
+    this.gameInitData = gameInitData;
+    this.canvas = canvas;
+    this.countGameParams();
 
-    // change mode
-    mode = GAME_MODES.ARCADE;
-    // mode = GAME_MODES.ONLINE;
-    // mode = GAME_MODES.OFFLINE;
-
-    switch (mode) {
-      case GAME_MODES.ONLINE: {
-        // GameConstructor = OnlineGame;
-        GameConstructor = OfflineGame;
+    switch (gameInfo.mode) {
+      case GAME_MODE.CLASSIC: {
+        if (gameInfo.type === GAME_MODE.SINGLPLAYER) {
+          // GameConstructor = OnlineGame;
+          GameConstructor = OfflineGame;
+        } else {
+          GameConstructor = OfflineGame;
+        }
+        this.start();
         break;
       }
-      case GAME_MODES.OFFLINE: {
-        GameConstructor = OfflineGame;
-        // GameConstructor = OnlineGame;
-        break;
-      }
-      case GAME_MODES.ARCADE: {
+
+      case GAME_MODE.ARCADE: {
         GameConstructor = ArcadeGame;
+        this.start();
+        break;
+      }
+
+      case GAME_MODE.MULTIPLAYER: {
+        GameConstructor = OnlineGame;
+        this.waitingPlayers = new WaitingPlayers(this.canvas, this.gameInitData, gameInfo);
+        this.waitingPlayers.start();
+        this.events = { quick_search_done: this.start.bind(this) };
+        busController.setBusListeners(this.events);
         break;
       }
       default:
-        throw new Error(`Invalid game mode ${mode}`);
+        throw new Error(`Invalid game mode ${gameInfo.mode}`);
+    }
+  }
+
+  initGame() {
+    this.gameScene = new GameScene(
+      this.canvas,
+      this.windowSize,
+      this.cellSize,
+      this.gameInitData.otientation, // FIXME: typo?
+    );
+    this.gameCore = new GameConstructor(this.gameScene, this.gameInitData);
+  }
+
+  countGameParams() {
+    let cellWidth;
+    if (this.gameInitData.windowWidth > this.gameInitData.windowHeight) {
+      cellWidth = Math.floor(
+        Math.min(
+          this.gameInitData.windowWidth / this.gameInitData.widthCellCount,
+          this.gameInitData.windowHeight / this.gameInitData.heightCellCount,
+        ),
+      );
+      this.gameInitData.otientation = config.HORIZONTAL;
+    } else {
+      cellWidth = Math.floor(
+        Math.min(
+          this.gameInitData.windowWidth / this.gameInitData.heightCellCount,
+          this.gameInitData.windowHeight / this.gameInitData.widthCellCount,
+        ),
+      );
+      this.gameInitData.otientation = config.VERTICAL;
     }
 
-    const cellWidth = gameInitData.DOMRect.width;
-    const cellHeight = gameInitData.DOMRect.height;
-
     // реальные размеры одной ячейки
-    this.cellSize = new Size(cellWidth, cellHeight);
+    this.cellSize = new Size(cellWidth, cellWidth);
+    this.gameInitData.cellSize = this.cellSize;
 
-    const { windowWidth } = gameInitData;
-    const { windowHeight } = gameInitData;
+    const windowWidth = cellWidth * this.gameInitData.widthCellCount;
+    const windowHeight = cellWidth * this.gameInitData.heightCellCount;
 
     // реальные размеры окна для игры
     this.windowSize = new Size(windowWidth, windowHeight);
 
-    const widthCellCount = Math.floor(windowWidth / cellWidth);
-    const heightCellCount = Math.floor(windowHeight / cellHeight);
-
     // размерность поля игры
-    gameInitData.cellCount = new Size(widthCellCount, heightCellCount);
-
-    console.log('this.cellSize', this.cellSize);
-    console.log('this.windowSize', this.windowSize);
-    console.log('gameInitData.cellCount', gameInitData.cellCount);
-
-    this.gameScene = new GameScene(canvas, this.windowSize, this.cellSize);
-    this.keyboardController = keyboardController;
-    this.gameCore = new GameConstructor(this.keyboardController, this.gameScene, gameInitData);
+    this.gameInitData.cellCount = new Size(this.gameInitData.widthCellCount,
+      this.gameInitData.heightCellCount);
   }
 
-  start() {
+  start(message) {
+    console.log('start quick search');
+    if (this.events) {
+      this.wsPostman = new WsPostman();
+      this.wsPostman.setRoomToken(message.payload.room_token);
+      busController.removeBusListeners(this.events);
+      this.waitingPlayers.stop();
+    }
+    this.initGame();
     this.gameCore.start();
   }
 
@@ -75,6 +115,11 @@ export default class Game {
   }
 
   destroy() {
-    this.gameCore.destroy();
+    if (this.gameCore) {
+      this.gameCore.destroy();
+    }
+    if (this.waitingPlayers) {
+      this.waitingPlayers.stop();
+    }
   }
 }

@@ -1,26 +1,30 @@
+import busController from '../../modules/busController';
+
 export default class GameCore {
-  constructor(keyboardController, scene) {
-    this.keyboardController = keyboardController;
+  constructor(scene) {
     this.scene = scene;
+    this.close = this.close.bind(this); 
   }
 
   start() {
-    this.keyboardController.start();
     this.scene.start();
+    busController.setBusListeners({ Backspace: this.close });
   }
 
   pause() {
-    // this.keyboardController.stop();
     // this.scene.pause();
   }
 
   resume() {
-    // this.keyboardController.start();
     // this.scene.resume();
   }
 
+  close() {
+    busController.emit('link', '/snake');
+  }
+
   destroy() {
-    this.keyboardController.stop();
-    this.scene.destroy();
+    // this.scene.destroy();
+    busController.removeBusListeners({ Backspace: this.close });
   }
 }

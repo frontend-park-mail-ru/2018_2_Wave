@@ -2,7 +2,7 @@ import { logout } from '../../../modules/network';
 import userService from '../../../modules/userservice';
 import bus from '../../../modules/bus';
 import Element from '../../element';
-import '../styles/profile.css';
+import '../styles/profile.pcss';
 
 const template = require('../templates/profile.pug');
 

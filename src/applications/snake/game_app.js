@@ -1,70 +1,78 @@
-import GAME_MODES from './game/core/modes';
+import SnakeGameView from './game/utils/game_view';
+import GameEnv from './views/game_env';
 
+import WsPostman from './modules/wsPostman';
+import WsMessageParser from './modules/wsMessageParser';
+import WebSocket from '../../modules/webSocket';
+import keyboardController from './modules/keyboardController';
+import styleChanger from './modules/style_changer';
 
 import BaseApp from '../base_app';
 
-import GameEnv from './views/env';
-import GameView from './views/game_field';
-import Game from './game/game';
+import MainMenuView from './game_menu/main_menu/main_menu_view';
+import SinglplayerView from './game_menu/singlplayer/singlplayer_menu';
+import MultiplayerMenu from './game_menu/multiplayer/multiplayer_menu';
+import HotKeys from './game_menu/hotkeys/hotkeys';
 
-import './styles/style.css';
+import globalUser from './globalUser';
 
+import ErrorMessage from './error_message/errorMessage';
 
-export default class SnakeApp extends BaseApp {
+// import './styles/style.pcss';
+
+import './style.pcss';
+// import './styles/font.pcss';
+// import './static/fonts/PressStart2P.ttf';
+
+export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new GameEnv(parent);
-    super(appUrl, env.getContainer(), GameView);
+    const Views = {
+      game: SnakeGameView,
+      singlplayer: SinglplayerView,
+      multiplayer: MultiplayerMenu,
+      hotkeys: HotKeys,
+    };
+
+    super(appUrl, env.getContainer(), MainMenuView, Views);
 
     this.env = env;
-    this.gameContainer = this.views.main.getCanvas();
+    this.parent = parent;
+    this.wsMessageParser = new WsMessageParser(this);
+    this.wsMessageParser.setModel('user_token', globalUser);
+    this.webSocket = new WebSocket(this.wsMessageParser);
+    this.wsPostman = new WsPostman(this.webSocket);
+    this.errorMessage = new ErrorMessage();
+    this.styleChanger = styleChanger;
+
+    this.keyboardController = keyboardController;
   }
 
-
   start() {
+    this.parent.style.background = 'black';
+    this.styleChanger.start();
     this.env.show();
     super.start();
-
-    this.initGame();
+    this.webSocket.connect();
+    this.keyboardController.start();
   }
 
   pause() {
+    this.styleChanger.stop();
     this.env.hide();
     super.pause();
-    this.game.pause();
   }
 
   resume() {
+    this.parent.style.background = 'black';
+    this.styleChanger.start();
     this.env.show();
     super.resume();
   }
 
-
   stop() {
-    this.game.destroy();
-  }
-
-
-  initGame() {
-    const gameInitData = {
-      snakeText: 'qwertyuiopqe',
-      DOMRect: {
-        x: 10,
-        y: 10,
-        width: 18,
-        height: 18,
-      },
-      // windowWidth: window.innerWidth,
-      // windowHeight: window.innerHeight,
-      windowWidth: 800,
-      windowHeight: 500,
-    };
-
-    const mode = navigator.onLine
-      ? GAME_MODES.ONLINE
-      : GAME_MODES.OFFLINE;
-    this.game = new Game(mode, this.gameContainer, gameInitData);
-
-    // TODO: FIXME: call this in view after button press!
-    this.game.start();
+    this.styleChanger.stop();
+    this.webSocket.close();
+    super.stop();
   }
 }

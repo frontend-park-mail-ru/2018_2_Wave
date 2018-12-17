@@ -1,0 +1,11 @@
+.main-content
+    .gamename.gamename_purple ОНАCONDA
+    .hotkeys-block.snakemenu__purple-border
+        - hotkeys.forEach((hotkey) => {
+            .hotky-combination
+                span.hotkey-key.gamename_purple=hotkey.key
+                span.hotkey-info=hotkey.info
+        - });
+            .hotkeysmenu
+                each data, text in buttons
+                    a.snakemenu-button(href=data.href, params=data.params, search=data.params)=text

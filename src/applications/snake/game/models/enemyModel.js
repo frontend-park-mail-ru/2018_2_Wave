@@ -1,9 +1,17 @@
+import globalUser from '../../globalUser';
+
 export default class EnemyModel {
-  constructor({
-    username = 'myEnemy',
-    score = 0,
-  }) {
-    this.username = username;
-    this.score = score;
+  constructor() {
+    this.segments = [];
+  }
+
+  setState(snake) {
+    this.user_serial = snake.user_serial;
+    snake.body.forEach((segment) => {
+      this.segments.push({
+        x: segment.position.X,
+        y: segment.position.Y,
+      });
+    });
   }
 }

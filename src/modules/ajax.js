@@ -1,12 +1,13 @@
 import bus from './bus';
 
 
-const URL = 'https://api.rasseki.com';
+const URL = 'http://api.localhost:3000';
 
 // errors which are handled by another modules
 const errorEvents = {
   401: 'unauthorized',
   500: 'serverError',
+  502: 'badGateway',
 };
 
 function getCodeType(statusCode) {

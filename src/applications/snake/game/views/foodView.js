@@ -1,27 +1,22 @@
+import config from '../../modules/view_config';
+
 export default class FoodView {
   constructor(foodModel) {
     this.foodModel = foodModel;
-    this.letters = false;
   }
 
-  render(canvas) {
-    const font = 'Arial';
-    const size = 15;
-    const fillStyle = '#99ff00';
+  render(canvas, foodModel) {
+    if (foodModel) {
+      this.foodModel = foodModel;
+    }
 
-    if (this.letters.letters) {
-      canvas.drawLetter({
-        font,
-        size,
-        fillStyle,
-        x: this.foodModel.position.x,
-        y: this.foodModel.position.y,
-        letter: this.foodModel.currentLetter,
-      });
-    } else {
+    const fillStyle = config.foodColor;
+    const strokeStyle = config.foodColor;
+
+    if (this.foodModel.position) {
       canvas.drawRect({
-        fillStyle: '#003300',
-        strokeStyle: '#009900',
+        fillStyle,
+        strokeStyle,
         x: this.foodModel.position.x,
         y: this.foodModel.position.y,
         width: 1,

@@ -1,15 +1,17 @@
 import bus from './busController';
-import SwipeDetector from './swipeDetector';
+import swipeDetector from './swipeDetector';
 
 class KeyboardController {
   constructor() {
     this.controls = [
-      // 8, // backspace
+      8, // backspace
       // 9, // tab
-      // 13, // enter
+      13, // enter
       // 27, // esc
       // 16, // shift
-      32, // space
+      // 32, // space
+      81, // q exit
+      84, // t key (change theme)
     ];
 
     this.snakeControls = [
@@ -26,11 +28,13 @@ class KeyboardController {
 
     ];
 
-    this.swipeDetector = new SwipeDetector();
+    this.swipeDetector = swipeDetector;
+    this.isSpace = false;
   }
 
   start() {
-    document.addEventListener('keydown', this.acceptInput.bind(this));
+    // magic here
+    setTimeout(() => document.addEventListener('keydown', this.acceptInput.bind(this), 1));
     this.swipeDetector.start();
   }
 
@@ -43,10 +47,29 @@ class KeyboardController {
     return (this.controls.indexOf(keyCode) > -1);
   }
 
+  isCommand() {
+    return (this.lastCommand || this.swipeDetector.lastCommand);
+  }
+
   getLastCommand() {
-    const temp = this.lastCommand;
-    this.lastCommand = undefined;
-    return temp;
+    if (this.lastCommand) {
+      const temp = this.lastCommand;
+      this.lastCommand = undefined;
+      return temp;
+    }
+
+    if (this.swipeDetector.isCommand()) {
+      return this.swipeDetector.getLastCommand();
+    }
+    return undefined;
+  }
+
+  getSpace() {
+    if (this.isSpace) {
+      this.isSpace = false;
+      return true;
+    }
+    return false;
   }
 
   isSnakeControls(keyCode) {
@@ -55,7 +78,7 @@ class KeyboardController {
 
   /*
   isInputKey(keyCode) {
-    return (keyCode >= 48 && keyCode <= 90 
+    return (keyCode >= 48 && keyCode <= 90
       || keyCode >= 96 && keyCode <= 111
       || keyCode >= 186 && keyCode <= 222);
   }
@@ -89,12 +112,15 @@ class KeyboardController {
     */
 
     if (this.isControlKey(keyCode)) {
-      e.preventDefault();
+      // console.log('emit', e.code);
       bus.emit(e.code);
     } else if (this.isSnakeControls(keyCode)) {
-      e.preventDefault();
       bus.emit(e.code);
       this.lastCommand = e.key;
+    }
+
+    if (e.code === 'Space') {
+      this.isSpace = true;
     }
   }
 }

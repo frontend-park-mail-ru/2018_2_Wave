@@ -1,7 +1,8 @@
 export default class Player {
-  constructor() {
+  constructor(userToken) {
     this.score = 0;
     this.isDead = false;
+    this.userToken = userToken;
   }
 
   setSnake(snake) {
@@ -12,7 +13,7 @@ export default class Player {
     this.isDead = true;
   }
 
-  addToScore(value = 1) {
-    this.score += value;
+  addToScore() {
+    this.score += 1;
   }
 }

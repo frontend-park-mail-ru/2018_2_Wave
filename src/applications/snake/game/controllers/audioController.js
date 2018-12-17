@@ -1,20 +1,20 @@
 import AudioModel from '../models/audioModel';
 import busController from '../../modules/busController';
 
-import gameOfThrones from '../../static/audio/game_of_thrones.mp3';
-import radioactive from '../../static/audio/radioactive.mp3';
-import starWars from '../../static/audio/star_wars.mp3';
-import turnDown from '../../static/audio/turn_down_for_what.mp3';
+// import gameOfThrones from '../../static/audio/game_of_thrones.mp3';
+// import radioactive from '../../static/audio/radioactive.mp3';
+// import starWars from '../../static/audio/star_wars.mp3';
+// import turnDown from '../../static/audio/turn_down_for_what.mp3';
 
 export default class AudioController {
   constructor() {
     this.busController = busController;
     this.root = '../static/audio';
     this.mainAudios = [
-      gameOfThrones,
-      radioactive,
-      starWars,
-      turnDown,
+      // gameOfThrones,
+      // radioactive,
+      // starWars,
+      // turnDown,
     ];
 
     this.init();

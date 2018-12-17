@@ -12,9 +12,16 @@ export default class LevelController {
       pickFood: this.removeFoodFromMap.bind(this),
     };
 
-    this.busController.setBusListeners(this.eventsMethosds);
-
+    this.setBusListeners();
     this.generateLevel();
+  }
+
+  setBusListeners() {
+    this.busController.setBusListeners(this.eventsMethosds);
+  }
+
+  removeBusListeners() {
+    this.busController.removeBusListeners(this.eventsMethosds);
   }
 
   removeFoodFromMap(position) {
@@ -43,7 +50,6 @@ export default class LevelController {
         }
         wallLength -= 1;
       } else {
-        console.log('wallType', wallType);
         wallLength = Math.floor(Math.random() * this.maxWallLength) + 3;
         if (wallType) {
           wallType = 0;
@@ -52,6 +58,29 @@ export default class LevelController {
         }
       }
     }
+
+    // for(rc = 0; rc < rwc; rc += 1) {
+    //   // calculate a position for a random wall, somewhere within the walls of the grid. 
+    //   rwx  = Math.floor(3 + Math.random() * (level.width - 6));
+    //   rwy  = Math.floor(3 + Math.random() * (level.height - 6));
+    //   rwl  = Math.floor(3 + Math.random() * 5);
+    //   rwdx = ((rwx < level.width / 2) ? 1 : -1);
+    //   rwdy = ((rwy < level.height / 2) ? 1 : -1);
+
+    //   for(ri = 0; ri < rwl; ri += 1) {
+    //     i = level.index(rwx, rwy);
+
+    //     // don't try to make a new block when one already exists! 
+    //     if(level.wdata[i] !== 0) {
+    //       break;
+    //     }
+
+    //     level.wdata[i] = level.odata[i] = 2;
+
+    //     rwx += rwdx;
+    //     rwy += rwdy;
+    //   }
+    // }
 
     wallLength = this.maxWallLength;
     for (let y = 0; y < levelHeight; y += 1) {
@@ -65,9 +94,12 @@ export default class LevelController {
       }
     }
 
-    return this.level.getMap();
   }
 
   update() {
+  }
+
+  stop() {
+    this.removeBusListeners();
   }
 }

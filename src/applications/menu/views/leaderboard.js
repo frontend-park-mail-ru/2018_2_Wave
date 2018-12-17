@@ -1,6 +1,6 @@
 import { getLeaders } from '../../../modules/network';
 import Element from '../../element';
-import '../styles/leaderboard.css';
+import '../styles/leaderboard.pcss';
 
 const template = require('../templates/leaderboard.pug');
 

@@ -1,31 +1,43 @@
 import busController from '../../modules/busController';
 
-export default class FoodController {
-  constructor(player, level) {
+export default class PlayerController {
+  constructor(player, view) {
     this.player = player;
-    this.level = level;
+    this.view = view;
     this.busController = busController;
 
     this.events = {
       DEAD: this.setDead.bind(this),
       pickFood: this.addToScore.bind(this),
     };
-
-    this.busController.setBusListeners(this.events);
   }
 
   init() {
+    this.setBusListebers();
+  }
+
+  setBusListebers() {
+    this.busController.setBusListeners(this.events);
+  }
+
+  removeBusListeners() {
+    this.busController.removeBusListeners(this.events);
   }
 
   update() {
   }
 
   setDead() {
-    busController.removeBusListeners(this.events);
+    this.removeBusListeners();
     this.player.setDead();
   }
 
   addToScore(value = 1) {
     this.player.addToScore(value);
+    this.view.setScore(this.player.score);
+  }
+
+  stop() {
+    this.removeBusListeners();
   }
 }

@@ -1,17 +1,26 @@
-# Команда Wave
+# Wave Frontend
 
-## Репозитории
-* [Клиент](https://github.com/frontend-park-mail-ru/2018_2_Wave)
+Клиент для приложения команды Wave.
 
-## Запуск
-npm install  
-npm run start
+![Alt Text](https://media.giphy.com/media/lJEGgG5ajs4zC/giphy.gif)
 
-## Деплой
-без деплоя  
-old: [wave.now.sh](https://wave.now.sh)
+## Сборка
 
-## Участники
+```
+npm run-script prod
+npm run
+```
+
+## Ссылки
+
+* Сервер &mdash; https://api.rasseki.com
+* Клиент &mdash; https://rasseki.com
+* API &mdash; https://frontend.tech-mail.ru/2018_2_Wave/
+* Grafana &mdash; https://grafana.rasseki.com
+
+* Репозиторий бэкенда &mdash; https://github.com/go-park-mail-ru/2018_2_Wave
+
+## Авторы
 
 * Дмитрий Палий &mdash; [stanford](https://github.com/stanf0rd)
 * Илья Лебедев &mdash; [bomkvilt](https://github.com/bomkvilt)
