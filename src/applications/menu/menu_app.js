@@ -53,7 +53,7 @@ export default class MenuApp extends BaseApp {
   start() {
     this.appContainer.hide();
     this.env.show();
-    this.animateLaunch();
+    // this.animateLaunch();
     super.start();
   }
 

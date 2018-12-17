@@ -37,11 +37,8 @@ export default class BaseApp {
   }
 
   launch(resource) {
-    if (resource) {
-      this.animateLaunch(resource);
-      return;
-    }
-    if (this.started) this.resume();
+    if (resource) this.animateLaunch(resource);
+    else if (this.started) this.resume();
     else this.start();
   }
 
