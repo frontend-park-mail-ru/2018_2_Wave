@@ -119,7 +119,7 @@ export default class Router {
 
     if (!app.active) {
       Object.values(this.routes).forEach((knownApp) => {
-        if (knownApp.active) knownApp.pause();
+        if (knownApp !== app && knownApp.active) knownApp.pause();
       });
       app.launch(target);
     }
