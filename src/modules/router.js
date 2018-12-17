@@ -109,6 +109,11 @@ export default class Router {
     //   return;
     // }
 
+    if (!app) {
+      this.open('/');
+      return;
+    }
+
     this.currentApp = app;
 
     if (!app.active) {
