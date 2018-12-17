@@ -5,6 +5,7 @@ import GAME_MODE from '../core/modes';
 import SnakeGameTemplate from '../templates/snakegame.pug';
 import '../../static/images/home.svg';
 
+// import music from '../../static/audio/game_of_thrones.mp3';
 import Element from '../../../element';
 
 export default class GameView extends Element {
@@ -54,6 +55,23 @@ export default class GameView extends Element {
       };
     }
 
+    // const audio = new Audio(music);
+    // const playPromise = audio.play();
+
+
+    // if (playPromise !== undefined) {
+    //   playPromise.then((_) => {
+    //   // Automatic playback started!
+    //   // Show playing UI.
+    //     console.log('playyyyyy');
+    //   })
+    //     .catch((error) => {
+    //       console.log('music error', error);
+    //       // Auto-play was prevented
+    //       // Show paused UI.
+    //     });
+    // }
+
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
       this.setMultiplayerEnviroment();
     } else {
@@ -61,6 +79,7 @@ export default class GameView extends Element {
     }
 
     this.gameParams.onLine = navigator.onLine;
+
     const [canvasWrapper] = this.wrapper.getElementsByClassName('canvas-wrapper');
     this.gameInitData = {
       userToken: this.userToken,

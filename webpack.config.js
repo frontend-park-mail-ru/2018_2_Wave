@@ -51,7 +51,7 @@ const config = {
         loader: 'pug-loader',
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|wav)$/,
         loader: 'file-loader?name=music/[hash].[ext]',
       },
       {
@@ -59,7 +59,7 @@ const config = {
         loader: 'file-loader?name=img/[name].[ext]',
       },
       {
-        test: /\.ico$/,
+        test: /\.(ico)$/,
         loader: 'file-loader?name=favicon.ico',
       },
       {
