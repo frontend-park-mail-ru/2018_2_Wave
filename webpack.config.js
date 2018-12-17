@@ -59,8 +59,12 @@ const config = {
         loader: 'file-loader?name=img/[name].[ext]',
       },
       {
-        test: /\.ico$/,
+        test: /\.(ico)$/,
         loader: 'file-loader?name=favicon.ico',
+      },
+      {
+        test: /\.(mp3)$/,
+        loader: 'file-loader',
       },
       {
         test: /\.(eot|woff|woff2|ttf|otf|svg)$/,

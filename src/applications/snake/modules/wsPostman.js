@@ -1,5 +1,3 @@
-import config from './wsConfig';
-
 let instance;
 
 export default class WsPostman {
@@ -9,6 +7,13 @@ export default class WsPostman {
       instance = this;
     }
     return instance;
+  }
+
+  isReady() {
+    if (this.ws.readyState === 1) {
+      return true;
+    }
+    return false;
   }
 
   setRoomToken(roomToken) {
