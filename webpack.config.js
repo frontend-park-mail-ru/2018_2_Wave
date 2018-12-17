@@ -63,10 +63,6 @@ const config = {
         loader: 'file-loader?name=favicon.ico',
       },
       {
-        test: /\.(mp3)$/,
-        loader: 'file-loader',
-      },
-      {
         test: /\.(eot|woff|woff2|ttf|otf|svg)$/,
         loader: 'url-loader?limit=30000&name=fonts/[name].[ext]',
       },
