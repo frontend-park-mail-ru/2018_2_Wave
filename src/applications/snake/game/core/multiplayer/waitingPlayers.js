@@ -82,16 +82,21 @@ export default class WaitingPlayers {
 
   updateTable(message) {
     console.log('wait player');
-    this.players = document.getElementsByClassName('player');
+    const playersCollection = document.getElementsByClassName('players');
+    this.players = Array.prototype.slice.call(playersCollection);
     message.payload.members.forEach((member) => {
-      [this.member] = document.querySelectorAll(`[user_serial="${member.user_serial}"]`);
+      this.member = playersCollection.item(member.user_serial);
+      this.players.splice(this.players.indexOf(this.member), 1);
       [this.player] = this.member.getElementsByClassName('player');
       // this.player.innerHTML = member.user_serial;
-      this.player.innerHTML = 'newPlayer';
+      this.member.hidden = false;
+      this.player.innerHTML = `player${member.user_serial}`;
 
       [this.score] = this.member.getElementsByClassName('score');
       this.score.innerHTML = 0;
     });
+
+    this.players.forEach(player => player.hidden = true);
   }
 
   stop() {
