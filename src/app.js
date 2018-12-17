@@ -10,5 +10,5 @@ import './style.pcss';
 new Router(document.body, MainApp)
   .registerApp('terminal', Terminal)
   .registerApp('snake', Snake)
-  .registerApp('test', Game, 'https://www.innogames.com/games/all-games/')
+  .registerApp('test', Game, '//v6p9d9t4.ssl.hwcdn.net/html/1170743/index.html')
   .start();

@@ -2,7 +2,7 @@ import Element from '../../element';
 
 import template from './frame.pug';
 
-// import './styles/frame.css';
+import './frame.pcss';
 
 export default class FrameView extends Element {
   constructor(parent, wrapper, source) {
@@ -11,6 +11,7 @@ export default class FrameView extends Element {
   }
 
   render() {
+    // [this.frame] = this.wrapper.getElementsByClassName('frame');
     super.render({ source: this.source });
   }
 
