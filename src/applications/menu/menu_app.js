@@ -39,10 +39,21 @@ export default class MenuApp extends BaseApp {
     );
   }
 
+  animateLaunch() {
+    const { mainContainer } = this.env;
+
+    mainContainer.classList.remove('blurred');
+    mainContainer.classList.add('unblurred');
+    mainContainer.addEventListener('animationend', () => {
+      mainContainer.classList.remove('unblurred');
+      this.appContainer.hide();
+    }, { once: true });
+  }
 
   start() {
     this.appContainer.hide();
     this.env.show();
+    this.animateLaunch();
     super.start();
   }
 
@@ -57,17 +68,9 @@ export default class MenuApp extends BaseApp {
       this.start();
       return;
     }
+    this.animateLaunch();
 
     this.active = true;
-
-    const { mainContainer } = this.env;
-
-    mainContainer.classList.remove('blurred');
-    mainContainer.classList.add('unblurred');
-    mainContainer.addEventListener('animationend', () => {
-      mainContainer.classList.remove('unblurred');
-      this.appContainer.hide();
-    }, { once: true });
   }
 
   changeView(viewUrl, params) {

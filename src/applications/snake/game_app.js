@@ -49,6 +49,7 @@ export default class GameApp extends BaseApp {
   }
 
   start() {
+    this.parent.style.background = 'black';
     this.styleChanger.start();
     this.env.show();
     super.start();
@@ -63,6 +64,7 @@ export default class GameApp extends BaseApp {
   }
 
   resume() {
+    this.parent.style.background = 'black';
     this.styleChanger.start();
     this.env.show();
     super.resume();
@@ -71,5 +73,6 @@ export default class GameApp extends BaseApp {
   stop() {
     this.styleChanger.stop();
     this.webSocket.close();
+    super.stop();
   }
 }
