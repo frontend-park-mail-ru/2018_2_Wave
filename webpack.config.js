@@ -51,7 +51,7 @@ const config = {
         loader: 'pug-loader',
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|wav)$/,
         loader: 'file-loader?name=music/[hash].[ext]',
       },
       {
