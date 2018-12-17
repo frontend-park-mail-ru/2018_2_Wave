@@ -64,8 +64,8 @@ export default class BaseMenu extends Element {
     this.hide();
     const href = this.getFocus()[0].getAttribute('href');
     if (href) {
-      const [path, params] = href.split('?');
-      this.busController.emit('link', path, params);
+      const params = this.getFocus()[0].getAttribute('params');
+      this.busController.emit('link', href, params);
     } else {
       const event = this.getFocus()[0].getAttribute('event');
       this.busController.emit(event);

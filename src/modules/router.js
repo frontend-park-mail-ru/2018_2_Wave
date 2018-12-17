@@ -7,8 +7,10 @@ import bus from './bus';
 function splitParams(string) {
   if (!string) return null;
   const params = {};
+  if (string[0] === '?') {
+    string = string.slice(1);
+  }
   string
-    .slice(1)
     .split('&', 5)
     .forEach((item) => {
       const [key, val] = item.split('=');
