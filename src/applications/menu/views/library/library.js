@@ -20,9 +20,9 @@ const apps = [
     name: 'Snake',
   },
   {
-    link: '/terminal',
+    link: '/test',
     image: '/img/terminal.jpg',
-    name: 'Terminal',
+    name: 'Do not click here',
   },
   {
     link: '/snake',
