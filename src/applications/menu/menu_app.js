@@ -70,8 +70,17 @@ export default class MenuApp extends BaseApp {
     }, { once: true });
   }
 
-  changeView(...args) {
-    super.changeView(...args);
+  changeView(viewUrl, params) {
+    if (!this.views.hasOwnProperty(viewUrl)) {
+      console.error('No such view');
+      this.currentView = this.views.main;
+    } else {
+      this.currentView.hide();
+      this.currentView = this.views[viewUrl];
+    }
+
     this.env.setTitle(this.currentView.title);
+    this.currentView.render(params);
+    this.currentView.show();
   }
 }
