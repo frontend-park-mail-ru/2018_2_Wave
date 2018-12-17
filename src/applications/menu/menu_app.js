@@ -61,6 +61,7 @@ export default class MenuApp extends BaseApp {
     this.active = false;
     this.env.mainContainer.classList.add('blurred');
     this.appContainer.show();
+    document.activeElement.blur();
   }
 
   resume() {
@@ -69,6 +70,7 @@ export default class MenuApp extends BaseApp {
       return;
     }
     this.animateLaunch();
+    this.env.title.focus();
 
     this.active = true;
   }
