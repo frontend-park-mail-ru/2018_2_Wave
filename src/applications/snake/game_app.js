@@ -21,8 +21,8 @@ import ErrorMessage from './error_message/errorMessage';
 // import './styles/style.pcss';
 
 import './style.pcss';
-// import './styles/font.pcss';
-// import './static/fonts/PressStart2P.ttf';
+import './styles/font.pcss';
+import '../../../static/fonts/PressStart2P.ttf';
 
 export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
