@@ -69,6 +69,7 @@ export default class Router {
     }
 
     this.mainApp.start();
+    this.currentApp = this.mainApp;
 
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
@@ -115,12 +116,9 @@ export default class Router {
       return;
     }
 
-    this.currentApp = app;
-
     if (!app.active) {
-      Object.values(this.routes).forEach((knownApp) => {
-        if (knownApp !== app && knownApp.active) knownApp.pause();
-      });
+      this.currentApp.pause();
+      this.currentApp = app;
       app.launch(target);
     }
 
