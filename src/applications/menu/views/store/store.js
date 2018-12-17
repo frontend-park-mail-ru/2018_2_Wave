@@ -27,12 +27,13 @@ const storeApps = [
 
 
 export default class StoreView extends Element {
-  constructor(parent, wrapper) {
+  constructor(parent, wrapper, views) {
     super(template, parent, wrapper);
     super.render();
 
     this.title = 'Store';
 
+    this.parentViews = views;
     [this.panel] = this.wrapper.getElementsByClassName('store__tile-panel');
   }
 
@@ -42,5 +43,15 @@ export default class StoreView extends Element {
       const tile = new AppTile(this.panel, app);
       tile.show();
     });
+  }
+
+  show() {
+    super.show();
+    this.parentViews.env.menu.hide();
+  }
+
+  hide() {
+    super.hide();
+    this.parentViews.env.menu.show();
   }
 }

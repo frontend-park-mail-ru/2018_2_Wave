@@ -53,7 +53,6 @@ export default class LibraryView extends Element {
   }
 
   render() {
-    console.log(this.panel);
     if (this.panel.innerHTML !== '') return;
     apps.forEach((app) => {
       const tile = new AppTile(this.panel, app);

@@ -68,7 +68,7 @@ export default class BaseApp {
 
     const launchAnimation = element.animate({
       transform: [
-        'scale(1, 1) translate(0px, 0px)',
+        'translate(0px, 0px)',
         `scale(${widthScale}, ${heightScale}) translate(${translateX}px, ${translateY}px)`,
       ],
       'border-radius': [

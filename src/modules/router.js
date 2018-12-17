@@ -64,6 +64,15 @@ export default class Router {
   }
 
 
+  registerGame(url, App, source) {
+    const app = new App(url, this.root);
+    if (url === '/') this.mainApp = app;
+    app.specify(source);
+    this.routes[url] = app;
+    return this;
+  }
+
+
   start() {
     if (!this.routes.hasOwnProperty('/')) {
       throw new Error('No main app!');
@@ -86,21 +95,30 @@ export default class Router {
     const params = splitParams(paramString);
 
     let app;
-
     if (this.routes.hasOwnProperty(path)) {
       app = this.routes[path];
       // if (app === this.mainApp) app.changeView('main', params);
       app.changeView('main', params);
     } else {
-      Object.values(this.routes).some((currentApp) => {
-        if (currentApp.views.hasOwnProperty(path)) {
-          app = currentApp;
+      Object.values(this.routes).forEach((foundApp) => {
+        if (foundApp.views.hasOwnProperty(path)) {
+          app = foundApp;
           app.changeView(path, params);
-          return true;
         }
-        return false;
       });
     }
+
+    // let app;
+    // if (this.routes.hasOwnProperty(path)) {
+    //   app = this.routes[path];
+    //   if (app === this.mainApp) app.changeView('main', params);
+    // } else if (this.mainApp.views.hasOwnProperty(path)) {
+    //   app = this.mainApp;
+    //   app.changeView(path, params);
+    // } else {
+    //   this.open('/');
+    //   return;
+    // }
 
     if (!app) {
       this.open('/');
@@ -111,8 +129,6 @@ export default class Router {
 
     if (!app.active) {
       Object.values(this.routes).forEach((knownApp) => {
-        // TODO: make array of started apps
-        // TODO: stop old apps
         if (knownApp.active) knownApp.pause();
       });
       app.launch(target);

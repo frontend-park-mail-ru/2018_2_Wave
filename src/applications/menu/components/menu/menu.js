@@ -33,9 +33,12 @@ const tiles = [
 export default class Menu extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper);
+  }
 
+  show() {
+    if (!this.rendered) this.render();
 
-    this.showAnimation = this.wrapper.animate({
+    const showAnimation = this.wrapper.animate({
       transform: [
         'translateY(250px)',
         'translateY(0px)',
@@ -45,28 +48,25 @@ export default class Menu extends Element {
       fill: 'forwards',
       easing: 'cubic-bezier(.36,1.08,.55,.93)',
     });
-    this.showAnimation.pause();
-  }
-
-  show() {
-    if (!this.rendered) {
-      // render only one time, because menu is unchangeable
-      this.render();
-    }
-
-    this.showAnimation.onfinish = () => {
-      super.show();
-    };
-
-    this.showAnimation.play();
+    showAnimation.pause();
+    showAnimation.onfinish = () => super.show();
+    showAnimation.play();
   }
 
   hide() {
-    this.showAnimation.onfinish = () => {
-      super.hide();
-    };
-
-    this.showAnimation.reverse();
+    const hideAnimation = this.wrapper.animate({
+      transform: [
+        'translateY(0px)',
+        'translateY(250px)',
+      ],
+    }, {
+      duration: 200,
+      fill: 'forwards',
+      easing: 'cubic-bezier(.36,1.08,.55,.93)',
+    });
+    hideAnimation.pause();
+    hideAnimation.onfinish = () => super.hide();
+    hideAnimation.play();
   }
 
   render() {
