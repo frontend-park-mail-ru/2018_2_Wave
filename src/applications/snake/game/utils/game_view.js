@@ -5,7 +5,7 @@ import GAME_MODE from '../core/modes';
 import SnakeGameTemplate from '../templates/snakegame.pug';
 import '../../static/images/home.svg';
 
-// import music from '../../static/audio/game_of_thrones.mp3';
+
 import Element from '../../../element';
 
 export default class GameView extends Element {
@@ -87,6 +87,8 @@ export default class GameView extends Element {
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
       this.removeMultiplayerEnviroment();
     }
-    this.game.destroy();
+    if (this.game) {
+      this.game.destroy();
+    }
   }
 }

@@ -7,6 +7,7 @@ import Size from './models/size';
 import WaitingPlayers from './core/multiplayer/waitingPlayers';
 import busController from '../modules/busController';
 import config from './utils/game_config';
+import ErrorMessage from '../error_message/errorMessage';
 
 import './game.pcss';
 import WsPostman from '../modules/wsPostman';
@@ -16,12 +17,14 @@ export default class Game {
   constructor(gameInfo, canvas, gameInitData) {
     this.gameInitData = gameInitData;
     this.canvas = canvas;
+    this.wsPostman = new WsPostman();
+    this.errorMessage = new ErrorMessage();
+    this.busController = busController;
     this.countGameParams();
 
     switch (gameInfo.mode) {
       case GAME_MODE.CLASSIC: {
         if (gameInfo.type === GAME_MODE.SINGLPLAYER) {
-          // GameConstructor = OnlineGame;
           GameConstructor = OfflineGame;
         } else {
           GameConstructor = OfflineGame;
@@ -37,6 +40,11 @@ export default class Game {
       }
 
       case GAME_MODE.MULTIPLAYER: {
+        if (!this.wsPostman.isReady()) {
+          this.errorMessage.setErrorMessage('You are offline');
+          this.busController.emit('link', '/snake');
+          return;
+        }
         GameConstructor = OnlineGame;
         this.waitingPlayers = new WaitingPlayers(this.canvas, this.gameInitData, gameInfo);
         this.waitingPlayers.start();
@@ -54,7 +62,7 @@ export default class Game {
       this.canvas,
       this.windowSize,
       this.cellSize,
-      this.gameInitData.otientation, // FIXME: typo?
+      this.gameInitData.orientation,
     );
     this.gameCore = new GameConstructor(this.gameScene, this.gameInitData);
   }
@@ -68,7 +76,7 @@ export default class Game {
           this.gameInitData.windowHeight / this.gameInitData.heightCellCount,
         ),
       );
-      this.gameInitData.otientation = config.HORIZONTAL;
+      this.gameInitData.orientation = config.HORIZONTAL;
     } else {
       cellWidth = Math.floor(
         Math.min(
@@ -76,7 +84,7 @@ export default class Game {
           this.gameInitData.windowHeight / this.gameInitData.widthCellCount,
         ),
       );
-      this.gameInitData.otientation = config.VERTICAL;
+      this.gameInitData.orientation = config.VERTICAL;
     }
 
     // реальные размеры одной ячейки
@@ -97,7 +105,6 @@ export default class Game {
   start(message) {
     console.log('start quick search');
     if (this.events) {
-      this.wsPostman = new WsPostman();
       this.wsPostman.setRoomToken(message.payload.room_token);
       busController.removeBusListeners(this.events);
       this.waitingPlayers.stop();
