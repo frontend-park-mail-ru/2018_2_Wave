@@ -50,22 +50,12 @@ export default class Router {
   }
 
 
-  registerApp(url, App) {
-    const app = new App(url, this.appContainer);
+  registerApp(url, App, source) {
+    const app = new App(url, this.appContainer, source);
     if (url === '/') {
       console.error('MainApp already registered');
       return this;
     }
-    // TODO: create app object only when app opens
-    this.routes[url] = app;
-    return this;
-  }
-
-
-  registerGame(url, App, source) {
-    const app = new App(url, this.root);
-    if (url === '/') this.mainApp = app;
-    app.specify(source);
     this.routes[url] = app;
     return this;
   }
