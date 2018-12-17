@@ -59,18 +59,21 @@ export default class GameApp extends BaseApp {
 
   pause() {
     this.styleChanger.stop();
+    this.keyboardController.stop();
     this.env.hide();
     super.pause();
   }
 
   resume() {
     this.parent.style.background = 'black';
+    this.keyboardController.start();
     this.styleChanger.start();
     this.env.show();
     super.resume();
   }
 
   stop() {
+    this.keyboardController.stop();
     this.styleChanger.stop();
     this.webSocket.close();
     super.stop();

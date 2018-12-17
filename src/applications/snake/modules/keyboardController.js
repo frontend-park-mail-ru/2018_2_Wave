@@ -30,16 +30,18 @@ class KeyboardController {
 
     this.swipeDetector = swipeDetector;
     this.isSpace = false;
+    this.acceptInput = this.acceptInput.bind(this);
   }
 
   start() {
     // magic here
-    setTimeout(() => document.addEventListener('keydown', this.acceptInput.bind(this), 1));
+    // setTimeout(() => document.addEventListener('keydown', this.acceptInput.bind(this), 1));
+    document.addEventListener('keydown', this.acceptInput);
     this.swipeDetector.start();
   }
 
   stop() {
-    document.removeEventListener('keydown', this.acceptInput.bind(this));
+    document.removeEventListener('keydown', this.acceptInput);
     this.swipeDetector.stop();
   }
 
