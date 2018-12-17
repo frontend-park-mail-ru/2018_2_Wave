@@ -1,8 +1,9 @@
 import Game from '../game';
 import GAME_MODE from '../core/modes';
-import FullScreen from './fullScreen';
+// import FullScreen from './fullScreen';
 
 import SnakeGameTemplate from '../templates/snakegame.pug';
+import '../../static/images/home.svg';
 
 import Element from '../../../element';
 
@@ -13,7 +14,7 @@ export default class GameView extends Element {
   }
 
   show() {
-    FullScreen.set();
+    // FullScreen.set();
     super.show();
     this.setGameParams();
   }

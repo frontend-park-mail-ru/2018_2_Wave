@@ -7,7 +7,7 @@ const buttons = {
   '/singlplayer': 'Singlplayer',
   '/multiplayer': 'Multiplayer',
   '/hotkeys': 'Hot keys',
-  '/terminal': 'exit',
+  '/': 'exit',
 };
 
 export default class MainMenuView extends BaseMenu {

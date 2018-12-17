@@ -40,6 +40,13 @@ const config = {
         ],
       },
       {
+        test: /\.svg/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {},
+        },
+      },
+      {
         test: /\.pug$/,
         loader: 'pug-loader',
       },
@@ -56,7 +63,7 @@ const config = {
         loader: 'file-loader?name=favicon.ico',
       },
       {
-        test: /\.(eot|woff|woff2|ttf|otf)$/,
+        test: /\.(eot|woff|woff2|ttf|otf|svg)$/,
         loader: 'url-loader?limit=30000&name=fonts/[name].[ext]',
       },
     ],

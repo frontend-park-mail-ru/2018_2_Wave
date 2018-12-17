@@ -21,6 +21,8 @@ import ErrorMessage from './error_message/errorMessage';
 // import './styles/style.pcss';
 
 import './style.pcss';
+// import './styles/font.pcss';
+// import './static/fonts/PressStart2P.ttf';
 
 export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
@@ -47,14 +49,6 @@ export default class GameApp extends BaseApp {
   }
 
   start() {
-    if (this.parent.requestFullscreen) {
-      this.parent.requestFullscreen();
-    } else if (this.parent.mozRequestFullScreen) {
-      this.parent.mozRequestFullScreen();
-    } else if (this.parent.webkitRequestFullscreen) {
-      this.parent.webkitRequestFullscreen();
-    }
-
     this.styleChanger.start();
     this.env.show();
     super.start();
