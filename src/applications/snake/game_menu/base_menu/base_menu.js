@@ -62,7 +62,10 @@ export default class BaseMenu extends Element {
   processLine() {
     this.stop();
     this.hide();
-    const href = this.getFocus()[0].getAttribute('href');
+    let href = this.getFocus()[0].getAttribute('src');
+    if (!href) {
+      href = this.getFocus()[0].getAttribute('href');
+    }
     if (href) {
       const params = this.getFocus()[0].getAttribute('params');
       this.busController.emit('link', href, params);
