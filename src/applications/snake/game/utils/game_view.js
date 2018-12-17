@@ -55,23 +55,6 @@ export default class GameView extends Element {
       };
     }
 
-    // const audio = new Audio(music);
-    // const playPromise = audio.play();
-
-
-    // if (playPromise !== undefined) {
-    //   playPromise.then((_) => {
-    //   // Automatic playback started!
-    //   // Show playing UI.
-    //     console.log('playyyyyy');
-    //   })
-    //     .catch((error) => {
-    //       console.log('music error', error);
-    //       // Auto-play was prevented
-    //       // Show paused UI.
-    //     });
-    // }
-
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
       this.setMultiplayerEnviroment();
     } else {

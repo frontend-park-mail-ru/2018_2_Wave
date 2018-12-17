@@ -32,21 +32,16 @@ export default class AudioController {
       DEAD: this.dead,
     };
 
-    // const audios = this.mainAudios.length;
-    // const randomAudioIndex = Math.floor(Math.random() * (audios - 1));
-    // const mainAudio = this.mainAudios[randomAudioIndex];
-    const mainAudio = AudioController.getRandom(this.mainAudios);
-    const dead = AudioController.getRandom(this.deadAudios);
+    this.setNewMainAudio();
+    this.setNewDead();
 
-    this.mainAudio = new AudioModel(mainAudio);
     this.pickFood = new AudioModel(pickFood);
-    this.dead = new AudioModel(dead);
 
     this.busController = busController;
   }
 
   static getRandom(list) {
-    return list[Math.floor(Math.random() * (list.length - 1))];
+    return list[Math.floor(Math.random() * (list.length - 0.1))];
   }
 
   start() {
@@ -54,8 +49,19 @@ export default class AudioController {
     this.setBusListeners();
   }
 
+  setNewMainAudio() {
+    const mainAudio = AudioController.getRandom(this.mainAudios);
+    this.mainAudio = new AudioModel(mainAudio);
+  }
+
+  setNewDead() {
+    const dead = AudioController.getRandom(this.deadAudios);
+    this.dead = new AudioModel(dead);
+  }
+
   pause() {
     this.mainAudio.pause();
+    this.setNewMainAudio();
     this.removeBusListeners();
   }
 
@@ -76,6 +82,7 @@ export default class AudioController {
   dead() {
     this.mainAudio.stop();
     this.dead.play();
+    this.setNewDead();
   }
 
   setBusListeners() {
