@@ -62,6 +62,15 @@ export default class Router {
   }
 
 
+  registerGame(url, App, source) {
+    const app = new App(url, this.root);
+    if (url === '/') this.mainApp = app;
+    app.specify(source);
+    this.routes[url] = app;
+    return this;
+  }
+
+
   start() {
     if (!this.routes.hasOwnProperty('/')) {
       throw new Error('No main app!');
