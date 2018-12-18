@@ -35,7 +35,8 @@ export default class Router {
 
     this.mainApp = new MainApp('/', this.root);
     this.routes['/'] = this.mainApp;
-    this.appContainer = this.mainApp.appContainer.wrapper;
+    this.appContainer = this.mainApp.appContainer.screen;
+    this.appBar = this.mainApp.appContainer.bar;
 
     this.listeners = [
       {
@@ -53,11 +54,12 @@ export default class Router {
 
 
   registerApp(url, App, source) {
-    const app = new App(url, this.appContainer, source);
     if (url === '/') {
       console.error('MainApp already registered');
       return this;
     }
+    const app = new App(url, this.appContainer, source);
+    app.setBar(this.appBar);
     this.routes[url] = app;
     return this;
   }
@@ -98,18 +100,6 @@ export default class Router {
         }
       });
     }
-
-    // let app;
-    // if (this.routes.hasOwnProperty(path)) {
-    //   app = this.routes[path];
-    //   if (app === this.mainApp) app.changeView('main', params);
-    // } else if (this.mainApp.views.hasOwnProperty(path)) {
-    //   app = this.mainApp;
-    //   app.changeView(path, params);
-    // } else {
-    //   this.open('/');
-    //   return;
-    // }
 
     if (!app) {
       this.open('/');

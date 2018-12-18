@@ -18,6 +18,9 @@ export default class BaseApp {
     this.started = false;
   }
 
+  setBar(bar) {
+    this.bar = bar;
+  }
 
   changeView(viewUrl, params) {
     // write view change animations in overridden method
@@ -87,10 +90,37 @@ export default class BaseApp {
     launchAnimation.play();
   }
 
+  showBar() {
+    return this.bar.animate({
+      transform: [
+        'translateY(-100px)',
+        'translateY(0px)',
+      ],
+    }, {
+      duration: 300,
+      fill: 'forwards',
+      easing: 'cubic-bezier(.36,1.08,.55,.93)',
+    });
+  }
+
+  hideBar() {
+    return this.bar.animate({
+      transform: [
+        'translateY(0px)',
+        'translateY(-100px)',
+      ],
+    }, {
+      duration: 100,
+      fill: 'forwards',
+      easing: 'cubic-bezier(.36,1.08,.55,.93)',
+    });
+  }
+
   start() {
     this.started = true;
     this.active = true;
     this.currentView.show();
+    this.showBar();
   }
 
   stop() {
@@ -98,12 +128,18 @@ export default class BaseApp {
     this.active = false;
     this.currentView.hide();
     this.parent.innerHTML = '';
+    this.hideBar();
   }
 
   pause() {
     this.parent.style.background = 'none';
     this.active = false;
-    this.currentView.hide();
+    const barAnimation = this.hideBar();
+    barAnimation.pause();
+    barAnimation.onfinish = () => {
+      this.currentView.hide();
+    };
+    barAnimation.play();
   }
 
   resume() {
@@ -111,7 +147,8 @@ export default class BaseApp {
       this.start();
       return;
     }
-    this.active = true;
+    this.showBar();
     this.currentView.show();
+    this.active = true;
   }
 }
