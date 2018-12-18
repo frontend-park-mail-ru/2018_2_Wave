@@ -8,6 +8,9 @@ export default class AppContainer extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
     super.render();
+    [this.screen] = this.wrapper.getElementsByClassName('screen');
+    [this.bar] = this.wrapper.getElementsByClassName('bar');
+    // this.bar.hidden = true;
   }
 
   hide() {

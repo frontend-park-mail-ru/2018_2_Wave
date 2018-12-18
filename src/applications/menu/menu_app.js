@@ -54,7 +54,9 @@ export default class MenuApp extends BaseApp {
     this.appContainer.hide();
     this.env.show();
     // this.animateLaunch();
-    super.start();
+    this.started = true;
+    this.active = true;
+    this.currentView.show();
   }
 
   pause() {
@@ -71,7 +73,6 @@ export default class MenuApp extends BaseApp {
     }
     this.animateLaunch();
     this.env.title.focus();
-
     this.active = true;
   }
 
