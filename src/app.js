@@ -1,5 +1,5 @@
 import Router from './modules/router';
-import MainApp from './applications/menu/menu_app';
+import MainApp from './applications/main/main_app';
 import Terminal from './applications/terminal/terminal_app';
 import Snake from './applications/snake/game_app';
 import Game from './applications/frame/game_app';

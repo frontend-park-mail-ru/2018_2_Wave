@@ -107,7 +107,7 @@ export default class BaseApp {
     return this.bar.animate({
       transform: [
         'translateY(0px)',
-        'translateY(-100px)',
+        'translateY(-65px)',
       ],
     }, {
       duration: 100,
@@ -121,6 +121,7 @@ export default class BaseApp {
     this.active = true;
     this.currentView.show();
     this.showBar();
+    setTimeout(() => this.hideBar(), 2000);
   }
 
   stop() {
@@ -148,6 +149,7 @@ export default class BaseApp {
       return;
     }
     this.showBar();
+    setTimeout(() => this.hideBar(), 2000);
     this.currentView.show();
     this.active = true;
   }
