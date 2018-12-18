@@ -8,9 +8,9 @@ import template from './menu.pug';
 
 const tiles = [
   {
-    link: '/library',
-    name: 'Library',
-    icon: 'apps',
+    link: '/home',
+    name: 'Home',
+    icon: 'home',
   },
   {
     link: '/store',
