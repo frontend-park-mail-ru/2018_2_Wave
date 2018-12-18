@@ -1,9 +1,9 @@
 import Element from '../../../element';
 import AppTile from '../../components/app_tile/app_tile';
 
-import template from './library.pug';
+import template from './home.pug';
 import '../../components/app_tile/app_tile.pcss';
-import './library.pcss';
+import './home.pcss';
 
 import '../../../../../static/img/terminal.jpg';
 import '../../../../../static/img/snake.jpg';
@@ -42,14 +42,30 @@ const apps = [
 ];
 
 
-export default class LibraryView extends Element {
+export default class HomeView extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper);
     super.render();
 
-    this.title = 'Library';
+    this.title = 'Home';
 
-    [this.panel] = this.wrapper.getElementsByClassName('library__tile-panel');
+    [this.panel] = this.wrapper.getElementsByClassName('home__tile-panel');
+  }
+
+  show() {
+    const [grid] = document.getElementsByClassName('grid-common');
+    if (!grid.classList.contains('home__grid')) {
+      grid.classList.add('home__grid');
+    }
+    super.show();
+  }
+
+  hide() {
+    const [grid] = document.getElementsByClassName('grid-common');
+    if (grid.classList.contains('home__grid')) {
+      grid.classList.remove('home__grid');
+    }
+    super.show();
   }
 
   render() {

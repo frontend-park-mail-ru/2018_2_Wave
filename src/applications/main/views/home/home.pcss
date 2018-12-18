@@ -1,0 +1,65 @@
+@import '../../../../config.pcss';
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__grid {
+    grid-template-rows: 14% 19% 1fr 27%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 10px;
+    grid-auto-rows: 0;
+
+    grid-template-areas:
+    "userblock icon-set"
+    "title title"
+    "content content"
+    "menu menu";
+  }
+
+  &__tile-panel {
+    height: 80%;
+    width: calc(100vw - 2 * var(--grid-padding-x));
+
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media (--minimal) {
+  .home__tile-panel {
+    width: calc(100vw - 2 * var(--minimal-grid-padding-x));
+  }
+}
+
+@media (--mobile) {
+  .home__grid {
+    grid-template-rows: 14% 14% 1fr 27%;
+    grid-template-areas:
+      "userblock"
+      "title"
+      "content"
+      "menu";
+  }
+}
+
+@media (--tablet) {
+  .home__grid {
+    grid-template-rows: 14% 14% 1fr 27%;
+  }
+}
+
+@media (--small) {
+  .home__grid {
+    grid-template-rows: 14% 14% 1fr 27%;
+  }
+
+  .home__tile-panel {
+    width: calc(100vw - 2 * var(--small-grid-padding-x));
+  }
+}
