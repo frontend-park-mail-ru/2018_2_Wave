@@ -38,8 +38,6 @@ export default class OfflineGame extends GameCore {
     this.scene = scene;
     this.busController = busController;
 
-    this.deadMessage  = new DeadMessage();
-
     this.controllers = [];
 
     this.level = new LevelModel(this.cellCount);
@@ -64,9 +62,11 @@ export default class OfflineGame extends GameCore {
 
     this.audioController = new AudioController();
     this.errorMessage = new ErrorMessage();
+    this.deadMessage  = new DeadMessage();
 
     this.events = {
       DEAD: this.dead.bind(this),
+      // Space: this.pause,
     };
   }
 

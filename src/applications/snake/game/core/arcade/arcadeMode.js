@@ -1,26 +1,28 @@
-import GameCore from './core';
-import events from './events';
-import keyboardController from '../../modules/keyboardController';
-import busController from '../../modules/busController';
-import Size from '../models/size';
+import GameCore from '../core';
+import keyboardController from '../../../modules/keyboardController';
+import busController from '../../../modules/busController';
+import GAME_MODE from '../modes';
 
+import LevelController from '../../controllers/levelController';
+import SnakeController from '../../controllers/snackeController';
+import FoodsController from '../../controllers/foodsController';
+import AudioController from '../../controllers/audioController';
+import PlayerController from '../../controllers/playerController';
+import FrameSpeedController from '../../controllers/frameSpeedController';
 
-import LevelController from '../controllers/levelController';
-import SnakeController from '../controllers/snackeController';
-import FoodsController from '../controllers/foodsController';
-import AudioController from '../controllers/audioController';
-import PlayerController from '../controllers/playerController';
-import FrameSpeedController from '../controllers/frameSpeedController';
+import LevelView from '../../views/levelView';
+import SnakeView from '../../views/snakeView';
+import FoodsView from '../../views/foodsView';
 
-import LevelView from '../views/levelView';
-import SnakeView from '../views/snakeView';
-import FoodsView from '../views/foodsView';
+import LevelModel from '../../models/levelModel';
+import SnakeModel from '../../models/snakeModel';
+import FoodsModel from '../../models/foodsModel';
+import PlayerModel from '../../models/playerModel';
+import FrameSpeedModel from '../../models/frameSpeedModel';
 
-import LevelModel from '../models/levelModel';
-import SnakeModel from '../models/snakeModel';
-import FoodsModel from '../models/foodsModel';
-import PlayerModel from '../models/playerModel';
-import FrameSpeedModel from '../models/frameSpeedModel';
+import DeadMessage from '../../dead_message/dead_message';
+import DeadMenuTemplate from './dead_menu.pug';
+import ErrorMessage from '../../../error_message/errorMessage';
 
 export default class ArcadeMode extends GameCore {
   constructor(scene, gameInitData) {
@@ -31,8 +33,6 @@ export default class ArcadeMode extends GameCore {
     this.paused = false;
 
     this.snakeText = gameInitData.snakeText;
-    this.startX = gameInitData.DOMRect.x;
-    this.startY = gameInitData.DOMRect.y;
 
     this.cellCount = gameInitData.cellCount;
 
@@ -47,7 +47,7 @@ export default class ArcadeMode extends GameCore {
     this.controllers.push(this.frameSpeedController);
 
     this.level = new LevelModel(this.cellCount);
-    
+
     this.player = new PlayerModel();
     this.playerController = new PlayerController(this.player);
 
@@ -67,6 +67,8 @@ export default class ArcadeMode extends GameCore {
     this.scene.push(new FoodsView(this.foods));
 
     this.audioController = new AudioController();
+    this.errorMessage = new ErrorMessage();
+    this.deadMessage  = new DeadMessage();
 
     this.resume =  this.resume.bind(this);
     this.resumeEvents = {
@@ -77,11 +79,27 @@ export default class ArcadeMode extends GameCore {
     this.stopEvents = {
       Space: this.pause,
     };
+    this.events = {
+      DEAD: this.dead.bind(this),
+      // Space: this.pause,
+    };
 
+    this.setBusListeners();
+  }
+
+  setBusListeners() {
     busController.setBusListeners(this.stopEvents);
+    busController.setBusListeners(this.events);
+  }
+
+  removeBusListeners() {
+    busController.removeBusListeners(this.events);
+    busController.removeBusListeners(this.resumeEvents);
+    busController.removeBusListeners(this.events);
   }
 
   start() {
+    this.errorMessage.setErrorMessage('You are in develo version');
     this.controllers.forEach(controller => controller.init());
     super.start();
 
@@ -96,21 +114,39 @@ export default class ArcadeMode extends GameCore {
   }
 
   gameloop(now) {
-    setTimeout((_) => {
-      this.lastFrame = now;
+    if (!this.isDead) {
+      setTimeout((_) => {
+        this.lastFrame = now;
 
-      if (this.keyboardController.isCommand()) {
-        this.snakeController.setDirection(this.keyboardController.getLastCommand());
-      }
+        if (this.keyboardController.isCommand()) {
+          this.snakeController.setDirection(this.keyboardController.getLastCommand());
+        }
 
-      if (!this.paused) {
-        this.update();
-      }
+        if (!this.paused) {
+          this.update();
+        }
 
-      this.scene.renderScene();
+        this.scene.renderScene();
 
-      this.gameloopRequestId = requestAnimationFrame(this.gameloop);
-    }, 1000 / this.frameSpeed.getSpeed());
+        this.gameloopRequestId = requestAnimationFrame(this.gameloop);
+      }, 1000 / this.frameSpeed.getSpeed());
+    }
+  }
+
+  dead() {
+    this.isDead = true;
+    const deadButtons = {
+      'PLAY AGAIN': {
+        href: '/game',
+        params: `mode=${GAME_MODE.ARCADE}&type=${GAME_MODE.SINGLPLAYER}`,
+      },
+      MENU: {
+        href: '/snake',
+        params: 'menu',
+      },
+    };
+
+    this.deadMessage.show(DeadMenuTemplate({ deadButtons }), this.player.score);
   }
 
   pause() {
@@ -130,9 +166,10 @@ export default class ArcadeMode extends GameCore {
   }
 
   destroy() {
+    this.isDead = true;
     super.destroy();
-    busController.removeBusListeners(this.stopEvents);
-    busController.removeBusListeners(this.resumeEvents);
+    this.removeBusListeners();
+    this.deadMessage.hide();
     this.audioController.destroy();
     cancelAnimationFrame(this.gameloopRequestId);
   }
