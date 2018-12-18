@@ -116,7 +116,6 @@ class TerminalApp extends BaseApp {
 
 
   focusInput() {
-    console.log('focusing!');
     const input = this.view.getInput();
     if (input) {
       input.focus();

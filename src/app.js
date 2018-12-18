@@ -17,5 +17,5 @@ new Router(document.body, MainApp)
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('./sw.js')
-    .catch(err => console.log({ err }));
+    .catch(err => console.error({ err }));
 }
