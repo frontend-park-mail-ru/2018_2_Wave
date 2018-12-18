@@ -1,5 +1,5 @@
 export default class AudioModel {
-  constructor(path, volume = 1, loop = false) {
+  constructor({ path, volume = 1, loop = false }) {
     this.path         = path;
     this.audio        = new Audio();
     this.audio.src    = `./${path}`;

@@ -27,16 +27,18 @@ export default class AudioController {
 
     this.pickFood = this.pickFood.bind(this);
     this.dead = this.dead.bind(this);
+    this.pauseMusic = this.pauseMusic.bind(this);
     this.events = {
       pickFood: this.pickFood,
       DEAD: this.dead,
+      KeyS: this.pauseMusic,
     };
 
     this.setNewMainAudio();
     this.setNewDead();
 
-    this.pickFood = new AudioModel(pickFood);
-
+    this.pause = false;
+    this.pickFood = new AudioModel({ path: pickFood });
     this.busController = busController;
   }
 
@@ -51,12 +53,21 @@ export default class AudioController {
 
   setNewMainAudio() {
     const mainAudio = AudioController.getRandom(this.mainAudios);
-    this.mainAudio = new AudioModel(mainAudio);
+    this.mainAudio = new AudioModel({ path: mainAudio, loop: true });
+  }
+
+  pauseMusic() {
+    if (this.pause) {
+      this.mainAudio.play();
+    } else {
+      this.mainAudio.pause();
+    }
+    this.pause = !this.pause;
   }
 
   setNewDead() {
     const dead = AudioController.getRandom(this.deadAudios);
-    this.dead = new AudioModel(dead);
+    this.dead = new AudioModel({ path: dead });
   }
 
   pause() {
@@ -76,13 +87,17 @@ export default class AudioController {
   }
 
   pickFood() {
-    this.pickFood.play();
+    if (!this.pause) {
+      this.pickFood.play();
+    }
   }
 
   dead() {
-    this.mainAudio.stop();
-    this.dead.play();
-    this.setNewDead();
+    if (!this.pause) {
+      this.mainAudio.stop();
+      this.dead.play();
+      this.setNewDead();
+    }
   }
 
   setBusListeners() {
