@@ -10,6 +10,7 @@ class KeyboardController {
       // 27, // esc
       // 16, // shift
       // 32, // space
+      83, // s turn off the music
       81, // q exit
       84, // t key (change theme)
     ];
