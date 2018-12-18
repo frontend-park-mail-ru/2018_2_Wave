@@ -1,5 +1,3 @@
-import globalUser from '../../globalUser';
-
 export default class EnemyModel {
   constructor() {
     this.segments = [];
@@ -9,8 +7,8 @@ export default class EnemyModel {
     this.user_serial = snake.user_serial;
     snake.body.forEach((segment) => {
       this.segments.push({
-        x: segment.position.X,
-        y: segment.position.Y,
+        x: segment.position.x,
+        y: segment.position.y,
       });
     });
   }

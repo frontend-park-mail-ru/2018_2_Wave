@@ -3,6 +3,7 @@ import GAME_MODE from '../modes';
 import Loader from './loader/loader';
 import busController from '../../../modules/busController';
 import ReadyMessage from './ready_message/ready_message';
+import ErrorMessage from '../../../error_message/errorMessage';
 
 export default class WaitingPlayers {
   constructor(canvas, gameParams, gameInfo) {
@@ -10,10 +11,14 @@ export default class WaitingPlayers {
     this.gameParams = gameParams;
     this.gameInfo = gameInfo;
     this.loader = new Loader(this.canvas, this.gameParams);
+    this.errorMessage = new ErrorMessage();
 
+    this.updateTable = this.updateTable.bind(this);
+    this.quickSearchReady = this.quickSearchReady.bind(this);
     this.events = {
-      quick_search_status: this.updateTable.bind(this),
+      quick_search_added: this.updateTable.bind(this),
       quick_search_ready: this.quickSearchReady.bind(this),
+      quick_search_removed: this.removed.bind(this),
     };
   }
 
@@ -80,19 +85,23 @@ export default class WaitingPlayers {
     this.game_mode.innerHTML = this.temp_mode;
   }
 
+  removed(message) {
+    this.errorMessage.setErrorMessage('Player left the room');
+    this.updateTable(message);
+  }
+
   updateTable(message) {
-    console.log('wait player');
     const playersCollection = document.getElementsByClassName('players');
     this.players = Array.prototype.slice.call(playersCollection);
     message.payload.members.forEach((member) => {
-      this.member = playersCollection.item(member.user_serial);
-      this.players.splice(this.players.indexOf(this.member), 1);
-      [this.player] = this.member.getElementsByClassName('player');
+      this.player = playersCollection.item(member.user_serial);
+      this.players.splice(this.players.indexOf(this.player), 1);
+      [this.playerName] = this.player.getElementsByClassName('player');
       // this.player.innerHTML = member.user_serial;
-      this.member.hidden = false;
-      this.player.innerHTML = `player${member.user_serial}`;
+      this.player.hidden = false;
+      this.playerName.innerHTML = `player${member.user_serial}`;
 
-      [this.score] = this.member.getElementsByClassName('score');
+      [this.score] = this.player.getElementsByClassName('score');
       this.score.innerHTML = 0;
     });
 

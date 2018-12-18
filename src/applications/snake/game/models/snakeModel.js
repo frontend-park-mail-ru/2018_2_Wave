@@ -89,8 +89,8 @@ export default class SnakeModel {
           // this.playerId = snake.playerId
           snake.body.forEach((segment) => {
             this.segments.push({
-              x: segment.position.X,
-              y: segment.position.Y,
+              x: segment.position.x,
+              y: segment.position.y,
             });
           });
         }
