@@ -4,7 +4,8 @@ export default class Ws {
     this.mesageParser = mesageParser;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    this.address = 'ws://192.168.1.195:9605/conn/ws';
+    // this.address = 'ws://192.168.1.195:9605/conn/ws';
+    this.address = 'wss://localhost:9605/conn/ws';
   }
 
   connect() {

@@ -26,6 +26,9 @@ export default class ReadyMessage extends BaseMenu {
   setListeners() {
     busController.setBusListeners(this.events);
   }
+  acceptMembers() {
+    
+  }
 
   removeListeners() {
     busController.removeBusListeners(this.events);
