@@ -5,6 +5,7 @@ import BaseApp from '../base_app';
 import Enviroment from './views/enviroment/env';
 import LibraryView from './views/library/library';
 import StoreView from './views/store/store';
+import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
@@ -32,6 +33,11 @@ export default class MenuApp extends BaseApp {
     this.env = env;
     this.views.env = this.env;
     this.menu = this.env.menu;
+
+    this.bar = new Bar(
+      this.env.appContainerPlace,
+      this.env.appContainerPlace,
+    );
 
     this.appContainer = new AppContainer(
       this.env.appContainerPlace,

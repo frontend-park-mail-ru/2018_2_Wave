@@ -90,38 +90,13 @@ export default class BaseApp {
     launchAnimation.play();
   }
 
-  showBar() {
-    return this.bar.animate({
-      transform: [
-        'translateY(-100px)',
-        'translateY(0px)',
-      ],
-    }, {
-      duration: 300,
-      fill: 'forwards',
-      easing: 'cubic-bezier(.36,1.08,.55,.93)',
-    });
-  }
-
-  hideBar() {
-    return this.bar.animate({
-      transform: [
-        'translateY(0px)',
-        'translateY(-65px)',
-      ],
-    }, {
-      duration: 100,
-      fill: 'forwards',
-      easing: 'cubic-bezier(.36,1.08,.55,.93)',
-    });
-  }
-
   start() {
     this.started = true;
     this.active = true;
     this.currentView.show();
-    this.showBar();
-    setTimeout(() => this.hideBar(), 2000);
+
+    this.bar.show();
+    setTimeout(() => this.bar.hide(), 2000);
   }
 
   stop() {
@@ -129,18 +104,22 @@ export default class BaseApp {
     this.active = false;
     this.currentView.hide();
     this.parent.innerHTML = '';
-    this.hideBar();
+    this.bar.hide();
   }
 
   pause() {
     this.parent.style.background = 'none';
     this.active = false;
-    const barAnimation = this.hideBar();
-    barAnimation.pause();
-    barAnimation.onfinish = () => {
+    const barAnimation = this.bar.hide();
+    if (barAnimation) {
+      barAnimation.pause();
+      barAnimation.onfinish = () => {
+        this.currentView.hide();
+      };
+      barAnimation.play();
+    } else {
       this.currentView.hide();
-    };
-    barAnimation.play();
+    }
   }
 
   resume() {
@@ -148,8 +127,8 @@ export default class BaseApp {
       this.start();
       return;
     }
-    this.showBar();
-    setTimeout(() => this.hideBar(), 2000);
+    this.bar.show();
+    setTimeout(() => this.bar.hide(), 2000);
     this.currentView.show();
     this.active = true;
   }

@@ -7,10 +7,8 @@ import template from './app_container.pug';
 export default class AppContainer extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
-    super.render();
+    this.render();
     [this.screen] = this.wrapper.getElementsByClassName('screen');
-    [this.bar] = this.wrapper.getElementsByClassName('bar');
-    // this.bar.hidden = true;
   }
 
   hide() {
@@ -21,5 +19,10 @@ export default class AppContainer extends Element {
   show() {
     super.show();
     this.wrapper.style['z-index'] = 2;
+  }
+
+  render() {
+    console.log(this.wrapper);
+    this.wrapper.innerHTML += this.template();
   }
 }
