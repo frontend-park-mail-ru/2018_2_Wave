@@ -99,7 +99,7 @@ export default class ArcadeMode extends GameCore {
   }
 
   start() {
-    this.errorMessage.setErrorMessage('You are in develo version');
+    this.errorMessage.setErrorMessage('You are in develop version');
     this.controllers.forEach(controller => controller.init());
     super.start();
 
