@@ -10,7 +10,7 @@ export default class WsPostman {
   }
 
   isReady() {
-    if (this.ws.readyState === 1) {
+    if (this.ws.getReadyState() === 1) {
       return true;
     }
     return false;

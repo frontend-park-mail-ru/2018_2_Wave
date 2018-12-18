@@ -28,25 +28,16 @@ export default class ReadyMessage extends BaseMenu {
   }
 
   removeListeners() {
-    busController.removeBusListeners(this.events); 
+    busController.removeBusListeners(this.events);
   }
 
   quickSearchStart() {
-    console.log('quickSearchStart');
     this.wsPostman.quickSearchAccept();
   }
 
   quickSearchQuit() {
     console.log('quickSearchQuit');
     this.wsPostman.quickSearchAbort();
-  }
-
-  quickSearchQuit(message) {
-    console.log('accepted', message.payload);
-  }
-
-  acceptMembers() {
-
   }
 
   show() {

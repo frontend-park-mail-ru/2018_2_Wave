@@ -4,7 +4,7 @@ export default class Ws {
     this.mesageParser = mesageParser;
 
     // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    this.address = 'wss://rasseki:9605/conn/ws';
+    this.address = 'ws://192.168.1.195:9605/conn/ws';
   }
 
   connect() {
@@ -22,6 +22,10 @@ export default class Ws {
         this.mesageParser.emit('close');
       };
     };
+  }
+
+  getReadyState() {
+    return this.ws.readyState;
   }
 
   handleMessage(event) {
