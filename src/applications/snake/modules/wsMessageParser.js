@@ -25,7 +25,8 @@ export default class WsMessageParser {
     || message.status === 'quick_search_ready'
     || message.status === 'quick_search_done'
     || message.status === 'quick_search_added'
-    || message.status === 'quick_search_removed') {
+    || message.status === 'quick_search_removed'
+    || message.status === 'quick_search_kick') {
       busController.emit(message.status, message);
     }
     if (typeof message === 'string') {

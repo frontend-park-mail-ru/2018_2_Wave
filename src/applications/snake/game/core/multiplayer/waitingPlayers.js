@@ -15,10 +15,13 @@ export default class WaitingPlayers {
 
     this.updateTable = this.updateTable.bind(this);
     this.quickSearchReady = this.quickSearchReady.bind(this);
+    this.removed = this.removed.bind(this);
+    this.kick = this.kick.bind(this);
     this.events = {
-      quick_search_added: this.updateTable.bind(this),
-      quick_search_ready: this.quickSearchReady.bind(this),
-      quick_search_removed: this.removed.bind(this),
+      quick_search_added: this.updateTable,
+      quick_search_ready: this.quickSearchReady,
+      quick_search_removed: this.removed,
+      quick_search_kick: this.kick,
     };
   }
 
@@ -60,6 +63,11 @@ export default class WaitingPlayers {
   quickSearchReady(message) {
     this.readyMessage = new ReadyMessage(message.payload.accept_timeout);
     this.readyMessage.show();
+  }
+
+  kick(message) {
+    this.errorMessage.setErrorMessage('You were kiked from the room');
+    busController.emit('link', '/snake');
   }
 
   setEnviroment() {

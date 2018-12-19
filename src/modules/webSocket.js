@@ -3,9 +3,8 @@ export default class Ws {
     // this.host = window.location.host;
     this.mesageParser = mesageParser;
 
-    // const address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/ws`;
-    // this.address = 'ws://192.168.1.195:9605/conn/ws';
-    this.address = 'ws://localhost:9605/conn/ws';
+    this.host = 'localhost:9605';
+    this.address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/conn/ws`;
   }
 
   connect() {

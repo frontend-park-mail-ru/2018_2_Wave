@@ -26,8 +26,9 @@ export default class ReadyMessage extends BaseMenu {
   setListeners() {
     busController.setBusListeners(this.events);
   }
+
   acceptMembers() {
-    
+
   }
 
   removeListeners() {
@@ -51,6 +52,7 @@ export default class ReadyMessage extends BaseMenu {
 
   startTimer() {
     [this.timer] = this.parent.getElementsByClassName('timer');
+    this.timer.innerHTML = 30;
     this.begin = new Date().getSeconds();
     this.timerLoop();
   }
@@ -58,7 +60,19 @@ export default class ReadyMessage extends BaseMenu {
   timerLoop() {
     this.timerId = setInterval(() => {
       const now = new Date();
-      const distance = this.time - (now.getSeconds() - this.begin);
+      const nowSeconds = now.getSeconds();
+      let distance;
+      if (nowSeconds > this.begin) {
+        distance = this.time - (nowSeconds - this.begin);
+      } else {
+        distance = this.begin - nowSeconds - this.time;
+      }
+      console.log('timer', this.time, now.getSeconds(), this.begin, distance);
+      if (!distance || distance > 30) {
+        distance = 30;
+      } else if (distance < 0) {
+        distance = 0;
+      }
       this.timer.innerHTML = distance;
     }, 1000);
   }

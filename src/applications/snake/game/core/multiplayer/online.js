@@ -54,30 +54,30 @@ export default class OnlineGame extends GameCore {
 
     this.snake = new SnakeModel();
     this.snakeController = new SnakeController(this.snake, this.level);
-    // this.controllers.push(this.snakeController);
-    // this.scene.push(new SnakeView(this.snake));
+    this.controllers.push(this.snakeController);
+    this.scene.push(new SnakeView(this.snake));
 
     this.foods = new FoodsModel(10);
     this.foodsController = new FoodsController(this.foods, this.level);
-    // this.controllers.push(this.foodsController);
-    // this.scene.push(new FoodsView(this.foods));
+    this.controllers.push(this.foodsController);
+    this.scene.push(new FoodsView(this.foods));
 
     this.boosts = new FoodsModel(10);
     this.boostsController = new FoodsController(this.boosts, this.level);
-    // this.controllers.push(this.boostsController);
-    // this.scene.push(new FoodsView(this.boosts));
+    this.controllers.push(this.boostsController);
+    this.scene.push(new FoodsView(this.boosts));
 
     this.enemies = new EnemiesModel(gameInitData.userToken);
-    // this.scene.push(new EnemiesView(this.enemies));
+    this.scene.push(new EnemiesView(this.enemies));
 
-    // this.wsMessageParser.setModel('snakes', this.snake);
-    // this.wsMessageParser.setModel('snakes', this.enemies);
-    // this.wsMessageParser.setModel('food', this.foods);
+    this.wsMessageParser.setModel('snakes', this.snake);
+    this.wsMessageParser.setModel('snakes', this.enemies);
+    this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
-    // this.wsMessageParser.setModel('boosters', this.boosts);
+    this.wsMessageParser.setModel('boosters', this.boosts);
 
     this.deadMessage  = new DeadMessage();
-    // this.audioController = new AudioController();
+    this.audioController = new AudioController();
 
     this.events = {
       STATUS_DEAD: this.dead.bind(this),
