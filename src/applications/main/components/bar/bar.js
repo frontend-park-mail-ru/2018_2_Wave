@@ -30,7 +30,7 @@ export default class Bar extends Element {
   }
 
   hide() {
-    clearTimeout(this.hideTimeout);
+    clearTimeout(this.hideTimeout); 
     if (this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = true;

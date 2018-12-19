@@ -47,7 +47,7 @@ export default class StoreView extends Element {
 
     this.list.show();
     super.show();
-    this.parentViews.env.menu.hide();
+    // this.parentViews.env.menu.hide();
   }
 
   hide() {
@@ -58,6 +58,6 @@ export default class StoreView extends Element {
 
     this.list.hide();
     super.hide();
-    this.parentViews.env.menu.show();
+    // this.parentViews.env.menu.show();
   }
 }
