@@ -14,16 +14,17 @@
     transition: all 0.3s ease-out;
 
     &:hover > .app__card {
+      box-shadow: 0 0 15px 2px #4462C4;
       transform: scale(1.03);
     }
 
     &:hover > .app__card::after {
       transform: scale(1.03) translateY(3px);
+      box-shadow: 0px 0px 60px 5px #4462C4;
     }
 
     &:hover .tile__name {
-      color: white;
-      transform: scale(1.15) translateY(5px);
+      opacity: 0;
     }
   }
 
