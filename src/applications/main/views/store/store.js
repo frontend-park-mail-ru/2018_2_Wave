@@ -24,8 +24,7 @@ export default class StoreView extends Element {
     this.list = new List(this.listPlace, this.listPlace);
     this.listPlace.addEventListener('click', (event) => {
       const categoryName = event.target.innerText.toLowerCase();
-      this.render(categoryName);
-      console.log('rendered');
+      if (categoryName) this.render(categoryName);
     });
 
     this.list.render(Object.keys(storeApps));
