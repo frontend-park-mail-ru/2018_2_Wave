@@ -1,5 +1,4 @@
 import busController from './busController';
-import config from './wsConfig';
 
 let instance;
 
@@ -28,7 +27,8 @@ export default class WsMessageParser {
     || message.status === 'quick_search_added'
     || message.status === 'quick_search_removed'
     || message.status === 'quick_search_kick'
-    || message.status === 'quick_search_failed') {
+    || message.status === 'quick_search_failed'
+    || message.status === 'win') {
       busController.emit(message.status, message);
     } else if (message.status === 'STATUS_TICK'
       || message.status === 'STATUS_TOKEN') {

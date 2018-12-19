@@ -76,10 +76,8 @@ export default class GameView extends Element {
   }
 
   startGame() {
-    console.log('game init data', this.gameInitData);
     const [canvas] = this.wrapper.getElementsByClassName('snakegame-canvas');
     this.game = new Game(this.gameParams, canvas, this.gameInitData);
-    // this.game.start();
   }
 
   hide() {

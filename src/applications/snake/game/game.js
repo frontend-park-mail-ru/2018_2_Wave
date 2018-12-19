@@ -10,6 +10,7 @@ import config from './utils/game_config';
 import ErrorMessage from '../error_message/errorMessage';
 
 import './game.pcss';
+import '../static/images/home.svg';
 import WsPostman from '../modules/wsPostman';
 
 let GameConstructor;
@@ -107,7 +108,6 @@ export default class Game {
   }
 
   start(message) {
-    console.log('start quick search');
     if (this.events) {
       this.wsPostman.setRoomToken(message.payload.room_token);
       busController.removeBusListeners(this.events);
