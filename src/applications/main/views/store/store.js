@@ -23,13 +23,18 @@ export default class StoreView extends Element {
 
     this.list = new List(this.listPlace, this.listPlace);
     this.listPlace.addEventListener('click', (event) => {
-      console.log(event.target.innerText);
+      const categoryName = event.target.innerText.toLowerCase();
+      this.render(categoryName);
+      console.log('rendered');
     });
+
+    this.list.render(Object.keys(storeApps));
   }
 
-  render() {
-    if (this.panel.innerHTML !== '') return;
-    storeApps.all.forEach((app) => {
+  render(category) {
+    if (!category || !(category in storeApps)) category = 'all';
+    this.panel.innerHTML = '';
+    storeApps[category].forEach((app) => {
       const tile = new AppTile(this.panel, app);
       tile.show();
     });
