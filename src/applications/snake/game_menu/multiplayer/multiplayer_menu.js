@@ -14,7 +14,7 @@ const buttons = {
   },
   '4 PLAYERS': {
     href: '/game',
-    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`
+    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`,
   },
   BACK: {
     href: '/snake',

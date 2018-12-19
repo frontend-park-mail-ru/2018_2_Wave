@@ -17,8 +17,10 @@ export default class WaitingPlayers {
     this.quickSearchReady = this.quickSearchReady.bind(this);
     this.removed = this.removed.bind(this);
     this.kick = this.kick.bind(this);
+    this.acceptStatus = this.acceptStatus.bind(this);
     this.events = {
       quick_search_added: this.updateTable,
+      // quick_search_accept_status: this.acceptStatus,
       quick_search_ready: this.quickSearchReady,
       quick_search_removed: this.removed,
       quick_search_kick: this.kick,
@@ -68,6 +70,10 @@ export default class WaitingPlayers {
   kick(message) {
     this.errorMessage.setErrorMessage('You were kiked from the room');
     busController.emit('link', '/snake');
+  }
+
+  acceptStatus() {
+    this.readyMessage.hide();
   }
 
   setEnviroment() {

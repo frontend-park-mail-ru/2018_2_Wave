@@ -19,6 +19,7 @@ import FoodsModel from '../../models/foodsModel';
 import EnemiesModel from '../../models/enemiesModel';
 import globalUser from '../../../globalUser';
 import PlayerModel from '../../models/playerModel';
+import PlayersModel from '../../models/playersModel';
 
 import WsMessageParser from '../../../modules/wsMessageParser';
 import WsPostman from '../../../modules/wsPostman';
@@ -40,7 +41,8 @@ export default class OnlineGame extends GameCore {
     this.lastFrame = 0;
     this.framesPerSecond = 30;
 
-    this.cellCount = gameInitData.cellCount;
+    this.gameInitData = gameInitData;
+    this.cellCount = this.gameInitData.cellCount;
 
     this.scene = scene;
     this.keyboardController = keyboardController;
@@ -53,11 +55,6 @@ export default class OnlineGame extends GameCore {
     this.levelController = new LevelController(this.level);
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
-
-    // this.snake = new SnakeModel();
-    // this.snakeController = new SnakeController(this.snake, this.level);
-    // this.controllers.push(this.snakeController);
-    // this.scene.push(new SnakeView(this.snake));
 
     this.foods = new FoodsModel(10);
     this.foodsController = new FoodsController(this.foods, this.level);
@@ -78,7 +75,8 @@ export default class OnlineGame extends GameCore {
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
     // this.wsMessageParser.setModel('boosters', this.boosts);
-
+    
+    this.playersModel = new PlayersModel();
     this.deadMessage  = new DeadMessage();
     this.audioController = new AudioController();
 
@@ -129,7 +127,7 @@ export default class OnlineGame extends GameCore {
       const deadButtons = {
         'PLAY AGAIN': {
           href: '/game',
-          params: `mode=${GAME_MODE.MULTIPLYER}&type=${GAME_MODE.SINGLPLAYER}`,
+          params: `mode=${this.gameInitData.mode}&type=${this.gameInitData.type}`,
         },
         MENU: {
           href: '/snake',
@@ -139,6 +137,7 @@ export default class OnlineGame extends GameCore {
       const template = DeadMenuTemplate({ deadButtons });
       this.deadMessage.show(template, this.player.score);
     } else {
+      this.playersModel.setDead(message.payload.user_serial);
       console.log(message.payload.user_token, globalUser.userToken, 'dead');
     }
   }

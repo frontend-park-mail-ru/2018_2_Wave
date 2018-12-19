@@ -16,6 +16,7 @@ let GameConstructor;
 export default class Game {
   constructor(gameInfo, canvas, gameInitData) {
     this.gameInitData = gameInitData;
+    this.gameInfo = gameInfo;
     this.canvas = canvas;
     this.wsPostman = new WsPostman();
     this.errorMessage = new ErrorMessage();
@@ -100,6 +101,9 @@ export default class Game {
     // размерность поля игры
     this.gameInitData.cellCount = new Size(this.gameInitData.widthCellCount,
       this.gameInitData.heightCellCount);
+
+    this.gameInitData.mode = this.gameInfo.mode;
+    this.gameInitData.type = this.gameInfo.type;
   }
 
   start(message) {
