@@ -108,6 +108,7 @@ export default class WaitingPlayers {
   removed(message) {
     this.errorMessage.setErrorMessage('Player left the room');
     this.updateTable(message);
+    this.readyMessage.hide();
   }
 
   updateTable(message) {

@@ -42,7 +42,6 @@ export default class SnakeController {
         y: this.snake.getStartPosition().y,
       });
     }
-    console.log('head init', this.snake.getSegments()[0]);
   }
 
   findEmptyPlace() {

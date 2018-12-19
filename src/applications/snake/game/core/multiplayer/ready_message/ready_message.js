@@ -40,7 +40,6 @@ export default class ReadyMessage extends BaseMenu {
   }
 
   quickSearchQuit() {
-    console.log('quickSearchQuit');
     this.wsPostman.quickSearchAbort();
   }
 

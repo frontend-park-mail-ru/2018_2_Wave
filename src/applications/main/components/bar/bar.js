@@ -16,6 +16,7 @@ export default class Bar extends Element {
     if (!this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = false;
+    this.hideTimeout = setTimeout(() => this.hide(), 5000);
     return bar.animate({
       transform: [
         'translateY(-100px)',
@@ -29,6 +30,7 @@ export default class Bar extends Element {
   }
 
   hide() {
+    clearTimeout(this.hideTimeout);
     if (this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = true;
