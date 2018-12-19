@@ -131,7 +131,14 @@ export default class Router {
     if (target instanceof HTMLAnchorElement
     && (target.getAttribute('type') !== 'submit')) {
       event.preventDefault();
-      this.open(target.pathname, target.search, target);
+      if (target.pathname) {
+        this.open(target.pathname, target.search, target);
+      } else {
+        const busEvent = target.getAttribute('event');
+        if (busEvent) {
+          bus.emit(busEvent);
+        }
+      }
     }
   }
 }
