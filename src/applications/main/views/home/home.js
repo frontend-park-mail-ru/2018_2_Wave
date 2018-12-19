@@ -1,12 +1,13 @@
 import Element from '../../../element';
 import AppTile from '../../components/app_tile/app_tile';
 
-import template from './library.pug';
+import template from './home.pug';
 import '../../components/app_tile/app_tile.pcss';
-import './library.pcss';
+import './home.pcss';
 
 import '../../../../../static/img/terminal.jpg';
 import '../../../../../static/img/snake.jpg';
+import '../../../../../static/img/igor.png';
 
 const apps = [
   {
@@ -20,9 +21,9 @@ const apps = [
     name: 'Snake',
   },
   {
-    link: '/test',
-    image: '/img/terminal.jpg',
-    name: 'Do not click here',
+    link: '/chunk',
+    image: '/img/igor.png',
+    name: 'Chunk',
   },
   {
     link: '/snake',
@@ -42,14 +43,30 @@ const apps = [
 ];
 
 
-export default class LibraryView extends Element {
+export default class HomeView extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper);
     super.render();
 
-    this.title = 'Library';
+    this.title = 'Home';
 
-    [this.panel] = this.wrapper.getElementsByClassName('library__tile-panel');
+    [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
+  }
+
+  show() {
+    const [grid] = document.getElementsByClassName('grid-common');
+    if (!grid.classList.contains('home-page__grid')) {
+      grid.classList.add('home-page__grid');
+    }
+    super.show();
+  }
+
+  hide() {
+    const [grid] = document.getElementsByClassName('grid-common');
+    if (grid.classList.contains('home-page__grid')) {
+      grid.classList.remove('home-page__grid');
+    }
+    super.hide();
   }
 
   render() {

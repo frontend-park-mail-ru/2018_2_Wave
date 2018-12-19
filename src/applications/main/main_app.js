@@ -3,8 +3,9 @@ import './styles/fonts.pcss';
 import BaseApp from '../base_app';
 
 import Enviroment from './views/enviroment/env';
-import LibraryView from './views/library/library';
+import HomeView from './views/home/home';
 import StoreView from './views/store/store';
+import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
@@ -21,8 +22,8 @@ export default class MenuApp extends BaseApp {
     const env = new Enviroment(parent, parent);
     super(appUrl, env.contentPlace);
 
-    const [libraryPlace] = env.wrapper.getElementsByClassName('library');
-    this.views.main = new LibraryView(libraryPlace, libraryPlace);
+    const [homePlace] = env.wrapper.getElementsByClassName('home-page');
+    this.views.main = new HomeView(homePlace, homePlace);
     this.currentView = this.views.main;
 
     const [storePlace] = env.wrapper.getElementsByClassName('store');
@@ -32,6 +33,11 @@ export default class MenuApp extends BaseApp {
     this.env = env;
     this.views.env = this.env;
     this.menu = this.env.menu;
+
+    this.bar = new Bar(
+      this.env.appContainerPlace,
+      this.env.appContainerPlace,
+    );
 
     this.appContainer = new AppContainer(
       this.env.appContainerPlace,

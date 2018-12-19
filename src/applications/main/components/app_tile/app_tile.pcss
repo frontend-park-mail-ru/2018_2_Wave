@@ -11,7 +11,23 @@
 
     scroll-margin: 10px;
     scroll-snap-align: start;
+    transition: all 0.3s ease-out;
+
+    &:hover > .app__card {
+      box-shadow: 0 0 15px 2px #4462C4;
+      transform: scale(1.03);
+    }
+
+    &:hover > .app__card::after {
+      transform: scale(1.03) translateY(3px);
+      box-shadow: 0px 0px 60px 5px #4462C4;
+    }
+
+    &:hover .tile__name {
+      opacity: 0;
+    }
   }
+
 
   &__card {
     display: flex;
@@ -20,6 +36,7 @@
     background-color: black;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-out;
 
     &:after {
       width: 70%;
@@ -29,6 +46,7 @@
 
       border-radius: 100px;
       box-shadow: 0px 0px 60px 3px black;
+      transition: all 0.3s ease-out;
     }
   }
 }

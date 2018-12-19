@@ -36,7 +36,7 @@ export default class Router {
     this.mainApp = new MainApp('/', this.root);
     this.routes['/'] = this.mainApp;
     this.appContainer = this.mainApp.appContainer.screen;
-    this.appBar = this.mainApp.appContainer.bar;
+    this.appBar = this.mainApp.bar;
 
     this.listeners = [
       {
