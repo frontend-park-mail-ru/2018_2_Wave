@@ -8,11 +8,11 @@ export default class Ws {
   }
 
   connect() {
-    try {
-      this.ws = new WebSocket(this.address);
-    } catch (error) {
-      console.log('ws error', error);
-    }
+    this.ws = new WebSocket(this.address);
+
+    this.ws.onerror = (error) => {
+      console.log('WebSocket connection failed', error);
+    };
 
     this.ws.onopen = (event) => {
       console.log(`WebSocket on address ${this.address} opened`);
