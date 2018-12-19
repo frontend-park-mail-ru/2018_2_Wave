@@ -82,6 +82,7 @@ export default class OnlineGame extends GameCore {
 
     this.events = {
       STATUS_DEAD: this.dead.bind(this),
+      // STATUS_WIN: this.win.bind(this),
     };
   }
 
@@ -120,9 +121,27 @@ export default class OnlineGame extends GameCore {
     }, 1000 / this.framesPerSecond);
   }
 
+  win(message) {
+    if (message.payload.user_token === globalUser.userToken) {
+      const deadButtons = {
+        'PLAY AGAIN': {
+          href: '/game',
+          params: `mode=${this.gameInitData.mode}&type=${this.gameInitData.type}`,
+        },
+        MENU: {
+          href: '/snake',
+          params: 'menu',
+        },
+      };
+      const template = DeadMenuTemplate({ deadButtons });
+      this.deadMessage.show(template, this.player.score, 'You Win!');
+    }
+  }
+
   dead(message) {
     if (message.payload.user_token === globalUser.userToken)  {
       this.isDead = true;
+      this.playersModel.setDead(message.payload.user_serial);
 
       const deadButtons = {
         'PLAY AGAIN': {
@@ -138,7 +157,6 @@ export default class OnlineGame extends GameCore {
       this.deadMessage.show(template, this.player.score);
     } else {
       this.playersModel.setDead(message.payload.user_serial);
-      console.log(message.payload.user_token, globalUser.userToken, 'dead');
     }
   }
 

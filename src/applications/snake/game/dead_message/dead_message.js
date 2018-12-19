@@ -12,11 +12,15 @@ export default class DeadMessage extends BaseMenu {
     super.hide();
   }
 
-  show(deadMenuContent, score) {
+  show(deadMenuContent, score, preText) {
     const [deadScore] = this.parent.getElementsByClassName('dead-message__score');
     deadScore.innerHTML = score;
     const [deadMenu] = this.parent.getElementsByClassName('dead-menu');
     deadMenu.innerHTML = deadMenuContent;
+    if (preText) {
+      const [deadText] = this.parent.getElementsByClassName('dead-message__text');
+      deadText.innerHTML = preText;
+    }
     super.show();
   }
 
