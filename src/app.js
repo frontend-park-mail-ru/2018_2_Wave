@@ -10,7 +10,7 @@ import './style.pcss';
 new Router(document.body, MainApp)
   .registerApp('terminal', Terminal)
   .registerApp('snake', Snake)
-  .registerApp('test', Game, 'https://chunk-frontend.herokuapp.com/menu')
+  .registerApp('chunk', Game, 'https://chunk-frontend.herokuapp.com/menu')
   .start();
 
 

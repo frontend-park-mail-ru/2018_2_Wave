@@ -7,6 +7,7 @@ import './home.pcss';
 
 import '../../../../../static/img/terminal.jpg';
 import '../../../../../static/img/snake.jpg';
+import '../../../../../static/img/igor.png';
 
 const apps = [
   {
@@ -20,9 +21,9 @@ const apps = [
     name: 'Snake',
   },
   {
-    link: '/test',
-    image: '/img/terminal.jpg',
-    name: 'Do not click here',
+    link: '/chunk',
+    image: '/img/igor.png',
+    name: 'Chunk',
   },
   {
     link: '/snake',
