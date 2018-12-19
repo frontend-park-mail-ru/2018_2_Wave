@@ -95,6 +95,7 @@ export default class WaitingPlayers {
 
   removed(message) {
     this.errorMessage.setErrorMessage('Player left the room');
+    this.readyMessage.hide();
     this.updateTable(message);
   }
 
@@ -105,12 +106,12 @@ export default class WaitingPlayers {
       this.player = playersCollection.item(member.user_serial);
       this.players.splice(this.players.indexOf(this.player), 1);
       [this.playerName] = this.player.getElementsByClassName('player');
-      // this.player.innerHTML = member.user_serial;
       this.player.hidden = false;
-      this.playerName.innerHTML = `player${member.user_serial}`;
-
-      [this.score] = this.player.getElementsByClassName('score');
-      this.score.innerHTML = 0;
+      if (member.user_name) {
+        this.playerName.innerHTML = `player${member.user_name}`;
+      } else {
+        this.playerName.innerHTML = `player${member.user_serial}`;
+      }
     });
 
     this.players.forEach(player => player.hidden = true);

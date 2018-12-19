@@ -3,20 +3,22 @@ import busController from '../../../modules/busController';
 import GAME_MODE from '../modes';
 
 import LevelController from '../../controllers/levelController';
-import SnakeController from '../../controllers/snackeController';
+// import SnakeController from '../../controllers/snackeController';
 import FoodsController from '../../controllers/foodsController';
 import AudioController from '../../controllers/audioController';
 import keyboardController from '../../../modules/keyboardController';
 
 import LevelView from '../../views/levelView';
-import SnakeView from '../../views/snakeView';
+// import SnakeView from '../../views/snakeView';
 import FoodsView from '../../views/foodsView';
 import EnemiesView from '../../views/enemiesView';
 
 import LevelModel from '../../models/levelModel';
-import SnakeModel from '../../models/snakeModel';
+// import SnakeModel from '../../models/snakeModel';
 import FoodsModel from '../../models/foodsModel';
 import EnemiesModel from '../../models/enemiesModel';
+import globalUser from '../../../globalUser';
+import PlayerModel from '../../models/playerModel';
 
 import WsMessageParser from '../../../modules/wsMessageParser';
 import WsPostman from '../../../modules/wsPostman';
@@ -52,10 +54,10 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
-    this.snake = new SnakeModel();
-    this.snakeController = new SnakeController(this.snake, this.level);
-    this.controllers.push(this.snakeController);
-    this.scene.push(new SnakeView(this.snake));
+    // this.snake = new SnakeModel();
+    // this.snakeController = new SnakeController(this.snake, this.level);
+    // this.controllers.push(this.snakeController);
+    // this.scene.push(new SnakeView(this.snake));
 
     this.foods = new FoodsModel(10);
     this.foodsController = new FoodsController(this.foods, this.level);
@@ -67,14 +69,15 @@ export default class OnlineGame extends GameCore {
     this.controllers.push(this.boostsController);
     this.scene.push(new FoodsView(this.boosts));
 
-    this.enemies = new EnemiesModel(gameInitData.userToken);
+    this.player = new PlayerModel();
+
+    this.enemies = new EnemiesModel(this.player);
     this.scene.push(new EnemiesView(this.enemies));
 
-    this.wsMessageParser.setModel('snakes', this.snake);
     this.wsMessageParser.setModel('snakes', this.enemies);
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
-    this.wsMessageParser.setModel('boosters', this.boosts);
+    // this.wsMessageParser.setModel('boosters', this.boosts);
 
     this.deadMessage  = new DeadMessage();
     this.audioController = new AudioController();
@@ -119,20 +122,25 @@ export default class OnlineGame extends GameCore {
     }, 1000 / this.framesPerSecond);
   }
 
-  dead() {
-    this.isDead = true;
-    const deadButtons = {
-      'PLAY AGAIN': {
-        href: '/game',
-        params: `mode=${GAME_MODE.MULTIPLYER}&type=${GAME_MODE.SINGLPLAYER}`,
-      },
-      MENU: {
-        href: '/snake',
-        params: 'menu',
-      },
-    };
-    const template = DeadMenuTemplate({ deadButtons });
-    this.deadMessage.show(template, 25);
+  dead(message) {
+    if (message.payload.user_token === globalUser.userToken)  {
+      this.isDead = true;
+
+      const deadButtons = {
+        'PLAY AGAIN': {
+          href: '/game',
+          params: `mode=${GAME_MODE.MULTIPLYER}&type=${GAME_MODE.SINGLPLAYER}`,
+        },
+        MENU: {
+          href: '/snake',
+          params: 'menu',
+        },
+      };
+      const template = DeadMenuTemplate({ deadButtons });
+      this.deadMessage.show(template, this.player.score);
+    } else {
+      console.log(message.payload.user_token, globalUser.userToken, 'dead');
+    }
   }
 
   destroy() {

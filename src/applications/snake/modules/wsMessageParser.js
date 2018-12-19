@@ -26,19 +26,19 @@ export default class WsMessageParser {
     || message.status === 'quick_search_done'
     || message.status === 'quick_search_added'
     || message.status === 'quick_search_removed'
-    || message.status === 'quick_search_kick') {
+    || message.status === 'quick_search_kick'
+    || message.status === 'quick_search_failed') {
       busController.emit(message.status, message);
-    }
-    if (typeof message === 'string') {
-      busController.emit('data', message);
-    // } else if (message.status === 'STATUS_TICK') {
-    } else {
+    } else if (message.status === 'STATUS_TICK'
+      || message.status === 'STATUS_TOKEN') {
       busController.emit('STATUS_TICK', message.payload);
-      const a = Object.keys(message.payload);
-
       Object.keys(message.payload).forEach((key) => {
         if (Object.keys(this.models).indexOf(key) !== -1) {
-          this.models[key].forEach(model => model.setState(message.payload[key]), key);
+          this.models[key].forEach((model) => {
+            if (model && typeof model.setState === 'function') {
+              model.setState(message.payload[key]);
+            }
+          }, key);
         }
       });
     }
