@@ -49,23 +49,23 @@ export default class HomeView extends Element {
 
     this.title = 'Home';
 
-    [this.panel] = this.wrapper.getElementsByClassName('home__tile-panel');
+    [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
   }
 
   show() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (!grid.classList.contains('home__grid')) {
-      grid.classList.add('home__grid');
+    if (!grid.classList.contains('home-page__grid')) {
+      grid.classList.add('home-page__grid');
     }
     super.show();
   }
 
   hide() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (grid.classList.contains('home__grid')) {
-      grid.classList.remove('home__grid');
+    if (grid.classList.contains('home-page__grid')) {
+      grid.classList.remove('home-page__grid');
     }
-    super.show();
+    super.hide();
   }
 
   render() {
