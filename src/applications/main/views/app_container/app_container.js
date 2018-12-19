@@ -22,7 +22,6 @@ export default class AppContainer extends Element {
   }
 
   render() {
-    console.log(this.wrapper);
     this.wrapper.innerHTML += this.template();
   }
 }
