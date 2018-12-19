@@ -22,7 +22,7 @@ export default class MenuApp extends BaseApp {
     const env = new Enviroment(parent, parent);
     super(appUrl, env.contentPlace);
 
-    const [homePlace] = env.wrapper.getElementsByClassName('home');
+    const [homePlace] = env.wrapper.getElementsByClassName('home-page');
     this.views.main = new HomeView(homePlace, homePlace);
     this.currentView = this.views.main;
 
