@@ -96,7 +96,6 @@ export default class BaseApp {
     this.currentView.show();
 
     this.bar.show();
-    setTimeout(() => this.bar.hide(), 2000);
   }
 
   stop() {
@@ -128,7 +127,6 @@ export default class BaseApp {
       return;
     }
     this.bar.show();
-    setTimeout(() => this.bar.hide(), 2000);
     this.currentView.show();
     this.active = true;
   }
