@@ -6,10 +6,26 @@
   justify-content: center;
   align-items: flex-start;
 
+  &__grid {
+    overflow: hidden;
+    grid-template-rows: 14% 19% 1fr 27%;
+    grid-template-columns: 300px 1fr;
+    grid-row-gap: 10px;
+    grid-auto-rows: 0;
+
+    grid-template-areas:
+    "userblock icon-set"
+    "title ."
+    "list content"
+    "menu next-content";
+
+    width:  calc(100vw - var(--grid-padding-x));
+    padding: 0 0 0 var(--grid-padding-x);
+  }
 
   &__tile-panel {
     height: 80%;
-    width: calc(100vw - 2 * var(--grid-padding-x));
+    width: calc((100vw - var(--grid-padding-x) - 300px));
 
     scroll-snap-type: x mandatory;
     // scroll-snap-stop: always;
