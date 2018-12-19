@@ -51,6 +51,33 @@ export default class HomeView extends Element {
     this.title = 'Home';
 
     [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
+
+    this.startScroller();
+  }
+
+  startScroller() {
+    let lastLeft = Date.now();
+    let lastRight = Date.now();
+    document.addEventListener('keydown', (ev) => {
+      if (ev.which === 37 || ev.which === 39) ev.preventDefault();
+      if (ev.which === 39 && (Date.now() - lastLeft) > 400) {
+        this.scrollPanelLeft();
+        lastLeft = Date.now();
+      } else if (ev.which === 37 && (Date.now() - lastRight) > 400) {
+        this.scrollPanelRight();
+        lastRight = Date.now();
+      }
+    });
+  }
+
+  scrollPanelLeft() {
+    const [tile] = this.panel.children;
+    this.panel.scrollLeft += tile.offsetWidth;
+  }
+
+  scrollPanelRight() {
+    const [tile] = this.panel.children;
+    this.panel.scrollLeft -= tile.offsetWidth;
   }
 
   show() {
