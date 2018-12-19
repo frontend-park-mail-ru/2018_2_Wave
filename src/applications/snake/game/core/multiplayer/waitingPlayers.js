@@ -18,12 +18,14 @@ export default class WaitingPlayers {
     this.removed = this.removed.bind(this);
     this.kick = this.kick.bind(this);
     this.acceptStatus = this.acceptStatus.bind(this);
+    this.hideReadyMesage = this.hideReadyMesage.bind(this);
     this.events = {
       quick_search_added: this.updateTable,
       // quick_search_accept_status: this.acceptStatus,
       quick_search_ready: this.quickSearchReady,
       quick_search_removed: this.removed,
       quick_search_kick: this.kick,
+      QUICK_SEARCH: this.hideReadyMesage,
     };
   }
 
@@ -72,6 +74,10 @@ export default class WaitingPlayers {
     busController.emit('link', '/snake');
   }
 
+  hideReadyMesage() {
+    this.readyMessage.hide();
+  }
+
   acceptStatus() {
     this.readyMessage.hide();
   }
@@ -101,7 +107,6 @@ export default class WaitingPlayers {
 
   removed(message) {
     this.errorMessage.setErrorMessage('Player left the room');
-    this.readyMessage.hide();
     this.updateTable(message);
   }
 
