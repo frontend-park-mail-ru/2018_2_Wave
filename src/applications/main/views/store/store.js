@@ -8,29 +8,7 @@ import './store.pcss';
 
 import '../../../../../static/img/terminal.jpg';
 
-const storeApps = [
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Купи говно',
-  },
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Купи говно',
-  },
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Купи говно',
-  },
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Купи говно',
-  },
-];
-
+import storeApps from './mock';
 
 export default class StoreView extends Element {
   constructor(parent, wrapper, views) {
@@ -41,13 +19,17 @@ export default class StoreView extends Element {
 
     this.parentViews = views;
     [this.panel] = this.wrapper.getElementsByClassName('store__tile-panel');
-    [this.listPlace] = this.parentViews.main.wrapper.getElementsByClassName('list');
+    [this.listPlace] = document.getElementsByClassName('list');
+
     this.list = new List(this.listPlace, this.listPlace);
+    this.listPlace.addEventListener('click', (event) => {
+      console.log(event.target.innerText);
+    });
   }
 
   render() {
     if (this.panel.innerHTML !== '') return;
-    storeApps.forEach((app) => {
+    storeApps.all.forEach((app) => {
       const tile = new AppTile(this.panel, app);
       tile.show();
     });
@@ -59,6 +41,7 @@ export default class StoreView extends Element {
       grid.classList.add('store__grid');
     }
 
+    this.list.show();
     super.show();
     this.parentViews.env.menu.hide();
   }
@@ -69,6 +52,7 @@ export default class StoreView extends Element {
       grid.classList.remove('store__grid');
     }
 
+    this.list.hide();
     super.hide();
     this.parentViews.env.menu.show();
   }
