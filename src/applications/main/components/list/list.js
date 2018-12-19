@@ -5,6 +5,7 @@ import './list.pcss';
 import template from './list.pug';
 
 const categories = [
+  'all',
   'new',
   'popular',
   '2018_2',
@@ -19,6 +20,7 @@ export default class List extends Element {
   }
 
   render() {
+    console.log(this.wrapper);
     super.render({ categories });
   }
 }
