@@ -54,6 +54,7 @@ class KeyboardController {
     // console.log('start keyboard');
     // setTimeout(() => document.addEventListener('keydown', this.acceptInput), 1000);
     enter = 0;
+    setTimeout(() => { enter += 1; }, 1000);
     document.addEventListener('keydown', this.acceptInput);
     this.swipeDetector.start();
   }
