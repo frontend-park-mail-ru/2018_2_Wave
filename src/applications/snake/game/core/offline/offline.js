@@ -28,6 +28,7 @@ export default class OfflineGame extends GameCore {
   constructor(scene, gameInitData) {
     super(scene);
 
+    keyboardController.setOrintation(gameInitData.orientation);
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.framesPerSecond = 10;

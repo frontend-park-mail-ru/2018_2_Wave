@@ -45,6 +45,7 @@ export default class OnlineGame extends GameCore {
 
     this.scene = scene;
     this.keyboardController = keyboardController;
+    this.keyboardController.setOrintation(gameInitData.orientation);
     this.busController = busController;
 
     this.controllers = [];

@@ -39,6 +39,7 @@ export default class ArcadeMode extends GameCore {
 
     this.scene = scene;
     this.keyboardController = keyboardController;
+    this.keyboardController.setOrintation(gameInitData.orientation);
     this.busController = busController;
 
     this.controllers = [];

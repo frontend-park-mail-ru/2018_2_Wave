@@ -55,6 +55,10 @@ class KeyboardController {
     this.swipeDetector.start();
   }
 
+  setOrintation(orientation) {
+    this.orientation = orientation;
+  }
+
   stop() {
     document.removeEventListener('keydown', this.acceptInput);
     this.swipeDetector.stop();
