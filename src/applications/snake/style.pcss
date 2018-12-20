@@ -25,9 +25,10 @@ window {
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: 1fr 1fr 9fr;
   grid-template-areas:
-    "home mode score"
+    "mode mode mode"
+    "home score ."
     "game game game";
 
   /* position: relative; */
@@ -173,4 +174,20 @@ window {
   .game-board__hidden-border {
     border-width: 0px;
   }
+
+  .gamehotkeys {
+    display: none;
+  }
+}
+
+.gamehotkeys {
+  font-size: 14px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.gamehotkey {
+  flex-direction: row;
+  display: flex;
 }

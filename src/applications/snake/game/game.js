@@ -38,7 +38,6 @@ export default class Game {
         break;
       }
 
-
       case GAME_MODE.ARCADE: {
         GameConstructor = ArcadeGame;
         this.start();

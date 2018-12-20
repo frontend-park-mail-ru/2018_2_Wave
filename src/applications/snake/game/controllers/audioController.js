@@ -48,12 +48,13 @@ export default class AudioController {
 
   start() {
     this.mainAudio.play();
+    this.mainAudio.riseVolume();
     this.setBusListeners();
   }
 
   setNewMainAudio() {
     const mainAudio = AudioController.getRandom(this.mainAudios);
-    this.mainAudio = new AudioModel({ path: mainAudio, loop: true });
+    this.mainAudio = new AudioModel({ path: mainAudio, loop: true, volume: 0 });
   }
 
   pauseMusic() {
