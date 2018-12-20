@@ -2,7 +2,8 @@ import TerminalView from './terminal_view';
 import BaseApp from '../base_app';
 import messages from './messages';
 import bus from '../../modules/bus';
-import { register } from '../../modules/network';
+import { register, logout } from '../../modules/network';
+import userService from '../../modules/userservice';
 
 class TerminalApp extends BaseApp {
   constructor(url, parent) {
@@ -16,6 +17,8 @@ class TerminalApp extends BaseApp {
     };
 
     this.commands = {
+      me: this.me,
+      logout: this.logout,
       register: this.register,
       help: this.help,
       history: this.history,
@@ -74,7 +77,6 @@ class TerminalApp extends BaseApp {
     const processData = async (value) => {
       password2 = value;
       if (password === password2) {
-        console.log('valid');
         const formdata = new FormData();
         formdata.append('username', name);
         formdata.append('password', password);
@@ -97,6 +99,18 @@ class TerminalApp extends BaseApp {
       this.ask('  password:', repeatPassword, true);
     };
     this.ask('  your name:', askPassword);
+  }
+
+  async logout() {
+    const { err } = await logout();
+    console.log(err);
+    if (!err) {
+      this.view.printString('Ok');
+      this.view.addInput(this.intro);
+    } else if (err.status === 401) {
+      this.view.printString('Already.');
+      this.view.addInput(this.intro);
+    }
   }
 
   help() {
