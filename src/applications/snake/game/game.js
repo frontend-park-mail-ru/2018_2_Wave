@@ -24,6 +24,8 @@ export default class Game {
     this.errorMessage = new ErrorMessage();
     this.busController = busController;
     this.countGameParams();
+    this.close = this.close.bind(this);
+    this.busController.setBusListeners({ Backspace: this.close });
 
     switch (gameInfo.mode) {
       case GAME_MODE.CLASSIC: {
@@ -35,6 +37,7 @@ export default class Game {
         this.start();
         break;
       }
+
 
       case GAME_MODE.ARCADE: {
         GameConstructor = ArcadeGame;
@@ -68,6 +71,10 @@ export default class Game {
       this.gameInitData.orientation,
     );
     this.gameCore = new GameConstructor(this.gameScene, this.gameInitData);
+  }
+
+  close() {
+    this.busController.emit('link', '/snake');
   }
 
   countGameParams() {
@@ -133,5 +140,6 @@ export default class Game {
     if (this.waitingPlayers) {
       this.waitingPlayers.stop();
     }
+    busController.removeBusListeners({ Backspace: this.close });
   }
 }
