@@ -4,6 +4,7 @@ import './bar.pcss';
 
 import template from './bar.pug';
 
+import userService from '../../../../modules/userservice';
 
 export default class Bar extends Element {
   constructor(parent, wrapper) {
@@ -13,6 +14,8 @@ export default class Bar extends Element {
   }
 
   show() {
+    const { err, loggedIn } = userService.isLoggedIn();
+    if (err || !loggedIn) return false;
     if (!this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = false;
@@ -30,7 +33,7 @@ export default class Bar extends Element {
   }
 
   hide() {
-    clearTimeout(this.hideTimeout); 
+    clearTimeout(this.hideTimeout);
     if (this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = true;
