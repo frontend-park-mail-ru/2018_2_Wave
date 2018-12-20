@@ -4,6 +4,7 @@ import GAME_MODE from '../core/modes';
 
 import SnakeGameTemplate from '../templates/snakegame.pug';
 import '../../static/images/home.svg';
+import config from '../../modules/view_config';
 
 
 import Element from '../../../element';
@@ -22,7 +23,12 @@ export default class GameView extends Element {
 
   render(gameParams) {
     this.gameParams = gameParams;
-    super.render();
+    const renderParams = {
+      mainScoreCollor: config.mainScoreCollor,
+      gameCanvasBorder: config.gameCanvasBorder,
+      gameBoardBorder: config.gameBoardBorder,
+    };
+    super.render(renderParams);
   }
 
   setMultiplayerEnviroment() {

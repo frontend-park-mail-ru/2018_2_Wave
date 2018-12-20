@@ -1,6 +1,6 @@
 import BaseMenu from '../../game_menu/base_menu/base_menu';
 import DeadMessageTemplate from './dead_message.pug';
-import style from './dead_message.pcss';
+import './dead_message.pcss';
 
 export default class DeadMessage extends BaseMenu {
   constructor() {

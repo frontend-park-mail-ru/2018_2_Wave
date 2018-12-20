@@ -1,6 +1,6 @@
 class Config {
   constructor() {
-    this.setDefaultColors();
+    // this.setDefaultColors();
   }
 
   setColors(colorsConfig, classConfig) {
@@ -13,6 +13,8 @@ class Config {
     const {
       gameCanvasBorder,
       snakemenuButtonFocus,
+      mainScoreCollor,
+      gameBoardBorder,
     } = classConfig;
 
     this.wallColor = wallColor;
@@ -22,18 +24,20 @@ class Config {
 
     this.gameCanvasBorder = gameCanvasBorder;
     this.snakemenuButtonFocus = snakemenuButtonFocus;
+    this.mainScoreCollor = mainScoreCollor;
+    this.gameBoardBorder = gameBoardBorder;
   }
 
-  setDefaultColors() {
-    // розовые стены голубая змея зеленая еда
-    this.wallColor = 'blue';
-    this.snakeColor = '#00FFFF';
-    this.foodColor = 'white';
-    this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
-    this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
-    this.gameCanvasBorder = 'game-board__purple';
-    this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
-  }
+  // setDefaultColors() {
+  //   // розовые стены голубая змея зеленая еда
+  //   this.wallColor = 'blue';
+  //   this.snakeColor = '#00FFFF';
+  //   this.foodColor = 'white';
+  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
+  //   this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
+  //   this.gameCanvasBorder = 'game-board__purple';
+  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
+  // }
 }
 
 export default new Config();
