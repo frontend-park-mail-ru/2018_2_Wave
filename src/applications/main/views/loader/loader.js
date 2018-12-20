@@ -10,7 +10,14 @@ export default class Loader extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper);
     this.checkUser = this.checkUser.bind(this);
-    this.hide = this.hide.bind(this);
+    this.hide = super.hide.bind(this);
+    this.show = this.show.bind(this);
+
+    bus.listen('userUpdated', () => {
+      const { loggedIn } = userService.isLoggedIn();
+      if (loggedIn) this.hide();
+      else this.show();
+    });
   }
 
   show() {
