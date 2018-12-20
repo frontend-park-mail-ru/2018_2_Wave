@@ -9,7 +9,7 @@ class TerminalApp extends BaseApp {
   constructor(url, parent) {
     super(url, parent, TerminalView);
 
-    this.username = 'guest';
+    this.username = null;
 
     this.listeners = {
       keydown: this.handleKeypress.bind(this),
@@ -47,7 +47,22 @@ class TerminalApp extends BaseApp {
       },
     };
 
+    this.register = this.register.bind(this);
+    this.setUsername = this.setUsername.bind(this);
+    this.setUsername();
     this.commandHistory = [];
+    bus.listen('userUpdated', this.setUsername);
+  }
+
+  setUsername() {
+    bus.ignore('userUpdated', this.setUsername);
+    const { err, user } = userService.getUser();
+    if (err && err === 'updating') bus.listen('userUpdated', this.setUsername);
+    else if (err) {
+      this.username = 'guest';
+    } else {
+      this.username = user.username;
+    }
   }
 
   get intro() {
@@ -68,11 +83,21 @@ class TerminalApp extends BaseApp {
 
   /*   service methods   */
   start() {
+    this.setUsername();
     this.parent.style.background = 'black';
     super.start();
     this.addListeners();
     this.view.printBlock(messages.hello);
-    this.view.addInput(this.intro);
+
+    if (this.username !== null) {
+      this.view.addInput(this.intro);
+    } else {
+      const callback = () => {
+        bus.ignore('userUpdated', callback);
+        setTimeout(() => this.view.addInput(this.intro), 100);
+      };
+      bus.listen('userUpdated', callback);
+    }
   }
 
   stop() {
@@ -97,6 +122,15 @@ class TerminalApp extends BaseApp {
 
   /*   terminal commands   */
   register() {
+    bus.ignore('userUpdated', this.register);
+    const { err, loggedIn } = userService.isLoggedIn();
+    if (err) bus.listen('userUpdated', this.register);
+    else if (loggedIn) {
+      this.view.printString(`I already know you, ${this.username}.`);
+      this.view.addInput(this.intro);
+      return;
+    }
+
     this.terminal.removeEventListener('keydown', this.listeners.keydown);
     let name, password, password2;
     const processData = async (value) => {
