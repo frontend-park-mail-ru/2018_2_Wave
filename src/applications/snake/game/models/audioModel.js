@@ -18,9 +18,8 @@ export default class AudioModel {
   }
 
   riseVolume() {
-    if (this.audio.volume < 1) {
+    if (this.audio.volume < 0.9) {
       this.audio.volume += 0.1;
-      console.log(this.volume);
       setTimeout(this.riseVolume, 1500);
     }
   }

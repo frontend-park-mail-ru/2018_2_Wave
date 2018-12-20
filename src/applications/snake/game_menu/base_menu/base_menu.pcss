@@ -78,6 +78,7 @@
   align-self: center;
   cursor: pointer;
   margin: 0 20px;
+  pointer-events: none;
 }
   
 .snakemenu-button_focus::before {
@@ -111,6 +112,10 @@
   .snakemenu-button__focus-cyan {
     color: white;
     font-size: 14px;
+  }
+
+  .snakemenu-button {
+    pointer-events: auto;
   }
 
   .snakemenu-button:hover {
