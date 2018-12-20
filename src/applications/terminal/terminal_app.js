@@ -2,6 +2,7 @@ import TerminalView from './terminal_view';
 import BaseApp from '../base_app';
 import messages from './messages';
 import bus from '../../modules/bus';
+import { register } from '../../modules/network';
 
 class TerminalApp extends BaseApp {
   constructor(url, parent) {
@@ -15,6 +16,7 @@ class TerminalApp extends BaseApp {
     };
 
     this.commands = {
+      register: this.register,
       help: this.help,
       history: this.history,
       clear: this.clear,
@@ -67,21 +69,54 @@ class TerminalApp extends BaseApp {
 
 
   /*   terminal commands   */
+  register() {
+    let name, password, password2;
+    const processData = async (value) => {
+      password2 = value;
+      if (password === password2) {
+        console.log('valid');
+        const formdata = new FormData();
+        formdata.append('username', name);
+        formdata.append('password', password);
+        const { err } = await register(formdata);
+        if (!err) {
+          this.view.printString(`Hello, ${name}!`);
+          this.view.addInput(this.intro);
+        }
+      } else {
+        this.view.printString('Passwords don\'t match.');
+        this.view.addInput(this.intro);
+      }
+    };
+    const repeatPassword = (value) => {
+      password = value;
+      this.ask('  repeat password:', processData, true);
+    };
+    const askPassword = (value) => {
+      name = value;
+      this.ask('  password:', repeatPassword, true);
+    };
+    this.ask('  your name:', askPassword);
+  }
+
   help() {
     this.view.printString('Available commands:');
     Object.keys(this.commands).forEach((key) => {
       this.view.printString(` * ${key}`);
     });
+    this.view.addInput(this.intro);
   }
 
   history() {
     this.commandHistory.forEach((command) => {
       this.view.printString(` * ${command}`);
     });
+    this.view.addInput(this.intro);
   }
 
   clear() {
     this.view.clear();
+    this.view.addInput(this.intro);
   }
 
 
@@ -111,9 +146,23 @@ class TerminalApp extends BaseApp {
       }
       this.commandHistory.push(command);
     }
-    this.view.addInput(this.intro);
   }
 
+  ask(message, process, hideInput) {
+    const callback = (ev) => {
+      if (ev.which === 13) {
+        ev.preventDefault();
+        process(this.view.processInput());
+        this.terminal.removeEventListener('keydown', callback);
+        this.terminal.addEventListener('keydown', this.listeners.keydown);
+      }
+    };
+
+    if (hideInput) this.view.addPasswordInput(message);
+    else this.view.addInput(message);
+    this.terminal.removeEventListener('keydown', this.listeners.keydown);
+    this.terminal.addEventListener('keydown', callback);
+  }
 
   focusInput() {
     const input = this.view.getInput();
