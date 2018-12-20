@@ -51,4 +51,8 @@ export default class WsMessageParser {
     }
     this.models[route].push(model);
   }
+
+  emit(action) {
+    busController.emit(action);
+  }
 }
