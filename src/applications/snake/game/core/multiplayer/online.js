@@ -1,6 +1,5 @@
 import GameCore from '../core';
 import busController from '../../../modules/busController';
-import GAME_MODE from '../modes';
 
 import LevelController from '../../controllers/levelController';
 // import SnakeController from '../../controllers/snackeController';
@@ -82,7 +81,7 @@ export default class OnlineGame extends GameCore {
 
     this.events = {
       STATUS_DEAD: this.dead.bind(this),
-      // STATUS_WIN: this.win.bind(this),
+      win: this.win.bind(this),
     };
   }
 
@@ -134,7 +133,7 @@ export default class OnlineGame extends GameCore {
         },
       };
       const template = DeadMenuTemplate({ deadButtons });
-      this.deadMessage.show(template, this.player.score, 'You Win!');
+      this.deadMessage.show(template, this.player.score, 'You Won!');
     }
   }
 

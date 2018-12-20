@@ -84,7 +84,7 @@ export default class Canvas {
     this.context.closePath();
   }
 
-  setBlackBackground(width, height) {
+  setBlackBackground() {
     this.context.clearRect(0, 0,
       this.canvas.width * this.cellSize.width, this.canvas.height * this.cellSize.height);
   }

@@ -66,7 +66,6 @@ export default class ReadyMessage extends BaseMenu {
       } else {
         distance = this.begin - nowSeconds - this.time;
       }
-      console.log('timer', this.time, now.getSeconds(), this.begin, distance);
       if (!distance || distance > 30) {
         distance = 30;
       } else if (distance < 0) {

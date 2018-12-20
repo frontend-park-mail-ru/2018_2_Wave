@@ -87,7 +87,6 @@ export default class SnakeModel {
     this.segments  = [];
     if (snakes) {
       snakes.forEach((snake) => {
-        console.log(globalUser.userToken);
         if (snake.user_token === this.userToken) {
           this.playersModel.setState(snake.user_serial, snake.score);
           this.score = snake.score;
