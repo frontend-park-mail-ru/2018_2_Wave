@@ -13,6 +13,7 @@ import FrameSpeedController from '../../controllers/frameSpeedController';
 import LevelView from '../../views/levelView';
 import SnakeView from '../../views/snakeView';
 import FoodsView from '../../views/foodsView';
+import PlayerView from '../../views/playerView';
 
 import LevelModel from '../../models/levelModel';
 import SnakeModel from '../../models/snakeModel';
@@ -48,23 +49,24 @@ export default class ArcadeMode extends GameCore {
 
     this.level = new LevelModel(this.cellCount);
 
-    this.player = new PlayerModel();
-    this.playerController = new PlayerController(this.player);
+    this.player = new PlayerModel(gameInitData.userToken);
+    this.playerView = new PlayerView();
+    this.playerController = new PlayerController(this.player, this.playerView);
 
     this.levelController = new LevelController(this.level);
     this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
-
-    this.snake = new SnakeModel(this.snakeText);
-    this.snakeController = new SnakeController(this.snake, this.level);
-    this.controllers.push(this.snakeController);
-    this.scene.push(new SnakeView(this.snake));
 
     // передаем колличество еды на поле
     this.foods = new FoodsModel(10);
     this.foodsController = new FoodsController(this.foods, this.level);
     this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
+
+    this.snake = new SnakeModel(this.snakeText);
+    this.snakeController = new SnakeController(this.snake, this.level);
+    this.controllers.push(this.snakeController);
+    this.scene.push(new SnakeView(this.snake));
 
     this.audioController = new AudioController();
     this.errorMessage = new ErrorMessage();
@@ -101,6 +103,7 @@ export default class ArcadeMode extends GameCore {
   start() {
     this.errorMessage.setErrorMessage('You are in develop version');
     this.controllers.forEach(controller => controller.init());
+    this.playerController.init();
     super.start();
 
     this.audioController.start();

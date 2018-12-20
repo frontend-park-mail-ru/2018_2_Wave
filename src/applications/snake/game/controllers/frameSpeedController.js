@@ -10,7 +10,7 @@ export default class FrameSpeedController {
 
   update() {
     const currentFrameSpeed = this.frameSpeed.getSpeed();
-    if (currentFrameSpeed > 60) {
+    if (currentFrameSpeed > 50) {
       this.delta = -0.5;
     }
 
