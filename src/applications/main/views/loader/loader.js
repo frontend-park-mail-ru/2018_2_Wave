@@ -39,6 +39,7 @@ export default class Loader extends Element {
       mockBlock.setAttribute('href', '/terminal');
       this.wrapper.appendChild(mockBlock);
       mockBlock.click();
+      mockBlock.hidden = true;
     }
   }
 }
