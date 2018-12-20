@@ -5,6 +5,7 @@ import BaseApp from '../base_app';
 import Enviroment from './views/enviroment/env';
 import HomeView from './views/home/home';
 import StoreView from './views/store/store';
+import LoaderView from './views/loader/loader';
 import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
 // import LoginView from './views/login';
@@ -21,6 +22,10 @@ export default class MenuApp extends BaseApp {
     // const env = new Enviroment(parent, envWrapper);
     const env = new Enviroment(parent, parent);
     super(appUrl, env.contentPlace);
+
+    const [loaderPlace] = env.wrapper.getElementsByClassName('loader-container');
+    this.loader = new LoaderView(loaderPlace, loaderPlace);
+    this.loader.show();
 
     const [homePlace] = env.wrapper.getElementsByClassName('home-page');
     this.views.main = new HomeView(homePlace, homePlace);
@@ -56,10 +61,13 @@ export default class MenuApp extends BaseApp {
     }, { once: true });
   }
 
+  // start() {
+
+  // }
+
   start() {
     this.appContainer.hide();
     this.env.show();
-    // this.animateLaunch();
     this.started = true;
     this.active = true;
     this.currentView.show();
