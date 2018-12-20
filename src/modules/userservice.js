@@ -25,7 +25,7 @@ class UserService {
       if (err === 'updating') return { err };
       throw new Error();
     } else if (!loggedIn) {
-      bus.emit('link', '/login');
+      bus.emit('link', '/terminal');
       return { err: 'unathorized' };
     }
 
