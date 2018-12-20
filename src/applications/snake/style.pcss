@@ -3,13 +3,11 @@
 .game-container {
   height: 100%;
   display: grid;
-  // cursor: none;
+  cursor: none;
   justify-items: center;
   align-items: center;
   color: white;
 }
-
-
 
 window {
   overscroll-behavior: none;
@@ -36,6 +34,10 @@ window {
 }
 
 @media screen and (max-width: 768px) {
+  .game-container {
+    cursor: auto;
+  }
+
   .snakegame-container {
     grid-template-rows: 1fr 1fr 10fr;
     grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
