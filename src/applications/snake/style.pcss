@@ -29,7 +29,7 @@ window {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 4fr;
   grid-template-areas:
-    ". mode score"
+    "home mode score"
     "game game game";
 
   /* position: relative; */
@@ -41,10 +41,14 @@ window {
     grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
     grid-template-areas:
       "mode mode mode mode mode"
-      ". home score . ."
+      "home . score . ."
       "game game game game game";
 
     /* position: relative; */
+  }
+
+  .home {
+    display: grid;
   }
 }
 
@@ -145,13 +149,12 @@ window {
 
 @media screen and (max-width: 768px) {
   .snakegame-container__multiplayer {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr 6fr;
     grid-template-rows: 2fr 1fr 10fr;
     grid-template-areas:
-      "mode"
-      /* "score" */
-      "board"
-      "game";
+      "mode mode"
+      "home board"
+      "game game";
   }
 
   .game-board-name {

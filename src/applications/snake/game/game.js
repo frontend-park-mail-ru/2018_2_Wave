@@ -11,6 +11,7 @@ import ErrorMessage from '../error_message/errorMessage';
 
 import './game.pcss';
 import '../static/images/home.svg';
+import '../static/images/arrow.png';
 import WsPostman from '../modules/wsPostman';
 
 let GameConstructor;

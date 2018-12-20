@@ -74,7 +74,7 @@ export default class OnlineGame extends GameCore {
     this.wsMessageParser.setModel('snakes', this.enemies);
     this.wsMessageParser.setModel('food', this.foods);
     this.wsMessageParser.setModel('walls', this.level);
-    // this.wsMessageParser.setModel('boosters', this.boosts);
+    this.wsMessageParser.setModel('boosters', this.boosts);
     
     this.playersModel = new PlayersModel();
     this.deadMessage  = new DeadMessage();

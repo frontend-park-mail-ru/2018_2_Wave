@@ -4,7 +4,7 @@ import Loader from './loader/loader';
 import busController from '../../../modules/busController';
 import ReadyMessage from './ready_message/ready_message';
 import ErrorMessage from '../../../error_message/errorMessage';
-import config from '../../utils/game_config';
+import config from '../../../modules/view_config';
 
 export default class WaitingPlayers {
   constructor(canvas, gameParams, gameInfo) {
@@ -42,7 +42,7 @@ export default class WaitingPlayers {
     this.setBusListeners();
     this.quickSearchStart();
     this.setEnviroment();
-    this.loader.start();
+    this.loader.start(this.canvas);
   }
 
   quickSearchStart() {
@@ -66,6 +66,7 @@ export default class WaitingPlayers {
   }
 
   quickSearchReady(message) {
+    this.loader.hideTimer();
     this.readyMessage = new ReadyMessage(message.payload.accept_timeout);
     this.readyMessage.show();
   }
@@ -77,6 +78,7 @@ export default class WaitingPlayers {
 
   hideReadyMesage() {
     this.readyMessage.hide();
+    this.loader.showTimer();
   }
 
   acceptStatus() {
@@ -84,9 +86,6 @@ export default class WaitingPlayers {
   }
 
   setEnviroment() {
-    this.canvas.width = this.gameParams.windowWidth;
-    this.canvas.height = this.gameParams.windowHeight;
-
     [this.container] = document.getElementsByClassName('snakegame-container__multiplayer');
 
     [this.canvas] = this.container.getElementsByClassName('snakegame-canvas');
@@ -98,6 +97,9 @@ export default class WaitingPlayers {
     [this.game_mode] = this.container.getElementsByClassName('game_mode');
     this.temp_mode = this.game_mode.innerHTML;
     this.game_mode.innerHTML = 'WAITING FOR PLAYERS';
+
+    this.canvas.width = this.gameParams.windowWidth * 0.99;
+    this.canvas.height = this.gameParams.windowHeight * 0.99;
   }
 
   removeEnviroment() {
@@ -107,6 +109,7 @@ export default class WaitingPlayers {
   }
 
   removed(message) {
+    this.loader.showTimer();
     this.errorMessage.setErrorMessage('Player left the room');
     this.updateTable(message);
     this.readyMessage.hide();

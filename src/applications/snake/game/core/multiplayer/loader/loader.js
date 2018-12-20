@@ -15,6 +15,8 @@ export default class Loader {
     this.controllers = [];
     this.views = [];
 
+    this.startTmer = this.startTmer.bind(this);
+
     this.snakes = 1;
     for (let i = 0; i < this.snakes; i += 1) {
       const snake = new SnakeModel();
@@ -28,16 +30,42 @@ export default class Loader {
       controller.init();
     });
     this.gameloop();
+    this.bigin =  (new Date()).getTime();
+
+    this.timer = document.createElement('div');
+    this.timer.classList.add('multiplayer-timer');
+    const [root] = document.getElementsByClassName('snakegame-container');
+    root.appendChild(this.timer);
+    this.startTmer();
+  }
+
+  hideTimer() {
+    this.timer.hidden = true;
+  }
+
+  showTimer() {
+    this.timer.hidden = false;
+  }
+
+  startTmer() {
+    let s = (new Date()).getTime() - this.bigin;
+    s = parseInt(s / 1000, 10);
+
+    const m = parseInt(s / 60, 10);
+    s -= m * 60;
+
+    this.timer.innerHTML = `${m}:${s}`;
+    console.log(`${m}:${s}`);
+    this.timerId = setTimeout(this.startTmer, 1000);
   }
 
   gameloop() {
-    this.timerId = setTimeout((_) => {
-
+    this.loaderId = setTimeout((_) => {
       this.clearCanvas();
       this.controllers.forEach((controller) => {
         controller.update();
       });
-      
+
       this.views.forEach((view) => {
         view.render();
       });
@@ -47,7 +75,11 @@ export default class Loader {
   }
 
   stop() {
-    clearInterval(this.timerId);
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
+    this.timer.remove();
+    clearInterval(this.loaderId);
     cancelAnimationFrame(this.gameloopRequestId);
   }
 
