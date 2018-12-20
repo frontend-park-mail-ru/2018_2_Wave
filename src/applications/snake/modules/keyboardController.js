@@ -61,6 +61,7 @@ class KeyboardController {
 
   setOrintation(orientation) {
     this.orientation = orientation;
+    this.lastCommand = undefined;
   }
 
   stop() {
