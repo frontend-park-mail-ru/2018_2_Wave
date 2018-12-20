@@ -51,23 +51,27 @@ export default class HomeView extends Element {
     this.title = 'Home';
 
     [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
+  }
 
-    this.startScroller();
+  scroller(ev) {
+    if (ev.which === 37 || ev.which === 39) ev.preventDefault();
+    if (ev.which === 39 && (Date.now() - this.lastLeft) > 400) {
+      this.scrollPanelLeft();
+      this.lastLeft = Date.now();
+    } else if (ev.which === 37 && (Date.now() - this.lastRight) > 400) {
+      this.scrollPanelRight();
+      this.lastRight = Date.now();
+    }
   }
 
   startScroller() {
-    let lastLeft = Date.now();
-    let lastRight = Date.now();
-    document.addEventListener('keydown', (ev) => {
-      if (ev.which === 37 || ev.which === 39) ev.preventDefault();
-      if (ev.which === 39 && (Date.now() - lastLeft) > 400) {
-        this.scrollPanelLeft();
-        lastLeft = Date.now();
-      } else if (ev.which === 37 && (Date.now() - lastRight) > 400) {
-        this.scrollPanelRight();
-        lastRight = Date.now();
-      }
-    });
+    this.lastLeft = Date.now();
+    this.lastRight = Date.now();
+    document.addEventListener('keydown', this.scroller);
+  }
+
+  stopScroller() {
+    document.removeEventListener('keydown', this.scroller);
   }
 
   scrollPanelLeft() {
@@ -85,6 +89,7 @@ export default class HomeView extends Element {
     if (!grid.classList.contains('home-page__grid')) {
       grid.classList.add('home-page__grid');
     }
+    this.startScroller();
     super.show();
   }
 
@@ -93,6 +98,7 @@ export default class HomeView extends Element {
     if (grid.classList.contains('home-page__grid')) {
       grid.classList.remove('home-page__grid');
     }
+    this.stopScroller();
     super.hide();
   }
 
