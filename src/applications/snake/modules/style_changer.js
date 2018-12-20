@@ -1,21 +1,22 @@
 import busController from './busController';
 import viewConfig from './view_config';
 
-const defaultStyle = {
+const greenredStyle = {
   classes: {
-    snakemenu_main_border: 'snakemenu__purple-border',
-    mainScoreCollor: 'main-score__purple',
-    snakemenuButtonFocus: 'snakemenu-button__focus-purple',
-    gameBoardBorder: 'game-board__purple',
-    gameCanvasBorder: 'game-board__purple',
-    gameName: 'gamename_purple',
+    snakemenu_main_border: 'snakemenu__greenred-border',
+    mainScoreCollor: 'main-score__greenred',
+    snakemenuButtonFocus: 'snakemenu-button__focus-greenred',
+    gameBoardBorder: 'game-board__greenred',
+    gameCanvasBorder: 'game-board__greenred',
+    gameName: 'gamename_greenred',
   },
   config_colors: {
-    wallColor: '#FF40FF',
-    snakeColor: '#00FFFF',
-    foodColor: '#40FF00',
+    wallColor: '#ff0a27',
+    snakeColor: '#0a27ff',
+    foodColor: '#a1ff0a',
   },
 };
+
 
 const yellowgreenStyle = {
   classes: {
@@ -44,35 +45,35 @@ const pinkStyle = {
     gameName: 'gamename_pink',
   },
   config_colors: {
-    wallColor: '#000761',
-    snakeColor: '#00FFFF',
-    foodColor: '#FE00DD',
+    wallColor: '#7fffbf',
+    snakeColor: '#7fbfff',
+    foodColor: '#ffff7f',
   },
 };
 
-const greenStyle = {
+const cyanStyle = {
   classes: {
-    snakemenu_main_border: 'snakemenu__yellowgreen-border',
-    mainScoreCollor: 'main-score__greenyellow',
-    snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
-    gameBoardBorder: 'game-board__greenyellow',
-    gameCanvasBorder: 'game-board__greenyellow',
-    gameName: 'gamename_greenyellow',
+    snakemenu_main_border: 'snakemenu__cyan-border',
+    mainScoreCollor: 'main-score__cyan',
+    snakemenuButtonFocus: 'snakemenu-button__focus-cyan',
+    gameBoardBorder: 'game-board__cyan',
+    gameCanvasBorder: 'game-board__cyan',
+    gameName: 'gamename_cyan',
   },
   config_colors: {
-    wallColor: '#40FFC0',
-    snakeColor: '#80FF00',
-    foodColor: '#FF40FF',
+    wallColor: '#ff0080',
+    snakeColor: '#80ff00',
+    foodColor: '#ff8000',
   },
 };
 
 class StyleChanger {
   constructor() {
-    this.styles = [defaultStyle, yellowgreenStyle, pinkStyle, greenStyle];
-    this.currentStyle = defaultStyle;
+    this.styles = [greenredStyle, yellowgreenStyle, pinkStyle, cyanStyle];
+    this.currentStyle = greenredStyle;
     this.currentStyleIndex = 0;
     this.changeStyle = this.changeStyle.bind(this);
-    viewConfig.setColors(defaultStyle.config_colors, defaultStyle.classes);
+    viewConfig.setColors(this.styles[0].config_colors, this.styles[0].classes);
   }
 
   start() {

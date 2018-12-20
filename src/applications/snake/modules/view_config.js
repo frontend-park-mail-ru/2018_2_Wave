@@ -33,10 +33,10 @@ class Config {
   //   this.wallColor = 'blue';
   //   this.snakeColor = '#00FFFF';
   //   this.foodColor = 'white';
-  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
+  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-greenred';
   //   this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
-  //   this.gameCanvasBorder = 'game-board__purple';
-  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
+  //   this.gameCanvasBorder = 'game-board__greenred';
+  //   this.snakemenuButtonFocus = 'snakemenu-button__focus-greenred';
   // }
 }
 
