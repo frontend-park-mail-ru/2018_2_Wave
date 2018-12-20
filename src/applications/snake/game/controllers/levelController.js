@@ -59,28 +59,28 @@ export default class LevelController {
       }
     }
 
-    // for(rc = 0; rc < rwc; rc += 1) {
-    //   // calculate a position for a random wall, somewhere within the walls of the grid. 
-    //   rwx  = Math.floor(3 + Math.random() * (level.width - 6));
-    //   rwy  = Math.floor(3 + Math.random() * (level.height - 6));
-    //   rwl  = Math.floor(3 + Math.random() * 5);
-    //   rwdx = ((rwx < level.width / 2) ? 1 : -1);
-    //   rwdy = ((rwy < level.height / 2) ? 1 : -1);
+    const rwc = 5;
+    for (let rc = 0; rc < rwc; rc += 1) {
+      // calculate a position for a random wall, somewhere within the walls of the grid.
+      let rwx  = Math.floor(3 + Math.random() * (levelWidth - 6));
+      let rwy  = Math.floor(3 + Math.random() * (levelHeight - 6));
+      const rwl  = Math.floor(3 + Math.random() * 5);
+      const rwdx = ((rwx < levelWidth / 2) ? 1 : -1);
+      const rwdy = ((rwy < levelHeight / 2) ? 1 : -1);
 
-    //   for(ri = 0; ri < rwl; ri += 1) {
-    //     i = level.index(rwx, rwy);
+      for (let ri = 0; ri < rwl; ri += 1) {
+        // const i = this.level.index(rwx, rwy);
+ 
+        // if(level.wdata[i] !== 0) {
+        //   break;
+        // }
 
-    //     // don't try to make a new block when one already exists! 
-    //     if(level.wdata[i] !== 0) {
-    //       break;
-    //     }
+        this.level.setWall({ x: rwx, y: rwy });
 
-    //     level.wdata[i] = level.odata[i] = 2;
-
-    //     rwx += rwdx;
-    //     rwy += rwdy;
-    //   }
-    // }
+        rwx += rwdx;
+        rwy += rwdy;
+      }
+    }
 
     wallLength = this.maxWallLength;
     for (let y = 0; y < levelHeight; y += 1) {
