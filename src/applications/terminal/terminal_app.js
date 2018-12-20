@@ -9,7 +9,7 @@ class TerminalApp extends BaseApp {
   constructor(url, parent) {
     super(url, parent, TerminalView);
 
-    this.intro = 'stanford@wave:~/$';
+    this.username = 'guest';
 
     this.listeners = {
       keydown: this.handleKeypress.bind(this),
@@ -17,7 +17,7 @@ class TerminalApp extends BaseApp {
     };
 
     this.commands = {
-      me: this.me,
+      // me: this.me,
       logout: this.logout,
       register: this.register,
       help: this.help,
@@ -27,13 +27,31 @@ class TerminalApp extends BaseApp {
         bus.emit('link', '/snake');
         this.view.addInput(this.intro);
       },
-      exit: () => {
-        bus.emit('link', '/');
-        this.view.addInput(this.intro);
+      exit: async () => {
+        const { err, loggedIn } = await userService.isLoggedIn();
+        if (err || !loggedIn) {
+          const frases = [
+            ' Not now, dear.',
+            ' Why are you so serious?',
+            ' I have headache.',
+            ' Don\'t leave me alone...',
+            ' Nope :3',
+            ' You don\'t like me?',
+          ];
+          this.view.printString(frases[Math.floor(Math.random() * frases.length)]);
+          this.view.addInput(this.intro);
+        } else {
+          bus.emit('link', '/');
+          this.view.addInput(this.intro);
+        }
       },
     };
 
     this.commandHistory = [];
+  }
+
+  get intro() {
+    return `${this.username}@wave:~/&`;
   }
 
   get view() {
@@ -89,6 +107,7 @@ class TerminalApp extends BaseApp {
         const { err } = await register(formdata);
         if (!err) {
           this.view.printString(`Hello, ${name}!`);
+          this.username = name;
           this.view.addInput(this.intro);
         }
       } else {
@@ -155,7 +174,6 @@ class TerminalApp extends BaseApp {
   /**  reads and process command from input  */
   handleCommand() {
     const command = this.view.processInput();
-
     if (command) {
       if (this.commands.hasOwnProperty(command)) {
         this.commands[command].call(this);
@@ -166,6 +184,8 @@ class TerminalApp extends BaseApp {
         this.view.addInput(this.intro);
       }
       this.commandHistory.push(command);
+    } else {
+      this.view.addInput(this.intro);
     }
   }
 

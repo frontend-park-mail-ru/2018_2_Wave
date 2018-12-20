@@ -1,5 +1,4 @@
 import bus from './bus';
-import userService from './userservice';
 
 /*                utils                */
 
@@ -101,10 +100,6 @@ export default class Router {
       });
     }
 
-    if (app === this.mainApp) {
-      const { err, loggedIn } = userService.isLoggedIn();
-      if (err || !loggedIn) this.open('terminal');
-    }
 
     if (!app) {
       this.open('/');
