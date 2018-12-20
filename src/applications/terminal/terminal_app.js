@@ -142,9 +142,10 @@ class TerminalApp extends BaseApp {
         const formdata = new FormData();
         formdata.append('username', name);
         formdata.append('password', password);
-        const { err } = await register(formdata);
-        if (!err) {
+        const { err: regErr } = await register(formdata);
+        if (!regErr) {
           this.view.printString(`Hello, ${name}!`);
+          bus.emit('checkUser');
           this.username = name;
           this.view.addInput(this.intro);
         }
@@ -171,6 +172,7 @@ class TerminalApp extends BaseApp {
     if (!err) {
       this.view.printString('Ok');
       bus.emit('checkUser', 'logout');
+      this.username = 'guest';
       this.view.addInput(this.intro);
     } else if (err.status === 401) {
       this.view.printString('Already.');
