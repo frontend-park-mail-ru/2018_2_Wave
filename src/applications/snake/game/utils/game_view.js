@@ -38,6 +38,9 @@ export default class GameView extends Element {
     [this.game_mode] = this.parent.getElementsByClassName('game_mode');
     this.game_mode.innerHTML = 'MULTIPLAYER';
 
+    [this.main_score] = this.parent.getElementsByClassName('main-score');
+    this.main_score.classList.add('main-score_miltiplayer');
+
     [this.gameBoard] = document.getElementsByClassName('game-board-wrapper');
     this.gameBoard.hidden = false;
   }
@@ -51,6 +54,7 @@ export default class GameView extends Element {
   removeMultiplayerEnvironment() {
     this.snakegameContainer.classList.remove('snakegame-container__multiplayer');
     this.gameBoard.hidden = true;
+    this.main_score.classList.remove('main-score_miltiplayer');
   }
 
   setSinglplayerEnviroment() {

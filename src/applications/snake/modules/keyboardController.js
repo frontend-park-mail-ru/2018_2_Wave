@@ -2,6 +2,7 @@ import bus from './busController';
 import swipeDetector from './swipeDetector';
 import config from '../game/utils/game_config';
 
+let enter = 0;
 class KeyboardController {
   constructor() {
     if (window.innerWidth > window.innerHeight) {
@@ -50,8 +51,9 @@ class KeyboardController {
 
   start() {
     // magic here
-    setTimeout(() => document.addEventListener('keydown', this.acceptInput));
-    // document.addEventListener('keydown', this.acceptInput);
+    // console.log('start keyboard');
+    // setTimeout(() => document.addEventListener('keydown', this.acceptInput), 1000);
+    document.addEventListener('keydown', this.acceptInput);
     this.swipeDetector.start();
   }
 
@@ -112,7 +114,7 @@ class KeyboardController {
   */
 
   acceptInput(e) {
-    const keyCode =  e.which || e.keyCode;
+    let keyCode =  e.which || e.keyCode;
 
     /*
     if (e.ctrlKey) {
@@ -131,6 +133,11 @@ class KeyboardController {
       return;
     }
     */
+
+    if (keyCode === 13 && enter === 0) {
+      enter += 1;
+      keyCode = -1;
+    }
 
     if (this.isControlKey(keyCode)) {
       bus.emit(e.code);
