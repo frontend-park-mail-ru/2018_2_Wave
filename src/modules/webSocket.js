@@ -3,7 +3,7 @@ export default class Ws {
     // this.host = window.location.host;
     this.mesageParser = mesageParser;
 
-    this.host = 'snake.rasseki.com';
+    this.host = '192.168.1.195:9605';
     this.address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/conn/ws`;
   }
 

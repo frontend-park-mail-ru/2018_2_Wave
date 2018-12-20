@@ -49,6 +49,7 @@ export default class GameApp extends BaseApp {
   }
 
   start() {
+    // window.onscroll = function () { window.scrollTo(0, 0); };
     this.parent.style.background = 'black';
     this.styleChanger.start();
     this.env.show();
