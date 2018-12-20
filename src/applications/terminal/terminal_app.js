@@ -23,8 +23,14 @@ class TerminalApp extends BaseApp {
       help: this.help,
       history: this.history,
       clear: this.clear,
-      snake: () => bus.emit('link', '/snake'),
-      exit: () => bus.emit('link', '/'),
+      snake: () => {
+        bus.emit('link', '/snake');
+        this.view.addInput(this.intro);
+      },
+      exit: () => {
+        bus.emit('link', '/');
+        this.view.addInput(this.intro);
+      },
     };
 
     this.commandHistory = [];
@@ -157,6 +163,7 @@ class TerminalApp extends BaseApp {
         this.view.printString();
         this.view.printString(`${command}: command not found`);
         this.view.printString();
+        this.view.addInput(this.intro);
       }
       this.commandHistory.push(command);
     }
