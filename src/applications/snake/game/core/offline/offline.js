@@ -80,7 +80,6 @@ export default class OfflineGame extends GameCore {
   }
 
   start() {
-    this.errorMessage.setErrorMessage('You are offline');
     this.controllers.forEach(controller => controller.init());
     this.playerController.init();
     super.start();
