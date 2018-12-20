@@ -1,2 +1,3 @@
 each data, text in deadButtons
-    a.snakemenu-button(href=data.href, params=data.params)=text
+    - href = `${data.href}?${data.params}`;
+    a.snakemenu-button(href=href,src=data.href, params=data.params)=text

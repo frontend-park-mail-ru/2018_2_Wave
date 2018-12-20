@@ -42,8 +42,13 @@ export default class GameView extends Element {
     this.gameBoard.hidden = false;
   }
 
+  setArcadeEnvironmemnt() {
+    [this.game_mode] = this.parent.getElementsByClassName('game_mode');
+    this.game_mode.innerHTML = 'ARCADE';
+  }
 
-  removeMultiplayerEnviroment() {
+
+  removeMultiplayerEnvironment() {
     this.snakegameContainer.classList.remove('snakegame-container__multiplayer');
     this.gameBoard.hidden = true;
   }
@@ -63,6 +68,8 @@ export default class GameView extends Element {
 
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
       this.setMultiplayerEnviroment();
+    } else if (this.gameParams.mode === GAME_MODE.ARCADE) {
+      this.setArcadeEnvironmemnt();
     } else {
       this.setSinglplayerEnviroment();
     }
@@ -89,7 +96,7 @@ export default class GameView extends Element {
   hide() {
     super.hide();
     if (this.gameParams.mode === GAME_MODE.MULTIPLAYER) {
-      this.removeMultiplayerEnviroment();
+      this.removeMultiplayerEnvironment();
     }
     if (this.game) {
       this.game.destroy();
