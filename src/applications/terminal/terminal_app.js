@@ -29,6 +29,8 @@ class TerminalApp extends BaseApp {
       },
       exit: async () => {
         const { err, loggedIn } = await userService.isLoggedIn();
+        console.log(err, loggedIn);
+
         if (err || !loggedIn) {
           const frases = [
             ' Not now, dear.',
@@ -56,11 +58,12 @@ class TerminalApp extends BaseApp {
 
   setUsername() {
     bus.ignore('userUpdated', this.setUsername);
-    const { err, user } = userService.getUser();
-    if (err && err === 'updating') bus.listen('userUpdated', this.setUsername);
-    else if (err) {
+    const { err, loggedIn } = userService.isLoggedIn();
+    if (err) bus.listen('userUpdated', this.setUsername);
+    else if (!loggedIn) {
       this.username = 'guest';
     } else {
+      const { user } = userService.getUser();
       this.username = user.username;
     }
   }
@@ -167,6 +170,7 @@ class TerminalApp extends BaseApp {
     console.log(err);
     if (!err) {
       this.view.printString('Ok');
+      bus.emit('checkUser', 'logout');
       this.view.addInput(this.intro);
     } else if (err.status === 401) {
       this.view.printString('Already.');
