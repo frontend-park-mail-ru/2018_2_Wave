@@ -4,6 +4,7 @@ import Loader from './loader/loader';
 import busController from '../../../modules/busController';
 import ReadyMessage from './ready_message/ready_message';
 import ErrorMessage from '../../../error_message/errorMessage';
+import config from '../../utils/game_config';
 
 export default class WaitingPlayers {
   constructor(canvas, gameParams, gameInfo) {
@@ -88,8 +89,8 @@ export default class WaitingPlayers {
 
     [this.container] = document.getElementsByClassName('snakegame-container__multiplayer');
 
-    // [this.canvas] = this.container.getElementsByClassName('snakegame-canvas');
-    // this.canvas.classList.remove('game-board__purple');
+    [this.canvas] = this.container.getElementsByClassName('snakegame-canvas');
+    this.canvas.classList.remove(config.gameCanvasBorder);
 
     [this.score] = this.container.getElementsByClassName('main-score');
     this.score.hidden = true;
@@ -100,7 +101,7 @@ export default class WaitingPlayers {
   }
 
   removeEnviroment() {
-    // this.canvas.classList.add('game-board__purple');
+    this.canvas.classList.add(config.gameCanvasBorder);
     this.score.hidden = false;
     this.game_mode.innerHTML = this.temp_mode;
   }

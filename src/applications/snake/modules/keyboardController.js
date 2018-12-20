@@ -1,8 +1,15 @@
 import bus from './busController';
 import swipeDetector from './swipeDetector';
+import config from '../game/utils/game_config';
 
 class KeyboardController {
   constructor() {
+    if (window.innerWidth > window.innerHeight) {
+      this.orientation = config.HORIZONTAL;
+    } else {
+      this.orientation = config.VERTICAL;
+    }
+
     this.controls = [
       8, // backspace
       // 9, // tab
@@ -28,6 +35,13 @@ class KeyboardController {
       67, // ctrl+c
 
     ];
+
+    this.verticalDirection = {
+      ArrowUp: 'ArrowLeft',
+      ArrowDown: 'ArrowRight',
+      ArrowLeft: 'ArrowUp',
+      ArrowRight: 'ArrowDown',
+    };
 
     this.swipeDetector = swipeDetector;
     this.isSpace = false;
@@ -117,8 +131,12 @@ class KeyboardController {
     if (this.isControlKey(keyCode)) {
       bus.emit(e.code);
     } else if (this.isSnakeControls(keyCode)) {
+      let direction = e.key;
+      if (this.orientation === config.VERTICAL) {
+        direction = this.verticalDirection[direction];
+      }
       bus.emit(e.code);
-      this.lastCommand = e.key;
+      this.lastCommand = direction;
     }
 
     if (e.code === 'Space') {

@@ -3,20 +3,25 @@ class Config {
     this.setDefaultColors();
   }
 
-  setColors(colorsConfig) {
+  setColors(colorsConfig, classConfig) {
     const {
       wallColor,
       snakeColor,
       foodColor,
-      snakemenuButtonFocus,
-      enemiesColors,
     } = colorsConfig;
+
+    const {
+      gameCanvasBorder,
+      snakemenuButtonFocus,
+    } = classConfig;
 
     this.wallColor = wallColor;
     this.snakeColor = snakeColor;
     this.foodColor = foodColor;
+    this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
+
+    this.gameCanvasBorder = gameCanvasBorder;
     this.snakemenuButtonFocus = snakemenuButtonFocus;
-    this.enemiesColors = enemiesColors;
   }
 
   setDefaultColors() {
@@ -26,6 +31,8 @@ class Config {
     this.foodColor = 'white';
     this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
     this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
+    this.gameCanvasBorder = 'game-board__purple';
+    this.snakemenuButtonFocus = 'snakemenu-button__focus-purple';
   }
 }
 
