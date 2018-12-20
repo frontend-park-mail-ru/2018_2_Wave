@@ -8,6 +8,7 @@ import StoreView from './views/store/store';
 import LoaderView from './views/loader/loader';
 import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
+import bus from '../../modules/bus';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
 // import LeaderboardView from './views/leaderboard';
@@ -85,9 +86,15 @@ export default class MenuApp extends BaseApp {
       this.start();
       return;
     }
-    this.animateLaunch();
-    this.env.title.focus();
-    this.active = true;
+    if (this.loader.active) {
+      console.log('loader active');
+      bus.emit('link', '/terminal');
+    } else {
+      console.log('loader is not active');
+      this.animateLaunch();
+      this.env.title.focus();
+      this.active = true;
+    }
   }
 
   changeView(viewUrl, params) {
