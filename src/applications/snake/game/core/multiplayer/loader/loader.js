@@ -55,7 +55,7 @@ export default class Loader {
     s -= m * 60;
 
     this.timer.innerHTML = `${m}:${s}`;
-    console.log(`${m}:${s}`);
+    // console.log(`${m}:${s}`);
     this.timerId = setTimeout(this.startTmer, 1000);
   }
 

@@ -39,7 +39,7 @@ export default class Ws {
 
   send(data) {
     // костыль
-    this.waitForConnection(() => { console.log('send', data); this.ws.send(JSON.stringify(data)); }, 0);
+    this.waitForConnection(() => { this.ws.send(JSON.stringify(data)); }, 0);
   }
 
   waitForConnection(callback, interval) {

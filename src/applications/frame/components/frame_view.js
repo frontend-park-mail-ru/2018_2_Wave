@@ -12,7 +12,7 @@ export default class FrameView extends Element {
   }
 
   render() {
-    console.log('here');
+    // console.log('here');
     // [this.frame] = this.wrapper.getElementsByClassName('frame');
     super.render({ source: this.source });
   }

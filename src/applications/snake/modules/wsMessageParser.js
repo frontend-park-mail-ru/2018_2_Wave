@@ -16,7 +16,7 @@ export default class WsMessageParser {
    * @param {message from ws for parsing} message
    */
   parse(message) {
-    console.log('ws_message', message);
+    // console.log('ws_message', message);
 
     if (message.status === 'STATUS_OK'
     || message.status === 'STATUS_DEAD'
