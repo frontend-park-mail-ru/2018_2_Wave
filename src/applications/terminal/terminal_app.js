@@ -97,6 +97,7 @@ class TerminalApp extends BaseApp {
 
   /*   terminal commands   */
   register() {
+    this.terminal.removeEventListener('keydown', this.listeners.keydown);
     let name, password, password2;
     const processData = async (value) => {
       password2 = value;
@@ -114,6 +115,7 @@ class TerminalApp extends BaseApp {
         this.view.printString('Passwords don\'t match.');
         this.view.addInput(this.intro);
       }
+      this.terminal.addEventListener('keydown', this.listeners.keydown);
     };
     const repeatPassword = (value) => {
       password = value;
@@ -190,18 +192,16 @@ class TerminalApp extends BaseApp {
   }
 
   ask(message, process, hideInput) {
-    const callback = (ev) => {
+    const callback = async (ev) => {
       if (ev.which === 13) {
         ev.preventDefault();
-        process(this.view.processInput());
+        await process(this.view.processInput());
         this.terminal.removeEventListener('keydown', callback);
-        this.terminal.addEventListener('keydown', this.listeners.keydown);
       }
     };
 
     if (hideInput) this.view.addPasswordInput(message);
     else this.view.addInput(message);
-    this.terminal.removeEventListener('keydown', this.listeners.keydown);
     this.terminal.addEventListener('keydown', callback);
   }
 
