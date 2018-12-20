@@ -4,7 +4,7 @@ import MainMenuTemplate from './main_menu.pug';
 import './main_menu.pcss';
 
 const buttons = {
-  '/singlplayer': 'Singlplayer',
+  '/singleplayer': 'Singleplayer',
   '/multiplayer': 'Multiplayer',
   '/hotkeys': 'Hot keys',
   '/': 'exit',
