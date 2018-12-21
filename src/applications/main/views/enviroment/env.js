@@ -3,6 +3,7 @@ import './env.pcss';
 import Element from '../../../element';
 import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
+import IconBlock from '../../components/icon-block/icon-block';
 
 import template from './env.pug';
 
@@ -19,8 +20,10 @@ export default class Enviroment extends Element {
     [this.mainContainer] = this.wrapper.getElementsByClassName('grid-common');
     const [userblockPlace] = this.wrapper.getElementsByClassName('userblock');
     const [menuPlace] = this.wrapper.getElementsByClassName('menu');
+    const [iconsPlace] = this.wrapper.getElementsByClassName('icon-block');
     this.userblock = new UserBlock(userblockPlace, userblockPlace);
     this.menu = new Menu(menuPlace, menuPlace);
+    this.iconBlock = new IconBlock(iconsPlace, iconsPlace);
 
     [this.appContainerPlace] = this.wrapper.getElementsByClassName('application');
   }
@@ -32,11 +35,13 @@ export default class Enviroment extends Element {
 
   show() {
     super.show();
+    this.iconBlock.show();
     this.userblock.show();
     this.menu.show();
   }
 
   render() {
+    this.iconBlock.render();
     this.userblock.render();
     this.menu.render();
   }
