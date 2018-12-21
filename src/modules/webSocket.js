@@ -5,10 +5,10 @@ export default class Ws {
 
     if (window.location.host === 'localhost:3000'
       || window.location.host === '127.0.0.1:3000') {
-        this.host = 'localhost:9605';
-      } else {
-    this.host = 'snake.rasseki.com';
-      }
+      this.host = 'localhost:9605';
+    } else {
+      this.host = 'snake.rasseki.com';
+    }
     this.address = `${window.location.protocol.replace('http', 'ws')}//${this.host}/conn/ws`;
   }
 

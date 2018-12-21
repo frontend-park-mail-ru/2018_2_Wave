@@ -1,5 +1,10 @@
 .main-content
   .gamename.gamename_greenred ОНАCONDA
   .snakemenu-main.snakemenu__greenred-border
-   each value, key in buttons
-      a.snakemenu-button(href=key src=key)=value
+    - console.log('loggedIn', key,  loggedIn);
+      each value, key in buttons
+          - if (key === '/multiplayer' && !loggedIn) {
+            a.snakemenu-button.multiplayermenu-button(href=key src=key)=value
+          - } else {
+            a.snakemenu-button(href=key src=key)=value
+          - }

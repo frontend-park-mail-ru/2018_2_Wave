@@ -64,7 +64,7 @@ export default class OnlineGame extends GameCore {
     this.boosts = new FoodsModel(10);
     this.boostsController = new FoodsController(this.boosts, this.level);
     this.controllers.push(this.boostsController);
-    this.scene.push(new FoodsView(this.boosts));
+    this.scene.push(new FoodsView(this.boosts, '#400040'));
 
     this.player = new PlayerModel();
 
