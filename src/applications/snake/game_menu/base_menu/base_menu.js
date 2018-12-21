@@ -1,5 +1,6 @@
 import busController from '../../modules/busController';
 import Element from '../../../element';
+import ErrorMessage from '../../error_message/errorMessage';
 
 import config from '../../modules/view_config';
 
@@ -11,6 +12,8 @@ export default class BaseMenu extends Element {
     this.firstFocus = undefined;
     this.menuClass = menuClass;
     this.busController = busController;
+    this.errorMessage = new ErrorMessage();
+    this.onClick = this.onClick.bind(this);
 
     if (isHorizontal) {
       this.eventsMethods = {
@@ -37,12 +40,22 @@ export default class BaseMenu extends Element {
     } else {
       this.menu = this.wrapper;
     }
+    this.menu.addEventListener('click', this.onClick);
     super.show();
     this.setFirstFosus();
     this.setBusListeners();
   }
 
+  onClick() {
+    if (window.innerWidth > 768) {
+      this.errorMessage.setErrorMessage('Use keyboard arrows');
+    }
+  }
+
   hide() {
+    if (this.menu) {
+      this.menu.removeEventListener('click', this.onClick);
+    }
     this.removeBusListeners();
     super.hide();
   }
