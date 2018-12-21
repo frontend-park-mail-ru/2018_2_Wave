@@ -5,6 +5,7 @@ import './main_menu.pcss';
 
 import ErrorMesage from '../../error_message/errorMessage';
 import globalUser from '../../globalUser';
+import busController from '../../modules/busController';
 
 const buttons = {
   '/singleplayer': 'Singleplayer',
@@ -46,15 +47,24 @@ export default class MainMenuView extends BaseMenu {
           this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
           this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
         }
-      } else {
+      } else if (this.multiplayerButton) {
         this.multiplayerButton.setAttribute('href', '/multiplayer');
         this.multiplayerButton.setAttribute('src', '/multiplayer');
       }
     }
   }
 
-  unauthorizedMessage() {
-    this.errorMessage.setErrorMessage('Register to play in multiplayer');
+  unauthorizedMessage(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const isloginUser = globalUser.isLoginUser();
+    if (isloginUser) {
+      this.busController.emit('link', '/multiplayer');
+    } else {
+      this.errorMessage.setErrorMessage('Register to play in multiplayer');
+    }
+    this.multiplayerButton.removeEventListener('click', this.unauthorizedMessage);
   }
 
   pause() {
