@@ -58,7 +58,7 @@ export default class MainMenuView extends BaseMenu {
     if (globalUser) {
       super.render({ buttons, loggedIn: await globalUser.isLogin() });
     } else {
-      super.render({ buttons, loggedIn: await false });
+      super.render({ buttons, loggedIn: false });
     }
   }
 
