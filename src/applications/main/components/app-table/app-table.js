@@ -21,6 +21,7 @@ export default class AppTable extends Element {
   }
 
   async render(askedCategory) {
+    console.log('rendering matrix');
     let category;
     if (!askedCategory) category = 'all';
 
