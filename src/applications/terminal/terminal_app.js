@@ -14,6 +14,7 @@ class TerminalApp extends BaseApp {
     this.listeners = {
       keydown: this.handleKeypress.bind(this),
       click: this.focusInput.bind(this),
+      keyup: this.handleKeyup.bind(this),
     };
 
     this.commands = {
@@ -280,6 +281,12 @@ class TerminalApp extends BaseApp {
     this.view.addInput(this.intro);
   }
 
+  break() {
+    this.view.processInput();
+    this.view.printString('Break!');
+    this.view.addInput(this.intro);
+  }
+
 
   /*   handlers and listeners   */
   handleKeypress(ev) {
@@ -295,6 +302,33 @@ class TerminalApp extends BaseApp {
       case 40:
         ev.preventDefault();
         this.toggleDown();
+        break;
+      case 67:
+        if (this.ctrlDown) {
+          ev.preventDefault();
+          this.break();
+        }
+        break;
+      case 76:
+        if (this.ctrlDown) {
+          ev.preventDefault();
+          this.clear();
+        }
+        break;
+      case 91:
+      case 17:
+        this.ctrlDown = true;
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleKeyup(ev) {
+    switch (ev.keyCode) {
+      case 91:
+      case 17:
+        this.ctrlDown = false;
         break;
       default:
         break;
