@@ -14,7 +14,7 @@ export default class AppTable extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
     this.wrapper.addEventListener('click', (ev) => {
-      if (ev.target !== HTMLImageElement) return;
+      if (!(ev.target instanceof HTMLImageElement)) return;
       const name = ev.target.getAttribute('name');
       console.log('emitted');
       bus.emit('about', name);

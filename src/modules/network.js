@@ -39,7 +39,7 @@ async function addApp(name) {
 async function getApp(name) {
   try {
     const app = await ajax.GET({
-      path: `/me/${name}`,
+      path: `/apps/${name}`,
     });
     return { app };
   } catch (err) {

@@ -22,21 +22,21 @@ export default class Description extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
 
-    bus.listen('about', this.render.bind(this));
+    // bus.listen('about', this.render.bind(this));
 
     this.render();
   }
 
   async render(appName) {
-    if (appName) {
-      console.log('rendering info', appName);
-      const { err, app } = await getApp(appName);
+    // if (appName) {
+    //   console.log('rendering info', appName);
+    //   const { err, app } = await getApp(appName);
 
-      console.log(err, app);
+    //   console.log(err, app);
 
-      super.render({ app });
-    }
+    //   super.render({ app });
+    // }
 
-    super.render();
+    super.render({ app: application });
   }
 }
