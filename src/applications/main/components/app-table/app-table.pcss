@@ -2,7 +2,7 @@
   grid-area: app-table;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
 
   flex-wrap: wrap;
 
@@ -12,12 +12,17 @@
   padding: 0 10px;
   border-left: 1px solid rgba(100%, 100%, 100%, 0.6);
   border-right: 1px solid rgba(100%, 100%, 100%, 0.6);
-}
 
-.table_tile {
-  scroll-snap-align: start;
+  &__tile {
+    scroll-snap-align: start;
 
-  margin: 10px;
-  // height: calc(64vh - );
-  width: 30vh;
+    margin: 10px;
+    scroll-margin: 10px;
+    height: calc(64vh / 3 - 27px);
+    width: 29vh;
+  }
+
+  &__card {
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  }
 }
