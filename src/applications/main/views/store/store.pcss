@@ -8,24 +8,24 @@
 
   &__grid {
     overflow: hidden;
-    grid-template-rows: 14vh 14vh 1fr 27vh;
-    grid-template-columns: 300px 1fr;
+    grid-template-rows: 14vh 14vh 50vh 22vh;
+    grid-template-columns: 250px 1fr 250px;
     grid-row-gap: 10px;
     grid-auto-rows: 0;
 
     grid-template-areas:
-    "userblock icon-set"
-    "title ."
-    "list content"
-    "menu menu";
+    "userblock . icon-set"
+    "title app-table description"
+    "list app-table description"
+    "menu menu menu";
 
-    width:  calc(100vw - var(--grid-padding-x));
-    padding: 0 0 0 var(--grid-padding-x);
+    width:  calc(100vw - 2 * var(--grid-padding-x));
+    padding: 0 var(--grid-padding-x);
   }
 
   &__tile-panel {
     height: 80%;
-    width: calc((100vw - var(--grid-padding-x) - 300px));
+    width: calc((100vw - 2* var(--grid-padding-x) - 600px));
 
     scroll-snap-type: x mandatory;
     // scroll-snap-stop: always;
@@ -34,6 +34,13 @@
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+}
+
+
+@media (--boss) {
+  .store__grid {
+    grid-template-columns: 300px 1fr 300px;
   }
 }
 
