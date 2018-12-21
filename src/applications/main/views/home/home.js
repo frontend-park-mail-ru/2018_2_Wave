@@ -105,7 +105,7 @@ export default class HomeView extends Element {
   render() {
     if (this.panel.innerHTML !== '') return;
     apps.forEach((app) => {
-      const tile = new AppTile(this.panel, app);
+      const tile = new AppTile(this.panel, app, 'home-page__tile');
       tile.show();
     });
   }
