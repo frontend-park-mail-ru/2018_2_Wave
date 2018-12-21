@@ -60,10 +60,14 @@ export default class MainMenuView extends BaseMenu {
   async render() {
     console.log('checkglobaluser render');
     if (globalUser) {
-      super.render({ buttons, loggedIn: await globalUser.isLogin() });
+      console.log('checkglobaluser in');
+      const isloginUser = await globalUser.isLogin();
+      super.render({ buttons, loggedIn: isloginUser });
     } else {
+      console.log('checkglobaluser else');
       super.render({ buttons, loggedIn: false });
     }
+    console.log('checkglobaluser out');
   }
 
   hide() {
