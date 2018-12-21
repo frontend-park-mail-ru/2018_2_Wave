@@ -16,6 +16,7 @@ export default class AppTable extends Element {
     this.wrapper.addEventListener('click', (ev) => {
       if (ev.target !== HTMLImageElement) return;
       const name = ev.target.getAttribute('name');
+      console.log('emitted');
       bus.emit('about', name);
     });
   }
