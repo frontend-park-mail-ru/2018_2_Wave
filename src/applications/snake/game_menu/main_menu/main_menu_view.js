@@ -35,7 +35,7 @@ export default class MainMenuView extends BaseMenu {
   async setEnvironment() {
     console.log('checkglobaluser setEnvironment');
     if (globalUser) {
-      const isloginUser = await globalUser.isLogin();
+      const isloginUser = await globalUser.isLoginUser();
       if (!isloginUser) {
         console.log('nologin');
         [this.multiplayerButton] = document.getElementsByClassName('multiplayermenu-button');
@@ -61,7 +61,7 @@ export default class MainMenuView extends BaseMenu {
     console.log('checkglobaluser render');
     if (globalUser) {
       console.log('checkglobaluser in');
-      const isloginUser = await globalUser.isLogin();
+      const isloginUser = await globalUser.isLoginUser();
       super.render({ buttons, loggedIn: isloginUser });
     } else {
       console.log('checkglobaluser else');

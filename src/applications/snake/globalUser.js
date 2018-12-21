@@ -9,7 +9,7 @@ class GlobalUser {
     this.setUserToken(data);
   }
 
-  async isLogin() {
+  async isLoginUser() {
     const { err, loggedIn } = await userService.isLoggedIn();
     console.log(err, loggedIn, this.userToken);
     if (err || !loggedIn) {
