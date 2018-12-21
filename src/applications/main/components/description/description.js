@@ -1,6 +1,7 @@
 import Element from '../../../element';
 
 import bus from '../../../../modules/bus';
+import { getApp } from '../../../../modules/network';
 
 import template from './description.pug';
 import './description.pcss';
@@ -22,12 +23,21 @@ export default class Description extends Element {
     super(template, parent, wrapper || parent);
 
     bus.listen('about', this.render.bind(this));
-    console.log('this');
 
     this.render();
   }
 
-  render(app) {
-    super.render({ app });
+  async render(appName) {
+    if (appName) {
+      console.log('rendering info', appName);
+      const { err, app } = await getApp(appName);
+
+      console.log(err, app);
+
+      super.render({ app });
+      return;
+    }
+
+    super.render();
   }
 }

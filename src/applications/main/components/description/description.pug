@@ -1,9 +1,9 @@
 .description
   if app
     .description__tile
-      img.description__background(src='/img/terminal.jpg')
+      img.description__background(src='https://rasseki.com/' + app.image)
     .description__title= app.name
-    .description__installs= 'Place: ' + app.place
+    //- .description__installs= 'Place: ' + app.place
     .description__installs= 'Installs: ' + app.installs
 
     .description__about= app.about
@@ -14,4 +14,4 @@
     else
       .description__button.add-button add
   else
-    .description__about Click on app to see infp about it
+    .description__about Click on app to see infо about it

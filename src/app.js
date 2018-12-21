@@ -19,3 +19,5 @@ if ('serviceWorker' in navigator) {
     .register('./sw.js')
     .catch(err => console.error({ err }));
 }
+
+console.log('ЖУРАВЛЬ');
