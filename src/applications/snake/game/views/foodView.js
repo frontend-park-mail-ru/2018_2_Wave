@@ -5,12 +5,18 @@ export default class FoodView {
     this.foodModel = foodModel;
   }
 
-  render(canvas, foodModel) {
+  render(canvas, foodModel, color) {
     if (foodModel) {
       this.foodModel = foodModel;
     }
 
-    const fillStyle = config.foodColor;
+    let fillStyle;
+    if (color) {
+      fillStyle = color;
+    } else {
+      fillStyle = config.foodColor;
+    }
+ 
     const strokeStyle = config.foodColor;
 
     if (this.foodModel.position) {

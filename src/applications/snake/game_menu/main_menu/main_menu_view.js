@@ -41,8 +41,8 @@ export default class MainMenuView extends BaseMenu {
         this.multiplayerButton.setAttribute('href', '/snake');
         this.multiplayerButton.setAttribute('src', '/snake');
         this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
+        this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
       }
-      this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
     }
   }
 
@@ -55,7 +55,11 @@ export default class MainMenuView extends BaseMenu {
   }
 
   async render() {
-    super.render({ buttons, loggedIn: await globalUser.isLogin() });
+    if (globalUser) {
+      super.render({ buttons, loggedIn: await globalUser.isLogin() });
+    } else {
+      super.render({ buttons, loggedIn: await false });
+    }
   }
 
   hide() {
