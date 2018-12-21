@@ -13,8 +13,6 @@ npm run
 
 ## Ссылки
 
-* Сервер &mdash; https://api.rasseki.com
-* Клиент &mdash; https://rasseki.com
 * API &mdash; https://frontend.tech-mail.ru/2018_2_Wave/
 * Grafana &mdash; https://grafana.rasseki.com
 
