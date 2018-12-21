@@ -1,8 +1,9 @@
 import Element from '../../../element';
 
-import './description.pcss';
+import bus from '../../../../modules/bus';
 
 import template from './description.pug';
+import './description.pcss';
 
 
 const application = {
@@ -19,7 +20,11 @@ const application = {
 export default class Description extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
-    this.render(application);
+
+    bus.listen('about', this.render.bind(this));
+    console.log('this');
+
+    this.render();
   }
 
   render(app) {

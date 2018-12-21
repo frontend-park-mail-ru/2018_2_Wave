@@ -8,16 +8,16 @@ import './app-table.pcss';
 import template from './app-table.pug';
 import appTemplate from './app.pug';
 
-// import bus from '../../../../modules/bus';
+import bus from '../../../../modules/bus';
 
 export default class AppTable extends Element {
   constructor(parent, wrapper) {
     super(template, parent, wrapper || parent);
-    // this.wrapper.addEventListener('click', (ev) => {
-    //   if (ev.target !== HTMLImageElement) return;
-    //   const name = ev.target.getAttribute('name');
-
-    // });
+    this.wrapper.addEventListener('click', (ev) => {
+      if (ev.target !== HTMLImageElement) return;
+      const name = ev.target.getAttribute('name');
+      bus.emit('about', name);
+    });
   }
 
   async render(askedCategory) {
