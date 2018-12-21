@@ -1,5 +1,4 @@
 import Element from '../../../element';
-import AppTile from '../../components/app_tile/app_tile';
 import List from '../../components/list/list';
 import Description from '../../components/description/description';
 import AppTable from '../../components/app-table/app-table';
@@ -41,15 +40,6 @@ export default class StoreView extends Element {
     });
 
     this.list.render(categories);
-  }
-
-  render(category) {
-    // if (!category || !(category in storeApps)) category = 'all';
-    // this.panel.innerHTML = '';
-    // storeApps[category].forEach((app) => {
-    //   const tile = new AppTile(this.panel, app);
-    //   tile.show();
-    // });
   }
 
   show() {
