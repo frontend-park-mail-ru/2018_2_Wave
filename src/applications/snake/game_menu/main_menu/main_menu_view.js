@@ -61,8 +61,8 @@ export default class MainMenuView extends BaseMenu {
     console.log('checkglobaluser render');
     if (typeof globalUser.isLoginUser === 'function') {
       console.log('checkglobaluser in');
-      const isloginUser = globalUser.isLoginUser();
-      super.render({ buttons, loggedIn: isloginUser });
+      const loggedIn = globalUser.isLoginUser();
+      super.render({ buttons, loggedIn });
     } else {
       console.log('checkglobaluser else');
       super.render({ buttons, loggedIn: false });
