@@ -4,7 +4,7 @@
     - console.log('loggedIn', key,  loggedIn);
       each value, key in buttons
           - if (key === '/multiplayer' && !loggedIn) {
-            a.snakemenu-button.multiplayermenu-button(href=key src=key error='Register to play in multiplayer')=value
+            a.snakemenu-button.multiplayermenu-button(href=key src=key)=value
           - } else {
             a.snakemenu-button(href=key src=key)=value
           - }

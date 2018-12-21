@@ -28,8 +28,8 @@ export default class MainMenuView extends BaseMenu {
   }
 
   show() {
-    this.setEnvironment();
     super.show();
+    this.setEnvironment();
   }
 
   async setEnvironment() {
@@ -40,6 +40,7 @@ export default class MainMenuView extends BaseMenu {
       if (this.multiplayerButton) {
         this.multiplayerButton.setAttribute('href', '/snake');
         this.multiplayerButton.setAttribute('src', '/snake');
+        this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
       }
       this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
     }
