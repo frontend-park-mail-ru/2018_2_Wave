@@ -47,7 +47,7 @@ export default class MainMenuView extends BaseMenu {
   }
 
   unauthorizedMessage() {
-    this.errorMessage.setErrorMessage('Register to play in multiplyer');
+    this.errorMessage.setErrorMessage('Register to play in multiplayer');
   }
 
   pause() {
