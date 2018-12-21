@@ -12,7 +12,9 @@ export default class IconBlock extends Element {
 
     const date = new Date();
     const timeout = (60 - date.getSeconds()) * 1000;
+    console.log(timeout);
     setTimeout(() => {
+      this.render();
       setInterval(() => this.render(), 60000);
     }, timeout);
   }
