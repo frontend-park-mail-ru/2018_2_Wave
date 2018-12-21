@@ -11,13 +11,17 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding-right: 10px;
 
-  width: 250px;
-  height: 100%;
-}
 
-.preview {
-  width: 245px;
-  height: 100px;
-  background-image: url('/img/terminal.jpg')
+  &__tile {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__background {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0 5px 5px 0;
+  }
 }
