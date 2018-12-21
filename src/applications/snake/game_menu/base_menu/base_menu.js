@@ -92,6 +92,7 @@ export default class BaseMenu extends Element {
 
     const error = focus.getAttribute('error');
     if (error) {
+      console.log('main_menu', error);
       this.errorMessage.setErrorMessage(error);
     }
   }
