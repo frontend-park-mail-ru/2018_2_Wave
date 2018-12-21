@@ -27,6 +27,26 @@ const tiles = [
     name: 'About us',
     icon: 'accessible_forward',
   },
+  {
+    link: '/terminal',
+    name: 'Terminal',
+    icon: 'video_label',
+  },
+  {
+    link: '/terminal',
+    name: 'Terminal',
+    icon: 'video_label',
+  },
+  {
+    link: '/terminal',
+    name: 'Terminal',
+    icon: 'video_label',
+  },
+  {
+    link: '/terminal',
+    name: 'Terminal',
+    icon: 'video_label',
+  },
 ];
 
 
