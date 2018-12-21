@@ -3,6 +3,9 @@ import BaseMenu from '../base_menu/base_menu';
 import MainMenuTemplate from './main_menu.pug';
 import './main_menu.pcss';
 
+import ErrorMesage from '../../error_message/errorMessage';
+import globalUser from '../../globalUser';
+
 const buttons = {
   '/singleplayer': 'Singleplayer',
   '/multiplayer': 'Multiplayer',
@@ -16,17 +19,48 @@ export default class MainMenuView extends BaseMenu {
     this.render();
     this.goBack = this.goBack.bind(this);
     this.noRender = true;
+    this.errorMessage = new ErrorMesage();
+    this.unauthorizedMessage = this.unauthorizedMessage.bind(this);
   }
 
   goBack() {
     super.goBack('/');
   }
 
+  show() {
+    this.setEnvironment();
+    super.show();
+  }
+
+  async setEnvironment() {
+    const isLogin = await globalUser.isLogin();
+    if (!isLogin) {
+      console.log('nologin');
+      [this.multiplayerButton] = document.getElementsByClassName('multiplayermenu-button');
+      if (this.multiplayerButton) {
+        this.multiplayerButton.setAttribute('href', '/snake');
+        this.multiplayerButton.setAttribute('src', '/snake');
+      }
+      this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
+    }
+  }
+
+  unauthorizedMessage() {
+    this.errorMessage.setErrorMessage('Register to play in multiplyer');
+  }
+
   pause() {
     super.pause();
   }
 
-  render() {
-    super.render({ buttons });
+  async render() {
+    super.render({ buttons, loggedIn: await globalUser.isLogin() });
+  }
+
+  hide() {
+    if (this.multiplayerButton) {
+      this.multiplayerButton.removeEventListener('click', this.unauthorizedMessage);
+    }
+    super.hide();
   }
 }

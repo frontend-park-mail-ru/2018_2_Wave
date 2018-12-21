@@ -40,7 +40,9 @@ export default class BaseMenu extends Element {
     } else {
       this.menu = this.wrapper;
     }
-    this.menu.addEventListener('click', this.onClick);
+    if (this.menu) {
+      this.menu.addEventListener('click', this.onClick);
+    }
     super.show();
     this.setFirstFosus();
     this.setBusListeners();
@@ -75,16 +77,22 @@ export default class BaseMenu extends Element {
   processLine() {
     this.stop();
     this.hide();
-    let href = this.getFocus()[0].getAttribute('src');
+    const focus = this.getFocus()[0];
+    let href = focus.getAttribute('src');
     if (!href) {
-      href = this.getFocus()[0].getAttribute('href');
+      href = focus.getAttribute('href');
     }
     if (href) {
-      const params = this.getFocus()[0].getAttribute('params');
+      const params = focus.getAttribute('params');
       this.busController.emit('link', href, params);
     } else {
-      const event = this.getFocus()[0].getAttribute('event');
+      const event = focus.getAttribute('event');
       this.busController.emit(event);
+    }
+
+    const error = focus.getAttribute('error');
+    if (error) {
+      this.errorMessage.setErrorMessage(error);
     }
   }
 
