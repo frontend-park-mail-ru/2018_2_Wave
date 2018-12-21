@@ -33,15 +33,18 @@ export default class MainMenuView extends BaseMenu {
   }
 
   async setEnvironment() {
-    const isLogin = await globalUser.isLogin();
-    if (!isLogin) {
-      console.log('nologin');
-      [this.multiplayerButton] = document.getElementsByClassName('multiplayermenu-button');
-      if (this.multiplayerButton) {
-        this.multiplayerButton.setAttribute('href', '/snake');
-        this.multiplayerButton.setAttribute('src', '/snake');
-        this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
-        this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
+    console.log('checkglobaluser setEnvironment');
+    if (globalUser) {
+      const isloginUser = await globalUser.isLogin();
+      if (!isloginUser) {
+        console.log('nologin');
+        [this.multiplayerButton] = document.getElementsByClassName('multiplayermenu-button');
+        if (this.multiplayerButton) {
+          this.multiplayerButton.setAttribute('href', '/snake');
+          this.multiplayerButton.setAttribute('src', '/snake');
+          this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
+          this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
+        }
       }
     }
   }
@@ -55,6 +58,7 @@ export default class MainMenuView extends BaseMenu {
   }
 
   async render() {
+    console.log('checkglobaluser render');
     if (globalUser) {
       super.render({ buttons, loggedIn: await globalUser.isLogin() });
     } else {
