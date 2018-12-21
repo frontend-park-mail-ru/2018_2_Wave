@@ -1,0 +1,23 @@
+.app-table {
+  grid-area: app-table;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  flex-wrap: wrap;
+
+  scroll-snap-type: y mandatory;
+  overflow: scroll;
+
+  padding: 0 10px;
+  border-left: 1px solid rgba(100%, 100%, 100%, 0.6);
+  border-right: 1px solid rgba(100%, 100%, 100%, 0.6);
+}
+
+.table_tile {
+  scroll-snap-align: start;
+
+  margin: 10px;
+  // height: calc(64vh - );
+  width: 30vh;
+}
