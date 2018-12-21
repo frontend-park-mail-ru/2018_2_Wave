@@ -2,7 +2,7 @@ import TerminalView from './terminal_view';
 import BaseApp from '../base_app';
 import messages from './messages';
 import bus from '../../modules/bus';
-import { register, logout } from '../../modules/network';
+import { register, logout, login } from '../../modules/network';
 import userService from '../../modules/userservice';
 
 class TerminalApp extends BaseApp {
@@ -20,6 +20,7 @@ class TerminalApp extends BaseApp {
       // me: this.me,
       logout: this.logout,
       register: this.register,
+      login: this.login,
       help: this.help,
       history: this.history,
       clear: this.clear,
@@ -50,6 +51,7 @@ class TerminalApp extends BaseApp {
     };
 
     this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
     this.setUsername = this.setUsername.bind(this);
     this.setUsername();
     this.commandHistory = [];
@@ -148,6 +150,9 @@ class TerminalApp extends BaseApp {
           bus.emit('checkUser');
           this.username = name;
           this.view.addInput(this.intro);
+        } else {
+          this.view.printString('This name already in use!');
+          this.view.addInput(this.intro);
         }
       } else {
         this.view.printString('Passwords don\'t match.');
@@ -157,11 +162,82 @@ class TerminalApp extends BaseApp {
     };
     const repeatPassword = (value) => {
       password = value;
-      this.ask('  repeat password:', processData, true);
+      if (password.length < 3) {
+        this.view.printString('Even my mom hacks this short password.');
+        this.ask('  password:', repeatPassword, true);
+      } else if (!password.match(/[\S]{3,}/)) {
+        this.view.printString('Maybe better without gaps.');
+        this.ask('  password:', repeatPassword);
+      } else {
+        this.ask('  repeat password:', processData, true);
+      }
     };
+
     const askPassword = (value) => {
       name = value;
-      this.ask('  password:', repeatPassword, true);
+      if (name.length < 3) {
+        this.view.printString('I hope you have something longer in stock.');
+        this.ask('  your name:', askPassword);
+      } else if (!name.match(/[\S]{3,}/)) {
+        this.view.printString('Maybe better without gaps.');
+        this.ask('  your name:', askPassword);
+      } else {
+        this.ask('  password:', repeatPassword, true);
+      }
+    };
+
+    this.ask('  your name:', askPassword);
+  }
+
+  login() {
+    bus.ignore('userUpdated', this.login);
+    const { err, loggedIn } = userService.isLoggedIn();
+    if (err) bus.listen('userUpdated', this.login);
+    else if (loggedIn) {
+      this.view.printString(`I already know you, ${this.username}.`);
+      this.view.addInput(this.intro);
+      return;
+    }
+
+    this.terminal.removeEventListener('keydown', this.listeners.keydown);
+    let name, password;
+    const processData = async (value) => {
+      password = value;
+      if (password.length < 3) {
+        this.view.printString(`Looks like you remember only ${password.length} characters.`);
+        this.ask('  password:', processData, true);
+      } else if (!password.match(/[\S]{3,}/)) {
+        this.view.printString('Maybe better without gaps.');
+        this.ask('  password:', processData, true);
+      } else if (password) {
+        const formdata = new FormData();
+        formdata.append('username', name);
+        formdata.append('password', password);
+        const { err: regErr } = await login(formdata);
+        if (!regErr) {
+          this.view.printString(`Hello, ${name}!`);
+          bus.emit('checkUser');
+          this.username = name;
+          this.view.addInput(this.intro);
+        } else {
+          this.view.printString('Wrong name or password.');
+          this.view.addInput(this.intro);
+        }
+        this.terminal.addEventListener('keydown', this.listeners.keydown);
+      }
+    };
+
+    const askPassword = (value) => {
+      name = value;
+      if (name.length < 3) {
+        this.view.printString(`Your name seems to be longer than ${name.length} characters.`);
+        this.ask('  your name:', askPassword);
+      } else if (!name.match(/[\S]{3,}/)) {
+        this.view.printString('Maybe better without gaps.');
+        this.ask('  your name:', askPassword);
+      } else {
+        this.ask('  password:', processData, true);
+      }
     };
     this.ask('  your name:', askPassword);
   }
