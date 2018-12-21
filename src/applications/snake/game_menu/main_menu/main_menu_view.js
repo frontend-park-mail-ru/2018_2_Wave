@@ -36,6 +36,7 @@ export default class MainMenuView extends BaseMenu {
     console.log('checkglobaluser setEnvironment');
     if (globalUser) {
       const isloginUser = globalUser.isLoginUser();
+      console.log('islogin', isloginUser);
       if (!isloginUser) {
         console.log('nologin');
         [this.multiplayerButton] = document.getElementsByClassName('multiplayermenu-button');
@@ -45,6 +46,9 @@ export default class MainMenuView extends BaseMenu {
           this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
           this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
         }
+      } else {
+        this.multiplayerButton.setAttribute('href', '/multiplayer');
+        this.multiplayerButton.setAttribute('src', '/multiplayer');
       }
     }
   }
@@ -57,17 +61,8 @@ export default class MainMenuView extends BaseMenu {
     super.pause();
   }
 
-  async render() {
-    console.log('checkglobaluser render');
-    if (typeof globalUser.isLoginUser === 'function') {
-      console.log('checkglobaluser in');
-      const loggedIn = globalUser.isLoginUser();
-      super.render({ buttons, loggedIn });
-    } else {
-      console.log('checkglobaluser else');
-      super.render({ buttons, loggedIn: false });
-    }
-    console.log('checkglobaluser out');
+  render() {
+    super.render({ buttons });
   }
 
   hide() {
