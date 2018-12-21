@@ -41,7 +41,6 @@ class TerminalView extends Element {
     this.terminal.innerHTML += textblockTemplate({ text });
   }
 
-
   /*  working with inputs  */
   getInput() {
     if (this.input) return this.input;
@@ -75,6 +74,13 @@ class TerminalView extends Element {
 
     this.terminal.innerHTML += inputTemplate({ intro });
     this.focusInput();
+  }
+
+  setInput(value) {
+    if (!this.input) {
+      [this.input] = this.terminal.getElementsByClassName('terminal__input');
+    }
+    this.input.value = value;
   }
 
   addPasswordInput(intro) {

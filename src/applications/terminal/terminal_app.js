@@ -18,16 +18,16 @@ class TerminalApp extends BaseApp {
 
     this.commands = {
       // me: this.me,
-      logout: this.logout,
       register: this.register,
       login: this.login,
-      help: this.help,
-      history: this.history,
-      clear: this.clear,
       snake: () => {
         bus.emit('link', '/snake');
         this.view.addInput(this.intro);
       },
+      history: this.history,
+      clear: this.clear,
+      logout: this.logout,
+      help: this.help,
       exit: async () => {
         const { err, loggedIn } = await userService.isLoggedIn();
         console.log(err, loggedIn);
@@ -55,6 +55,7 @@ class TerminalApp extends BaseApp {
     this.setUsername = this.setUsername.bind(this);
     this.setUsername();
     this.commandHistory = [];
+    this.currentCommandIndex = -1;
     bus.listen('userUpdated', this.setUsername);
   }
 
@@ -253,6 +254,9 @@ class TerminalApp extends BaseApp {
     } else if (err.status === 401) {
       this.view.printString('Already.');
       this.view.addInput(this.intro);
+    } else {
+      this.view.printString('Internal error, try later.');
+      this.view.addInput(this.intro);
     }
   }
 
@@ -284,6 +288,14 @@ class TerminalApp extends BaseApp {
         ev.preventDefault();
         this.handleCommand();
         break;
+      case 38:
+        ev.preventDefault();
+        this.toggleUp();
+        break;
+      case 40:
+        ev.preventDefault();
+        this.toggleDown();
+        break;
       default:
         break;
     }
@@ -301,7 +313,7 @@ class TerminalApp extends BaseApp {
         this.view.printString();
         this.view.addInput(this.intro);
       }
-      this.commandHistory.push(command);
+      this.commandHistory.unshift(command);
     } else {
       this.view.addInput(this.intro);
     }
@@ -340,6 +352,31 @@ class TerminalApp extends BaseApp {
       // FIXME:
       this.terminal.removeEventListener(key, this.listeners[key]);
     });
+  }
+
+  toggleCommandHistory(direction) {
+    let newIndex = this.currentCommandIndex + direction;
+
+    if (newIndex < -1) newIndex = -1;
+    if (newIndex >= this.commandHistory.length) newIndex = this.commandHistory.length - 1;
+
+    if (newIndex !== this.currentCommandIndex) {
+      this.currentCommandIndex = newIndex;
+    }
+
+    if (newIndex > -1) {
+      this.view.setInput(this.commandHistory[newIndex]);
+    } else {
+      this.view.setInput('');
+    }
+  }
+
+  toggleUp() {
+    this.toggleCommandHistory(1);
+  }
+
+  toggleDown() {
+    this.toggleCommandHistory(-1);
   }
 }
 
