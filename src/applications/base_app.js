@@ -1,3 +1,5 @@
+import bus from '../modules/bus';
+
 export default class BaseApp {
   constructor(appURL, parent, MainView, Views) {
     this.url = appURL;
@@ -88,6 +90,10 @@ export default class BaseApp {
     };
 
     launchAnimation.play();
+
+    const name = resource.getAttribute('name');
+    console.log(name);
+    setTimeout(() => bus.emit('addTile', name), 1000);
   }
 
   start() {
@@ -119,6 +125,10 @@ export default class BaseApp {
     } else {
       this.currentView.hide();
     }
+  }
+
+  animateClose() {
+    
   }
 
   resume() {

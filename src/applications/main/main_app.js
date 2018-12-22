@@ -102,6 +102,10 @@ export default class MenuApp extends BaseApp {
     }
   }
 
+  stop() {
+    this.pause();
+  }
+
   changeView(viewUrl, params) {
     if (!this.views.hasOwnProperty(viewUrl)) {
       console.error('No such view');

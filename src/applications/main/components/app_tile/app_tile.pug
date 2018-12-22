@@ -1,9 +1,10 @@
 .tile.app__tile
   a.tile__card.app__card(
+    name= tile.name
     href= tile.link
   )
     img.tile__background(
-      src= tile.image
+      src= 'https://rasseki.com/' + tile.image
     )
   div
     .tile__name= tile.name

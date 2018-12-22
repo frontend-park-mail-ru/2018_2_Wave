@@ -19,7 +19,7 @@ async function getMyApps() {
     const apps = await ajax.GET({
       path: '/me/apps',
     });
-    return { apps: apps.user_apps };
+    return { apps: apps.apps };
   } catch (err) {
     return { err };
   }
@@ -27,9 +27,11 @@ async function getMyApps() {
 
 async function addApp(name) {
   try {
+    const formdata = new FormData();
+    formdata.append('name', name);
     return await ajax.POST({
       path: '/me/apps',
-      body: { name },
+      body: formdata,
     });
   } catch (err) {
     return { err };
