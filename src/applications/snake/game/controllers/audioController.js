@@ -31,6 +31,7 @@ export default class AudioController {
     this.events = {
       pickFood: this.pickFood,
       DEAD: this.dead,
+      STATUS_DEAD: this.dead,
       KeyS: this.pauseMusic,
     };
 

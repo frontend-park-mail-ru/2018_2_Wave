@@ -95,6 +95,7 @@ export default class OnlineGame extends GameCore {
     this.wsPostman.startGame();
     super.start();
 
+    this.audioController.start();
     this.setBusListeners();
     this.lastFrame = performance.now();
     this.gameloopRequestId = requestAnimationFrame(this.gameloop);
@@ -154,6 +155,7 @@ export default class OnlineGame extends GameCore {
     } else {
       this.playersModel.setDead(message.payload.user_serial);
     }
+    this.multiplayer.dead();
   }
 
   destroy() {
@@ -163,7 +165,7 @@ export default class OnlineGame extends GameCore {
     super.destroy();
     this.deadMessage.hide();
     this.removeBusListeners();
-    // this.audioController.destroy();
+    this.audioController.destroy();
     clearTimeout(this.timerId);
     cancelAnimationFrame(this.gameloopRequestId);
   }
