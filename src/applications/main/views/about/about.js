@@ -23,7 +23,7 @@ export default class AboutView extends Element {
     this.title = 'About us';
 
     this.parentViews = views;
-    [this.panel] = this.wrapper.getElementsByClassName('about');
+    // [this.panel] = this.wrapper.getElementsByClassName('about');
     [this.listPlace] = document.getElementsByClassName('about-list');
     [this.formAboutUsPlace] = document.getElementsByClassName('form-about-us');
 
