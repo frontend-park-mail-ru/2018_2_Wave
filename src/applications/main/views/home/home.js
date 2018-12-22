@@ -14,6 +14,7 @@ export default class HomeView extends Element {
     super(template, parent, wrapper);
     super.render();
 
+    this.apps = null;
     this.title = 'Home';
 
     [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
@@ -74,12 +75,15 @@ export default class HomeView extends Element {
       console.log(err);
     } else {
       console.log(apps);
-      this.panel.innerHTML = '';
-      apps.forEach((app) => {
-        bus.emit('regApp', app.link, GameApp, app.url);
-        const tile = new AppTile(this.panel, app, 'home-page__tile');
-        tile.show();
-      });
+      if (!this.apps || this.apps !== apps) {
+        this.apps = apps;
+        this.panel.innerHTML = '';
+        apps.forEach((app) => {
+          bus.emit('regApp', app.link, GameApp, app.url);
+          const tile = new AppTile(this.panel, app, 'home-page__tile');
+          tile.show();
+        });
+      }
     }
   }
 }

@@ -18,34 +18,9 @@ const tiles = [
     icon: 'local_mall',
   },
   {
-    link: '/settings',
-    name: 'Settings',
-    icon: 'settings',
-  },
-  {
     link: '/about',
     name: 'About us',
     icon: 'accessible_forward',
-  },
-  {
-    link: '/terminal',
-    name: 'Terminal',
-    icon: 'video_label',
-  },
-  {
-    link: '/terminal',
-    name: 'Terminal',
-    icon: 'video_label',
-  },
-  {
-    link: '/terminal',
-    name: 'Terminal',
-    icon: 'video_label',
-  },
-  {
-    link: '/terminal',
-    name: 'Terminal',
-    icon: 'video_label',
   },
 ];
 
