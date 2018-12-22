@@ -16,7 +16,7 @@ export default class GameView extends Element {
   }
 
   show() {
-    FullScreen.set();
+    // FullScreen.set();
     super.show();
     this.setGameParams();
   }
