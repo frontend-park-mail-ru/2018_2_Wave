@@ -34,7 +34,7 @@ export default class ProfileView extends Element {
     if (!grid.classList.contains('profile__grid')) {
       grid.classList.add('profile__grid');
     }
-
+    // this.startScroller();
     this.appTable.show();
     this.userData.show();
     this.profileDescription.show();
@@ -50,7 +50,7 @@ export default class ProfileView extends Element {
     this.userData.hide();
     this.appTable.hide();
     this.profileDescription.hide();
-    // super.render();
+    super.render();
   }
 
   render() {

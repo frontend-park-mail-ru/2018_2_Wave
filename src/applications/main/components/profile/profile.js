@@ -25,6 +25,7 @@ export default class Profile extends Element {
   }
 
   show() {
+    this.render();
     [this.avatarWrapper] = document.getElementsByClassName('profile__avatar-wrapper');
     this.avatarWrapper.addEventListener('click', this.photoUpload);
     super.show();
