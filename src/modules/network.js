@@ -27,9 +27,11 @@ async function getMyApps() {
 
 async function addApp(name) {
   try {
+    const formdata = new FormData();
+    formdata.append('name', name);
     return await ajax.POST({
       path: '/me/apps',
-      body: { name },
+      body: formdata,
     });
   } catch (err) {
     return { err };
