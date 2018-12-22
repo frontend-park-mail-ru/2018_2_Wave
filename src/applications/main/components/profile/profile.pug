@@ -1,13 +1,11 @@
 .profile__user-data-wrapper
-    label.profile__avatar-wrapper(for="fileField")
+    .profile__avatar-wrapper
         img.profile__avatar(src='/img/triss.jpg')
-
     .avatar-overlay
-    form#registerForm(name='register-form' enctype='multipart/form-data')
-        input#fileInput(name="avatar" type="file")
+    form#uploadForm(name='upload-form' enctype='multipart/form-data')
+        input.profile-avatar-upload(name="avatar" type="file" hidden)
 
-        .profile__name Triss Merigold
-    a.menu__card.profile__edit-button(href="/home") Edit profile
+    .profile__name Triss Merigold
 
 //- if !authorized
 //-   a.userblock__button(href='/login') login

@@ -1,0 +1,12 @@
+.profile-description
+  if app
+    .profile-description__tile
+      img.profile-description__background(src='https://rasseki.com/' + app.image)
+    .profile-description__title= app.name
+    .profile-description__installs= 'Installs: ' + app.installs
+
+    .profile-description__about= app.about
+    .profile-description__spent-time= app.spent_time
+
+  else
+    .profile-description__about Click on app to see amount of time spent in the game
