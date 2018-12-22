@@ -11,6 +11,11 @@ export default class Bar extends Element {
     super(template, parent, wrapper || parent);
     super.render();
     this.hidden = true;
+    this.show = this.show.bind(this);
+    this.trigger = this.wrapper.getElementsByClassName('hover-mock');
+    this.trigger.onclick = () => {
+      this.show();
+    };
   }
 
   show() {
@@ -19,7 +24,6 @@ export default class Bar extends Element {
     if (!this.hidden) return false;
     const [bar] = this.wrapper.getElementsByClassName('bar');
     this.hidden = false;
-    this.hideTimeout = setTimeout(() => this.hide(), 5000);
     return bar.animate({
       transform: [
         'translateY(-100px)',
