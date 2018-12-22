@@ -45,11 +45,11 @@ export default class Game {
       }
 
       case GAME_MODE.MULTIPLAYER: {
-        if (!this.wsPostman.isReady()) {
-          this.errorMessage.setErrorMessage('You are offline');
-          this.busController.emit('link', '/snake');
-          return;
-        }
+        // if (!this.wsPostman.isReady()) {
+        //   this.errorMessage.setErrorMessage('You are offline');
+        //   this.busController.emit('link', '/snake');
+        //   return;
+        // }
         GameConstructor = OnlineGame;
         this.waitingPlayers = new WaitingPlayers(this.canvas, this.gameInitData, gameInfo);
         this.waitingPlayers.start();
