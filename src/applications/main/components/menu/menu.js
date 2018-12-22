@@ -51,10 +51,9 @@ export default class Menu extends Element {
 
     console.log(foundTiles);
 
-    if (childs.length === 4) return true;
     if (foundTiles.length !== 0) foundTiles[0].remove();
 
-    if (childs.length >= 3) {
+    if (childs.length <= 3) {
       this.panel.innerHTML += appTileTemplate({ tile: app });
       return true;
     }
@@ -62,7 +61,7 @@ export default class Menu extends Element {
 
     const mock = document.createElement('div');
     mock.innerHTML = appTileTemplate({ tile: app });
-    const [elem] = mock.getElementsByClassName('menu_tile');
+    const [elem] = mock.getElementsByClassName('menu__tile');
 
     this.panel.insertBefore(elem, childs[3]);
     return true;

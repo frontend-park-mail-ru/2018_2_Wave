@@ -116,7 +116,7 @@ export default class MenuApp extends BaseApp {
     }
 
     this.env.setTitle(this.currentView.title);
-    this.currentView.render(params);
+    if (!this.currentView.rendered) this.currentView.render();
     this.currentView.show();
   }
 }
