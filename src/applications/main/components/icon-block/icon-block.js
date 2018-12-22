@@ -25,6 +25,7 @@ export default class IconBlock extends Element {
     const minutes = date.getMinutes();
     const time = `${hours}:${(minutes < 10) ? 0 : ''}${minutes}`;
 
+    console.log(this.wrapper);
     super.render({ time });
   }
 }
