@@ -155,7 +155,7 @@ export default class OnlineGame extends GameCore {
     } else {
       this.playersModel.setDead(message.payload.user_serial);
     }
-    this.multiplayer.dead();
+    // this.multiplayer.dead();
   }
 
   destroy() {
