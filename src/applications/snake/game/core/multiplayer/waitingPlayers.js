@@ -124,7 +124,7 @@ export default class WaitingPlayers {
       [this.playerName] = this.player.getElementsByClassName('player');
       this.player.hidden = false;
       if (member.user_name) {
-        this.playerName.innerHTML = `player${member.user_name}`;
+        this.playerName.innerHTML = `${member.user_name}`;
       } else {
         this.playerName.innerHTML = `player${member.user_serial}`;
       }
