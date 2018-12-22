@@ -1,48 +1,4 @@
 const storeApps = {
-  all: [
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи всё говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи всё говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи всё говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи всё говно',
-    },
-  ],
-  new: [
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи новое говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи новое говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи новое говно',
-    },
-    {
-      link: '/terminal',
-      image: '/img/terminal.jpg',
-      name: 'Купи новое говно',
-    },
-  ],
   popular: [
     {
       link: '/terminal',
