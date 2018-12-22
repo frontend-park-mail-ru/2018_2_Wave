@@ -18,6 +18,27 @@ export default class Description extends Element {
       if (ev.target.classList.contains('add-button')) {
         const { err } = await addApp(this.shownApp.name);
         if (err) console.error(err);
+        else {
+          const element = ev.target;
+          const firstAnimation = element.animate({
+            color: [
+              'rgba(100%, 100%, 100%, 0.8)',
+              'rgba(100%, 100%, 100%, 0)',
+            ],
+          }, {
+            duration: 200,
+            fill: 'forwards',
+            easing: 'cubic-bezier(0.6, 0.04, 0.98, 0.335)',
+          });
+          firstAnimation.pause();
+          firstAnimation.onfinish = () => {
+            firstAnimation.onfinish = null;
+            element.innerText = 'installed';
+            element.classList.remove('add-button');
+            firstAnimation.reverse();
+          };
+          firstAnimation.play();
+        }
       }
     });
 
@@ -26,10 +47,8 @@ export default class Description extends Element {
 
   async render(appName) {
     if (appName) {
-      console.log('rendering info', appName);
       const { err, app } = await getApp(appName);
-
-      console.log(err, app);
+      if (err) console.error(err);
       this.shownApp = app;
       super.render({ app });
       return;
