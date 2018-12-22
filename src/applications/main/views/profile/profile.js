@@ -25,7 +25,6 @@ export default class ProfileView extends Element {
     [this.profileDescriptionPlace] = document.getElementsByClassName('profile-description-container');
 
     this.userData = new Profile(this.userDataPlace, this.userDataPlace);
-    this.appTable = new AppTable(this.appTablePlace, this.appTablePlace);
     this.profileDescription = new ProfileDescription(this.profileDescriptionPlace);
   }
 
