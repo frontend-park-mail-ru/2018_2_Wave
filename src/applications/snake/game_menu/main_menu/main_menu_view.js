@@ -25,7 +25,7 @@ export default class MainMenuView extends BaseMenu {
   }
 
   goBack() {
-    super.goBack('/');
+    super.goBack('/terminal');
   }
 
   show() {
