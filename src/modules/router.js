@@ -85,6 +85,7 @@ export default class Router {
 
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
+    bus.listen('regApp', this.registerApp.bind(this));
 
     this.listeners.forEach((listener) => {
       const { target, event, method } = listener;

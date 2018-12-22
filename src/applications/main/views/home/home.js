@@ -5,9 +5,9 @@ import template from './home.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './home.pcss';
 
-import router from '../../../../modules/router';
 import { getMyApps } from '../../../../modules/network';
 import GameApp from '../../../frame/game_app';
+import bus from '../../../../modules/bus';
 
 export default class HomeView extends Element {
   constructor(parent, wrapper) {
@@ -76,9 +76,7 @@ export default class HomeView extends Element {
       console.log(apps);
       this.panel.innerHTML = '';
       apps.forEach((app) => {
-        if (!router.checkRegister(app.link)) {
-          router.registerApp(app.link, GameApp, app.name);
-        }
+        bus.emit('regApp', app.link, GameApp, app.name);
         const tile = new AppTile(this.panel, app, 'home-page__tile');
         tile.show();
       });
