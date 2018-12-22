@@ -18,6 +18,10 @@ export default class HomeView extends Element {
     this.title = 'Home';
 
     [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
+
+    this.render = this.render.bind(this);
+    bus.listen('appInstalled', this.render);
+    this.render();
   }
 
   scroller(ev) {

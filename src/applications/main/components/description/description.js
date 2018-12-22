@@ -20,6 +20,7 @@ export default class Description extends Element {
         if (err) console.error(err);
         else {
           const element = ev.target;
+          bus.emit('appInstalled');
           const firstAnimation = element.animate({
             color: [
               'rgba(100%, 100%, 100%, 0.8)',
