@@ -48,22 +48,18 @@ export default class OnlineGame extends GameCore {
     this.keyboardController.setOrintation(gameInitData.orientation);
     this.busController = busController;
 
-    this.controllers = [];
 
     this.level = new LevelModel(this.cellCount);
 
     this.levelController = new LevelController(this.level);
-    this.controllers.push(this.levelController);
     this.scene.push(new LevelView(this.level));
 
     this.foods = new FoodsModel(10);
     this.foodsController = new FoodsController(this.foods, this.level);
-    this.controllers.push(this.foodsController);
     this.scene.push(new FoodsView(this.foods));
 
     this.boosts = new FoodsModel(10);
     this.boostsController = new FoodsController(this.boosts, this.level);
-    this.controllers.push(this.boostsController);
     this.scene.push(new FoodsView(this.boosts, '#400040'));
 
     this.player = new PlayerModel();
@@ -161,6 +157,7 @@ export default class OnlineGame extends GameCore {
   }
 
   destroy() {
+
     this.wsPostman.sendGameExit();
     this.wsPostman.sendRemoveFromRoom();
     super.destroy();

@@ -46,6 +46,7 @@ export default class MainMenuView extends BaseMenu {
           this.multiplayerButton.setAttribute('src', '/snake');
           this.multiplayerButton.setAttribute('error', 'Register to play in multiplayer');
           this.multiplayerButton.addEventListener('click', this.unauthorizedMessage);
+          this.multiplayerButton.removeEventListener('touchstart', this.unauthorizedMessage, { passive: false });
         }
       } else if (this.multiplayerButton) {
         this.multiplayerButton.setAttribute('href', '/multiplayer');
@@ -65,6 +66,7 @@ export default class MainMenuView extends BaseMenu {
       this.errorMessage.setErrorMessage('Register to play in multiplayer');
     }
     this.multiplayerButton.removeEventListener('click', this.unauthorizedMessage);
+    this.multiplayerButton.removeEventListener('touchstart', this.unauthorizedMessage, { passive: false });
   }
 
   pause() {
@@ -78,6 +80,7 @@ export default class MainMenuView extends BaseMenu {
   hide() {
     if (this.multiplayerButton) {
       this.multiplayerButton.removeEventListener('click', this.unauthorizedMessage);
+      this.multiplayerButton.removeEventListener('touchstart', this.unauthorizedMessage);
     }
     super.hide();
   }
