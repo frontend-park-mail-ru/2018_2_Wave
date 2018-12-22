@@ -20,7 +20,7 @@ export default class Enviroment extends Element {
     [this.mainContainer] = this.wrapper.getElementsByClassName('grid-common');
     const [userblockPlace] = this.wrapper.getElementsByClassName('userblock');
     const [menuPlace] = this.wrapper.getElementsByClassName('menu');
-    const [iconsPlace] = this.wrapper.getElementsByClassName('icon-block');
+    const [iconsPlace] = this.wrapper.getElementsByClassName('iconblock');
     this.userblock = new UserBlock(userblockPlace, userblockPlace);
     this.menu = new Menu(menuPlace, menuPlace);
     this.iconBlock = new IconBlock(iconsPlace, iconsPlace);
