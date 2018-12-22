@@ -27,11 +27,14 @@ export default class AboutView extends Element {
     [this.listPlace] = document.getElementsByClassName('about-list');
     [this.formAboutUsPlace] = document.getElementsByClassName('form-about-us');
 
+    this.list = new List(this.listPlace);
     this.formAboutUs = new FormAboutUs(this.formAboutUsPlace);
     this.listPlace.addEventListener('click', (event) => {
       const categoryName = event.target.innerText.toLowerCase();
       if (categoryName) this.render(categoryName);
     });
+
+    this.list.render(categories);
   }
 
   show() {
