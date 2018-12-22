@@ -76,7 +76,7 @@ export default class HomeView extends Element {
       console.log(apps);
       this.panel.innerHTML = '';
       apps.forEach((app) => {
-        bus.emit('regApp', app.link, GameApp, app.name);
+        bus.emit('regApp', app.link, GameApp, app.url);
         const tile = new AppTile(this.panel, app, 'home-page__tile');
         tile.show();
       });

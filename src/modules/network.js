@@ -19,8 +19,6 @@ async function getMyApps() {
     const apps = await ajax.GET({
       path: '/me/apps',
     });
-    console.log(apps);
-    
     return { apps: apps.apps };
   } catch (err) {
     return { err };

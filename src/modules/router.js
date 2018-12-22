@@ -64,6 +64,7 @@ export default class Router {
       console.error('MainApp already registered');
       return this;
     }
+    if (url[0] === '/') url = url.slice(1);
     if (url in this.routes) {
       console.log('Url already set.');
       return false;
