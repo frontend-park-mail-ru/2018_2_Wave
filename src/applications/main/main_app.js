@@ -36,6 +36,10 @@ export default class MenuApp extends BaseApp {
     const storeView = new StoreView(storePlace, storePlace, this.views);
     this.views.store = storeView;
 
+    const [profilePlace] = env.wrapper.getElementsByClassName('profile');
+    const profileView = new StoreView(profilePlace, profilePlace, this.views);
+    this.views.profile = profileView;
+
     this.env = env;
     this.views.env = this.env;
     this.menu = this.env.menu;

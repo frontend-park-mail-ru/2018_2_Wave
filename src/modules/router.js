@@ -20,8 +20,11 @@ function splitParams(string) {
 
 /**  removes slashes from path string  */
 function clearPath(string) {
+  let path;
   if (string === '/') return string;
-  const path = string.slice(1);
+  if (string) {
+    path = string.slice(1);
+  }
   if (path.slice(-1) === '/') return path.slice(0, -1);
   return path;
 }
