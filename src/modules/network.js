@@ -19,7 +19,7 @@ async function getMyApps() {
     const apps = await ajax.GET({
       path: '/me/apps',
     });
-    return { apps };
+    return { apps: apps.user_apps };
   } catch (err) {
     return { err };
   }
