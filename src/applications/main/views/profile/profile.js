@@ -50,7 +50,7 @@ export default class ProfileView extends Element {
     this.userData.hide();
     this.appTable.hide();
     this.profileDescription.hide();
-    // super.render();
+    super.render();
   }
 
   render() {

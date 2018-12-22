@@ -1,3 +1,5 @@
+import WsPostman from '../applications/snake/modules/wsPostman';
+
 export default class Ws {
   constructor(mesageParser) {
     // this.host = window.location.host;
@@ -21,8 +23,9 @@ export default class Ws {
 
     this.ws.onopen = (event) => {
       console.log(`WebSocket on address ${this.address} opened`);
+      this.wsPostman = new WsPostman(this.ws);
       this.ws.onmessage = this.handleMessage.bind(this);
-
+      this.wsPostman.sendLogin();
       this.ws.onclose = () => {
         this.mesageParser.emit('close');
       };

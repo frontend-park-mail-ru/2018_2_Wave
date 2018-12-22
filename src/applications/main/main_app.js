@@ -9,6 +9,7 @@ import LoaderView from './views/loader/loader';
 import ProfileView from './views/profile/profile';
 import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
+import AboutView from './views/about/about';
 import bus from '../../modules/bus';
 // import LoginView from './views/login';
 // import RegisterView from './views/register';
@@ -40,6 +41,10 @@ export default class MenuApp extends BaseApp {
     const [profilePlace] = env.wrapper.getElementsByClassName('profile');
     const profileView = new ProfileView(profilePlace, profilePlace, this.views);
     this.views.profile = profileView;
+
+    const [aboutPlace] = env.wrapper.getElementsByClassName('about');
+    const aboutView = new AboutView(aboutPlace, aboutPlace, this.views);
+    this.views.about = aboutView;
 
     this.env = env;
     this.views.env = this.env;
