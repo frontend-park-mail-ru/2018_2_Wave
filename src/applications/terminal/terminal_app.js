@@ -150,6 +150,7 @@ class TerminalApp extends BaseApp {
         if (!regErr) {
           this.view.printString(`Hello, ${name}!`);
           bus.emit('checkUser');
+          bus.emit('appInstalled');
           this.username = name;
           this.view.addInput(this.intro);
         } else {
