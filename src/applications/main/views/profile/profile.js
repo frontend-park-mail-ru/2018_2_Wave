@@ -1,46 +1,11 @@
 import Element from '../../../element';
-import AppTile from '../../components/app_tile/app_tile';
 
 import template from './profile.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './profile.pcss';
 
-import '../../../../../static/img/terminal.jpg';
-import '../../../../../static/img/snake.jpg';
-import '../../../../../static/img/igor.png';
-
-const apps = [
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-  {
-    link: '/chunk',
-    image: '/img/igor.png',
-    name: 'Chunk',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-];
+import Profile from '../../components/profile/profile';
+import AppTable from '../../components/app-table/app-table';
 
 
 export default class ProfileView extends Element {
@@ -51,6 +16,11 @@ export default class ProfileView extends Element {
     this.title = 'Profile';
 
     [this.panel] = this.wrapper.getElementsByClassName('profile-page__tile-panel');
+    [this.userDataPlace] = document.getElementsByClassName('profile__user-data');
+    [this.appTablePlace] = document.getElementsByClassName('app-table');
+
+    this.userData = new Profile(this.userDataPlace, this.userDataPlace);
+    this.appTable = new AppTable(this.appTablePlace, this.appTablePlace);
   }
 
   scroller(ev) {
@@ -64,49 +34,55 @@ export default class ProfileView extends Element {
     }
   }
 
-  startScroller() {
-    this.lastLeft = Date.now();
-    this.lastRight = Date.now();
-    document.addEventListener('keydown', this.scroller);
-  }
+  // startScroller() {
+  //   this.lastLeft = Date.now();
+  //   this.lastRight = Date.now();
+  //   document.addEventListener('keydown', this.scroller);
+  // }
 
-  stopScroller() {
-    document.removeEventListener('keydown', this.scroller);
-  }
+  // stopScroller() {
+  //   document.removeEventListener('keydown', this.scroller);
+  // }
 
-  scrollPanelLeft() {
-    const [tile] = this.panel.children;
-    this.panel.scrollLeft += tile.offsetWidth;
-  }
+  // scrollPanelLeft() {
+  //   const [tile] = this.panel.children;
+  //   this.panel.scrollLeft += tile.offsetWidth;
+  // }
 
-  scrollPanelRight() {
-    const [tile] = this.panel.children;
-    this.panel.scrollLeft -= tile.offsetWidth;
-  }
+  // scrollPanelRight() {
+  //   const [tile] = this.panel.children;
+  //   this.panel.scrollLeft -= tile.offsetWidth;
+  // }
 
   show() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (!grid.classList.contains('home-page__grid')) {
-      grid.classList.add('home-page__grid');
+    if (!grid.classList.contains('profile__grid')) {
+      grid.classList.add('profile__grid');
     }
-    this.startScroller();
+    // this.startScroller();
+    this.appTable.show();
+    this.userData.show();
     super.show();
   }
 
   hide() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (grid.classList.contains('home-page__grid')) {
-      grid.classList.remove('home-page__grid');
+    if (grid.classList.contains('profile__grid')) {
+      grid.classList.remove('profile__grid');
     }
-    this.stopScroller();
+    // this.stopScroller();
+    this.userData.hide();
+    this.appTable.hide();
     super.hide();
   }
 
   render() {
-    if (this.panel.innerHTML !== '') return;
-    apps.forEach((app) => {
-      const tile = new AppTile(this.panel, app, 'home-page__tile');
-      tile.show();
-    });
+    this.userData.render();
+    this.appTable.render();
+    // if (this.panel.innerHTML !== '') return;
+    // apps.forEach((app) => {
+    //   const tile = new AppTile(this.panel, app, 'profile__tile');
+    //   tile.show();
+    // });
   }
 }

@@ -25,6 +25,7 @@ export default class Enviroment extends Element {
     this.menu = new Menu(menuPlace, menuPlace);
     this.iconBlock = new IconBlock(iconsPlace, iconsPlace);
 
+
     [this.appContainerPlace] = this.wrapper.getElementsByClassName('application');
   }
 

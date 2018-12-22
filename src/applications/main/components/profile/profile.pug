@@ -1,0 +1,17 @@
+.profile__user-data-wrapper
+    label.profile__avatar-wrapper(for="fileField")
+        img.profile__avatar(src='/img/triss.jpg')
+
+    .avatar-overlay
+    form#registerForm(name='register-form' enctype='multipart/form-data')
+        input#fileInput(name="avatar" type="file")
+
+        .profile__name Triss Merigold
+    a.menu__card.profile__edit-button(href="/home") Edit profile
+
+//- if !authorized
+//-   a.userblock__button(href='/login') login
+//- else
+//- img.icon__img(src= "https://static.rasseki.com" + user.avatar)
+    
+//- .userblock__name= user.username

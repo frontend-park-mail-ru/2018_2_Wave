@@ -6,6 +6,7 @@ import Enviroment from './views/enviroment/env';
 import HomeView from './views/home/home';
 import StoreView from './views/store/store';
 import LoaderView from './views/loader/loader';
+import ProfileView from './views/profile/profile';
 import Bar from './components/bar/bar';
 import AppContainer from './views/app_container/app_container';
 import bus from '../../modules/bus';
@@ -37,7 +38,7 @@ export default class MenuApp extends BaseApp {
     this.views.store = storeView;
 
     const [profilePlace] = env.wrapper.getElementsByClassName('profile');
-    const profileView = new StoreView(profilePlace, profilePlace, this.views);
+    const profileView = new ProfileView(profilePlace, profilePlace, this.views);
     this.views.profile = profileView;
 
     this.env = env;

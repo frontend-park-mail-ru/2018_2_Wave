@@ -167,7 +167,7 @@ class TerminalApp extends BaseApp {
       if (password.length < 3) {
         this.view.printString('Even my mom hacks this short password.');
         this.ask('  password:', repeatPassword, true);
-      } else if (!password.match(/[\S]{3,}/)) {
+      } else if (!password.match(/[\S]{4,}/)) {
         this.view.printString('Maybe better without gaps.');
         this.ask('  password:', repeatPassword);
       } else {
@@ -180,7 +180,7 @@ class TerminalApp extends BaseApp {
       if (name.length < 3) {
         this.view.printString('I hope you have something longer in stock.');
         this.ask('  your name:', askPassword);
-      } else if (!name.match(/[\S]{3,}/)) {
+      } else if (!name.match(/[\S]{4,}/)) {
         this.view.printString('Maybe better without gaps.');
         this.ask('  your name:', askPassword);
       } else {
