@@ -11,6 +11,7 @@ export default class List extends Element {
   }
 
   render(categories) {
+    console.trace();
     super.render({ categories });
   }
 }

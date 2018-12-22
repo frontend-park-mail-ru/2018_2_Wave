@@ -50,6 +50,8 @@ export default class Description extends Element {
     if (appName) {
       const { err, app } = await getApp(appName);
       if (err) console.error(err);
+      console.log(app);
+
       this.shownApp = app;
       super.render({ app });
       return;
