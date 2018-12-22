@@ -16,7 +16,7 @@
     grid-template-areas:
     "userblock icon-set"
     "title description"
-    "list description"
+    "about_list description"
     "menu menu";
 
     width:  calc(100vw - 2 * var(--grid-padding-x));
@@ -53,4 +53,8 @@
   .about__tile-panel {
     width: calc(100vw - 2 * var(--minimal-grid-padding-x));
   }
+}
+
+.about_list {
+  grid-area: about_list;
 }

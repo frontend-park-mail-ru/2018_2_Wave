@@ -1,7 +1,6 @@
 import Element from '../../../element';
 import List from '../../components/list/list';
-import Description from '../../components/description/description';
-import AppTable from '../../components/app-table/app-table';
+import FormAboutUs from '../../components/formAboutUs/formAboutUs';
 
 import template from './about.pug';
 import '../../components/app_tile/app_tile.pcss';
@@ -25,12 +24,10 @@ export default class AboutView extends Element {
 
     this.parentViews = views;
     [this.panel] = this.wrapper.getElementsByClassName('about');
-    [this.listPlace] = document.getElementsByClassName('list');
-    [this.descriptionPlace] = document.getElementsByClassName('description-container');
-    [this.appTablePlace] = document.getElementsByClassName('app-table');
+    [this.listPlace] = document.getElementsByClassName('about-list');
+    [this.formAboutUsPlace] = document.getElementsByClassName('form-about-us');
 
-    this.appTable = new AppTable(this.appTablePlace, this.appTablePlace);
-    this.description = new Description(this.descriptionPlace);
+    this.formAboutUs = new FormAboutUs(this.formAboutUsPlace);
     this.list = new List(this.listPlace, this.listPlace);
     this.listPlace.addEventListener('click', (event) => {
       const categoryName = event.target.innerText.toLowerCase();
@@ -46,8 +43,8 @@ export default class AboutView extends Element {
       grid.classList.add('about__grid');
     }
 
-    this.appTable.show();
-    this.description.show();
+    this.formAboutUs.show();
+    // this.description.show();
     this.list.show();
     super.show();
     // this.parentViews.env.menu.hide();
@@ -59,8 +56,8 @@ export default class AboutView extends Element {
       grid.classList.remove('about__grid');
     }
 
-    this.appTable.hide();
-    this.description.hide();
+    this.formAboutUs.hide();
+    // this.description.hide();
     this.list.hide();
     super.hide();
     // this.parentViews.env.menu.show();

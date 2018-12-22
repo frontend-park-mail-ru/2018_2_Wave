@@ -11,7 +11,7 @@ export default class WsPostman {
     return instance;
   }
 
-  async sendLogin(user_login) {
+  async sendLogin() {
     const result = await getProfile();
     console.log('result profile', result, result.profile.username);
     this.ws.send(result.profile.username);

@@ -20,7 +20,7 @@ class Config {
     this.wallColor = wallColor;
     this.snakeColor = snakeColor;
     this.foodColor = foodColor;
-    this.enemiesColors = ['greenyellow', 'yellow', 'red', 'blue'];
+    this.enemiesColors = ['greenyellow', 'yellow', 'green', 'blue'];
 
     this.gameCanvasBorder = gameCanvasBorder;
     this.snakemenuButtonFocus = snakemenuButtonFocus;
