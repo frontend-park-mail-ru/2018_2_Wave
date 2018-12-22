@@ -52,10 +52,18 @@ export default class Router {
   }
 
 
+  checkRegister(appUrl) {
+    return appUrl in this.routes;
+  }
+
   registerApp(url, App, source) {
     if (url === '/') {
       console.error('MainApp already registered');
       return this;
+    }
+    if (url in this.routes) {
+      console.log('Url already set.');
+      return false;
     }
     const app = new App(url, this.appContainer, source);
     app.setBar(this.appBar);

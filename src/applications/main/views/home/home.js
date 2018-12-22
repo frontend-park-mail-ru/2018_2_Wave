@@ -5,43 +5,9 @@ import template from './home.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './home.pcss';
 
-import '../../../../../static/img/terminal.jpg';
-import '../../../../../static/img/snake.jpg';
-import '../../../../../static/img/igor.png';
-
-const apps = [
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-  {
-    link: '/chunk',
-    image: '/img/igor.png',
-    name: 'Chunk',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-  {
-    link: '/terminal',
-    image: '/img/terminal.jpg',
-    name: 'Terminal',
-  },
-  {
-    link: '/snake',
-    image: '/img/snake.jpg',
-    name: 'Snake',
-  },
-];
-
+import router from '../../../../modules/router';
+import { getMyApps } from '../../../../modules/network';
+import GameApp from '../../../frame/game_app';
 
 export default class HomeView extends Element {
   constructor(parent, wrapper) {
@@ -102,11 +68,20 @@ export default class HomeView extends Element {
     super.hide();
   }
 
-  render() {
-    if (this.panel.innerHTML !== '') return;
-    apps.forEach((app) => {
-      const tile = new AppTile(this.panel, app, 'home-page__tile');
-      tile.show();
-    });
+  async render() {
+    const { err, apps } = await getMyApps();
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(apps);
+      this.panel.innerHTML = '';
+      apps.forEach((app) => {
+        if (!router.checkRegister(app.link)) {
+          router.registerApp(app.link, GameApp, app.name);
+        }
+        const tile = new AppTile(this.panel, app, 'home-page__tile');
+        tile.show();
+      });
+    }
   }
 }
