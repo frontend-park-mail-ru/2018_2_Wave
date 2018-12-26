@@ -45,22 +45,28 @@
   }
 }
 
-.snakemenu__purple-border {
+.snakemenu__greenred-border {
   border-style: solid;
   border-width: 2px;
-  border-color: #3F0070;
+  border-color: #ff0a27;
 }
 
 .snakemenu__yellowgreen-border {
   border-style: solid;
   border-width: 2px;
-  border-color: yellowgreen;
+  border-color: #4d00ff;
 }
 
 .snakemenu__pink-border {
   border-style: solid;
   border-width: 2px;
-  border-color: pink;
+  border-color: #7fffbf;
+}
+
+.snakemenu__cyan-border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #00ffff;
 }
 
 .snakemenu-button {
@@ -72,19 +78,20 @@
   align-self: center;
   cursor: pointer;
   margin: 0 20px;
+  pointer-events: none;
 }
   
 .snakemenu-button_focus::before {
   content: "> ";
 }
 
-.snakemenu-button__focus-purple {
-  color: rgb(138, 4, 165);
+.snakemenu-button__focus-greenred {
+  color: #a1ff0a;
   font-size: 18px;
 }
 
 .snakemenu-button__focus-pink {
-  color: red;
+  color: #ff7fff;
   font-size: 18px;
 }
 
@@ -93,12 +100,22 @@
   font-size: 18px;
 }
 
+.snakemenu-button__focus-cyan {
+  color: #ff0080;
+  font-size: 18px;
+}
+
 @media (max-width: 768px) {
-  .snakemenu-button__focus-purple,
+  .snakemenu-button__focus-greenred,
   .snakemenu-button__focus-pink,
-  .snakemenu-button__focus-greenyellow {
+  .snakemenu-button__focus-greenyellow,
+  .snakemenu-button__focus-cyan {
     color: white;
     font-size: 14px;
+  }
+
+  .snakemenu-button {
+    pointer-events: auto;
   }
 
   .snakemenu-button:hover {
@@ -122,8 +139,8 @@
   }
 }
 
-.gamename_purple {
-  color: rgb(138, 4, 165);
+.gamename_greenred {
+  color: #a1ff0a;
 }
 
 .gamename_greenyellow {
@@ -131,5 +148,9 @@
 }
 
 .gamename_pink {
-  color: red;
+  color: #FF80FF;
+}
+
+.gamename_cyan {
+  color: cyan;
 }

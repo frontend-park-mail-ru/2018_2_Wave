@@ -1,3 +1,5 @@
+import bus from '../modules/bus';
+
 export default class BaseApp {
   constructor(appURL, parent, MainView, Views) {
     this.url = appURL;
@@ -18,6 +20,9 @@ export default class BaseApp {
     this.started = false;
   }
 
+  setBar(bar) {
+    this.bar = bar;
+  }
 
   changeView(viewUrl, params) {
     // write view change animations in overridden method
@@ -37,11 +42,8 @@ export default class BaseApp {
   }
 
   launch(resource) {
-    if (resource) {
-      this.animateLaunch(resource);
-      return;
-    }
-    if (this.started) this.resume();
+    if (resource) this.animateLaunch(resource);
+    else if (this.started) this.resume();
     else this.start();
   }
 
@@ -88,12 +90,18 @@ export default class BaseApp {
     };
 
     launchAnimation.play();
+
+    const name = resource.getAttribute('name');
+    console.log(name);
+    setTimeout(() => bus.emit('addTile', name), 1000);
   }
 
   start() {
     this.started = true;
     this.active = true;
     this.currentView.show();
+
+    this.bar.show();
   }
 
   stop() {
@@ -101,12 +109,26 @@ export default class BaseApp {
     this.active = false;
     this.currentView.hide();
     this.parent.innerHTML = '';
+    this.bar.hide();
   }
 
   pause() {
     this.parent.style.background = 'none';
     this.active = false;
-    this.currentView.hide();
+    const barAnimation = this.bar.hide();
+    if (barAnimation) {
+      barAnimation.pause();
+      barAnimation.onfinish = () => {
+        this.currentView.hide();
+      };
+      barAnimation.play();
+    } else {
+      this.currentView.hide();
+    }
+  }
+
+  animateClose() {
+    
   }
 
   resume() {
@@ -114,7 +136,8 @@ export default class BaseApp {
       this.start();
       return;
     }
-    this.active = true;
+    this.bar.show();
     this.currentView.show();
+    this.active = true;
   }
 }

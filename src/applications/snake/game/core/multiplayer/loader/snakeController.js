@@ -36,23 +36,31 @@ export default class SnakeController {
       case 1:
         if (newX < this.loaderParams.widthCellCount) {
           newX += 1;
-          break;
+        } else {
+          this.direction = 3;
         }
+        break;
       case 2:
         if (newX > 1) {
           newX -= 1;
-          break;
+        } else {
+          this.direction = 3;
         }
+        break;
       case 3:
         if (newY < this.loaderParams.heightCellCount) {
           newY += 1;
-          break;
+        } else {
+          this.direction = 1;
         }
-      case 2:
+        break;
+      case 4:
         if (newY > 1) {
           newY -= 1;
-          break;
+        } else {
+          this.direction = 1;
         }
+        break;
       default:
         break;
     }

@@ -1,27 +1,35 @@
 import GAME_MODE from './core/modes';
 import OfflineGame from './core/offline/offline';
 import OnlineGame from './core/multiplayer/online';
-import ArcadeGame from './core/arcadeMode';
+import ArcadeGame from './core/arcade/arcadeMode';
 import GameScene from './core/gameScene';
 import Size from './models/size';
 import WaitingPlayers from './core/multiplayer/waitingPlayers';
 import busController from '../modules/busController';
 import config from './utils/game_config';
+import ErrorMessage from '../error_message/errorMessage';
 
 import './game.pcss';
+import '../static/images/home.svg';
+import '../static/images/arrow.png';
 import WsPostman from '../modules/wsPostman';
 
 let GameConstructor;
 export default class Game {
   constructor(gameInfo, canvas, gameInitData) {
     this.gameInitData = gameInitData;
+    this.gameInfo = gameInfo;
     this.canvas = canvas;
+    this.wsPostman = new WsPostman();
+    this.errorMessage = new ErrorMessage();
+    this.busController = busController;
     this.countGameParams();
+    this.close = this.close.bind(this);
+    this.busController.setBusListeners({ Backspace: this.close });
 
     switch (gameInfo.mode) {
       case GAME_MODE.CLASSIC: {
         if (gameInfo.type === GAME_MODE.SINGLPLAYER) {
-          // GameConstructor = OnlineGame;
           GameConstructor = OfflineGame;
         } else {
           GameConstructor = OfflineGame;
@@ -37,6 +45,11 @@ export default class Game {
       }
 
       case GAME_MODE.MULTIPLAYER: {
+        // if (!this.wsPostman.isReady()) {
+        //   this.errorMessage.setErrorMessage('You are offline');
+        //   this.busController.emit('link', '/snake');
+        //   return;
+        // }
         GameConstructor = OnlineGame;
         this.waitingPlayers = new WaitingPlayers(this.canvas, this.gameInitData, gameInfo);
         this.waitingPlayers.start();
@@ -54,9 +67,13 @@ export default class Game {
       this.canvas,
       this.windowSize,
       this.cellSize,
-      this.gameInitData.otientation, // FIXME: typo?
+      this.gameInitData.orientation,
     );
     this.gameCore = new GameConstructor(this.gameScene, this.gameInitData);
+  }
+
+  close() {
+    this.busController.emit('link', '/snake');
   }
 
   countGameParams() {
@@ -68,7 +85,7 @@ export default class Game {
           this.gameInitData.windowHeight / this.gameInitData.heightCellCount,
         ),
       );
-      this.gameInitData.otientation = config.HORIZONTAL;
+      this.gameInitData.orientation = config.HORIZONTAL;
     } else {
       cellWidth = Math.floor(
         Math.min(
@@ -76,7 +93,7 @@ export default class Game {
           this.gameInitData.windowHeight / this.gameInitData.widthCellCount,
         ),
       );
-      this.gameInitData.otientation = config.VERTICAL;
+      this.gameInitData.orientation = config.VERTICAL;
     }
 
     // реальные размеры одной ячейки
@@ -92,12 +109,13 @@ export default class Game {
     // размерность поля игры
     this.gameInitData.cellCount = new Size(this.gameInitData.widthCellCount,
       this.gameInitData.heightCellCount);
+
+    this.gameInitData.mode = this.gameInfo.mode;
+    this.gameInitData.type = this.gameInfo.type;
   }
 
   start(message) {
-    console.log('start quick search');
     if (this.events) {
-      this.wsPostman = new WsPostman();
       this.wsPostman.setRoomToken(message.payload.room_token);
       busController.removeBusListeners(this.events);
       this.waitingPlayers.stop();
@@ -121,5 +139,6 @@ export default class Game {
     if (this.waitingPlayers) {
       this.waitingPlayers.stop();
     }
+    busController.removeBusListeners({ Backspace: this.close });
   }
 }

@@ -1,4 +1,5 @@
 import globalUser from '../../globalUser';
+import PlayersModel from './playersModel';
 
 export default class SnakeModel {
   constructor() {
@@ -27,6 +28,7 @@ export default class SnakeModel {
 
     this.direction = this.directions.RIGHT;
     this.prevDirection = this.direction;
+    this.playersModel = new PlayersModel();
     this.destroyed = false;
   }
 
@@ -86,11 +88,12 @@ export default class SnakeModel {
     if (snakes) {
       snakes.forEach((snake) => {
         if (snake.user_token === this.userToken) {
-          // this.playerId = snake.playerId
+          this.playersModel.setState(snake.user_serial, snake.score);
+          this.score = snake.score;
           snake.body.forEach((segment) => {
             this.segments.push({
-              x: segment.position.X,
-              y: segment.position.Y,
+              x: segment.position.x,
+              y: segment.position.y,
             });
           });
         }

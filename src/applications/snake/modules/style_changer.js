@@ -1,72 +1,79 @@
 import busController from './busController';
 import viewConfig from './view_config';
 
-const defaultStyle = {
-  snakemenu_main_border: 'snakemenu__purple-border',
-  mainScoreColor: 'main-score__purple',
-  snakemenuButtonFocus: 'snakemenu-button__focus-purple',
-  gameBoardBorder: 'game-board__purple',
-  gameCanvasBorder: 'game-canvas__purple',
-  gameName: 'gamename_purple',
-  first_player: 'player_greenyellow',
-  second_player: 'player_yellow',
-  third_player: 'player_green',
-  fourth_player: 'player_blue',
+const greenredStyle = {
+  classes: {
+    snakemenu_main_border: 'snakemenu__greenred-border',
+    mainScoreCollor: 'main-score__greenred',
+    snakemenuButtonFocus: 'snakemenu-button__focus-greenred',
+    gameBoardBorder: 'game-board__greenred',
+    gameCanvasBorder: 'game-board__greenred',
+    gameName: 'gamename_greenred',
+  },
   config_colors: {
-    wallColor: '#FF40FF',
-    snakeColor: '#00FFFF',
-    foodColor: '#40FF00',
-    snakemenuButtonFocus: 'snakemenu-button__focus-purple',
-    enemiesColors: ['greenyellow', 'yellow', 'red', 'blue'],
+    wallColor: '#ff0a27',
+    snakeColor: '#0a27ff',
+    foodColor: '#a1ff0a',
   },
 };
 
+
 const yellowgreenStyle = {
-  snakemenu_main_border: 'snakemenu__yellowgreen-border',
-  mainScoreColor: 'main-score__greenyellow',
-  snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
-  gameBoardBorder: 'game-board__greenyellow',
-  gameCanvasBorder: 'game-canvas__greenyellow',
-  gameName: 'gamename_greenyellow',
-  first_player: 'player_white',
-  second_player: 'player_yellow',
-  third_player: 'player_red',
-  fourth_player: 'player_green',
-  config_colors: {
-    wallColor: '#FF0000',
-    snakeColor: '#00FF00',
-    foodColor: '#C0FF00',
+  classes: {
+    snakemenu_main_border: 'snakemenu__yellowgreen-border',
+    mainScoreCollor: 'main-score__greenyellow',
     snakemenuButtonFocus: 'snakemenu-button__focus-greenyellow',
-    enemiesColors: ['white', 'yellow', 'red', 'green'],
+    gameBoardBorder: 'game-board__greenyellow',
+    gameCanvasBorder: 'game-board__greenyellow',
+    gameName: 'gamename_greenyellow',
+  },
+
+  config_colors: {
+    wallColor: '#ff00b3',
+    snakeColor: '#00FF00',
+    foodColor: '#4d00ff',
   },
 };
 
 const pinkStyle = {
-  snakemenu_main_border: 'snakemenu__pink-border',
-  mainScoreColor: 'main-score__pink',
-  snakemenuButtonFocus: 'snakemenu-button__focus-pink',
-  gameBoardBorder: 'game-board__pink',
-  gameCanvasBorder: 'game-canvas__pink',
-  gameName: 'gamename_pink',
-  first_player: 'player_greenyellow',
-  second_player: 'player_pink',
-  third_player: 'player_red',
-  fourth_player: 'player_blue',
-  config_colors: {
-    wallColor: '#000761',
-    snakeColor: '#00FFFF',
-    foodColor: '#FE00DD',
+  classes: {
+    snakemenu_main_border: 'snakemenu__pink-border',
+    mainScoreCollor: 'main-score__pink',
     snakemenuButtonFocus: 'snakemenu-button__focus-pink',
-    enemiesColors: ['greenyellow', 'pink', 'red', 'blue'],
+    gameBoardBorder: 'game-board__pink',
+    gameCanvasBorder: 'game-board__pink',
+    gameName: 'gamename_pink',
+  },
+  config_colors: {
+    wallColor: '#7fffbf',
+    snakeColor: '#7fbfff',
+    foodColor: '#ffff7f',
+  },
+};
+
+const cyanStyle = {
+  classes: {
+    snakemenu_main_border: 'snakemenu__cyan-border',
+    mainScoreCollor: 'main-score__cyan',
+    snakemenuButtonFocus: 'snakemenu-button__focus-cyan',
+    gameBoardBorder: 'game-board__cyan',
+    gameCanvasBorder: 'game-board__cyan',
+    gameName: 'gamename_cyan',
+  },
+  config_colors: {
+    wallColor: '#ff0080',
+    snakeColor: '#80ff00',
+    foodColor: '#ff8000',
   },
 };
 
 class StyleChanger {
   constructor() {
-    this.styles = [defaultStyle, yellowgreenStyle, pinkStyle];
-    this.currentStyle = defaultStyle;
+    this.styles = [greenredStyle, yellowgreenStyle, pinkStyle, cyanStyle];
+    this.currentStyle = greenredStyle;
     this.currentStyleIndex = 0;
     this.changeStyle = this.changeStyle.bind(this);
+    viewConfig.setColors(this.styles[0].config_colors, this.styles[0].classes);
   }
 
   start() {
@@ -79,14 +86,14 @@ class StyleChanger {
 
   changeStyle() {
     const [nextStyle, nextStyleIndex] = this.nextStyle();
-    Object.keys(this.currentStyle).forEach((styleKey) => {
-      const styledElements = document.getElementsByClassName(this.currentStyle[styleKey]);
+    Object.keys(this.currentStyle.classes).forEach((styleKey) => {
+      const styledElements = document.getElementsByClassName(this.currentStyle.classes[styleKey]);
       for (let i = styledElements.length - 1; i >= 0; i -= 1) {
-        styledElements[i].classList.add(nextStyle[styleKey]);
-        styledElements[i].classList.remove(this.currentStyle[styleKey]);
+        styledElements[i].classList.add(nextStyle.classes[styleKey]);
+        styledElements[i].classList.remove(this.currentStyle.classes[styleKey]);
       }
     });
-    viewConfig.setColors(nextStyle.config_colors);
+    viewConfig.setColors(nextStyle.config_colors, nextStyle.classes);
     this.currentStyle = nextStyle;
     this.currentStyleIndex = nextStyleIndex;
   }

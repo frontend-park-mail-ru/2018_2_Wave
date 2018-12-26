@@ -12,8 +12,6 @@ export default class Element {
     // sure?
     if (wrapperClass) {
       this.wrapper.classList.add(...wrapperClass);
-    } else {
-      this.wrapper.classList.add('wrapper');
     }
     // sure?
 

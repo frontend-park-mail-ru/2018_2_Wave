@@ -1,0 +1,106 @@
+.form-about-us-container {
+  grid-area: form-about-us;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.form-about-us {
+  font-family: Gilroy-Light;
+  font-size: 22px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 10px;
+  color: rgba(100%, 100%, 100%, .6);
+
+
+  &__tile {
+    width: 90%;
+  }
+
+  &__background {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    // border-radius: 0 5px 5px 0;
+  }
+
+  &__title {
+    color: white;
+    font-family: Gilroy-Light;
+    font-size: 34px;
+    margin: 0 15px;
+  }
+
+  &__about {
+    color: rgba(100%, 100%, 100%, 0.8);
+    font-family: Gilroy-Light;
+    font-size: 22px;
+    margin: 40px 15px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 90%;
+    margin-top: auto;
+
+    color: rgba(100%, 100%, 100%, 0.8);
+    text-transform: uppercase;
+    font-family: Gilroy-Light;
+    font-size: 22px;
+    border-radius: 5px;
+    background-color: rgba(100%, 100%, 100%, 0.1);
+
+    transition: all 0.3s ease-out;
+  }
+
+  &__installs {
+    color: rgba(100%, 100%, 100%, 0.8);
+    font-family: Gilroy-Light;
+    font-size: 22px;
+  }
+}
+
+.remove-button {
+  &:hover {
+    color: #fa2f2f;
+  }
+}
+
+.add-button {
+  &:hover {
+    background-color: #4462C4;
+  }
+}
+
+.form-about-us_text {
+  font-family: Gilroy-Light;
+    font-size: 22px;
+    text-align: center;
+}
+
+.about_from {
+  padding: 7px;
+}
+
+.about_button {
+  color: white;
+  font-family: Gilroy-Light;
+  padding: 7px;
+  width: 100px;
+  justify-content: center;
+    align-self: center;
+}
+
+.about_form {
+  display: flex;
+    flex-direction: column;
+}

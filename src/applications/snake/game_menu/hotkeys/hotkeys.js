@@ -19,6 +19,10 @@ const hotkeys = [
     info: 'Quit the game',
   },
   {
+    key: 'S',
+    info: 'Play/pause music',
+  },
+  {
     key: 'Backspase',
     info: 'Go back',
   },

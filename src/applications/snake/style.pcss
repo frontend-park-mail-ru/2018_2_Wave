@@ -2,8 +2,8 @@
 
 .game-container {
   height: 100%;
-  /* cursor: none; */
   display: grid;
+  cursor: default;
   justify-items: center;
   align-items: center;
   color: white;
@@ -25,9 +25,10 @@ window {
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: 1fr 1fr 9fr;
   grid-template-areas:
-    ". mode score"
+    "mode mode mode"
+    "home score ."
     "game game game";
 
   /* position: relative; */
@@ -39,10 +40,14 @@ window {
     grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
     grid-template-areas:
       "mode mode mode mode mode"
-      ". home score . ."
+      "home . score . ."
       "game game game game game";
 
     /* position: relative; */
+  }
+
+  .home {
+    display: grid;
   }
 }
 
@@ -70,6 +75,10 @@ window {
   grid-area: score;
 }
 
+.main-score_miltiplayer {
+  display:none;
+}
+
 .canvas-wrapper {
   width: 100%;
   height: 100%;
@@ -93,7 +102,7 @@ window {
 
 .snakegame-container__multiplayer {
   grid-template-areas:
-    ". mode mode mode score"
+    "mode mode mode mode mode"
     "game game game game board"
     "game game game game board";
 }
@@ -111,22 +120,28 @@ window {
   margin-right: 10px
 }
 
-.game-board__purple {
+.game-board__greenred {
   border-style: solid;
   border-width: 2px;
-  border-color: #3F0070;
+  border-color: #0a27ff;
 }
 
 .game-board__greenyellow {
   border-style: solid;
   border-width: 2px;
-  border-color: greenyellow;
+  border-color: #4d00ff;
 }
 
 .game-board__pink {
   border-style: solid;
   border-width: 2px;
   border-color: pink;
+}
+
+.game-board__cyan {
+  border-style: solid;
+  border-width: 2px;
+  border-color: cyan;
 }
 
 .game-board-name {
@@ -137,13 +152,12 @@ window {
 
 @media screen and (max-width: 768px) {
   .snakegame-container__multiplayer {
-    grid-template-columns: auto;
+    grid-template-columns: 1fr 6fr;
     grid-template-rows: 2fr 1fr 10fr;
     grid-template-areas:
-      "mode"
-      /* "score" */
-      "board"
-      "game";
+      "mode mode"
+      "home board"
+      "game game";
   }
 
   .game-board-name {
@@ -160,4 +174,21 @@ window {
   .game-board__hidden-border {
     border-width: 0px;
   }
+
+  .gamehotkeys {
+    display: none;
+  }
+}
+
+.gamehotkeys {
+  font-size: 14px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.gamehotkey {
+  flex-direction: row;
+  display: flex;
 }

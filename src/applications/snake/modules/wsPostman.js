@@ -1,4 +1,4 @@
-import config from './wsConfig';
+import { getProfile } from '../../../modules/network';
 
 let instance;
 
@@ -9,6 +9,19 @@ export default class WsPostman {
       instance = this;
     }
     return instance;
+  }
+
+  async sendLogin() {
+    const result = await getProfile();
+    console.log('result profile', result, result.profile.username);
+    this.ws.send(result.profile.username);
+  }
+
+  isReady() {
+    if (this.ws.getReadyState() === 1) {
+      return true;
+    }
+    return false;
   }
 
   setRoomToken(roomToken) {

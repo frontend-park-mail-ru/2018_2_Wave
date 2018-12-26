@@ -1,7 +1,9 @@
 import busController from '../../modules/busController';
 import Element from '../../../element';
+import ErrorMessage from '../../error_message/errorMessage';
 
 import config from '../../modules/view_config';
+import globalUser from '../../globalUser';
 
 import './base_menu.pcss';
 
@@ -11,6 +13,8 @@ export default class BaseMenu extends Element {
     this.firstFocus = undefined;
     this.menuClass = menuClass;
     this.busController = busController;
+    this.errorMessage = new ErrorMessage();
+    this.onClick = this.onClick.bind(this);
 
     if (isHorizontal) {
       this.eventsMethods = {
@@ -37,12 +41,24 @@ export default class BaseMenu extends Element {
     } else {
       this.menu = this.wrapper;
     }
+    if (this.menu) {
+      this.menu.addEventListener('click', this.onClick);
+    }
     super.show();
     this.setFirstFosus();
     this.setBusListeners();
   }
 
+  onClick() {
+    if (window.innerWidth > 768) {
+      this.errorMessage.setErrorMessage('Use keyboard arrows');
+    }
+  }
+
   hide() {
+    if (this.menu) {
+      this.menu.removeEventListener('click', this.onClick);
+    }
     this.removeBusListeners();
     super.hide();
   }
@@ -62,15 +78,35 @@ export default class BaseMenu extends Element {
   processLine() {
     this.stop();
     this.hide();
-    let href = this.getFocus()[0].getAttribute('src');
+    const focus = this.getFocus()[0];
+    let href = focus.getAttribute('src');
     if (!href) {
-      href = this.getFocus()[0].getAttribute('href');
+      href = focus.getAttribute('href');
     }
+
+    console.log('focus.innerHTML', focus.innerHTML);
+    if (focus.innerHTML === 'Multiplayer') {
+      if (globalUser) {
+        const isloginUser = globalUser.isLoginUser();
+        console.log('islogin', isloginUser);
+        if (isloginUser) {
+          console.log('redirect to /multiplayer');
+          this.busController.emit('link', '/multiplayer');
+        } else {
+          const error = focus.getAttribute('error');
+          if (error) {
+            console.log('main_menu', error);
+            this.errorMessage.setErrorMessage(error);
+          }
+        }
+      }
+    }
+ 
     if (href) {
-      const params = this.getFocus()[0].getAttribute('params');
+      const params = focus.getAttribute('params');
       this.busController.emit('link', href, params);
     } else {
-      const event = this.getFocus()[0].getAttribute('event');
+      const event = focus.getAttribute('event');
       this.busController.emit(event);
     }
   }
@@ -118,7 +154,6 @@ export default class BaseMenu extends Element {
     this.removeFocusElements();
     element.classList.add(config.snakemenuButtonFocus);
   }
-
 
   goBack(link) {
     busController.emit('link', link);

@@ -19,10 +19,20 @@ export default class SnakeController {
       ArrowLeft: 'LEFT',
       ArrowRight: 'RIGHT',
     };
+
+    this.reverseDirection = {
+      UP: 'DOWN',
+      DOWN: 'UP',
+      LEFT: 'RIGHT',
+      RIGHT: 'LEFT',
+    };
   }
 
   setDirection(keyboardDirection) {
-    this.snake.setDirection(this.keyboardDirections[keyboardDirection]);
+    const direction = this.keyboardDirections[keyboardDirection];
+    if (this.snake.direction !== this.reverseDirection[direction]) {
+      this.snake.setDirection(this.keyboardDirections[keyboardDirection]);
+    }
   }
 
   init() {
@@ -32,7 +42,6 @@ export default class SnakeController {
         y: this.snake.getStartPosition().y,
       });
     }
-    console.log('head init', this.snake.getSegments()[0]);
   }
 
   findEmptyPlace() {
@@ -56,9 +65,7 @@ export default class SnakeController {
   }
 
   isColisionWithSelf(position) {
-    return this.snake.getSegments().some((segment) => {
-      return segment.x === position.x && segment.y === position.y;
-    });
+    return this.snake.getSegments().some((segment) => segment.x === position.x && segment.y === position.y);
   }
 
   move() {

@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const path = require('path');
 
 
@@ -16,9 +15,6 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-    }),
-    new HardSourceWebpackPlugin({
-      cacheDirectory: '.cache/',
     }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/sw.js'),
@@ -51,7 +47,7 @@ const config = {
         loader: 'pug-loader',
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|wav)$/,
         loader: 'file-loader?name=music/[hash].[ext]',
       },
       {
@@ -59,7 +55,7 @@ const config = {
         loader: 'file-loader?name=img/[name].[ext]',
       },
       {
-        test: /\.ico$/,
+        test: /\.(ico)$/,
         loader: 'file-loader?name=favicon.ico',
       },
       {

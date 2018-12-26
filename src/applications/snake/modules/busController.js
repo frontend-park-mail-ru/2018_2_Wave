@@ -20,7 +20,6 @@ class BusController {
   }
 
   emit(event, ...data) {
-    console.log('emit', event);
     bus.emit(event, ...data);
   }
 }

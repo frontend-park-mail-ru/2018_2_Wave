@@ -1,6 +1,5 @@
 import bus from './bus';
 
-
 /*                utils                */
 
 /**  proceeds urlencoded params to array  */
@@ -21,8 +20,11 @@ function splitParams(string) {
 
 /**  removes slashes from path string  */
 function clearPath(string) {
+  let path;
   if (string === '/') return string;
-  const path = string.slice(1);
+  if (string) {
+    path = string.slice(1);
+  }
   if (path.slice(-1) === '/') return path.slice(0, -1);
   return path;
 }
@@ -35,7 +37,8 @@ export default class Router {
 
     this.mainApp = new MainApp('/', this.root);
     this.routes['/'] = this.mainApp;
-    this.appContainer = this.mainApp.appContainer.wrapper;
+    this.appContainer = this.mainApp.appContainer.screen;
+    this.appBar = this.mainApp.bar;
 
     this.listeners = [
       {
@@ -52,12 +55,22 @@ export default class Router {
   }
 
 
+  checkRegister(appUrl) {
+    return appUrl in this.routes;
+  }
+
   registerApp(url, App, source) {
-    const app = new App(url, this.appContainer, source);
     if (url === '/') {
       console.error('MainApp already registered');
       return this;
     }
+    if (url[0] === '/') url = url.slice(1);
+    if (url in this.routes) {
+      console.log('Url already set.');
+      return false;
+    }
+    const app = new App(url, this.appContainer, source);
+    app.setBar(this.appBar);
     this.routes[url] = app;
     return this;
   }
@@ -69,9 +82,11 @@ export default class Router {
     }
 
     this.mainApp.start();
+    this.currentApp = this.mainApp;
 
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
+    bus.listen('regApp', this.registerApp.bind(this));
 
     this.listeners.forEach((listener) => {
       const { target, event, method } = listener;
@@ -98,29 +113,15 @@ export default class Router {
       });
     }
 
-    // let app;
-    // if (this.routes.hasOwnProperty(path)) {
-    //   app = this.routes[path];
-    //   if (app === this.mainApp) app.changeView('main', params);
-    // } else if (this.mainApp.views.hasOwnProperty(path)) {
-    //   app = this.mainApp;
-    //   app.changeView(path, params);
-    // } else {
-    //   this.open('/');
-    //   return;
-    // }
 
     if (!app) {
       this.open('/');
       return;
     }
 
-    this.currentApp = app;
-
     if (!app.active) {
-      Object.values(this.routes).forEach((knownApp) => {
-        if (knownApp.active) knownApp.pause();
-      });
+      this.currentApp.pause();
+      this.currentApp = app;
       app.launch(target);
     }
 
@@ -143,7 +144,14 @@ export default class Router {
     if (target instanceof HTMLAnchorElement
     && (target.getAttribute('type') !== 'submit')) {
       event.preventDefault();
-      this.open(target.pathname, target.search, target);
+      if (target.pathname) {
+        this.open(target.pathname, target.search, target);
+      } else {
+        const busEvent = target.getAttribute('event');
+        if (busEvent) {
+          bus.emit(busEvent);
+        }
+      }
     }
   }
 }

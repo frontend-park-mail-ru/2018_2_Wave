@@ -1,0 +1,78 @@
+.description-container {
+  grid-area: description;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 10px;
+
+
+  &__tile {
+    width: 90%;
+  }
+
+  &__background {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    // border-radius: 0 5px 5px 0;
+  }
+
+  &__title {
+    color: white;
+    font-family: Gilroy-Light;
+    font-size: 34px;
+    margin: 0 15px;
+  }
+
+  &__about {
+    color: rgba(100%, 100%, 100%, 0.8);
+    font-family: Gilroy-Light;
+    font-size: 22px;
+    margin: 40px 15px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 90%;
+    margin-top: auto;
+
+    color: rgba(100%, 100%, 100%, 0.8);
+    text-transform: uppercase;
+    font-family: Gilroy-Light;
+    font-size: 22px;
+    border-radius: 5px;
+    background-color: rgba(100%, 100%, 100%, 0.1);
+
+    transition: all 0.3s ease-out;
+  }
+
+  &__installs {
+    color: rgba(100%, 100%, 100%, 0.8);
+    font-family: Gilroy-Light;
+    font-size: 22px;
+  }
+}
+
+.remove-button {
+  &:hover {
+    color: #fa2f2f;
+  }
+}
+
+.add-button {
+  &:hover {
+    background-color: #4462C4;
+  }
+}

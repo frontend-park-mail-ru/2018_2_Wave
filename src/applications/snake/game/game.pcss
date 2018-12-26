@@ -1,26 +1,33 @@
-.main-score__purple {
-    color: #A757BD;
+.main-score__greenred {
+    color: #a1ff0a;
 }
 
 .main-score__greenyellow {
-    color: greenyellow;
+    color: #4d00ff;
 }
 
 .main-score__pink {
     color: pink;
 }
 
-.home {
-    // content:url(../static/images/home.png);
-    background: url('../static/images/home.svg');
-    display: none;
-    width: 52px;
+.main-score__cyan {
+    color: cyan;
+}
 
+.home {
+    background-image: url('./img/arrow.png');
+    display: none;
+    width: 24px;
+    height: 24px;
+    justify-self: center;
+    align-self: center;
+    margin-left: 3px;
 }
   
-  @media screen and (max-width: 555px) {
-    .home {
-      display: grid;
-      grid-area: home;
-    }
+@media screen and (max-width: 555px) {
+  .home {
+    display: grid;
+    grid-area: home;
   }
+}
+

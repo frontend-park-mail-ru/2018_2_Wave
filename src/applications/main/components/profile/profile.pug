@@ -1,0 +1,15 @@
+.profile__user-data-wrapper
+    .profile__avatar-wrapper
+        img.profile__avatar(src='/img/triss.jpg')
+    .avatar-overlay
+    form#uploadForm(name='upload-form' enctype='multipart/form-data')
+        input.profile-avatar-upload(name="avatar" type="file" hidden)
+
+    .profile__name Triss Merigold
+
+//- if !authorized
+//-   a.userblock__button(href='/login') login
+//- else
+//- img.icon__img(src= "https://static.rasseki.com" + user.avatar)
+    
+//- .userblock__name= user.username

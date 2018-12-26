@@ -14,10 +14,12 @@ export default class FoodsModel {
 
   setState(foods) {
     this.foods = [];
-    foods.forEach((apple) => {
-      const newFood = new FoodModel();
-      newFood.setPosition(new Position(apple.position.X, apple.position.Y));
-      this.push(newFood);
-    });
+    if (foods) {
+      foods.forEach((apple) => {
+        const newFood = new FoodModel();
+        newFood.setPosition(new Position(apple.position.x, apple.position.y));
+        this.push(newFood);
+      });
+    }
   }
 }

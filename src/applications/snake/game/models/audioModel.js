@@ -1,10 +1,11 @@
 export default class AudioModel {
-  constructor(path, volume = 1, loop = false) {
+  constructor({ path, volume = 1, loop = false }) {
     this.path         = path;
     this.audio        = new Audio();
     this.audio.src    = `./${path}`;
     this.audio.loop   = loop;
     this.audio.volume = volume;
+    this.riseVolume = this.riseVolume.bind(this);
   }
 
   pause() {
@@ -14,6 +15,13 @@ export default class AudioModel {
   stop() {
     this.audio.currentTime = 0;
     this.pause();
+  }
+
+  riseVolume() {
+    if (this.audio.volume < 0.9) {
+      this.audio.volume += 0.1;
+      setTimeout(this.riseVolume, 1500);
+    }
   }
 
   play() {

@@ -41,7 +41,6 @@ class TerminalView extends Element {
     this.terminal.innerHTML += textblockTemplate({ text });
   }
 
-
   /*  working with inputs  */
   getInput() {
     if (this.input) return this.input;
@@ -53,10 +52,18 @@ class TerminalView extends Element {
   processInput() {
     if (!this.input) return null;
     const { value } = this.input;
+    const attr = this.input.getAttribute('type');
+    let newValue = '';
+    if (attr === 'password') {
+      let { length } = value;
+      while (length--) {
+        newValue += '•';
+      }
+    } else newValue = value;
     const line = this.input.parentElement;
 
     line.removeChild(this.input);
-    line.innerHTML += messageTemplate({ string: value });
+    line.innerHTML += messageTemplate({ string: newValue });
 
     this.input = null;
     return value;
@@ -66,6 +73,21 @@ class TerminalView extends Element {
     if (!this.rendered) this.render();
 
     this.terminal.innerHTML += inputTemplate({ intro });
+    this.focusInput();
+  }
+
+  setInput(value) {
+    if (!this.input) {
+      [this.input] = this.terminal.getElementsByClassName('terminal__input');
+    }
+    this.input.value = value;
+  }
+
+  addPasswordInput(intro) {
+    if (!this.rendered) this.render();
+
+    this.terminal.innerHTML += inputTemplate({ intro });
+    this.getInput().setAttribute('type', 'password');
     this.focusInput();
   }
 

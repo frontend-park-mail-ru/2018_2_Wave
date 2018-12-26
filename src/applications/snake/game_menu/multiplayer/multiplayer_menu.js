@@ -14,7 +14,7 @@ const buttons = {
   },
   '4 PLAYERS': {
     href: '/game',
-    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`
+    params: `mode=${GAME_MODE.MULTIPLAYER}&type=${GAME_MODE.FOUR_PLAYERS}`,
   },
   BACK: {
     href: '/snake',
@@ -23,7 +23,7 @@ const buttons = {
 
 export default class MultiplayerMenu extends BaseMenu {
   constructor(parent) {
-    // super(MultiplayerTemplate, parent, ['snakemenu__purple-border', 'snakemenu-multiplayer']);
+    // super(MultiplayerTemplate, parent, ['snakemenu__greenred-border', 'snakemenu-multiplayer']);
     super(MultiplayerTemplate, parent, ['snakepage-multiplayer'], false, 'snakemenu-multiplayer');
     this.render();
   }

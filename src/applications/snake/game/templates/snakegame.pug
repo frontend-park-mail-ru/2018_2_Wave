@@ -1,13 +1,16 @@
 .game_mode ARCADE
 a.home(href='/snake')
-.main-score.main-score__purple
+- if (!mainScoreCollor) mainScoreCollor='main-score__greenred';
+- if (!gameCanvasBorder) gameCanvasBorder='game-board__greenred';
+.main-score(class=mainScoreCollor)
     span.score__text Score:
         span.score__value 0
+
 .canvas-wrapper
-    canvas.snakegame-canvas.game-border__purple
+    canvas.snakegame-canvas(class=gameCanvasBorder)
 .game-board-wrapper(hidden)
     .game-board-name Players
-    .game-board.game-board__purple.game-board__hidden-border
+    .game-board.game-board__hidden-border(class=gameBoardBorder)
         .players.scores(user_serial=0)
             .player.player_greenyellow
             .score.player_greenyellow
@@ -20,3 +23,13 @@ a.home(href='/snake')
         .players.scores(user_serial=3)
             .player.player_blue
             .score.player_blue
+.gamehotkeys
+    .gamehotkey
+        .gamehotkey-key(class=mainScoreCollor) Backspace 
+        .gamehotkey_descroption - go out
+    .gamehotkey
+        .gamehotkey-key(class=mainScoreCollor) S 
+        .gamehotkey_descroption - stop the music
+    .gamehotkey
+        .gamehotkey-key(class=mainScoreCollor) T 
+        .gamehotkey_descroption - change theme

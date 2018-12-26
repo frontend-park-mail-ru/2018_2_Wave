@@ -27,26 +27,20 @@ export default class ReadyMessage extends BaseMenu {
     busController.setBusListeners(this.events);
   }
 
+  acceptMembers() {
+
+  }
+
   removeListeners() {
-    busController.removeBusListeners(this.events); 
+    busController.removeBusListeners(this.events);
   }
 
   quickSearchStart() {
-    console.log('quickSearchStart');
     this.wsPostman.quickSearchAccept();
   }
 
   quickSearchQuit() {
-    console.log('quickSearchQuit');
     this.wsPostman.quickSearchAbort();
-  }
-
-  quickSearchQuit(message) {
-    console.log('accepted', message.payload);
-  }
-
-  acceptMembers() {
-
   }
 
   show() {
@@ -57,6 +51,7 @@ export default class ReadyMessage extends BaseMenu {
 
   startTimer() {
     [this.timer] = this.parent.getElementsByClassName('timer');
+    this.timer.innerHTML = 30;
     this.begin = new Date().getSeconds();
     this.timerLoop();
   }
@@ -64,7 +59,18 @@ export default class ReadyMessage extends BaseMenu {
   timerLoop() {
     this.timerId = setInterval(() => {
       const now = new Date();
-      const distance = this.time - (now.getSeconds() - this.begin);
+      const nowSeconds = now.getSeconds();
+      let distance;
+      if (nowSeconds > this.begin) {
+        distance = this.time - (nowSeconds - this.begin);
+      } else {
+        distance = this.begin - nowSeconds - this.time;
+      }
+      if (!distance || distance > 30) {
+        distance = 30;
+      } else if (distance < 0) {
+        distance = 0;
+      }
       this.timer.innerHTML = distance;
     }, 1000);
   }

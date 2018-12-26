@@ -1,0 +1,56 @@
+@import '../../../../config.pcss';
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__grid {
+    overflow: hidden;
+    grid-template-rows: 14vh 14vh calc(50vh - 30px) 22vh;
+    grid-template-columns: 250px 1fr 250px;
+    grid-row-gap: 10px;
+    grid-auto-rows: 0;
+
+    grid-template-areas:
+    "userblock userblock icon-set"
+    "title app-table profile-description"
+    "user-data app-table profile-description"
+    "menu menu menu";
+
+    width:  calc(100vw - 2 * var(--grid-padding-x));
+    padding: 0 var(--grid-padding-x);
+  }
+
+  &__tile-panel {
+    height: 80%;
+    width: calc((100vw - 2* var(--grid-padding-x) - 600px));
+
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    overflow-y: visible;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+
+@media (--boss) {
+  .profile__grid {
+    grid-template-columns: 300px 1fr 300px;
+  }
+}
+
+@media (--small) {
+  .profile__tile-panel {
+    width: calc(100vw - 2 * var(--small-grid-padding-x));
+  }
+}
+
+@media (--minimal) {
+  .profile__tile-panel {
+    width: calc(100vw - 2 * var(--minimal-grid-padding-x));
+  }
+}

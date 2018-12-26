@@ -1,3 +1,5 @@
+@import '../../../config.pcss';
+
 /* CRUTCHES */
 
 ::-webkit-scrollbar {
@@ -5,7 +7,14 @@
 }
 
 /* END OF CRUTCHES */
+.terminal-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
+  background-color: black;
+}
 
 .terminal {
   background: black;
@@ -27,7 +36,7 @@
 
 @media (--minimal) {
   .terminal {
-    width: 95vw;
+    width: 93vw;
   }
 }
 

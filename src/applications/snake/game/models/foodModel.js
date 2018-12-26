@@ -23,7 +23,10 @@ export default class FoodModel {
   }
 
   getX() {
-    return this.position.x;
+    if (this.position) {
+      return this.position.x;
+    }
+    return undefined;
   }
 
   getLetter() {
@@ -31,7 +34,10 @@ export default class FoodModel {
   }
 
   getY() {
-    return this.position.y;
+    if (this.position) {
+      return this.position.y;
+    }
+    return undefined;
   }
 
   getPosition() {

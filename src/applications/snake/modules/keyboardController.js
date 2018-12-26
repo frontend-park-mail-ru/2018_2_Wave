@@ -1,8 +1,16 @@
 import bus from './busController';
 import swipeDetector from './swipeDetector';
+import config from '../game/utils/game_config';
 
+let enter = 0;
 class KeyboardController {
   constructor() {
+    if (window.innerWidth > window.innerHeight) {
+      this.orientation = config.HORIZONTAL;
+    } else {
+      this.orientation = config.VERTICAL;
+    }
+
     this.controls = [
       8, // backspace
       // 9, // tab
@@ -10,6 +18,7 @@ class KeyboardController {
       // 27, // esc
       // 16, // shift
       // 32, // space
+      83, // s turn off the music
       81, // q exit
       84, // t key (change theme)
     ];
@@ -28,18 +37,35 @@ class KeyboardController {
 
     ];
 
+    this.verticalDirection = {
+      ArrowUp: 'ArrowLeft',
+      ArrowDown: 'ArrowRight',
+      ArrowLeft: 'ArrowUp',
+      ArrowRight: 'ArrowDown',
+    };
+
     this.swipeDetector = swipeDetector;
     this.isSpace = false;
+    this.acceptInput = this.acceptInput.bind(this);
   }
 
   start() {
     // magic here
-    setTimeout(() => document.addEventListener('keydown', this.acceptInput.bind(this), 1));
+    // console.log('start keyboard');
+    // setTimeout(() => document.addEventListener('keydown', this.acceptInput), 1000);
+    enter = 0;
+    setTimeout(() => { enter += 1; }, 1000);
+    document.addEventListener('keydown', this.acceptInput);
     this.swipeDetector.start();
   }
 
+  setOrintation(orientation) {
+    this.orientation = orientation;
+    this.lastCommand = undefined;
+  }
+
   stop() {
-    document.removeEventListener('keydown', this.acceptInput.bind(this));
+    document.removeEventListener('keydown', this.acceptInput);
     this.swipeDetector.stop();
   }
 
@@ -91,7 +117,7 @@ class KeyboardController {
   */
 
   acceptInput(e) {
-    const keyCode =  e.which || e.keyCode;
+    let keyCode =  e.which || e.keyCode;
 
     /*
     if (e.ctrlKey) {
@@ -111,12 +137,20 @@ class KeyboardController {
     }
     */
 
+    if (keyCode === 13 && enter === 0) {
+      enter += 1;
+      keyCode = -1;
+    }
+
     if (this.isControlKey(keyCode)) {
-      // console.log('emit', e.code);
       bus.emit(e.code);
     } else if (this.isSnakeControls(keyCode)) {
+      let direction = e.key;
+      if (this.orientation === config.VERTICAL) {
+        direction = this.verticalDirection[direction];
+      }
       bus.emit(e.code);
-      this.lastCommand = e.key;
+      this.lastCommand = direction;
     }
 
     if (e.code === 'Space') {

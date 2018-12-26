@@ -1,12 +1,10 @@
+import globalUser from '../../globalUser';
+
 export default class Player {
-  constructor(userToken) {
+  constructor() {
     this.score = 0;
     this.isDead = false;
-    this.userToken = userToken;
-  }
-
-  setSnake(snake) {
-    this.snake = snake;
+    this.userToken = globalUser.userToken;
   }
 
   setDead() {

@@ -93,8 +93,10 @@ export default class levelModel {
 
   setState(walls) {
     this.walls = [];
-    walls.forEach((wall) => {
-      this.setWall(new Position(wall.X, wall.Y));
-    });
+    if (walls) {
+      walls.forEach((wall) => {
+        this.setWall(new Position(wall.x, wall.y));
+      });
+    }
   }
 }

@@ -28,6 +28,7 @@ export default class OfflineGame extends GameCore {
   constructor(scene, gameInitData) {
     super(scene);
 
+    keyboardController.setOrintation(gameInitData.orientation);
     this.gameloop = this.gameloop.bind(this);
     this.gameloopRequestId = null;
     this.framesPerSecond = 10;
@@ -37,8 +38,6 @@ export default class OfflineGame extends GameCore {
 
     this.scene = scene;
     this.busController = busController;
-
-    this.deadMessage  = new DeadMessage();
 
     this.controllers = [];
 
@@ -64,9 +63,11 @@ export default class OfflineGame extends GameCore {
 
     this.audioController = new AudioController();
     this.errorMessage = new ErrorMessage();
+    this.deadMessage  = new DeadMessage();
 
     this.events = {
       DEAD: this.dead.bind(this),
+      // Space: this.pause,
     };
   }
 
@@ -79,7 +80,6 @@ export default class OfflineGame extends GameCore {
   }
 
   start() {
-    this.errorMessage.setErrorMessage('You are offline');
     this.controllers.forEach(controller => controller.init());
     this.playerController.init();
     super.start();

@@ -67,7 +67,12 @@ class SwipeDetector {
     if ((e.target instanceof HTMLAnchorElement)
     && (e.target.getAttribute('type') !== 'submit')) {
       e.preventDefault();
-      bus.emit('link', e.target.pathname, e.target.search);
+      if (e.target.pathname) {
+        bus.emit('link', e.target.pathname, e.target.search);
+      } else {
+        const event = e.target.getAttribute('event');
+        bus.emit(event);
+      }
     }
 
     if (this.dtime <= this.allowedTime) {

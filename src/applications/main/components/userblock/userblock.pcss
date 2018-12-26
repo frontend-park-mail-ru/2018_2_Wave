@@ -1,0 +1,44 @@
+.userblock {
+  grid-area: userblock;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin: 0 5px;
+}
+
+
+.userblock__avatar-wrapper {
+  --icon-diameter: 5vh;
+  height: var(--icon-diameter);
+  width: var(--icon-diameter);
+
+  border-radius: 50%;
+
+  overflow: hidden;
+  margin: 5px;
+
+  cursor: pointer;
+}
+
+.userblock__avatar {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+
+.userblock__name {
+  color: white;
+  font-family: Gilroy-Light;
+  font-size: 26px;
+  margin: 0 15px;
+}
+
+@media (max-width: 640px) {
+  .userblock__name {
+    justify-content: center;
+  }
+}

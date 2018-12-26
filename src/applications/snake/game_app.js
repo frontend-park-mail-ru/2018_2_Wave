@@ -21,15 +21,15 @@ import ErrorMessage from './error_message/errorMessage';
 // import './styles/style.pcss';
 
 import './style.pcss';
-// import './styles/font.pcss';
-// import './static/fonts/PressStart2P.ttf';
+import './styles/font.pcss';
+import '../../../static/fonts/PressStart2P.ttf';
 
 export default class GameApp extends BaseApp {
   constructor(appUrl, parent) {
     const env = new GameEnv(parent);
     const Views = {
       game: SnakeGameView,
-      singlplayer: SinglplayerView,
+      singleplayer: SinglplayerView,
       multiplayer: MultiplayerMenu,
       hotkeys: HotKeys,
     };
@@ -49,6 +49,7 @@ export default class GameApp extends BaseApp {
   }
 
   start() {
+    // window.onscroll = function () { window.scrollTo(0, 0); };
     this.parent.style.background = 'black';
     this.styleChanger.start();
     this.env.show();
@@ -59,18 +60,21 @@ export default class GameApp extends BaseApp {
 
   pause() {
     this.styleChanger.stop();
+    this.keyboardController.stop();
     this.env.hide();
     super.pause();
   }
 
   resume() {
     this.parent.style.background = 'black';
+    this.keyboardController.start();
     this.styleChanger.start();
     this.env.show();
     super.resume();
   }
 
   stop() {
+    this.keyboardController.stop();
     this.styleChanger.stop();
     this.webSocket.close();
     super.stop();

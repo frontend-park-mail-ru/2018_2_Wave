@@ -1,6 +1,6 @@
 import BaseMenu from '../../game_menu/base_menu/base_menu';
 import DeadMessageTemplate from './dead_message.pug';
-import style from './dead_message.pcss';
+import './dead_message.pcss';
 
 export default class DeadMessage extends BaseMenu {
   constructor() {
@@ -12,11 +12,15 @@ export default class DeadMessage extends BaseMenu {
     super.hide();
   }
 
-  show(deadMenuContent, score) {
+  show(deadMenuContent, score, preText) {
     const [deadScore] = this.parent.getElementsByClassName('dead-message__score');
     deadScore.innerHTML = score;
     const [deadMenu] = this.parent.getElementsByClassName('dead-menu');
     deadMenu.innerHTML = deadMenuContent;
+    if (preText) {
+      const [deadText] = this.parent.getElementsByClassName('dead-message__text');
+      deadText.innerHTML = preText;
+    }
     super.show();
   }
 
