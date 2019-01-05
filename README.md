@@ -13,6 +13,7 @@ npm run
 
 ## Ссылки
 
+* deploy; https://snakewave.com
 * API &mdash; https://frontend.tech-mail.ru/2018_2_Wave/
 * Grafana &mdash; https://grafana.rasseki.com
 
