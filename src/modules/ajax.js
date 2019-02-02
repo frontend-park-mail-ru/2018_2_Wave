@@ -1,7 +1,15 @@
 import bus from './bus';
 
 
-const URL = 'https://api.rasseki.com';
+function url() {
+  if (window.location.host === 'localhost:3000'
+    || window.location.host === '127.0.0.1:3000') {
+    return 'http://localhost:9600';
+  }
+  return 'https://api.rasseki.com';
+}
+
+const URL = url();
 
 // errors which are handled by another modules
 const errorEvents = {
