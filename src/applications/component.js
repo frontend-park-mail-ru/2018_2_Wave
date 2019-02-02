@@ -31,13 +31,32 @@ export default class Component {
 
 
   /**
-   *Creates and returns render promise only of this component,
+   * Creates and returns render promise of this component,
    * but not its children.
    * @memberof Component
    */
   render() {
     this.renderPromise = this._render_();
     return this.renderPromise;
+  }
+
+
+  hide() {
+    this.body.hidden = true;
+    this.body.style.setProperty('display', 'none', 'important');
+
+    this.hidden = true;
+  }
+
+  show() {
+    if (!this.rendered) {
+      // here should be skeleton
+      this.render();
+    }
+    this.body.hidden = false;
+    this.body.style.display = null;
+
+    this.hidden = false;
   }
 
 
@@ -82,27 +101,4 @@ export default class Component {
 
     if (this.dataPromise) this.data = await this.dataPromise;
   }
-
-
-  hide() {
-    this.body.hidden = true;
-    this.body.style.setProperty('display', 'none', 'important');
-
-    this.hidden = true;
-  }
-
-  show() {
-    if (!this.rendered) {
-      // here can be skeleton
-      this.render();
-    }
-    this.body.hidden = false;
-    this.body.style.display = null;
-
-    this.hidden = false;
-  }
 }
-
-// при ререндере элемента заменяем прошлый body на новый
-
-// parent в конструкторе - это компонент
