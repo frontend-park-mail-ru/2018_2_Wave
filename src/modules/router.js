@@ -4,6 +4,7 @@ import bus from './bus';
 
 /**  proceeds urlencoded params to array  */
 function splitParams(string) {
+  /* eslint-disable no-param-reassign */
   if (!string) return null;
   const params = {};
   if (string[0] === '?') {
@@ -60,6 +61,7 @@ export default class Router {
   }
 
   registerApp(url, App, source) {
+    /* eslint-disable no-param-reassign */
     if (url === '/') {
       console.error('MainApp already registered');
       return this;
@@ -100,9 +102,8 @@ export default class Router {
     const params = splitParams(paramString);
 
     let app;
-    if (this.routes.hasOwnProperty(path)) {
+    if (path in this.routes) {
       app = this.routes[path];
-      // if (app === this.mainApp) app.changeView('main', params);
       app.changeView('main', params);
     } else {
       Object.values(this.routes).forEach((foundApp) => {
