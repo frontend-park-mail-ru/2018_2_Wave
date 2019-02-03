@@ -9,7 +9,6 @@ export default class Component {
    * @memberof Component
    */
   constructor({
-    name,
     template,
     parent,
     markTag,
@@ -22,7 +21,7 @@ export default class Component {
     this.markTag  = markTag  || null;
 
     if (this.parent instanceof Component) {
-      this.parent.addChild(name, this);
+      this.parent.addChild(markTag, this);
     }
 
     this.body = null;
