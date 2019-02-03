@@ -11,9 +11,8 @@ const template = require('./userblock.pug');
 
 
 export default class UserBlock extends Component {
-  constructor({ name = 'userblock', parent, markTag = 'userblock' }) {
+  constructor({ parent, markTag = 'userblock' }) {
     super({
-      name,
       template,
       parent,
       markTag,
