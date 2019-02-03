@@ -50,10 +50,6 @@ export default class Component {
 
 
   hide() {
-    Object
-      .values(this.children)
-      .forEach(child => child.hide());
-
     this.body.hidden = true;
     this.body.style.setProperty('display', 'none', 'important');
 
@@ -65,10 +61,6 @@ export default class Component {
       // here should be skeleton
       this.render();
     }
-
-    Object
-      .values(this.children)
-      .forEach(child => child.show());
 
     this.body.hidden = false;
     this.body.style.display = null;
