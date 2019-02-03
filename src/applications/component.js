@@ -25,7 +25,7 @@ export default class Component {
     }
 
     this.body = null;
-    this.childen = {};
+    this.children = {};
   }
 
 
@@ -33,7 +33,7 @@ export default class Component {
     if (component.parent !== this) {
       return { err: new Error('Invalid parent') };
     }
-    this.childen[name] = component;
+    this.children[name] = component;
     return true;
   }
 
@@ -50,6 +50,10 @@ export default class Component {
 
 
   hide() {
+    Object
+      .values(this.children)
+      .forEach(child => child.hide());
+
     this.body.hidden = true;
     this.body.style.setProperty('display', 'none', 'important');
 
@@ -61,6 +65,11 @@ export default class Component {
       // here should be skeleton
       this.render();
     }
+
+    Object
+      .values(this.children)
+      .forEach(child => child.show());
+
     this.body.hidden = false;
     this.body.style.display = null;
 
@@ -102,7 +111,7 @@ export default class Component {
     if ('getData' in this) this.dataPromise = this.getData();
 
     Object
-      .values(this.childen)
+      .values(this.children)
       .forEach(child => child.render());
 
     if (this.parent instanceof 'Component') {
