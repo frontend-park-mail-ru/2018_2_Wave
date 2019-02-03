@@ -8,20 +8,29 @@ export default class Component {
    * @param {String} markTag Tag name in parent, which will be replaced
    * @memberof Component
    */
-  constructor({ template, parent, markTag }) {
+  constructor({
+    name,
+    template,
+    parent,
+    markTag,
+  }) {
     this.rendered = false;
     this.hidden = true;
 
-    this.template = template || null;
-    this.parent   = parent   || null;
+    this.template = template;
+    this.parent   = parent;
     this.markTag  = markTag  || null;
+
+    if (this.parent instanceof Component) {
+      this.parent.addChild(name, this);
+    }
 
     this.body = null;
     this.childen = {};
   }
 
 
-  addChild({ name, component }) {
+  addChild(name, component) {
     if (component.parent !== this) {
       return { err: new Error('Invalid parent') };
     }
@@ -62,7 +71,9 @@ export default class Component {
 
   async _render_() {
     /* eslint-disable no-unused-expressions */
-    await this._prepareRender_();
+    const needToRender = await this._prepareRender_();
+
+    if (!needToRender) return;
 
     const bodyString = this.template(this.data || null);
     const newBody = DOMparser.parseFromString(bodyString, 'text/html');
@@ -89,7 +100,7 @@ export default class Component {
 
 
   async _prepareRender_() {
-    if ('data' in this) this.dataPromise = this.getData();
+    if ('getData' in this) this.dataPromise = this.getData();
 
     Object
       .values(this.childen)
@@ -99,6 +110,16 @@ export default class Component {
       await this.parent.renderPromise;
     }
 
-    if (this.dataPromise) this.data = await this.dataPromise;
+    if (this.dataPromise) {
+      const newData = await this.dataPromise;
+      if (newData === this.data) return false;
+      this.data = newData;
+      return true;
+    }
+
+    if ('getData' in this && !this.rendered) {
+      return true;
+    }
+    return false;
   }
 }
