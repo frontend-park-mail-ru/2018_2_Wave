@@ -127,10 +127,6 @@ export default class BaseApp {
     }
   }
 
-  animateClose() {
-    
-  }
-
   resume() {
     if (!this.started) {
       this.start();
