@@ -12,11 +12,7 @@ const template = require('./userblock.pug');
 
 export default class UserBlock extends Component {
   constructor({ parent, markTag = 'userblock' }) {
-    super({
-      template,
-      parent,
-      markTag,
-    });
+    super({ template, parent, markTag });
 
     bus.listen('userUpdated', this.update.bind(this));
   }
