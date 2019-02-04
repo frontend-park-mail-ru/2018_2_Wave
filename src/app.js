@@ -8,7 +8,7 @@ import '../static/favicon.ico';
 import './style.pcss';
 
 new Loader(document.body)
-  .render();
+  .start();
 
 // new Router(document.body, MainApp)
 //   .registerApp('terminal', Terminal)
