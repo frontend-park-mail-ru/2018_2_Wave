@@ -1,6 +1,3 @@
-const DOMparser = new DOMParser();
-
-
 export default class Component {
   /**
    *Creates an instance of Component.
