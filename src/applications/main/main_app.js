@@ -5,7 +5,6 @@ import BaseApp from '../base_app';
 import Enviroment from './views/enviroment/env';
 // import HomeView from './views/home/home';
 // import StoreView from './views/store/store';
-import LoaderView from './views/loader/loader';
 // import ProfileView from './views/profile/profile';
 // import Bar from './components/bar/bar';
 // import AppContainer from './views/app_container/app_container';
@@ -13,14 +12,13 @@ import LoaderView from './views/loader/loader';
 import bus from '../../modules/bus';
 
 
-export default class MenuApp extends BaseApp {
+export default class MainApp extends BaseApp {
   constructor(appUrl, parent) {
     super(appUrl);
+
     const env = new Enviroment(parent);
 
-    this.loaderView = new LoaderView(
-      { parent: env, markTag: 'loader' },
-    );
+
 
     // const [homePlace] = env.wrapper.getElementsByClassName('home-page');
     // this.views.main = new HomeView(homePlace, homePlace);
