@@ -16,8 +16,7 @@ export default class MainApp extends BaseApp {
   constructor(appUrl, parent) {
     super(appUrl);
 
-    const env = new Enviroment(parent);
-
+    this.env = new Enviroment(parent);
 
 
     // const [homePlace] = env.wrapper.getElementsByClassName('home-page');
