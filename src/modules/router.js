@@ -38,8 +38,6 @@ export default class Router {
 
     this.mainApp = new MainApp('/', this.root);
     this.routes['/'] = this.mainApp;
-    this.appContainer = this.mainApp.appContainer.screen;
-    this.appBar = this.mainApp.bar;
 
     this.listeners = [
       {
@@ -72,16 +70,22 @@ export default class Router {
       return false;
     }
     const app = new App(url, this.appContainer, source);
-    app.setBar(this.appBar);
+    // app.setBar(this.appBar);  //TODO: FIXME: bad idea for bar
     this.routes[url] = app;
     return this;
   }
 
 
-  start() {
+  async start() {
     if (!this.routes.hasOwnProperty('/')) {
       throw new Error('No main app!');
     }
+
+    this.mainApp.env.render();
+    await this.mainApp.env.appContainer.renderPromise;
+
+    this.appContainer = this.mainApp.appContainer.screen;
+    // this.appBar = this.mainApp.bar;  //TODO: FIXME: bad idea for bar
 
     this.mainApp.start();
     this.currentApp = this.mainApp;
