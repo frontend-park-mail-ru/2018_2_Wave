@@ -1,9 +1,11 @@
 import './env.pcss';
 
 import Component from '../../../component';
+
 import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
 import IconBlock from '../../components/icon-block/icon-block';
+import AppContainer from '../app_container/app_container';
 
 import template from './env.pug';
 
@@ -14,9 +16,6 @@ import '../../../../../static/fonts/Gilroy-Light.otf';
 export default class Enviroment extends Component {
   constructor(parent) {
     super({ template, parent });
-    // super.render();
-
-    // [this.mainContainer] = this.wrapper.getElementsByClassName('grid-common');
 
     this.userblock = new UserBlock(
       { parent: this, markTag: 'userblock' },
@@ -30,7 +29,9 @@ export default class Enviroment extends Component {
       { parent: this, markTag: 'iconblock' },
     );
 
-    // [this.appContainerPlace] = this.wrapper.getElementsByClassName('application');
+    this.appContainer = new AppContainer(
+      { parent: this, markTag: 'application' },
+    );
   }
 
   setTitle(text) {
