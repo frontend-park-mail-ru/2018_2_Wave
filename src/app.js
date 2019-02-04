@@ -4,17 +4,20 @@ import MainApp from './applications/main/main_app';
 import Terminal from './applications/terminal/terminal_app';
 import Snake from './applications/snake/game_app';
 
+import bus from './modules/bus';
+
 import '../static/favicon.ico';
 import './style.pcss';
 
 new Loader(document.body)
   .start();
 
-// new Router(document.body, MainApp)
-//   .registerApp('terminal', Terminal)
-//   .registerApp('snake', Snake)
-//   .start();
+new Router(document.body, MainApp)
+  // .registerApp('terminal', Terminal)
+  // .registerApp('snake', Snake)
+  .start();
 
+bus.emit('loaded');
 
 // if ('serviceWorker' in navigator) {
 //   navigator.serviceWorker
