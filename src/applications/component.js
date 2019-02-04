@@ -76,10 +76,15 @@ export default class Component {
     if (!needToRender) return;
 
     const bodyString = this.template(this.data || null);
-    const newBody = DOMparser.parseFromString(bodyString, 'text/html');
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = bodyString;
+    const newBody = wrapper.firstChild;
+
+    newBody.hidden = true;
+    newBody.style.setProperty('display', 'none', 'important');
 
     if (this.body === null) {
-      this.DOMparent = (this.parent instanceof 'HTMLElement')
+      this.DOMparent = (this.parent instanceof HTMLElement)
         ? this.parent
         : this.parent.body;
 
@@ -106,7 +111,7 @@ export default class Component {
       .values(this.children)
       .forEach(child => child.render());
 
-    if (this.parent instanceof 'Component') {
+    if (this.parent instanceof Component) {
       await this.parent.renderPromise;
     }
 
@@ -117,7 +122,7 @@ export default class Component {
       return true;
     }
 
-    if ('getData' in this && !this.rendered) {
+    if ('getData' in this || !this.rendered) {
       return true;
     }
     return false;
