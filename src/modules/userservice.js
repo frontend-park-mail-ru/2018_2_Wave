@@ -1,30 +1,26 @@
 import bus from './bus';
-import { getProfile } from './network';
+import { logout, getProfile } from './network';
 
 
 class UserService {
   constructor() {
     this.user = {};
     this.loggedIn = false;
-    bus.listen('checkUser', this.update.bind(this));
-    this.update();
+    bus.listen('checkUser', () => {
+      this.updatePromise = this.update();
+    });
   }
 
 
   isLoggedIn() {
-    return (this.updating === false)
-      ? { loggedIn: this.loggedIn }
-      : { err: 'updating' };
+    return this.loggedIn;
   }
 
 
-  getUser() {
-    const { err, loggedIn } = this.isLoggedIn();
+  async getUser() {
+    await this.updatePromise;
 
-    if (err) {
-      if (err === 'updating') return { err };
-      throw new Error();
-    } else if (!loggedIn) {
+    if (!this.loggedIn) {
       bus.emit('link', '/terminal');
       return { err: 'unathorized' };
     }
@@ -34,12 +30,11 @@ class UserService {
 
 
   async update(action) {
-    this.updating = true;
-
     if (action === 'logout') {
       this.loggedIn = false;
       this.user = {};
-      getProfile();
+
+      this.updatePromise = logout();
     } else {
       const { err, profile: user } = await getProfile();
       if (err) {
@@ -52,7 +47,6 @@ class UserService {
       }
     }
 
-    this.updating = false;
     bus.emit('userUpdated');
   }
 }
