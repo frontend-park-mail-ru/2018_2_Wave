@@ -23,10 +23,19 @@ export default class UserBlock extends Component {
     this.render();
   }
 
-  async render() {
-    // TODO: why not await?
-    const { user } = userService.getUser();
-    console.log(user);
-    super.render({ user });
+  /* eslint-disable class-methods-use-this */
+  async getData() {
+    const { err, user } = await userService.getUser();
+
+    if (err) return { user: { username: 'not logged in' } };
+
+    return { user };
   }
+
+  // async render() {
+  //   // TODO: why not await?
+  //   const { user } = userService.getUser();
+  //   console.log(user);
+  //   super.render({ user });
+  // }
 }
