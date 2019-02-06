@@ -37,7 +37,7 @@ export default class Menu extends Component {
     this.render();
 
     bus.listen('addTile', this.addTile.bind(this));
-    this.getData = () => tiles;
+    this.getData = async () => { tiles };
   }
 
   async addTile(appName) {
