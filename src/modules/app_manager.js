@@ -1,13 +1,13 @@
-
-
-export default class AppManager {
-  constructor(MainApp) {
-    this.mainApp = new MainApp();
-    this.activeApp = this.mainApp;
-
+class AppManager {
+  constructor() {
     this.appClasses = {};
     this.appInstances = {};
     this.startedAppsOrder = [];
+  }
+
+  start(MainApp) {
+    this.mainApp = new MainApp();
+    this.activeApp = this.mainApp;
   }
 
   /**
@@ -54,7 +54,7 @@ export default class AppManager {
       app.processParams(...params);
     }
 
-    if (app !== this.activeApp) {
+    if (app !== this.activeApp) { // TODO: FIXME: hide last app
       // await launch animation
       // async show bar for 3 seconds
       if (!app.started) {
@@ -113,3 +113,6 @@ export default class AppManager {
     }
   }
 }
+
+
+export default new AppManager();
