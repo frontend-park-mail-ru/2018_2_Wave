@@ -1,3 +1,4 @@
+import AppManager from './modules/app_manager';
 import Router from './modules/router';
 import Loader from './applications/loader/loader';
 import MainApp from './applications/main/main_app';
@@ -12,9 +13,12 @@ import './style.pcss';
 new Loader(document.body)
   .start();
 
+new AppManager(MainApp)
+  .registerApp('terminal', Terminal)
+  .registerApp('snake', Snake)
+  .start();
+
 new Router(document.body, MainApp)
-  // .registerApp('terminal', Terminal)
-  // .registerApp('snake', Snake)
   .start();
 
 bus.emit('loaded');
