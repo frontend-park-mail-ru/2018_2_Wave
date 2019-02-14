@@ -30,14 +30,12 @@ function clearPath(string) {
   return path;
 }
 
-
 export default class Router {
-  constructor(root, MainApp) {
-    this.routes = {};
-    this.root = root;
-
-    this.mainApp = new MainApp('/', this.root);
-    this.routes['/'] = this.mainApp;
+  /**
+   * @param {AppManager} appManager AppManager instance
+   */
+  constructor(appManager) {
+    this.appManager = appManager;
 
     this.listeners = [
       {
@@ -54,41 +52,10 @@ export default class Router {
   }
 
 
-  checkRegister(appUrl) {
-    return appUrl in this.routes;
-  }
-
-  registerApp(url, App, source) {
-    /* eslint-disable no-param-reassign */
-    if (url === '/') {
-      console.error('MainApp already registered');
-      return this;
-    }
-    if (url[0] === '/') url = url.slice(1);
-    if (url in this.routes) {
-      console.log('Url already set.');
-      return false;
-    }
-    const app = new App(url, this.appContainer, source);
-    // app.setBar(this.appBar);  //TODO: FIXME: bad idea for bar
-    this.routes[url] = app;
-    return this;
-  }
-
-
   async start() {
-    if (!this.routes.hasOwnProperty('/')) {
-      throw new Error('No main app!');
+    if (!this.appManager.started) {
+      throw new Error('AppManager not started.');
     }
-
-    this.mainApp.env.render();
-    await this.mainApp.env.appContainer.renderPromise;
-
-    this.appContainer = this.mainApp.appContainer.screen;
-    // this.appBar = this.mainApp.bar;  //TODO: FIXME: bad idea for bar
-
-    this.mainApp.start();
-    this.currentApp = this.mainApp;
 
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
@@ -105,6 +72,7 @@ export default class Router {
     const path = clearPath(fullPath);
     const params = splitParams(paramString);
 
+    // FIXME: fix this hell shit
     let app;
     if (path in this.routes) {
       app = this.routes[path];
