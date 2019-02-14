@@ -7,10 +7,23 @@ class AppManager {
     this.started = false;
   }
 
-  start(MainApp) {
-    this.mainApp = new MainApp();
+  /**
+   * Initiates AppManager, starts and inits main app
+   *
+   * @param MainApp
+   * @param {HTMLElement} container
+   * Element which will contain main app
+   */
+  async start(MainApp, container) {
+    this.mainApp = new MainApp(container);
+    await this.mainApp.start();
+
+    this.appContainer = this.mainApp.appContainer;
+
     this.activeApp = this.mainApp;
     this.started = true;
+
+    return this;
   }
 
   /**
@@ -26,7 +39,7 @@ class AppManager {
         console.log(
           `This app (${appName}) is already registered.`,
         );
-        return;
+        return this;
       }
       throw new Error(
         `Other app with name ${appName} is already registered.`,
@@ -34,6 +47,7 @@ class AppManager {
     }
 
     this.appClasses[appName] = App;
+    return this;
   }
 
   appExists(appName) {
@@ -49,8 +63,10 @@ class AppManager {
     if (!(appName in this.appInstances)) {
       const App = this.appClasses[appName];
 
-      // FIXME: what about AppContainer and other args?
-      this.appInstances[appName] = new App();
+      this.appInstances[appName] = new App(
+        appName,
+        this.appContainer.screen,
+      );
     }
 
     const app = this.appInstances[appName];
