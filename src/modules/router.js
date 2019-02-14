@@ -49,6 +49,8 @@ export default class Router {
         method: this.openClickedLink.bind(this),
       },
     ];
+
+    this.start = this.start.bind(this);
   }
 
 
