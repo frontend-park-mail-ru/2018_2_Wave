@@ -18,7 +18,7 @@ export default class UserBlock extends Component {
   }
 
 
-  // TODO: what is this?
+  // TODO // FIXME what is this?
   update() {
     this.render();
   }
