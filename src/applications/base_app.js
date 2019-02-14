@@ -1,7 +1,7 @@
 import bus from '../modules/bus';
 
 export default class BaseApp {
-  constructor(appURL, parent, MainView, Views) {
+  constructor(appURL, parent, MainView) {
     this.url = appURL;
     this.parent = parent;
 
@@ -9,12 +9,6 @@ export default class BaseApp {
       this.views = { main: new MainView(parent) };
       this.currentView = this.views.main;
     } else this.views = {};
-
-    if (Views) {
-      Object.keys(Views).forEach((key) => {
-        this.views[key] = new Views[key](parent);
-      });
-    }
 
     this.active = false;
     this.started = false;
