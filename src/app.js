@@ -1,4 +1,4 @@
-import AppManager from './modules/app_manager';
+import appManager from './modules/app_manager';
 import Router from './modules/router';
 import Loader from './applications/loader/loader';
 import MainApp from './applications/main/main_app';
@@ -13,15 +13,12 @@ import './style.pcss';
 new Loader(document.body)
   .start();
 
-new AppManager(MainApp)
+appManager
   .registerApp('terminal', Terminal)
   .registerApp('snake', Snake)
-  .start();
-
-new Router(document.body, MainApp)
-  .start();
-
-bus.emit('loaded');
+  .start(MainApp, document.body)
+  .then(new Router(appManager).start)
+  .then(() => bus.emit('loaded'));
 
 // if ('serviceWorker' in navigator) {
 //   navigator.serviceWorker
