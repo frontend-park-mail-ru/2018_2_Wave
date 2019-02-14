@@ -3,11 +3,14 @@ class AppManager {
     this.appClasses = {};
     this.appInstances = {};
     this.startedAppsOrder = [];
+
+    this.started = false;
   }
 
   start(MainApp) {
     this.mainApp = new MainApp();
     this.activeApp = this.mainApp;
+    this.started = true;
   }
 
   /**
@@ -45,6 +48,8 @@ class AppManager {
 
     if (!(appName in this.appInstances)) {
       const App = this.appClasses[appName];
+
+      // FIXME: what about AppContainer and other args?
       this.appInstances[appName] = new App();
     }
 
@@ -54,7 +59,7 @@ class AppManager {
       app.processParams(...params);
     }
 
-    if (app !== this.activeApp) { // TODO: FIXME: hide last app
+    if (app !== this.activeApp) { // TODO: // FIXME hide last app
       // await launch animation
       // async show bar for 3 seconds
       if (!app.started) {
