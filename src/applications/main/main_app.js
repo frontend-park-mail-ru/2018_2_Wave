@@ -17,7 +17,7 @@ export default class MainApp extends BaseApp {
     super(appUrl);
 
     this.env = new Enviroment(parent);
-
+    this.appContainer = this.env.appContainer;
 
     // const [homePlace] = env.wrapper.getElementsByClassName('home-page');
     // this.views.main = new HomeView(homePlace, homePlace);
@@ -62,12 +62,9 @@ export default class MainApp extends BaseApp {
   }
 
 
-  start() {
-    this.appContainer.hide();
-    this.env.show();
-    this.started = true;
-    this.active = true;
-    this.currentView.show();
+  async start() {
+    this.env.render();
+    await this.appContainer.renderPromise;
   }
 
   pause() {
