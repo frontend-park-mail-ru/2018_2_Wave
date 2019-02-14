@@ -1,3 +1,8 @@
+/**
+ * Deprecated stuff saved for backward compatibility
+ * Please do not use it
+ * @deprecated
+ */
 export default class Element {
   constructor(template, parent, wrapper, wrapperClass) {
     this.template = template;
