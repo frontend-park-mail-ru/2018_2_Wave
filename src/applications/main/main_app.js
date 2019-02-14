@@ -13,8 +13,8 @@ import bus from '../../modules/bus';
 
 
 export default class MainApp extends BaseApp {
-  constructor(appUrl, parent) {
-    super(appUrl);
+  constructor(parent) {
+    super('/', parent);
 
     this.env = new Enviroment(parent);
     this.appContainer = this.env.appContainer;
