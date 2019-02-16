@@ -3,6 +3,7 @@ import './styles/fonts.pcss';
 import BaseApp from '../base_app';
 
 import Enviroment from './views/enviroment/env';
+import AppContainer from './views/app_container/app_container';
 // import HomeView from './views/home/home';
 // import StoreView from './views/store/store';
 // import ProfileView from './views/profile/profile';
@@ -17,7 +18,10 @@ export default class MainApp extends BaseApp {
     super('/', parent);
 
     this.env = new Enviroment(parent);
-    this.appContainer = this.env.appContainer;
+
+    this.appContainer = new AppContainer(
+      { parent },
+    );
 
     // const [homePlace] = env.wrapper.getElementsByClassName('home-page');
     // this.views.main = new HomeView(homePlace, homePlace);
@@ -43,16 +47,12 @@ export default class MainApp extends BaseApp {
     //   this.env.appContainerPlace,
     //   this.env.appContainerPlace,
     // );
-
-    // this.appContainer = new AppContainer(
-    //   this.env.appContainerPlace,
-    //   this.env.appContainerPlace,
-    // );
   }
 
   animateLaunch() {
-    const { mainContainer } = this.env;
+    const mainContainer = this.env.body;
 
+    this.env.show();
     mainContainer.classList.remove('blurred');
     mainContainer.classList.add('unblurred');
     mainContainer.addEventListener('animationend', () => {
@@ -63,15 +63,18 @@ export default class MainApp extends BaseApp {
 
 
   async start() {
-    this.env.render();
-    await this.appContainer.renderPromise;
+    // TODO: move this to mainapp.renderPromise, await in start
+    await this.env.render();
+    await this.appContainer.render();
+    this.env.show();
+    bus.listen('loaderHidden', () => this.animateLaunch());
   }
 
   pause() {
     this.active = false;
     this.env.mainContainer.classList.add('blurred');
-    this.appContainer.show();
-    document.activeElement.blur();
+    this.appContainer.show();  // CHECK: sure?
+    document.activeElement.blur();  // CHECK: wtf?
   }
 
   resume() {
