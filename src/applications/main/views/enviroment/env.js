@@ -5,7 +5,6 @@ import Component from '../../../component';
 import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
 import IconBlock from '../../components/icon-block/icon-block';
-import AppContainer from '../app_container/app_container';
 
 import template from './env.pug';
 
@@ -27,10 +26,6 @@ export default class Enviroment extends Component {
 
     this.iconBlock = new IconBlock(
       { parent: this, markTag: 'iconblock' },
-    );
-
-    this.appContainer = new AppContainer(
-      { parent: this, markTag: 'application' },
     );
   }
 
