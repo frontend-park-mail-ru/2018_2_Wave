@@ -22,6 +22,7 @@ export default class Loader extends Component {
 
   async stop() {
     await this.timeoutPromise;
+    bus.emit('loaderHidden');
     super.hide();
   }
 }
