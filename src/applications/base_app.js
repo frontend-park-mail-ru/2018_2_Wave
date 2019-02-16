@@ -18,6 +18,7 @@ export default class BaseApp {
     this.bar = bar;
   }
 
+  // TODO: move deprecated method to snake realization
   changeView(viewUrl, params) {
     // write view change animations in overridden method
     // do not forget to call super.changeView() first!
@@ -34,6 +35,13 @@ export default class BaseApp {
     }                                  // sure?
     if (this.active) this.currentView.show();
   }
+
+  // TODO: write this.
+  processParams() {
+    console.log('processing params');
+    this.a = 0;
+  }
+
 
   launch(resource) {
     if (resource) this.animateLaunch(resource);
