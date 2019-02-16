@@ -19,15 +19,13 @@ export default class MainApp extends BaseApp {
 
     this.env = new Enviroment(parent);
 
-    this.appContainer = new AppContainer(
-      { parent },
-    );
+    this.appContainer = new AppContainer(parent);
 
-    // const [homePlace] = env.wrapper.getElementsByClassName('home-page');
-    // this.views.main = new HomeView(homePlace, homePlace);
+    // this.homeContentBlock = new HomeView(
+    // );
     // this.currentView = this.views.main;
 
-    // const [storePlace] = env.wrapper.getElementsByClassName('store');
+    // const [storePlace] = this.env.body.getElementsByClassName('store');
     // const storeView = new StoreView(storePlace, storePlace, this.views);
     // this.views.store = storeView;
 

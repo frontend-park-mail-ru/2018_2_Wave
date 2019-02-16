@@ -8,7 +8,7 @@ import template from './app_container.pug';
  * @extends Component
  */
 export default class AppContainer extends Component {
-  constructor({ parent, markTag }) {
+  constructor(parent, markTag) {
     super({ template, parent, markTag });
   }
 
