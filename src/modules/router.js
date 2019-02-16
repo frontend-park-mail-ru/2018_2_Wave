@@ -22,7 +22,7 @@ function splitParams(string) {
 /**  removes slashes from path string  */
 function clearPath(string) {
   let path;
-  if (string === '/') return string;
+  if (string === '/') return 'main';
   if (string) {
     path = string.slice(1);
   }
@@ -61,7 +61,6 @@ export default class Router {
 
     this.openFromAddressBar();
     bus.listen('link', this.open.bind(this));
-    bus.listen('regApp', this.registerApp.bind(this));
 
     this.listeners.forEach((listener) => {
       const { target, event, method } = listener;
@@ -70,38 +69,28 @@ export default class Router {
   }
 
 
-  open(fullPath, paramString, target) {
-    const path = clearPath(fullPath);
-    const params = splitParams(paramString);
+  open(fullPath, paramString, target) {  // TODO: what is target?
+    const path = clearPath(fullPath);  // aaaaa/bbbbbb/cccccc/dddddd
+    const params = splitParams(paramString);  // {a=1, b=2}
 
-    // FIXME: fix this hell shit
-    let app;
-    if (path in this.routes) {
-      app = this.routes[path];
-      app.changeView('main', params);
+    let appName, viewName;
+
+    const [preApp] = path.substring(0, path.indexOf('/'));
+    if (this.appManager.appExists(preApp)) {
+      appName = preApp;
+      viewName = path.substring(path.indexOf('/') + 1);
     } else {
-      Object.values(this.routes).forEach((foundApp) => {
-        if (foundApp.views.hasOwnProperty(path)) {
-          app = foundApp;
-          app.changeView(path, params);
-        }
-      });
+      appName = 'main';
+      viewName = path;
     }
 
+    this.appManager.openApp(appName, { view: viewName, params });
 
-    if (!app) {
-      this.open('/');
-      return;
-    }
-
-    if (!app.active) {
-      this.currentApp.pause();
-      this.currentApp = app;
-      app.launch(target);
-    }
-
-    if (window.location.pathname !== fullPath) {
+    // CHECK: replaceState if view or params list changed
+    if (this.appManager.activeAppName !== appName) {
       window.history.pushState(null, '', fullPath);
+    } else {
+      window.history.replaceState(null, '', fullPath);
     }
   }
 
