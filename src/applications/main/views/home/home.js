@@ -1,4 +1,4 @@
-import Element from '../../../element';
+import Component from '../../../component';
 import AppTile from '../../components/app_tile/app_tile';
 
 import template from './home.pug';
@@ -9,12 +9,11 @@ import { getMyApps } from '../../../../modules/network';
 import GameApp from '../../../frame/game_app';
 import bus from '../../../../modules/bus';
 
-export default class HomeView extends Element {
+export default class HomeContentBlock extends Component {
   constructor(parent, wrapper) {
     super(template, parent, wrapper);
-    super.render();
 
-    this.apps = null;
+    // this.apps = null;
     this.title = 'Home';
 
     [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
@@ -24,43 +23,45 @@ export default class HomeView extends Element {
     this.render();
   }
 
-  scroller(ev) {
-    if (ev.which === 37 || ev.which === 39) ev.preventDefault();
-    if (ev.which === 39 && (Date.now() - this.lastLeft) > 400) {
-      this.scrollPanelLeft();
-      this.lastLeft = Date.now();
-    } else if (ev.which === 37 && (Date.now() - this.lastRight) > 400) {
-      this.scrollPanelRight();
-      this.lastRight = Date.now();
-    }
-  }
+  // TODO: check and fix scroller
+  // scroller(ev) {
+  //   if (ev.which === 37 || ev.which === 39) ev.preventDefault();
+  //   if (ev.which === 39 && (Date.now() - this.lastLeft) > 400) {
+  //     this.scrollPanelLeft();
+  //     this.lastLeft = Date.now();
+  //   } else if (ev.which === 37 && (Date.now() - this.lastRight) > 400) {
+  //     this.scrollPanelRight();
+  //     this.lastRight = Date.now();
+  //   }
+  // }
 
-  startScroller() {
-    this.lastLeft = Date.now();
-    this.lastRight = Date.now();
-    document.addEventListener('keydown', this.scroller);
-  }
+  // startScroller() {
+  //   this.lastLeft = Date.now();
+  //   this.lastRight = Date.now();
+  //   document.addEventListener('keydown', this.scroller);
+  // }
 
-  stopScroller() {
-    document.removeEventListener('keydown', this.scroller);
-  }
+  // stopScroller() {
+  //   document.removeEventListener('keydown', this.scroller);
+  // }
 
-  scrollPanelLeft() {
-    const [tile] = this.panel.children;
-    this.panel.scrollLeft += tile.offsetWidth;
-  }
+  // scrollPanelLeft() {
+  //   const [tile] = this.panel.children;
+  //   this.panel.scrollLeft += tile.offsetWidth;
+  // }
 
-  scrollPanelRight() {
-    const [tile] = this.panel.children;
-    this.panel.scrollLeft -= tile.offsetWidth;
-  }
+  // scrollPanelRight() {
+  //   const [tile] = this.panel.children;
+  //   this.panel.scrollLeft -= tile.offsetWidth;
+  // }
+
 
   show() {
     const [grid] = document.getElementsByClassName('grid-common');
     if (!grid.classList.contains('home-page__grid')) {
       grid.classList.add('home-page__grid');
     }
-    this.startScroller();
+    // this.startScroller();
     super.show();
   }
 
@@ -69,7 +70,7 @@ export default class HomeView extends Element {
     if (grid.classList.contains('home-page__grid')) {
       grid.classList.remove('home-page__grid');
     }
-    this.stopScroller();
+    // this.stopScroller();
     super.hide();
   }
 
