@@ -16,17 +16,9 @@ export default class Enviroment extends Component {
   constructor(parent) {
     super({ template, parent });
 
-    this.userblock = new UserBlock(
-      { parent: this, markTag: 'userblock' },
-    );
-
-    this.menu = new Menu(
-      { parent: this, markTag: 'menu' },
-    );
-
-    this.iconBlock = new IconBlock(
-      { parent: this, markTag: 'iconblock' },
-    );
+    this.userblock = new UserBlock(this, 'userblock');
+    this.menu      = new Menu(this, 'menu');
+    this.iconBlock = new IconBlock(this, 'iconblock');
   }
 
   setTitle(text) {
