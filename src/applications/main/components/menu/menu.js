@@ -29,15 +29,14 @@ const tiles = [
 
 
 export default class Menu extends Component {
-  constructor({ parent, markTag = 'menu' }) {
+  constructor(parent, markTag = 'menu') {
     /* eslint arrow-body-style: ["error", "as-needed"] */
     super({ template, parent, markTag });
 
-
-    this.render();
-
     bus.listen('addTile', this.addTile.bind(this));
-    this.getData = async () => { tiles };
+    this.getData = async () => {
+      return { tiles };
+    };
   }
 
   async addTile(appName) {
