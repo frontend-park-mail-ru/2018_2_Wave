@@ -53,16 +53,25 @@ export default class Component {
     this.hidden = true;
   }
 
-  show() {
+  async show(showChildren = true) {
     if (!this.rendered) {
       // here should be skeleton
-      this.render();
+      if (!this.renderPromise) this.render();
+      await this.renderPromise;
     }
 
     this.body.hidden = false;
     this.body.style.display = null;
 
     this.hidden = false;
+
+    if (showChildren) {
+      Object
+        .values(this.children)
+        .forEach((child) => {
+          child.show();
+        });
+    }
   }
 
 
