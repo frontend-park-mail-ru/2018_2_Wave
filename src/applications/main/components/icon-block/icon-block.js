@@ -1,29 +1,32 @@
-import Element from '../../../element';
+import Component from '../../../component';
 
 
 import template from './icon-block.pug';
 import './icon-block.pcss';
 
 
-export default class IconBlock extends Element {
-  constructor(parent, wrapper) {
-    super(template, parent, wrapper || parent);
-    this.render();
+export default class IconBlock extends Component {
+  constructor(parent, markTag) {
+    super({ template, parent, markTag });
 
     const date = new Date();
     const timeout = (60 - date.getSeconds()) * 1000;
     setTimeout(() => {
-      this.render();
-      setInterval(() => this.render(), 60000);
+      this.updateTime();
+      setInterval(() => this.updateTime(), 60000);
     }, timeout);
+
+    this.updateTime();
   }
 
-  render() {
+  updateTime() {
     const date = new Date();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const time = `${hours}:${(minutes < 10) ? 0 : ''}${minutes}`;
+    this.timeString = `${hours}:${(minutes < 10) ? 0 : ''}${minutes}`;
+  }
 
-    super.render({ time });
+  getData() {
+    return { timeString: this.timeString };
   }
 }
