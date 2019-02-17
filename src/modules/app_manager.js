@@ -63,7 +63,7 @@ class AppManager {
   }
 
 
-  async openApp(appName, ...params) {
+  async openApp(appName, { view, params }) {
     if (!this.appExists(appName)) {
       throw new Error('App not exists');
     }
@@ -78,7 +78,7 @@ class AppManager {
 
     const app = this.appInstances[appName] || this.mainApp;
 
-    if (params) app.processParams(...params);
+    if (params) app.processParams({ view, params });
 
     if (app !== this.activeApp) {
       await this.hideActiveApp();
