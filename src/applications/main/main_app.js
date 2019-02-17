@@ -4,7 +4,7 @@ import BaseApp from '../base_app';
 
 import Enviroment from './views/enviroment/env';
 import AppContainer from './views/app_container/app_container';
-// import HomeView from './views/home/home';
+import HomeView from './views/home/home';
 // import StoreView from './views/store/store';
 // import ProfileView from './views/profile/profile';
 // import Bar from './components/bar/bar';
