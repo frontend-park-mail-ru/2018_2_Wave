@@ -13,7 +13,11 @@ export default class Clock extends Component {
     const timeout = (60 - date.getSeconds()) * 1000;
     setTimeout(() => {
       this.updateTime();
-      setInterval(() => this.updateTime(), 60000);
+      if (this.rendered) super.render();
+      setInterval(() => {
+        this.updateTime();
+        if (this.rendered) super.render();
+      }, 60000);
     }, timeout);
 
     this.updateTime();

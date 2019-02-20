@@ -86,8 +86,10 @@ export default class Component {
     wrapper.innerHTML = bodyString;
     const newBody = wrapper.firstChild;
 
-    newBody.hidden = true;
-    newBody.style.setProperty('display', 'none', 'important');
+    if (this.hidden) {
+      newBody.hidden = true;
+      newBody.style.setProperty('display', 'none', 'important');
+    }
 
     if (this.body === null) {
       this.DOMparent = (this.parent instanceof HTMLElement)
