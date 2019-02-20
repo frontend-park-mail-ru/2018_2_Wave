@@ -4,8 +4,6 @@ module.exports = {
     require('precss'),
     require('postcss-cssnext'),
     require('postcss-google-font'),
-    // require('postcss-font-magician')({
-    //   hosted: ['./Gilroy-FREE'],
-    // }),
+    // require('cssnano'),
   ],
 };
