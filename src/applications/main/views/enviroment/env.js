@@ -4,7 +4,7 @@ import Component from '../../../component';
 
 import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
-import IconBlock from '../../components/icon-block/icon-block';
+import Clock from '../../components/clock/clock';
 
 import template from './env.pug';
 
@@ -18,7 +18,7 @@ export default class Enviroment extends Component {
 
     this.userblock = new UserBlock(this, 'userblock');
     this.menu      = new Menu(this, 'menu');
-    this.iconBlock = new IconBlock(this, 'iconblock');
+    this.clock     = new Clock(this, 'clock');
   }
 
   setTitle(text) {
@@ -30,17 +30,4 @@ export default class Enviroment extends Component {
 
     return true;
   }
-
-  // show() {
-  //   super.show();
-  //   // this.iconBlock.show();
-  //   // this.userblock.show();
-  //   // this.menu.show();
-  // }
-
-  // render() {
-  //   this.iconBlock.render();
-  //   this.userblock.render();
-  //   this.menu.render();
-  // }
 }

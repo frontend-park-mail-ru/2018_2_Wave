@@ -1,11 +1,11 @@
 import Component from '../../../component';
 
 
-import template from './icon-block.pug';
-import './icon-block.pcss';
+import template from './clock.pug';
+import './clock.pcss';
 
 
-export default class IconBlock extends Component {
+export default class Clock extends Component {
   constructor(parent, markTag) {
     super({ template, parent, markTag });
 
