@@ -45,6 +45,27 @@ export default class Component {
     return this.renderPromise;
   }
 
+  delete() {
+    if (!this.rendered) throw new Error('Component not rendered');
+
+    Object
+      .values(this.children)
+      .forEach(child => child.delete());
+
+    const parent = this.body.parentElement;
+    if (this.markTag) {
+      const mock = document.createElement(this.markTag);
+      parent.replaceChild(mock, this.body);
+    } else {
+      parent.removeChild(this.body);
+    }
+
+    this.body = null;
+
+    this.rendered = false;
+    this.hidden = true;
+  }
+
 
   hide() {
     this.body.hidden = true;
