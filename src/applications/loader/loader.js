@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-expressions */
 import Component from '../component';
 import bus from '../../modules/bus';
 
 import template from './loader.pug';
+import '../../../static/img/loader.svg';
 import './loader.pcss';
 
 export default class Loader extends Component {
@@ -24,5 +26,6 @@ export default class Loader extends Component {
     await this.timeoutPromise;
     bus.emit('loaderHidden');
     super.hide();
+    super.delete();
   }
 }
