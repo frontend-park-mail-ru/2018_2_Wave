@@ -51,7 +51,7 @@ const config = {
         loader: 'file-loader?name=music/[hash].[ext]',
       },
       {
-        test: /\.(img|jpeg|jpg|png)$/,
+        test: /\.(img|jpeg|jpg|png|svg)$/,
         loader: 'file-loader?name=img/[name].[ext]',
       },
       {
@@ -59,7 +59,7 @@ const config = {
         loader: 'file-loader?name=favicon.ico',
       },
       {
-        test: /\.(eot|woff|woff2|ttf|otf|svg)$/,
+        test: /\.(eot|woff|woff2|ttf|otf)$/,
         loader: 'url-loader?limit=30000&name=fonts/[name].[ext]',
       },
     ],
