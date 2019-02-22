@@ -47,16 +47,36 @@ export default class MainApp extends BaseApp {
     // );
   }
 
-  animateLaunch() {
-    const mainContainer = this.env.body;
 
-    this.env.show();
-    mainContainer.classList.remove('blurred');
-    mainContainer.classList.add('unblurred');
-    mainContainer.addEventListener('animationend', () => {
-      mainContainer.classList.remove('unblurred');
-      this.appContainer.hide();
-    }, { once: true });
+  async wakeup() {
+    this.appContainer.hide();
+    await this.unblur();
+  }
+
+  async sleep() {
+    await this.blur();
+    this.appContainer.show();
+  }
+
+
+  async blur() {
+    this.env.body.classList.add('blurred');
+    return new Promise((resolve) => {
+      this.env.body.addEventListener('animationend', () => {
+        resolve();
+      }, { once: true });
+    });
+  }
+
+  async unblur() {
+    this.env.body.classList.remove('blurred');
+    this.env.body.classList.add('unblurred');
+    return new Promise((resolve) => {
+      this.env.body.addEventListener('animationend', () => {
+        this.env.body.classList.remove('unblurred');
+        resolve();
+      }, { once: true });
+    });
   }
 
 
@@ -65,12 +85,10 @@ export default class MainApp extends BaseApp {
     await this.env.render();
     await this.appContainer.render();
     this.env.show();
-    bus.listen('loaderHidden', () => this.animateLaunch());
   }
 
   pause() {
     this.active = false;
-    this.env.mainContainer.classList.add('blurred');
     this.appContainer.show();  // CHECK: sure?
     document.activeElement.blur();  // CHECK: wtf?
   }
