@@ -2,10 +2,10 @@ import bus from './bus';
 
 
 function url() {
-  if (window.location.host === 'localhost:3000'
-    || window.location.host === '127.0.0.1:3000') {
-    return 'http://localhost:9600';
-  }
+  // if (window.location.host === 'localhost:3000'
+  //   || window.location.host === '127.0.0.1:3000') {
+  //   return 'http://localhost:9600';
+  // }
   return 'https://api.rasseki.com';
 }
 
