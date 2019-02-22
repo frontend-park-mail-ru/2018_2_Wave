@@ -75,10 +75,14 @@ export default class Router {
 
     let appName, viewName;
 
-    const [preApp] = path.substring(0, path.indexOf('/'));
+    const preApp = path.indexOf('/') === -1
+      ? path
+      : path.substring(0, path.indexOf('/'));
     if (this.appManager.appExists(preApp)) {
       appName = preApp;
-      viewName = path.substring(path.indexOf('/') + 1);
+      viewName = path.indexOf('/') === -1
+        ? ''
+        : path.substring(path.indexOf('/') + 1);
     } else {
       appName = 'main';
       viewName = path;
