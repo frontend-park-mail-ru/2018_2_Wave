@@ -14,6 +14,7 @@ export default class BaseApp {
     this.started = false;
   }
 
+  // TODO: remove bar
   setBar(bar) {
     this.bar = bar;
   }
@@ -103,7 +104,7 @@ export default class BaseApp {
     this.active = true;
     this.currentView.show();
 
-    this.bar.show();
+    // this.bar.show();
   }
 
   stop() {
@@ -111,22 +112,22 @@ export default class BaseApp {
     this.active = false;
     this.currentView.hide();
     this.parent.innerHTML = '';
-    this.bar.hide();
+    // this.bar.hide();
   }
 
   pause() {
     this.parent.style.background = 'none';
     this.active = false;
-    const barAnimation = this.bar.hide();
-    if (barAnimation) {
-      barAnimation.pause();
-      barAnimation.onfinish = () => {
-        this.currentView.hide();
-      };
-      barAnimation.play();
-    } else {
-      this.currentView.hide();
-    }
+    // const barAnimation = this.bar.hide();
+    // if (barAnimation) {
+    //   barAnimation.pause();
+    //   barAnimation.onfinish = () => {
+    //     this.currentView.hide();
+    //   };
+    //   barAnimation.play();
+    // } else {
+    //   this.currentView.hide();
+    // }
   }
 
   resume() {
