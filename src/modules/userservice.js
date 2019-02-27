@@ -12,7 +12,10 @@ class UserService {
   }
 
 
-  isLoggedIn() {
+  async isLoggedIn() {
+    // TODO: get usre data from backend on login
+    await this.updatePromise;
+
     return this.loggedIn;
   }
 
@@ -28,13 +31,19 @@ class UserService {
     return { user: this.user };
   }
 
-
   async update(action) {
+    this.updatePromise = this._update_(action);
+    await this.updatePromise;
+    bus.emit('userUpdated');
+  }
+
+
+  async _update_(action) {
     if (action === 'logout') {
       this.loggedIn = false;
       this.user = {};
 
-      this.updatePromise = logout();
+      logout();
     } else {
       const { err, profile: user } = await getProfile();
       if (err) {
@@ -46,8 +55,6 @@ class UserService {
         this.loggedIn = true;
       }
     }
-
-    bus.emit('userUpdated');
   }
 }
 

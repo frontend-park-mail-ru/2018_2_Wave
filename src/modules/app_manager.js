@@ -1,4 +1,5 @@
 import bus from './bus';
+import userService from './userservice';
 
 class AppManager {
   constructor() {
@@ -65,8 +66,13 @@ class AppManager {
 
   async openApp(appName, { view, params }) {
     if (!this.appExists(appName)) {
+      // this should be checked by router
       throw new Error('App not exists');
     }
+
+    const isLoggedIn = await userService.isLoggedIn();
+    // eslint-disable-next-line no-param-reassign
+    if (!isLoggedIn) appName = 'terminal';
 
     if (!(appName in this.appInstances) && appName !== 'main') {
       const App = this.appClasses[appName];
@@ -100,7 +106,11 @@ class AppManager {
 
 
   async hideActiveApp() {
-    this.activeApp.pause();  // CHECK: mainApp.pause? blur there
+    if (this.activeAppName === 'main') {
+      this.mainApp.sleep();
+    } else {
+      this.activeApp.pause();  // CHECK: different methods? good or not?
+    }
     // TODO: hide bar
     // CHECK: is animation needed?
     // CHECK: is app hidden?

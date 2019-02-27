@@ -30,10 +30,9 @@ class TerminalApp extends BaseApp {
       logout: this.logout,
       help: this.help,
       exit: async () => {
-        const { err, loggedIn } = await userService.isLoggedIn();
-        console.log(err, loggedIn);
+        const loggedIn = await userService.isLoggedIn();
 
-        if (err || !loggedIn) {
+        if (!loggedIn) {
           const frases = [
             ' Not now, dear.',
             ' Why are you so serious?',
@@ -60,14 +59,13 @@ class TerminalApp extends BaseApp {
     bus.listen('userUpdated', this.setUsername);
   }
 
-  setUsername() {
-    bus.ignore('userUpdated', this.setUsername);
-    const { err, loggedIn } = userService.isLoggedIn();
-    if (err) bus.listen('userUpdated', this.setUsername);
-    else if (!loggedIn) {
+  async setUsername() {
+    const loggedIn = await userService.isLoggedIn();
+
+    if (!loggedIn) {
       this.username = 'guest';
     } else {
-      const { user } = userService.getUser();
+      const { user } = await userService.getUser();
       this.username = user.username;
     }
   }
@@ -89,7 +87,7 @@ class TerminalApp extends BaseApp {
 
 
   /*   service methods   */
-  start() {
+  async start() {
     this.setUsername();
     this.parent.style.background = 'black';
     super.start();
