@@ -21,6 +21,7 @@ export default class HomeView extends Element {
 
     this.render = this.render.bind(this);
     bus.listen('appInstalled', this.render);
+    bus.listen('userUpdated', this.render);
     this.render();
   }
 
