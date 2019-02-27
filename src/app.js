@@ -3,6 +3,7 @@ import './style.pcss';
 
 import bus from './modules/bus';
 import appManager from './modules/app_manager';
+import userService from './modules/userservice';
 
 import Router from './modules/router';
 import Loader from './applications/loader/loader';
@@ -14,12 +15,18 @@ import Terminal from './applications/terminal/terminal_app';
 new Loader(document.body)
   .start();
 
+
 appManager
-  .registerApp('terminal', Terminal)
-  // .registerApp('snake', Snake)
-  .start(MainApp, document.body)
+// .registerApp('snake', Snake)
+  .registerApp('terminal', Terminal);
+
+Promise.all([
+  userService.update(),
+])
+  .then(appManager.start(MainApp, document.body))
   .then(new Router(appManager).start)
   .then(() => bus.emit('loaded'));
+
 
 // if ('serviceWorker' in navigator) {
 //   navigator.serviceWorker
