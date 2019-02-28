@@ -23,6 +23,7 @@ export default class UserBlock extends Element {
 
   async render() {
     const { user } = userService.getUser();
+
     if (!user) return;
     super.render({ user });
   }
