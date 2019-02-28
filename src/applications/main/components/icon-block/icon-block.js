@@ -1,3 +1,5 @@
+import localeManager from '../../../../modules/locale';
+
 import Element from '../../../element';
 
 
@@ -24,6 +26,22 @@ export default class IconBlock extends Element {
     const minutes = date.getMinutes();
     const time = `${hours}:${(minutes < 10) ? 0 : ''}${minutes}`;
 
-    super.render({ time });
+    const { locale } = localeManager;
+
+    super.render({ locale, time });
+
+    [this.localeButton] = this.wrapper.getElementsByClassName('locale');
+    this.localeButton.onclick = () => {
+      // TODO: change locale in manager here
+      this.localeButton.classList.add('locale__clicked');
+      this.localeButton.addEventListener('transitionend', () => {
+        if (this.localeButton.innerHTML === 'DE') {
+          this.localeButton.innerHTML = 'EN';
+        } else {
+          this.localeButton.innerHTML = 'DE';
+        }
+        this.localeButton.classList.remove('locale__clicked');
+      }, { once: true });
+    };
   }
 }

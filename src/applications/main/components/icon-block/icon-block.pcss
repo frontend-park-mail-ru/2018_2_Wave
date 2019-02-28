@@ -14,3 +14,26 @@
   font-size: 26px;
   margin: 0 23px;
 }
+
+.locale {
+  color: white;
+  font-family: Gilroy-Light;
+  width: 26px;
+  height: 26px;
+  border: 1px solid white;
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__clicked {
+    background-color: white;
+  }
+}
