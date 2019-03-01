@@ -15,6 +15,16 @@
   margin: 0 23px;
 }
 
+.locale-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &:hover .locale__possible {
+    opacity: 1;
+  }
+}
+
 .locale {
   color: white;
   font-family: Gilroy-Light;
@@ -22,6 +32,7 @@
   height: 26px;
   border: 1px solid white;
   border-radius: 50%;
+  margin: 0 2px;
 
   display: flex;
   flex-direction: row;
@@ -29,11 +40,22 @@
   align-items: center;
   transition: all 0.2s ease-out;
 
-  &:hover {
-    transform: scale(1.1);
-  }
-
   &__clicked {
     background-color: white;
+  }
+
+  &__current {
+    &:hover .locale__possible {
+      // transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  &__possible {
+    opacity: 0;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }
