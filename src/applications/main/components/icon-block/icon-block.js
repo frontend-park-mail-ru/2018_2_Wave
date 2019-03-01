@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import localeManager from '../../../../modules/locale';
 
 import Element from '../../../element';
@@ -27,21 +28,52 @@ export default class IconBlock extends Element {
     const time = `${hours}:${(minutes < 10) ? 0 : ''}${minutes}`;
 
     const { locale } = localeManager;
+    const locales = ['RU', 'EN', 'DE'];
+    locales.splice(locales.indexOf(locale), 1);
 
-    super.render({ locale, time });
+    const [locale1, locale2] = locales;
 
-    [this.localeButton] = this.wrapper.getElementsByClassName('locale');
-    this.localeButton.onclick = () => {
-      // TODO: change locale in manager here
-      this.localeButton.classList.add('locale__clicked');
-      this.localeButton.addEventListener('transitionend', () => {
-        if (this.localeButton.innerHTML === 'DE') {
-          this.localeButton.innerHTML = 'EN';
-        } else {
-          this.localeButton.innerHTML = 'DE';
+    super.render({
+      locale1,
+      locale2,
+      locale,
+      time,
+    });
+
+    [this.localeContainer] = this.wrapper.getElementsByClassName('locale-container');
+    this.localeContainer.addEventListener(
+      'click', this.processLangClick.bind(this), { once: true },
+    );
+  }
+
+  processLangClick(ev) {
+    if (ev.target.classList.contains('locale__possible')) {
+      const newLang = ev.target.innerHTML;
+      const oldLang = localeManager.locale;
+
+      const buttons = this.wrapper.getElementsByClassName('locale');
+
+      [...buttons].forEach((button) => {
+        if ((button.innerHTML !== newLang)
+        &&  (button.innerHTML !== oldLang)) {
+          return;
         }
-        this.localeButton.classList.remove('locale__clicked');
-      }, { once: true });
-    };
+
+        button.classList.add('locale__clicked');
+        button.addEventListener('transitionend', () => {
+          button.innerHTML = button.innerHTML === newLang ? oldLang : newLang;
+          button.classList.remove('locale__clicked');
+        }, { once: true });
+      });
+
+      localeManager.locale = newLang;
+    }
+
+    setTimeout(() => {
+      [this.localeContainer] = this.wrapper.getElementsByClassName('locale-container');
+      this.localeContainer.addEventListener(
+        'click', this.processLangClick.bind(this), { once: true },
+      );
+    }, 500);
   }
 }
