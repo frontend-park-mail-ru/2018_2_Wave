@@ -16,12 +16,12 @@ export default class AppTable extends Element {
     this.wrapper.addEventListener('click', (ev) => {
       if (!(ev.target instanceof HTMLImageElement)) return;
       const name = ev.target.getAttribute('name');
-      console.log('emitted');
       bus.emit('about', name);
     });
   }
 
   async render(askedCategory) {
+    console.log('Rendering appTable');
     let category;
     if (!askedCategory) category = 'all';
 
