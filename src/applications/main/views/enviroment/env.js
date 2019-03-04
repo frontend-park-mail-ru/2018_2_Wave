@@ -5,11 +5,31 @@ import UserBlock from '../../components/userblock/userblock';
 import Menu from '../../components/menu/menu';
 import IconBlock from '../../components/icon-block/icon-block';
 
+import localeManager from '../../../../modules/locale';
+import bus from '../../../../modules/bus';
+
 import template from './env.pug';
 
 import '../../../../../static/fonts/Gilroy-ExtraBold.otf';
 import '../../../../../static/fonts/Gilroy-Light.otf';
 
+const translations = {
+  Home: {
+    en: 'Home',
+    de: 'Zuhause',
+    ru: 'Приложения',
+  },
+  Store: {
+    en: 'Store',
+    de: 'Geschäft',
+    ru: 'Магазин',
+  },
+  'About us': {
+    en: 'About us',
+    de: 'Über uns',
+    ru: 'О нас',
+  },
+};
 
 export default class Enviroment extends Element {
   constructor(parent, wrapper) {
@@ -30,8 +50,14 @@ export default class Enviroment extends Element {
   }
 
   setTitle(text) {
-    this.title.innerHTML = text;
-    document.title = text;
+    this.titleText = text;
+    const translatedText = translations[text][localeManager.locale.toLowerCase()];
+    this.title.innerHTML = translatedText;
+    document.title = translatedText;
+
+    bus.listen('localeChanged', () => {
+      this.setTitle(this.titleText);
+    });
   }
 
   show() {
