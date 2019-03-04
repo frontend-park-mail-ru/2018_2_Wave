@@ -1,6 +1,17 @@
+import bus from './bus';
+
 class LocaleManager {
   constructor() {
-    this.locale = 'EN';
+    this.localeName = 'EN';
+  }
+
+  set locale(value) {
+    this.localeName = value;
+    bus.emit('localeChanged', value);
+  }
+
+  get locale() {
+    return this.localeName;
   }
 }
 

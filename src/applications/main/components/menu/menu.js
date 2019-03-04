@@ -9,21 +9,28 @@ import template from './menu.pug';
 import tileTemplate from './tile.pug';
 import appTileTemplate from './menu_app-tile.pug';
 import bus from '../../../../modules/bus';
+import localeManager from '../../../../modules/locale';
 
 const tiles = [
   {
     link: '/home',
-    name: 'Home',
+    name_en: 'Home',
+    name_de: 'Zuhause',
+    name_ru: 'Домой',
     icon: 'home',
   },
   {
     link: '/store',
-    name: 'Store',
+    name_en: 'Store',
+    name_de: 'Geschäft',
+    name_ru: 'Магазин',
     icon: 'local_mall',
   },
   {
     link: '/about',
-    name: 'About us',
+    name_en: 'About us',
+    name_de: 'Über uns',
+    name_ru: 'О нас',
     icon: 'accessible_forward',
   },
 ];
@@ -37,6 +44,8 @@ export default class Menu extends Element {
     this.render();
 
     bus.listen('addTile', this.addTile.bind(this));
+
+    bus.listen('localeChanged', this.render.bind(this));
   }
 
   async addTile(appName) {
@@ -104,7 +113,13 @@ export default class Menu extends Element {
   render() {
     this.panel.innerHTML = '';
     tiles.forEach((tile) => {
-      this.panel.innerHTML += tileTemplate({ tile });
+      const newTile = {
+        link: tile.link,
+        name: tile[`name_${localeManager.locale.toLowerCase()}`],
+        icon: tile.icon,
+      };
+
+      this.panel.innerHTML += tileTemplate({ tile: newTile });
       // this.tileList += tile;
     });
     console.log('menu rendered');
