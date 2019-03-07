@@ -21,8 +21,8 @@ const translations = {
   },
   Store: {
     en: 'Store',
-    de: 'Geschäft',
-    ru: 'Магазин',
+    de: 'Laden',
+    ru: 'Игры',
   },
   'About us': {
     en: 'About us',
