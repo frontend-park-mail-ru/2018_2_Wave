@@ -36,6 +36,8 @@ export default class Enviroment extends Element {
     super(template, parent, wrapper || parent);
     super.render();
 
+    this.translations = translations;
+
     [this.title] = this.wrapper.getElementsByClassName('title__text');
     [this.mainContainer] = this.wrapper.getElementsByClassName('grid-common');
     const [userblockPlace] = this.wrapper.getElementsByClassName('userblock');
@@ -45,19 +47,18 @@ export default class Enviroment extends Element {
     this.menu = new Menu(menuPlace, menuPlace);
     this.iconBlock = new IconBlock(iconsPlace, iconsPlace);
 
-
     [this.appContainerPlace] = this.wrapper.getElementsByClassName('application');
-  }
-
-  setTitle(text) {
-    this.titleText = text;
-    const translatedText = translations[text][localeManager.locale.toLowerCase()];
-    this.title.innerHTML = translatedText;
-    document.title = translatedText;
 
     bus.listen('localeChanged', () => {
       this.setTitle(this.titleText);
     });
+  }
+
+  setTitle(text) {
+    this.titleText = text;
+    const translatedText = this.translations[text][localeManager.locale.toLowerCase()];
+    this.title.innerHTML = translatedText;
+    document.title = translatedText;
   }
 
   show() {
