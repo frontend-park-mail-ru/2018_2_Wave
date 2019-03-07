@@ -10,9 +10,10 @@ import '../../../../../static/img/terminal.jpg';
 
 const categories = [
   'Дмитрий Палий',
-  'Глазачева Ксения',
-  'Лебедев Илья',
+  'Андрюхов Артём',
   'Липко Дмитрий',
+  'Лебедев Илья',
+  'Глазачева Ксения',
 ];
 
 export default class AboutView extends Element {
