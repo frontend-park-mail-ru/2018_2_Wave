@@ -2,8 +2,12 @@
   "extends": "airbnb-base",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
+  "plugins": [
+    "jest"
+  ],
   "rules": {
     "no-console":"off",
     "no-multi-spaces":"off",
