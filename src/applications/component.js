@@ -17,6 +17,8 @@ export default class Component {
     this.parent   = parent;
     this.markTag  = markTag  || null;
 
+    console.log('INSTANCEOF: ', this.parent instanceof Component);
+
     if (this.parent instanceof Component) {
       this.parent.addChild(markTag, this);
     }
