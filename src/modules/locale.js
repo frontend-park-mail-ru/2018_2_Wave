@@ -7,7 +7,7 @@ class LocaleManager {
 
   set locale(value) {
     this.localeName = value;
-    bus.emit('localeChanged', value);
+    bus.emit('localeChanged');
   }
 
   get locale() {
