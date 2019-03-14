@@ -8,6 +8,7 @@ import './home.pcss';
 import { getMyApps } from '../../../../modules/network';
 import GameApp from '../../../frame/game_app';
 import bus from '../../../../modules/bus';
+import localeManager from '../../../../modules/locale';
 
 export default class HomeView extends Element {
   constructor(parent, wrapper) {
@@ -22,6 +23,7 @@ export default class HomeView extends Element {
     this.render = this.render.bind(this);
     bus.listen('appInstalled', this.render);
     bus.listen('userUpdated', this.render);
+    bus.listen('localeChanged', this.render);
     this.render();
   }
 
@@ -84,6 +86,12 @@ export default class HomeView extends Element {
         this.apps = apps;
         this.panel.innerHTML = '';
         apps.forEach((app) => {
+          const { locale } = localeManager;
+          if (locale === 'RU') {
+            app.name = app.name_ru;
+          } else if (locale === 'DE') {
+            app.name = app.name_de;
+          }
           bus.emit('regApp', app.link, GameApp, app.url);
           const tile = new AppTile(this.panel, app, 'home-page__tile');
           tile.show();

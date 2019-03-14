@@ -22,7 +22,7 @@ const tiles = [
   {
     link: '/store',
     name_en: 'Store',
-    name_de: 'Geschäft',
+    name_de: 'Laden',
     name_ru: 'Магазин',
     icon: 'local_mall',
   },
