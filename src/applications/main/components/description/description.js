@@ -51,10 +51,18 @@ export default class Description extends Element {
   }
 
   async render(appName) {
+    const { locale } = localeManager;
+
     if (appName) {
       const { err, app } = await getApp(appName);
       if (err) console.error(err);
       console.log(app);
+
+      if (locale === 'RU') {
+        app.about = app.about_ru;
+      } else if (locale === 'DE') {
+        app.about = app.about_de;
+      }
 
       this.shownApp = app;
       super.render({ app });
@@ -62,9 +70,6 @@ export default class Description extends Element {
     }
 
     let description = 'Click on app to see infо about it';
-    const { locale } = localeManager;
-    console.log(locale, description);
-
     if (locale === 'RU') {
       description = 'Кликните на приложение для просмотра информации о нём';
     } else if (locale === 'DE') {
