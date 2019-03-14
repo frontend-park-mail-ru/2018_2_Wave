@@ -2,6 +2,9 @@ import Element from '../../../element';
 import List from '../../components/list/list';
 import FormAboutUs from '../../components/formAboutUs/formAboutUs';
 
+import localeManager from '../../../../modules/locale';
+import bus from '../../../../modules/bus';
+
 import template from './about.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './about.pcss';
@@ -14,6 +17,14 @@ const categories = [
   'Липко Дмитрий',
   'Лебедев Илья',
   'Глазачева Ксения',
+];
+
+const categoriesInt = [
+  'Paliy Dmitry',
+  'Adryukhov Artem',
+  'Lipko Dmitry',
+  'Lebedev Ilya',
+  'Glazacheva Ksenia',
 ];
 
 export default class AboutView extends Element {
@@ -35,7 +46,8 @@ export default class AboutView extends Element {
       if (categoryName) this.render(categoryName);
     });
 
-    this.list.render(categories);
+    this.render = this.render.bind(this);
+    bus.listen('localeChanged', this.render);
   }
 
   show() {
@@ -62,5 +74,14 @@ export default class AboutView extends Element {
     this.list.hide();
     super.hide();
     // this.parentViews.env.menu.show();
+  }
+
+  render() {
+    const { locale } = localeManager;
+    if (locale !== 'RU') {
+      this.list.render(categoriesInt);
+    } else {
+      this.list.render(categories);
+    }
   }
 }
