@@ -1,6 +1,7 @@
 import Element from '../../../element';
 
 import bus from '../../../../modules/bus';
+import localeManager from '../../../../modules/locale';
 import { getApp, addApp } from '../../../../modules/network';
 
 import template from './description.pug';
@@ -43,6 +44,9 @@ export default class Description extends Element {
       }
     });
 
+    this.render = this.render.bind(this);
+    bus.listen('localeChanged', this.render);
+
     this.render();
   }
 
@@ -57,7 +61,17 @@ export default class Description extends Element {
       return;
     }
 
+    let description = 'Click on app to see infо about it';
+    const { locale } = localeManager;
+    console.log(locale, description);
+
+    if (locale === 'RU') {
+      description = 'Кликните на приложение для просмотра информации о нём';
+    } else if (locale === 'DE') {
+      description = 'Klick auf die App, um Informationen darüber anzuzeigen';
+    }
+
     this.shownApp = null;
-    super.render();
+    super.render({ description });
   }
 }

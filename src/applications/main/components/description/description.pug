@@ -7,10 +7,10 @@
 
     .description__about= app.about
 
-
     if app.installed
       .description__button installed
     else
       .description__button.add-button add
+
   else
-    .description__about Click on app to see infо about it
+    .description__about= description
