@@ -59,8 +59,10 @@ export default class Description extends Element {
       console.log(app);
 
       if (locale === 'RU') {
+        app.name = app.name_ru;
         app.about = app.about_ru;
       } else if (locale === 'DE') {
+        app.name = app.name_de;
         app.about = app.about_de;
       }
 
