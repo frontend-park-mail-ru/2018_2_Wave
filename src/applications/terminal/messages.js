@@ -12,6 +12,18 @@ const messages = {
 *      OF AVAILABLE COMMANDS     *
 **********************************
 `,
+  helloDe: `
+************************************
+*     WILLKOMMEN IM TERMINAL!      *
+*   JETZT SIND SIE EIN ENTWICKLER  *
+*                                  *
+*        NUR TYPE DEN BEFEHL       *
+*         UND ENTER ENTER          *
+*                                  *
+*           TYP 'help'             *
+*   UM LISTE DER BEFEHLE ANZEIGEN  *
+************************************
+  `,
 };
 
 export default messages;
