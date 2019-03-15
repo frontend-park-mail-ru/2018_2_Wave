@@ -2,7 +2,20 @@ import bus from './bus';
 
 class LocaleManager {
   constructor() {
-    this.localeName = 'EN';
+    const { hostname } = window.location;
+    console.log(hostname);
+
+    switch (hostname) {
+      case 'snakewave.com':
+        this.localeName = 'EN';
+        break;
+      case 'snakewave.de':
+        this.localeName = 'DE';
+        break;
+      default:
+        this.localeName = 'RU';
+        break;
+    }
   }
 
   set locale(value) {

@@ -2,6 +2,7 @@ import TerminalView from './terminal_view';
 import BaseApp from '../base_app';
 import messages from './messages';
 import bus from '../../modules/bus';
+import localeManager from '../../modules/locale';
 import { register, logout, login } from '../../modules/network';
 import userService from '../../modules/userservice';
 
@@ -94,7 +95,8 @@ class TerminalApp extends BaseApp {
     this.parent.style.background = 'black';
     super.start();
     this.addListeners();
-    this.view.printBlock(messages.hello);
+    const { locale } = localeManager;
+    this.view.printBlock(locale === 'DE' ? messages.helloDe : messages.hello);
 
     if (this.username !== null) {
       this.view.addInput(this.intro);
