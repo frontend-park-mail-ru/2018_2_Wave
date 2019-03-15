@@ -7,15 +7,36 @@ import template from './store.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './store.pcss';
 
+import bus from '../../../../modules/bus';
+import localeManager from '../../../../modules/locale';
+
 import '../../../../../static/img/terminal.jpg';
 
 const categories = [
-  'new',
-  'all',
-  'popular',
-  '2018_2',
-  '2018_1',
-  '2017_2',
+  'New',
+  'All',
+  'Popular',
+  '2018_2 semester',
+  '2018_1 semester',
+  '2017_2 semester',
+];
+
+const categories_ru = [
+  'Новые',
+  'Все',
+  'Популярные',
+  '2018_2 семестр',
+  '2018_1 семестр',
+  '2017_2 семестр',
+];
+
+const categories_de = [
+  'Neue',
+  'Alle',
+  'Beliebt',
+  '2018_2 Semester',
+  '2018_1 Semester',
+  '2017_2 Semester',
 ];
 
 export default class StoreView extends Element {
@@ -39,7 +60,9 @@ export default class StoreView extends Element {
       if (categoryName) this.render(categoryName);
     });
 
-    this.list.render(categories);
+    this.render = this.render.bind(this);
+    bus.listen('localeChanged', this.render);
+    this.render();
   }
 
   show() {
@@ -66,5 +89,16 @@ export default class StoreView extends Element {
     this.list.hide();
     super.hide();
     // this.parentViews.env.menu.show();
+  }
+
+  render() {
+    const { locale } = localeManager;
+    if (locale === 'RU') {
+      this.list.render(categories_ru);
+    } else if (locale === 'DE') {
+      this.list.render(categories_de);
+    } else {
+      this.list.render(categories);
+    }
   }
 }
