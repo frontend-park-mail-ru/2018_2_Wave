@@ -23,14 +23,17 @@ export default class FormAboutUs extends Element {
 
   render() {
     let text = 'Place for your feedback and suggestions for new games';
+    let buttonText = 'Send';
     const { locale } = localeManager;
 
     if (locale === 'RU') {
       text = 'Здесь вы можете отправить отзыв или предложить новую игру для платформы';
+      buttonText = 'Отправить';
     } else if (locale === 'DE') {
       text = 'Hier können Sie Feedback senden oder ein neues Spiel für die Plattform vorschlagen';
+      buttonText = 'Senden';
     }
 
-    super.render({ text });
+    super.render({ text, buttonText });
   }
 }
