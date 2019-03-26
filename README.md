@@ -14,9 +14,6 @@ npm run
 ## Ссылки
 
 * deploy &mdash; https://snakewave.com
-* API &mdash; https://frontend.tech-mail.ru/2018_2_Wave/
-* Grafana &mdash; https://grafana.rasseki.com
-
 * Репозиторий бэкенда &mdash; https://github.com/go-park-mail-ru/2018_2_Wave
 
 ## Авторы
