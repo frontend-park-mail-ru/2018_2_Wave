@@ -2,6 +2,10 @@
   "name": "sample",
   "version": "1.0.0",
   "main": "public/app.js",
+  "license": "(ISC OR GPL-3.0)",
+  "repository": {
+    "homepage": "https://github.com/frontend-park-mail-ru/2018_2_Wave"
+  },
   "scripts": {
     "test": "jest",
     "start": "node ./server/server.js",
@@ -9,17 +13,20 @@
     "prod": "webpack -p"
   },
   "dependencies": {
-    "express-history-api-fallback": "^2.2.1",
     "express": "^4.16.3",
+    "express-history-api-fallback": "^2.2.1",
     "morgan": "^1.9.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-instanceof": "^7.2.0",
+    "@babel/preset-env": "^7.4.2",
     "babel-jest": "^24.5.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.4.1",
-    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.5.0",
