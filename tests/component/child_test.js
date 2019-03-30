@@ -8,12 +8,11 @@ it('Automatic addChild in constructor', () => {
   const mark = document.createElement(markName);
   div.appendChild(mark);
 
-  const parentComponent = new Component('templateMock', div);
-  const childComponent = new Component(
-    'templateMock',
-    parentComponent,
-    markName,
-  );
+  const parentComponent = new Component({ parent: div });
+  const childComponent = new Component({
+    parent: parentComponent,
+    markTag: markName,
+  });
 
   const firstChild = parentComponent.children[markName];
   expect(firstChild).toBe(childComponent);
