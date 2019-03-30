@@ -5,5 +5,4 @@
       { "useBuiltIns": "usage" },
     ],
   ],
-  "plugins": ["@babel/plugin-transform-instanceof"]
 }
