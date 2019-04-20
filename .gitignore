@@ -3,6 +3,7 @@ public
 dist
 cert
 .cache
+coverage
 
 #macos
 .DS_Store
