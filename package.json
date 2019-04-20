@@ -2,41 +2,50 @@
   "name": "sample",
   "version": "1.0.0",
   "main": "public/app.js",
+  "license": "(ISC OR GPL-3.0)",
+  "repository": {
+    "homepage": "https://github.com/frontend-park-mail-ru/2018_2_Wave"
+  },
   "scripts": {
+    "test": "jest",
     "start": "node ./server/server.js",
     "dev": "webpack -d --watch --info-verbosity verbose",
     "prod": "webpack -p"
   },
   "dependencies": {
-    "cssnano": "^4.1.10",
     "express": "^4.16.3",
     "express-history-api-fallback": "^2.2.1",
-    "hard-source-webpack-plugin": "^0.12.0",
-    "morgan": "^1.9.0",
-    "postcss": "^7.0.6",
-    "postcss-cssnext": "^3.1.0",
-    "postcss-google-font": "^0.1.1",
-    "postcss-import": "^12.0.1",
-    "serviceworker-webpack-plugin": "^1.0.1",
-    "style-loader": "^0.23.0",
-    "svg-url-loader": "^2.3.2",
-    "url-loader": "^1.1.2"
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
-    "eslint": "^5.13.0",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-instanceof": "^7.2.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "eslint-plugin-jest": "^22.4.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "postcss-font-magician": "^2.2.1",
+    "jest": "^24.5.0",
+    "postcss": "^7.0.14",
+    "postcss-google-font": "^0.1.1",
+    "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.6.0",
+    "postcss-scss": "^2.0.0",
+    "postcss-strip-inline-comments": "^0.1.5",
     "precss": "^4.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
-    "style-loader": "^0.23.1",
-    "stylelint": "^9.9.0",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.2"
+    "serviceworker-webpack-plugin": "^1.0.1",
+    "style-loader": "^0.23.0",
+    "svg-url-loader": "^2.3.2",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }
