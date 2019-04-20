@@ -8,7 +8,7 @@
 
 ```
 npm run-script prod
-npm run
+npm start
 ```
 
 ## Ссылки
