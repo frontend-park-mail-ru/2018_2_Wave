@@ -6,10 +6,16 @@
 
 ## Сборка
 
+production:
 ```
 npm run-script prod
+```
+develop:
+```
+npm run-script dev
 npm start
 ```
+
 
 ## Ссылки
 
