@@ -10,11 +10,14 @@ production:
 ```
 npm run-script prod
 ```
+Статика соберётся в ../public
+
 develop:
 ```
 npm run-script dev
 npm start
 ```
+Статика соберётся в ./public
 
 
 ## Ссылки
