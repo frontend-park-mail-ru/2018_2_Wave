@@ -1,41 +1,18 @@
 import bus from '../modules/bus';
 
 export default class BaseApp {
-  constructor(appURL, parent, MainView) {
+  /**
+   * @param {string} appURL application id in appManager and its URL
+   */
+  constructor(appURL) {
     this.url = appURL;
-    this.parent = parent;
 
-    if (MainView) {
-      this.views = { main: new MainView(parent) };
-      this.currentView = this.views.main;
-    } else this.views = {};
+    this.views = {};
 
     this.active = false;
     this.started = false;
   }
 
-  // TODO: remove bar
-  setBar(bar) {
-    this.bar = bar;
-  }
-
-  // TODO: move deprecated method to snake realization
-  changeView(viewUrl, params) {
-    // write view change animations in overridden method
-    // do not forget to call super.changeView() first!
-    if (!this.views.hasOwnProperty(viewUrl)) {
-      console.error('No such view');
-      this.currentView = this.views.main;
-    } else {
-      this.currentView.hide();
-      this.currentView = this.views[viewUrl];
-    }
-
-    if (!this.currentView.noRender) {  // sure?
-      this.currentView.render(params);
-    }                                  // sure?
-    if (this.active) this.currentView.show();
-  }
 
   // TODO: write this.
   processParams() {
