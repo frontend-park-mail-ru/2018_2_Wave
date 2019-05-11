@@ -62,14 +62,13 @@ class AppManager {
    * MainApp and terminal are always allowed.
    * Other apps want user to be logged in.
    *
-   * @static
    * @param {String} appName
    * @returns {Boolean} `true` if it is allowed
    * @memberof AppManager
    */
-  static async allowedToOpen(appName) {
-    const allowedApps = ['main', 'terminal'];
-    return (appName in allowedApps)
+  async allowedToOpen(appName) {
+    this.allowedApps = ['main', 'terminal'];
+    return this.allowedApps.includes(appName)
       ? true
       : userService.isLoggedIn();
   }
@@ -77,17 +76,17 @@ class AppManager {
   /**
    * Checks if app instance was already created and not destroyed
    *
-   * @static
    * @param {String} appName
    * @returns {Boolean} `true` if instance exists
    * @memberof AppManager
    */
-  static appInited(appName) {
-    return appName in this.appInstances || appName !== 'main';
+  appInited(appName) {
+    return appName in this.appInstances || appName === 'main';
   }
 
 
   async openApp(appName, { view, params }) {
+    console.log(`opening ${appName} instead of ${this.activeAppName}`);
     if (!this.appExists(appName)) {
       throw new Error('App not exists');
     }
