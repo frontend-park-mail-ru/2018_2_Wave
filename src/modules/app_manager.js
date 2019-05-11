@@ -13,9 +13,9 @@ class AppManager {
   /**
    * Initiates AppManager, starts and inits main app
    *
-   * @param MainApp
+   * @param MainApp MainApp class
    * @param {HTMLElement} container
-   * Element which will contain main app
+   * Element which will contain main app and appContainer
    */
   async start(MainApp, container) {
     this.mainApp = new MainApp(container);
@@ -36,19 +36,12 @@ class AppManager {
    *
    * @param {String} appName used as unique app url
    * @param {BaseApplication} App app class
+   * @throws {Error} app with this appName alreaddy registered
    * @memberof AppManager
    */
   registerApp(appName, App) {
     if (appName in this.appClasses) {
-      if (this.appClasses[appName] === App) {
-        console.log(
-          `This app (${appName}) is already registered.`,
-        );
-        return this;
-      }
-      throw new Error(
-        `Other app with name ${appName} is already registered.`,
-      );
+      throw new Error(`App with name ${appName} is already registered.`);
     }
 
     this.appClasses[appName] = App;
@@ -63,57 +56,89 @@ class AppManager {
     return (appName in this.appClasses) || (appName === 'main');
   }
 
+  /**
+   * Checks if it is allowed to open app.
+   *
+   * MainApp and terminal are always allowed.
+   * Other apps want user to be logged in.
+   *
+   * @static
+   * @param {String} appName
+   * @returns {Boolean} `true` if it is allowed
+   * @memberof AppManager
+   */
+  static async allowedToOpen(appName) {
+    const allowedApps = ['main', 'terminal'];
+    return (appName in allowedApps)
+      ? true
+      : userService.isLoggedIn();
+  }
 
-  async openApp(appName, { view, params }) {
-    if (!this.appExists(appName)) {
-      // this should be checked by router
-      throw new Error('App not exists');
-    }
-
-    const isLoggedIn = await userService.isLoggedIn();
-    // eslint-disable-next-line no-param-reassign
-    if (!isLoggedIn) appName = 'terminal';
-
-    if (!(appName in this.appInstances) && appName !== 'main') {
-      const App = this.appClasses[appName];
-
-      this.appInstances[appName] = new App(
-        appName, this.appContainer.screen,
-      );
-    }
-
-    const app = this.appInstances[appName] || this.mainApp;
-
-    if (params) app.processParams({ view, params });
-
-    if (app !== this.activeApp) {
-      await this.hideActiveApp();
-      this.activeApp = app;
-      this.activeAppName = appName;
-      // await launch animation
-      // async show bar for 3 seconds
-      if (!app.started) {  // CHECK: mainApp.started?
-        // show loader
-        /* await */ app.start();
-        // hide loader
-      } else {
-        app.resume();  // CHECK: mainApp.resume? unblur there
-      }
-    }
-
-    this._addToActive_(appName);
+  /**
+   * Checks if app instance was already created and not destroyed
+   *
+   * @static
+   * @param {String} appName
+   * @returns {Boolean} `true` if instance exists
+   * @memberof AppManager
+   */
+  static appInited(appName) {
+    return appName in this.appInstances || appName !== 'main';
   }
 
 
-  async hideActiveApp() {
-    if (this.activeAppName === 'main') {
-      this.mainApp.sleep();
-    } else {
-      this.activeApp.pause();  // CHECK: different methods? good or not?
+  async openApp(appName, { view, params }) {
+    if (!this.appExists(appName)) {
+      throw new Error('App not exists');
     }
-    // TODO: hide bar
-    // CHECK: is animation needed?
-    // CHECK: is app hidden?
+
+    if (!(await this.allowedToOpen(appName))) {
+      await this.openApp('main', { view, params });
+      return;
+    }
+
+    if (!this.appInited(appName)) {
+      const App = this.appClasses[appName];
+      this.appInstances[appName] = new App(appName, this.appContainer.screen);
+    }
+
+    /**
+     * App instance of application extended from BaseApp
+     * @type {BaseApp}
+     */
+    const app = this.appInstances[appName] || this.mainApp;
+    app.processParams({ view, params });
+    if (app === this.activeApp) {
+      return;
+    }
+
+    // hiding previous app
+    if (this.activeAppName === 'main') {
+      this.appContainer.show();
+      // TODO: await launch animation
+      await this.mainApp.blur();
+    } else if (this.activeAppName) {
+      this.activeApp.pause();
+    }
+
+    if (app === this.mainApp) {
+      // TODO: await close animation
+      this.appContainer.hide();
+      await this.mainApp.unblur();
+    } else {
+      // TODO: async show bar for 3 seconds
+      // eslint-disable-next-line no-lonely-if
+      if (!app.started) {
+        // TODO: show loader
+        /* await */ app.start();
+        // TODO: hide loader
+      } else app.resume();
+    }
+
+    this.activeApp = app;
+    this.activeAppName = appName;
+
+    if (appName !== 'main') this._addToActive_(appName);
   }
 
 
@@ -122,26 +147,29 @@ class AppManager {
       throw new Error('App not exists');
     }
 
-    // await hide animation
-
     this.appInstances[appName].stop();
     delete this.appInstances[appName];
 
     this._removeFromActive_(appName);
   }
 
-
   _addToActive_(appName) {
+    if (!this.appExists(appName)) {
+      throw new Error('App not exists');
+    }
+
+    if (this.startedAppsOrder.length >= 5) {
+      const deletedAppName = this.startedAppsOrder[0].url;
+      delete this.appInstances[deletedAppName];
+      this.startedAppsOrder[0].stop();
+      this.startedAppsOrder.shift();
+    }
+
     const index = this.startedAppsOrder.indexOf(appName);
     if (index !== -1) {
       this.startedAppsOrder.splice(index, 1);
     }
     this.startedAppsOrder.push(appName);
-
-    if (this.startedAppsOrder.length >= 5) {
-      this.startedAppsOrder[0].stop();
-      this.startedAppsOrder.shift();
-    }
   }
 
   _removeFromActive_(appName) {
