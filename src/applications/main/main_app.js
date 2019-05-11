@@ -13,6 +13,14 @@ import HomeView from './views/home/home';
 import bus from '../../modules/bus';
 
 
+/**
+ * Main application class.
+ * Supplies appContainer component, which is already placed in layout.
+ * Has root url.
+ *
+ * @class MainApp
+ * @extends {BaseApp}
+ */
 export default class MainApp extends BaseApp {
   constructor(parent) {
     super('/', parent);
@@ -37,25 +45,23 @@ export default class MainApp extends BaseApp {
     // const aboutView = new AboutView(aboutPlace, aboutPlace, this.views);
     // this.views.about = aboutView;
 
-    // this.env = env;
-    // this.views.env = this.env;
-    // this.menu = this.env.menu;
-
     // this.bar = new Bar(
     //   this.env.appContainerPlace,
     //   this.env.appContainerPlace,
     // );
+
+    // this.pause = this.sleep.bind(this);
+    // this.resume = this.wakeup.bind(this);
   }
 
 
-  async wakeup() {
-    this.appContainer.hide();
-    await this.unblur();
-  }
+  async start() {
+    // TODO: move this to mainapp.renderPromise, await in start
+    await this.env.render();
+    await this.appContainer.render();
+    this.env.show();
 
-  async sleep() {
-    await this.blur();
-    this.appContainer.show();
+    bus.listen('loaderHidden', this.unblur.bind(this));
   }
 
 
@@ -80,34 +86,28 @@ export default class MainApp extends BaseApp {
   }
 
 
-  async start() {
-    // TODO: move this to mainapp.renderPromise, await in start
-    await this.env.render();
-    await this.appContainer.render();
-    this.env.show();
-  }
+  // pause() {
+  //   this.active = false;
+  //   this.appContainer.show();  // CHECK: sure?
+  //   document.activeElement.blur();  // CHECK: wtf?
+  // }
 
-  pause() {
-    this.active = false;
-    this.appContainer.show();  // CHECK: sure?
-    document.activeElement.blur();  // CHECK: wtf?
-  }
-
-  resume() {
-    if (!this.started) {
-      this.start();
-      return;
-    }
-    if (this.loader.active) {
-      console.log('loader active');
-      bus.emit('link', '/terminal');
-    } else {
-      console.log('loader is not active');
-      this.animateLaunch();
-      this.env.title.focus();
-      this.active = true;
-    }
-  }
+  // resume() {
+  //   console.log('mainApp.resume used');
+  //   if (!this.started) {
+  //     this.start();
+  //     return;
+  //   }
+  //   if (this.loader.active) {
+  //     console.log('loader active');
+  //     bus.emit('link', '/terminal');
+  //   } else {
+  //     console.log('loader is not active');
+  //     this.animateLaunch();
+  //     this.env.title.focus();
+  //     this.active = true;
+  //   }
+  // }
 
   stop() {
     this.pause();
