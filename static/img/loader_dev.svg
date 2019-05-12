@@ -1,0 +1,13 @@
+<svg width="600" height="100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 viewBox="0 0 270 45" xml:space="preserve">
+<style type="text/css">
+	.st1{stroke-width:0.8;stroke-linecap:round;stroke-linejoin:round;enable-background:new;}
+	.st2{font-family:'ArialMT';font-size:56px;}
+</style>
+<text transform="matrix(1 0 0 1 2.7 42)" class="st1 st2">
+  WAVE:dev
+  <animate attributeName="stroke" begin="0s" from="black" dur="0.1" to="#ADFF2F" restart="never" fill="freeze"></animate>
+  <animate accumulate="none" additive="replace" attributeName="stroke-dashoffset" begin="0s" calcMode="linear" dur="2.5" fill="remove" keyTimes="0;0.5;1" repeatCount="indefinite" restart="always" values="-200;0;0"></animate>
+  <animate accumulate="none" additive="replace" attributeName="stroke-dasharray" begin="0s" calcMode="spline" dur="2.5" fill="remove" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" keyTimes="0;0.5;1" repeatCount="indefinite" restart="always" values="0 350;350 350;0 350"></animate>
+</text>
+</svg>

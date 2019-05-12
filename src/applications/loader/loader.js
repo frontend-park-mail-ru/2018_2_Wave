@@ -3,7 +3,7 @@ import Component from '../component';
 import bus from '../../modules/bus';
 
 import template from './loader.pug';
-import '../../../static/img/loader.svg';
+import '../../../static/img/loader_dev.svg';
 import './loader.pcss';
 
 export default class Loader extends Component {
@@ -18,7 +18,7 @@ export default class Loader extends Component {
     super.show();
 
     this.timeoutPromise = new Promise((resolve) => {
-      setTimeout(resolve, 2000);
+      setTimeout(resolve, 2600);
     });
   }
 
@@ -26,6 +26,7 @@ export default class Loader extends Component {
     await this.timeoutPromise;
     bus.emit('loaderHidden');
     super.hide();
+    // TODO: hide animation here
     super.delete();
   }
 }
