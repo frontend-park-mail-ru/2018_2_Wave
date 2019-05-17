@@ -9,6 +9,7 @@
     "jest"
   ],
   "rules": {
+    "class-methods-use-this": ["error", { "exceptMethods": ["getData"] }],
     "no-console":"off",
     "no-multi-spaces":"off",
     "linebreak-style":"off",
