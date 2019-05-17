@@ -1,26 +1,21 @@
 import Component from '../../../component';
-import AppTile from '../../components/app_tile/app_tile';
 
 import template from './home.pug';
 import '../../components/app_tile/app_tile.pcss';
 import './home.pcss';
 
 import { getMyApps } from '../../../../modules/network';
-import GameApp from '../../../frame/game_app';
 import bus from '../../../../modules/bus';
 
 export default class HomeContentBlock extends Component {
-  constructor(parent, wrapper) {
-    super(template, parent, wrapper);
+  constructor(parent) {
+    super({ template, parent, markTag: 'home' });
 
     // this.apps = null;
     this.title = 'Home';
 
-    [this.panel] = this.wrapper.getElementsByClassName('home-page__tile-panel');
-
     this.render = this.render.bind(this);
-    bus.listen('appInstalled', this.render);
-    this.render();
+    bus.listen('appInstalled', this.render); // TODO: just add an app, not rerender!
   }
 
   // TODO: check and fix scroller
@@ -58,8 +53,8 @@ export default class HomeContentBlock extends Component {
 
   show() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (!grid.classList.contains('home-page__grid')) {
-      grid.classList.add('home-page__grid');
+    if (!grid.classList.contains('home__grid')) {
+      grid.classList.add('home__grid');
     }
     // this.startScroller();
     super.show();
@@ -67,28 +62,23 @@ export default class HomeContentBlock extends Component {
 
   hide() {
     const [grid] = document.getElementsByClassName('grid-common');
-    if (grid.classList.contains('home-page__grid')) {
-      grid.classList.remove('home-page__grid');
+    if (grid.classList.contains('home__grid')) {
+      grid.classList.remove('home__grid');
     }
     // this.stopScroller();
     super.hide();
   }
 
-  async render() {
+  async getData() {
     const { err, apps } = await getMyApps();
     if (err) {
-      console.log(err);
-    } else {
-      console.log(apps);
-      if (!this.apps || this.apps !== apps) {
-        this.apps = apps;
-        this.panel.innerHTML = '';
-        apps.forEach((app) => {
-          bus.emit('regApp', app.link, GameApp, app.url);
-          const tile = new AppTile(this.panel, app, 'home-page__tile');
-          tile.show();
-        });
-      }
+      console.log(
+        err,
+        `[MENU:${this.constructor.name}] Cannot get data`,
+      );
+      return { apps: [] };
     }
+
+    return { apps };
   }
 }

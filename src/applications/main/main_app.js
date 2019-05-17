@@ -29,8 +29,7 @@ export default class MainApp extends BaseApp {
 
     this.appContainer = new AppContainer(parent);
 
-    // this.homeContentBlock = new HomeView(
-    // );
+    this.homeContentBlock = new HomeView(this.env);
     // this.currentView = this.views.main;
 
     // const [storePlace] = this.env.body.getElementsByClassName('store');
@@ -84,13 +83,6 @@ export default class MainApp extends BaseApp {
       }, { once: true });
     });
   }
-
-
-  // pause() {
-  //   this.active = false;
-  //   this.appContainer.show();  // CHECK: sure?
-  //   document.activeElement.blur();  // CHECK: wtf?
-  // }
 
   // resume() {
   //   console.log('mainApp.resume used');
