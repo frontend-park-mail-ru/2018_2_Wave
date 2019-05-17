@@ -1,6 +1,6 @@
 export default class Component {
   /**
-   *Creates an instance of Component.
+   * Creates an instance of Component.
    * @param {Component|HTMLElement} parent Parent component or HTMLElement
    * @param {String} markTag Tag name in parent, which will be replaced
    * @memberof Component

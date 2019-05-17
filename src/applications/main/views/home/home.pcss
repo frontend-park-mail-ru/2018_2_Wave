@@ -1,6 +1,6 @@
 @import '../../../../config.pcss';
 
-.home-page {
+.home {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,7 +43,7 @@
 }
 
 @media (--minimal) {
-  .home-page__tile-panel {
+  .home__tile-panel {
     width: calc(100vw - 2 * var(--minimal-grid-padding-x));
   }
   .grid-common {
@@ -52,7 +52,7 @@
 }
 
 @media (--mobile) {
-  .home-page__grid {
+  .home__grid {
     grid-template-areas:
       "userblock"
       "title"
@@ -62,46 +62,46 @@
     padding: 0 var(--minimal-grid-padding-x);
   }
 
-  .home-page__tile {
+  .home__tile {
     width: calc(100vw - 2*var(--minimal-grid-padding-x) - 20px);
   }
 }
 
 @media (--tablet) {
-  .home-page__grid {
+  .home__grid {
     width:  calc(100vw - 2 * var(--minimal-grid-padding-x));
     padding: 0 var(--minimal-grid-padding-x);
   }
 
-  .home-page__tile {
+  .home__tile {
     width: calc((100vw - 2*var(--minimal-grid-padding-x)) / 2 - 20px);
   }
 }
 
 @media (--small) {
-  .home-page__grid {
+  .home__grid {
     width:  calc(100vw - 2 * var(--small-grid-padding-x));
     padding: 0 var(--small-grid-padding-x);
     grid-template-rows: 14% 14% 1fr 22%;
   }
 
-  .home-page__tile-panel {
+  .home__tile-panel {
     width: calc(100vw - 2 * var(--small-grid-padding-x));
   }
 
-  .home-page__tile {
+  .home__tile {
     width: calc((100vw - 2*var(--small-grid-padding-x)) / 3 - 20px);
   }
 }
 
 @media (--large) {
-  .home-page__tile {
+  .home__tile {
     width: calc((100vw - 2*var(--grid-padding-x)) / 4 - 20px);
   }
 }
 
 @media (--boss) {
-  .home-page__tile {
+  .home__tile {
     width: calc((100vw - 2*var(--grid-padding-x)) / 5 - 20px);
   }
 }
