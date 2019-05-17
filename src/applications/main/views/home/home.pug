@@ -1,1 +1,7 @@
-.tile-panel.home-page__tile-panel
+.content.home
+  .tile-panel.home__tile-panel
+    each tile in apps
+      include ../../components/app_tile/app_tile
+      +app_tile( tile, 'home__tile' )
+    else
+      div No apps :(

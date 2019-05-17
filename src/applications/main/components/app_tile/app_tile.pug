@@ -1,10 +1,13 @@
-.tile.app__tile
-  a.tile__card.app__card(
-    name= tile.name
-    href= tile.link
+mixin app_tile(tile, location_class)
+  .tile.app__tile(
+    class= location_class
   )
-    img.tile__background(
-      src= 'https://snakewave.com/' + tile.image
+    a.tile__card.app__card(
+      name= tile.name
+      href= tile.link
     )
-  div
-    .tile__name= tile.name
+      img.tile__background(
+        src= 'https://snakewave.com/' + tile.image
+      )
+    div
+      .tile__name= tile.name
