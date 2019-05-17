@@ -86,7 +86,6 @@ class AppManager {
 
 
   async openApp(appName, { view, params }) {
-    console.log(`opening ${appName} instead of ${this.activeAppName}`);
     if (!this.appExists(appName)) {
       throw new Error('App not exists');
     }
@@ -110,6 +109,8 @@ class AppManager {
     if (app === this.activeApp) {
       return;
     }
+
+    console.log(`[APP] ${appName} => ${this.activeAppName}`);
 
     // hiding previous app
     if (this.activeAppName === 'main') {
