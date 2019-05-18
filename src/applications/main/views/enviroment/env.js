@@ -10,6 +10,7 @@ import template from './env.pug';
 
 import '../../../../../static/fonts/Gilroy-ExtraBold.otf';
 import '../../../../../static/fonts/Gilroy-Light.otf';
+import '../../../../../static/img/trianglify.svg';
 
 
 export default class Enviroment extends Component {
