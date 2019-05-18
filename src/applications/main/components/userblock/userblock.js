@@ -17,7 +17,6 @@ export default class UserBlock extends Component {
     bus.listen('userUpdated', super.render.bind(this));
   }
 
-  /* eslint-disable class-methods-use-this */
   async getData() {
     const { err, user } = await userService.getUser();
     if (err) return { user: { username: 'not logged in' } };
