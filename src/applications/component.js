@@ -83,6 +83,9 @@ export default class Component {
 
     this.body.hidden = false;
     this.body.style.display = null;
+    if (this.body.getAttribute('style') === '') {
+      this.body.removeAttribute('style');
+    }
 
     this.hidden = false;
 
