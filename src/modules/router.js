@@ -60,6 +60,8 @@ export default class Router {
     }
 
     this.openFromAddressBar();
+    window.history.pushState(null, '', window.location);
+
     bus.listen('link', this.open.bind(this));
 
     this.listeners.forEach((listener) => {
