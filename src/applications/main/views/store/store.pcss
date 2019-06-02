@@ -7,20 +7,14 @@
   align-items: flex-start;
 
   &__grid {
-    overflow: hidden;
     grid-template-rows: 14vh 14vh calc(50vh - 30px) 22vh;
     grid-template-columns: 250px 1fr 250px;
-    grid-row-gap: 10px;
-    grid-auto-rows: 0;
 
     grid-template-areas:
     "userblock userblock icon-set"
     "title app-table description"
     "list app-table description"
     "menu menu menu";
-
-    width:  calc(100vw - 2 * var(--grid-padding-x));
-    padding: 0 var(--grid-padding-x);
   }
 
   &__tile-panel {
