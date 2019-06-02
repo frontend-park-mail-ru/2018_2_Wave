@@ -18,12 +18,12 @@ new Loader(document.body)
 
 // appManager
 // .registerApp('snake', Snake)
-  // .registerApp('terminal', Terminal);
+// .registerApp('terminal', Terminal);
 
 Promise.all([
   userService.update(),
+  appManager.start(MainApp, document.body),
 ])
-  .then(appManager.start(MainApp, document.body))
   .then(new Router(appManager).start)
   .then(() => bus.emit('loaded'));
 
