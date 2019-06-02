@@ -1,0 +1,6 @@
+.app-table
+  each tile in apps
+    include ../../components/app_tile/app_tile
+    +app_tile( tile, 'app__tile' )
+  else
+    div No apps :(
