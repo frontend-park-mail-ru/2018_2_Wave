@@ -5,7 +5,7 @@ import BaseApp from '../base_app';
 import Enviroment from './views/enviroment/env';
 import AppContainer from './views/app_container/app_container';
 import HomeView from './views/home/home';
-// import StoreView from './views/store/store';
+import StoreView from './views/store/store';
 // import ProfileView from './views/profile/profile';
 // import Bar from './components/bar/bar';
 // import AppContainer from './views/app_container/app_container';
@@ -30,6 +30,7 @@ export default class MainApp extends BaseApp {
     this.appContainer = new AppContainer(parent);
 
     this.homeContentBlock = new HomeView(this.env);
+    this.storeContentBlock = new StoreView(this.env);
     // this.currentView = this.views.main;
 
     // const [storePlace] = this.env.body.getElementsByClassName('store');
@@ -58,7 +59,13 @@ export default class MainApp extends BaseApp {
     // TODO: move this to mainapp.renderPromise, await in start
     await this.env.render();
     await this.appContainer.render();
+    await this.homeContentBlock.render();
+    await this.storeContentBlock.render();
+
     this.env.show();
+
+    // this.homeContentBlock.hide();
+    this.storeContentBlock.hide();
 
     bus.listen('loaderHidden', this.unblur.bind(this));
   }
@@ -101,8 +108,17 @@ export default class MainApp extends BaseApp {
   //   }
   // }
 
-  stop() {
-    this.pause();
+  // FIXME move this to changeView
+  processParams(view) {
+    console.log(`mainapp: processing view ${view}`);
+
+    if (view === 'store') {
+      this.homeContentBlock.hide();
+      this.storeContentBlock.show();
+    } else if (view === 'home') {
+      this.storeContentBlock.hide();
+      this.homeContentBlock.show();
+    }
   }
 
   changeView(viewUrl, params) {
