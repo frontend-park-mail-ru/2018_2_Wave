@@ -51,23 +51,23 @@ export default class HomeContentBlock extends Component {
   // }
 
 
-  show() {
-    const [grid] = document.getElementsByClassName('grid-common');
-    if (!grid.classList.contains('home__grid')) {
-      grid.classList.add('home__grid');
-    }
-    // this.startScroller();
-    super.show();
-  }
+  // show() {
+  //   const [grid] = document.getElementsByClassName('grid-common');
+  //   if (!grid.classList.contains('home__grid')) {
+  //     grid.classList.add('home__grid');
+  //   }
+  //   // this.startScroller();
+  //   super.show();
+  // }
 
-  hide() {
-    const [grid] = document.getElementsByClassName('grid-common');
-    if (grid.classList.contains('home__grid')) {
-      grid.classList.remove('home__grid');
-    }
-    // this.stopScroller();
-    super.hide();
-  }
+  // hide() {
+  //   const [grid] = document.getElementsByClassName('grid-common');
+  //   if (grid.classList.contains('home__grid')) {
+  //     grid.classList.remove('home__grid');
+  //   }
+  //   // this.stopScroller();
+  //   super.hide();
+  // }
 
   async getData() {
     const { err, apps } = await getMyApps();
