@@ -5,10 +5,10 @@ import ajax from './ajax';
 
 async function getAllApps() {
   try {
-    const apps = await ajax.GET({
+    const res = await ajax.GET({
       path: '/apps',
     });
-    return { apps };
+    return { apps: res.apps };
   } catch (err) {
     return { err };
   }
