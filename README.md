@@ -14,7 +14,7 @@ npm run-script prod
 
 develop:
 ```
-npm run-script dev
+npm run dev
 npm start
 ```
 Статика соберётся в ./public
