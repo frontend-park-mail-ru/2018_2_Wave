@@ -34,4 +34,4 @@ npm start
 
 ## Ментор
 
-* Игорь Дружинин &mdash; [Drujininii](https://github.com/Drujininii)
+* Игорь Дружинин  &mdash; [Drujininii](https://github.com/Drujininii)
