@@ -9,7 +9,7 @@
 ```
 npm i
 npm run prod
-npm run
+npm start
 ```
 
 ## Ссылки
