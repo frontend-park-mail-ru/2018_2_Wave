@@ -8,7 +8,7 @@
 
 ```
 npm i
-npm run-script prod
+npm run prod
 npm run
 ```
 
