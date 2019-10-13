@@ -9,7 +9,7 @@
 production:
 ```
 npm run-script prod
-```
+``` 
 Статика соберётся в ../public
 
 develop:
