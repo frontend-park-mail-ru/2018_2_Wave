@@ -31,7 +31,7 @@
     "postcss-font-magician": "^2.2.1",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-loader": "^2.4.0",
     "style-loader": "^0.23.1",
     "stylelint": "^9.9.0",
