@@ -12,7 +12,7 @@
     "express-history-api-fallback": "^2.2.1",
     "hard-source-webpack-plugin": "^0.12.0",
     "morgan": "^1.9.0",
-    "postcss": "^7.0.6",
+    "postcss": "^8.2.10",
     "postcss-cssnext": "^3.1.0",
     "postcss-google-font": "^0.1.1",
     "postcss-import": "^12.0.1",
