@@ -8,7 +8,7 @@
     "prod": "webpack -p"
   },
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-history-api-fallback": "^2.2.1",
     "hard-source-webpack-plugin": "^0.12.0",
     "morgan": "^1.9.0",
